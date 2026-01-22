@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Page Number to PDF. Add Page Number to PDF online</title>
+    <meta name="description" content="Add Page Number to PDF, rotate them or set a page margin. Convert Image to PDF online, easily, fast and free."/>
+    <meta name="keywords" content="Image to PDF, Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF, Add Pages to PDF"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/addPageNumber.css">
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+<body>
+
+        <div class="mx-auto">
+            <div id="pickPDFContainer">
+                <%- include('../components/AddPageNumberToPDF/pickPDF.ejs') %>
+            </div>
+            <div id="addPagesToPDFEnableContainer" class="hidden">
+                <%- include('../components/AddPageNumberToPDF/addPageNumberEnable.ejs') %>
+            </div>
+        </div>
+
+        <%- include("../components/footer") %>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script>
+
+<script src="/js/addPageNumber.js"></script>
+
+</html>

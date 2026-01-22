@@ -1,0 +1,37 @@
+<style>
+  .sortable-ghost {
+  opacity: 0.4;
+  transform: scale(.98);
+}
+.sortable-chosen {
+  border: 2px solid #7100ad;
+}
+.sortable-drag {
+  transform: rotate(3deg) scale(1.05);
+}
+
+</style>
+
+<!-- Updated cardViewSection.ejs -->
+<div id="cardViewSection" class="bg-gray-50 h-full relative">
+  <!-- Scrollable content container -->
+  <div class="p-4 pb-24 overflow-y-auto no-scrollbar h-full">
+    <!-- Container for cards, using grid for responsive columns -->
+    <div id="cardsContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <!-- Image cards will be dynamically populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Floating Add Button -->
+  <button id="addCardBtn" class="absolute bottom-6 right-6 bg-[var(--primary-color)] hover:bg-purple-700 
+           text-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center 
+           transition-colors duration-200">
+    <span class="text-4xl leading-none">+</span>
+  </button>
+
+  <!-- Hidden file input for multiple image selection -->
+  <input type="file" id="imageInput" multiple accept="image/png, image/jpeg, image/svg+xml" class="hidden">
+</div>
+
+<!-- Include SortableJS -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>

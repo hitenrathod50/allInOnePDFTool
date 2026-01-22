@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <title>Convert Image to PDF. Image to PDF online</title>
+    <meta name="description" content="Convert images to PDF, rotate them or set a page margin. Convert Image to PDF online, easily, fast and free."/>
+    <meta name="keywords" content="Image to PDF, Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/imagetopdf.css">
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+<body>
+
+        <div class="mx-auto">
+            <div id="pickImageContainer">
+                <%- include('../components/ImageToPDF/pickImage.ejs') %>
+            </div>
+            <div id="imageToPDFEnableContainer" class="hidden">
+                <%- include('../components/ImageToPDF/imageToPDFEnable.ejs') %>
+            </div>
+        </div>
+
+        <%- include("../components/footer") %>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script>
+<script src="/js/imagetopdf.js"></script>
+
+</html>

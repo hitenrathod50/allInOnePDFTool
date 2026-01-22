@@ -1,0 +1,79 @@
+<head>
+    <title>Download - <%= title %></title>
+    <meta name="description" content="Download the processed file with All in One PDF tool and share the link with who you want."/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/imagetopdf.css">
+    <meta name="robots" content="noindex,follow">
+</head>
+
+<%- include("../components/header") %>
+
+    <body>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
+            <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Download Your PDF</h2>
+            <p class="text-gray-600 mb-6">Your PDF is ready! Hit the button below to download.</p>
+            <button id="downloadButton"
+                class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-opacity-90 hover:bg-purple-700 transition active:bg-purple-800">
+                
+            </button>
+        </div>
+
+        <%- include("../components/footer") %>
+
+    </body>
+
+
+    <script>
+
+        const downloadButton = document.getElementById("downloadButton");
+
+        downloadButton.textContent = "Processing...";
+        const token = '<%= token %>';
+        const endPoint = '<%= endPoint %>';
+        
+        const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
+
+        // console.log(isZip);
+
+        const link = document.createElement('a');
+
+        async function getPDFLink() {
+            try {
+
+                // Fetch the PDF using the token
+                const response = await fetch(`/${endPoint}/download/file/${token}`);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to download PDF');
+                }
+
+                // Get the PDF as a blob
+                const pdfBlob = await response.blob();
+
+                // Create a temporary URL for the blob
+                const pdfUrl = window.URL.createObjectURL(pdfBlob);
+
+                // Create a temporary link element to trigger the download
+
+                link.href = pdfUrl;
+                link.download = isZip === 'true' ? 'output.zip' : 'output.pdf';
+                document.body.appendChild(link);
+
+            } catch (error) {
+                console.error('Error downloading PDF:', error);
+            }
+        }
+
+        getPDFLink()
+            .then(() => {
+                downloadButton.textContent = "Download PDF";
+                downloadButton.addEventListener('click', async function downloadPDF() {
+                    link.click();
+                })
+            })
+
+
+
+    </script>

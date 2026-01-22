@@ -1,0 +1,83 @@
+.settings-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.1);
+    border: 1px solid #e9d5ff;
+    transition: box-shadow 0.2s;
+}
+
+.settings-card:hover {
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+}
+
+.radio-option {
+    cursor: pointer;
+}
+
+.radio-label {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 70px;
+}
+
+.radio-option input:checked+.radio-label {
+    border-color: #7c3aed;
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.radio-option:hover .radio-label {
+    border-color: rgba(124, 58, 237, 0.5);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+#drawer>div:nth-child(2)::-webkit-scrollbar {
+    width: 6px;
+}
+
+#drawer>div:nth-child(2)::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+@media (max-width: 640px) {
+    .settings-card {
+        padding: 1rem;
+    }
+
+    .radio-label {
+        padding: 0.5rem;
+        min-height: 60px;
+    }
+}
