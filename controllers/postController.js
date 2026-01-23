@@ -2,8 +2,14 @@ const { PDFDocument, StandardFonts, rgb, degrees } = require('pdf-lib');
 const sharp = require('sharp');
 const crypto = require('crypto');
 const archiver = require('archiver')
-// const { type } = require('os');
 const pdfStorage = new Map();
+
+const { exec } = require('child_process');
+const fs = require('fs').promises;
+const path = require('path');
+const DocxMerger = require('docx-merger');
+
+const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp');
 
 // Helper to convert PDF page size to points
 const pageSizes = {
@@ -1037,6 +1043,169 @@ async function splitPDFPost(request, reply) {
     }
 }
 
+(async () => {
+    try {
+        await fs.mkdir(PROJECT_TEMP_ROOT, { recursive: true });
+    } catch (err) {
+        if (err.code !== 'EEXIST') console.error('Cannot create temp/word-to-pdf folder:', err);
+    }
+})();
+
+async function convertDocxToPdfBuffer(docxBuffer) {
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    const tmpDir = path.join(PROJECT_TEMP_ROOT, `conv-${uniqueId}`);
+
+    const inputPath  = path.join(tmpDir, 'input.docx');
+    const outputPath = path.join(tmpDir, 'input.pdf');   // soffice default naming
+
+    try {
+        await fs.mkdir(tmpDir, { recursive: true });
+        await fs.writeFile(inputPath, docxBuffer);
+
+        const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}" "${inputPath}"`;
+
+        await new Promise((resolve, reject) => {
+            exec(cmd, { timeout: 90000 }, (error, stdout, stderr) => {
+                if (error) {
+                    console.error('soffice error:', stderr || error.message);
+                    return reject(error);
+                }
+                resolve();
+            });
+        });
+
+        let pdfBuffer;
+        try {
+            pdfBuffer = await fs.readFile(outputPath);
+        } catch (e) {
+            throw new Error(`PDF not generated - file missing: ${outputPath}`);
+        }
+
+        return pdfBuffer;
+    } finally {
+        // Cleanup – best effort
+        fs.rm(tmpDir, { recursive: true, force: true })
+            .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
+    }
+}
+
+
+async function mergeDocxBuffers(buffers) {
+    if (buffers.length === 0) throw new Error('No documents to merge');
+    if (buffers.length === 1) return buffers[0];
+
+    const merger = new DocxMerger({ pageBreak: true }, buffers);
+    return new Promise((resolve, reject) => {
+        merger.save('nodebuffer', (data) => {
+            if (Buffer.isBuffer(data)) resolve(data);
+            else reject(new Error('docx-merger failed to produce buffer'));
+        });
+    });
+}
+
+
+
+async function wordToPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let wordFiles = [];           // [ { buffer, filename, contentType? } ]
+        let mergeIntoSingle = false;
+
+        for await (const part of parts) {
+            if (part.file) {
+                if (/^files\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    wordFiles.push({
+                        buffer,
+                        filename: part.filename || `document_${wordFiles.length + 1}.docx`,
+                        contentType: part.mimetype || 'application/octet-stream'
+                    });
+                }
+            } else {
+                // Form fields
+                const value = part.value;
+                if (part.fieldname === 'mergeIntoSingle') {
+                    mergeIntoSingle =
+                        value === 'true' || value === 'True' ||
+                        (value && JSON.parse(value) === true);
+                }
+            }
+        }
+
+        if (wordFiles.length === 0) {
+            return reply.status(400).send({ error: 'No Word files received' });
+        }
+
+        const outputPDFs = [];
+
+        if (mergeIntoSingle) {
+            // Merge all → one PDF
+            const mergedDocx = await mergeDocxBuffers(wordFiles.map(f => f.buffer));
+            const pdfBuffer = await convertDocxToPdfBuffer(mergedDocx);
+
+            outputPDFs.push({
+                name: 'merged-documents.pdf',
+                buffer: pdfBuffer
+            });
+        } else {
+            // Convert each separately
+            for (const file of wordFiles) {
+                const pdfBuffer = await convertDocxToPdfBuffer(file.buffer);
+
+                let safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, ''); // remove extension
+
+                safeName += '.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: pdfBuffer
+                });
+            }
+        }
+
+        const token = crypto.randomBytes(24).toString('hex');
+
+        if (!mergeIntoSingle && outputPDFs.length > 1) {
+            // ZIP multiple PDFs
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/word-to-pdf/download/${token}?type=zip&filename=converted-word-files.zip`);
+        }
+
+        // Single file case (merged or only one input)
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/word-to-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error(err);
+        return reply.status(500).send({
+            error: 'Word to PDF conversion failed',
+            message: err.message
+        });
+    }
+}
+
 
 module.exports = {
     imageToPDFPOST,
@@ -1046,5 +1215,6 @@ module.exports = {
     addPageNumberToPDFPost,
     rotatePDFAllPagesPost,
     removePagesFromPDFPost,
-    splitPDFPost
+    splitPDFPost,
+    wordToPDFPost
 };

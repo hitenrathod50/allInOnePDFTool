@@ -1,4 +1,4 @@
-const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF } = require("../controllers/getController");
+const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile } = require("../controllers/getController");
 
 async function getRoutes(fastify, options) {
 
@@ -48,6 +48,8 @@ async function getRoutes(fastify, options) {
   fastify.get("/edit-pdf-pages", editPDFPages)
 
   fastify.get("/word-to-pdf", wordToPDF)
+  fastify.get("/word-to-pdf/download/:token", wordToPDFDownload);
+  fastify.get("/word-to-pdf/download/file/:token", wordToPDFDownloadFile);
 
 }
 
