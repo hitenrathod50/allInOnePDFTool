@@ -9,7 +9,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const DocxMerger = require('docx-merger');
 
-const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp');
+const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp', 'word-to-pdf');
 
 // Helper to convert PDF page size to points
 const pageSizes = {
@@ -1051,6 +1051,7 @@ async function splitPDFPost(request, reply) {
     }
 })();
 
+
 async function convertDocxToPdfBuffer(docxBuffer) {
     const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
     const tmpDir = path.join(PROJECT_TEMP_ROOT, `conv-${uniqueId}`);
@@ -1086,7 +1087,7 @@ async function convertDocxToPdfBuffer(docxBuffer) {
         // Cleanup – best effort
         fs.rm(tmpDir, { recursive: true, force: true })
             .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
-    }
+    } 
 }
 
 
@@ -1102,7 +1103,6 @@ async function mergeDocxBuffers(buffers) {
         });
     });
 }
-
 
 
 async function wordToPDFPost(request, reply) {
