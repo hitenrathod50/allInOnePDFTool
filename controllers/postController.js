@@ -8,6 +8,7 @@ const { exec } = require('child_process');
 const fs = require('fs').promises;
 const path = require('path');
 const DocxMerger = require('docx-merger');
+const ExcelJS = require('exceljs');
 
 const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp', 'word-to-pdf');
 
@@ -1052,43 +1053,81 @@ async function splitPDFPost(request, reply) {
 })();
 
 
-async function convertDocxToPdfBuffer(docxBuffer) {
+async function convertToPdfBuffer(inputBuffer, inputExtension) {
+    if (!inputExtension.startsWith('.')) {
+        throw new Error('inputExtension must start with "." (e.g. ".docx", ".xlsx")');
+    }
+
     const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
     const tmpDir = path.join(PROJECT_TEMP_ROOT, `conv-${uniqueId}`);
 
-    const inputPath  = path.join(tmpDir, 'input.docx');
-    const outputPath = path.join(tmpDir, 'input.pdf');   // soffice default naming
+    const inputPath = path.join(tmpDir, `input${inputExtension}`);
+    const outputPath = path.join(tmpDir, 'input.pdf'); // LibreOffice naming
 
     try {
         await fs.mkdir(tmpDir, { recursive: true });
-        await fs.writeFile(inputPath, docxBuffer);
+        await fs.writeFile(inputPath, inputBuffer);
 
         const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}" "${inputPath}"`;
 
         await new Promise((resolve, reject) => {
-            exec(cmd, { timeout: 90000 }, (error, stdout, stderr) => {
+            exec(cmd, { timeout: 120000 }, (error, stdout, stderr) => {
                 if (error) {
-                    console.error('soffice error:', stderr || error.message);
+                    console.error('LibreOffice error:', stderr || error.message);
                     return reject(error);
                 }
                 resolve();
             });
         });
 
-        let pdfBuffer;
-        try {
-            pdfBuffer = await fs.readFile(outputPath);
-        } catch (e) {
-            throw new Error(`PDF not generated - file missing: ${outputPath}`);
-        }
-
+        const pdfBuffer = await fs.readFile(outputPath);
+        console.log(pdfBuffer);
         return pdfBuffer;
+
     } finally {
-        // Cleanup – best effort
+        // Best-effort cleanup
         fs.rm(tmpDir, { recursive: true, force: true })
             .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
-    } 
+    }
 }
+
+// async function convertDocxToPdfBuffer(docxBuffer) {
+//     const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+//     const tmpDir = path.join(PROJECT_TEMP_ROOT, `conv-${uniqueId}`);
+
+//     const inputPath  = path.join(tmpDir, 'input.docx');
+//     const outputPath = path.join(tmpDir, 'input.pdf');   // soffice default naming
+
+//     try {
+//         await fs.mkdir(tmpDir, { recursive: true });
+//         await fs.writeFile(inputPath, docxBuffer);
+
+//         const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}" "${inputPath}"`;
+
+//         await new Promise((resolve, reject) => {
+//             exec(cmd, { timeout: 90000 }, (error, stdout, stderr) => {
+//                 if (error) {
+//                     console.error('soffice error:', stderr || error.message);
+//                     return reject(error);
+//                 }
+//                 resolve();
+//             });
+//         });
+
+//         let pdfBuffer;
+//         try {
+//             pdfBuffer = await fs.readFile(outputPath);
+//         } catch (e) {
+//             throw new Error(`PDF not generated - file missing: ${outputPath}`);
+//         }
+
+//         return pdfBuffer;
+//     } finally {
+//         // Cleanup – best effort
+//         fs.rm(tmpDir, { recursive: true, force: true })
+//             .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
+//     } 
+// }
 
 
 async function mergeDocxBuffers(buffers) {
@@ -1142,7 +1181,8 @@ async function wordToPDFPost(request, reply) {
         if (mergeIntoSingle) {
             // Merge all → one PDF
             const mergedDocx = await mergeDocxBuffers(wordFiles.map(f => f.buffer));
-            const pdfBuffer = await convertDocxToPdfBuffer(mergedDocx);
+            // const pdfBuffer = await convertDocxToPdfBuffer(mergedDocx);
+            const pdfBuffer = await convertToPdfBuffer(mergedDocx, '.docx');
 
             outputPDFs.push({
                 name: 'merged-documents.pdf',
@@ -1151,7 +1191,8 @@ async function wordToPDFPost(request, reply) {
         } else {
             // Convert each separately
             for (const file of wordFiles) {
-                const pdfBuffer = await convertDocxToPdfBuffer(file.buffer);
+                // const pdfBuffer = await convertDocxToPdfBuffer(file.buffer);
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, '.docx');
 
                 let safeName = file.filename
                     .replace(/[^a-zA-Z0-9._-]/g, '_')
@@ -1207,6 +1248,174 @@ async function wordToPDFPost(request, reply) {
 }
 
 
+async function mergeExcelBuffers(buffersWithNames) {
+    // buffersWithNames = [{ buffer: Buffer, filename: string }, ...]
+    if (buffersWithNames.length === 0) throw new Error('No excel files to merge');
+    if (buffersWithNames.length === 1) return buffersWithNames[0].buffer;
+
+    const mergedWorkbook = new ExcelJS.Workbook();
+
+    for (const { buffer, filename } of buffersWithNames) {
+        const wb = new ExcelJS.Workbook();
+        await wb.xlsx.load(buffer);
+
+        // Take first worksheet or all? → here we take ALL sheets from source
+        for (const ws of wb.worksheets) {
+            // Create safe sheet name (ExcelJS enforces 31 char limit + no invalid chars)
+            let sheetName = (filename || 'Sheet')
+                .replace(/\.[^.]+$/, '')           // remove extension
+                .replace(/[^a-zA-Z0-9-_ ]/g, '_')  // safe chars
+                .slice(0, 28);                     // conservative limit
+
+            if (ws.name && ws.name.trim()) {
+                sheetName = ws.name
+                    .replace(/[^a-zA-Z0-9-_ ]/g, '_')
+                    .slice(0, 28);
+            }
+
+            // Avoid duplicate names
+            let finalName = sheetName;
+            let counter = 2;
+            while (mergedWorkbook.getWorksheet(finalName)) {
+                finalName = `${sheetName}_${counter++}`;
+                if (finalName.length > 31) finalName = `Sheet_${counter++}`;
+            }
+
+            const newSheet = mergedWorkbook.addWorksheet(finalName);
+
+            // Copy everything from source worksheet
+            ws.eachRow((row, rowNumber) => {
+                const newRow = newSheet.getRow(rowNumber);
+                row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+                    const newCell = newSheet.getCell(rowNumber, colNumber);
+                    newCell.value = cell.value;
+                    newCell.style = { ...cell.style }; // shallow copy
+                    // You can also copy merges, row height, column width, etc. if needed
+                });
+            });
+
+            // Copy column widths (optional but recommended)
+            ws.columns.forEach((col, i) => {
+                newSheet.columns[i] = { ...col };
+            });
+
+            // Copy row heights (optional)
+            ws.getRow(1).height; // trigger load if needed
+            for (let r = 1; r <= ws.rowCount; r++) {
+                const sourceRow = ws.getRow(r);
+                if (sourceRow.height) {
+                    newSheet.getRow(r).height = sourceRow.height;
+                }
+            }
+        }
+    }
+
+    const mergedBuffer = await mergedWorkbook.xlsx.writeBuffer();
+    return Buffer.from(mergedBuffer);
+}
+
+async function excelToPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let excelFiles = [];           // [ { buffer, filename, contentType? } ]
+        let mergeIntoSingle = false;
+
+        for await (const part of parts) {
+            if (part.file) {
+                if (/^files\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    excelFiles.push({
+                        buffer,
+                        filename: part.filename || `spreadsheet_${excelFiles.length + 1}.xlsx`,
+                        contentType: part.mimetype || 'application/octet-stream'
+                    });
+                }
+            } else {
+                // Form fields
+                const value = part.value;
+                if (part.fieldname === 'mergeIntoSingle') {
+                    mergeIntoSingle =
+                        value === 'true' || value === 'True' ||
+                        (value && JSON.parse(value) === true);
+                }
+            }
+        }
+
+        if (excelFiles.length === 0) {
+            return reply.status(400).send({ error: 'No Excel files received' });
+        }
+
+        const outputPDFs = [];
+
+        if (mergeIntoSingle) {
+            // Merge all → one PDF
+            const mergedXlsx = await mergeExcelBuffers(excelFiles);
+            const pdfBuffer = await convertToPdfBuffer(mergedXlsx, '.xlsx');
+
+            outputPDFs.push({
+                name: 'merged-spreadsheets.pdf',
+                buffer: pdfBuffer
+            });
+        } else {
+            // Convert each separately
+            for (const file of excelFiles) {
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, path.extname(file.filename) || '.xlsx');
+
+                let safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, ''); // remove extension
+
+                safeName += '.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: pdfBuffer
+                });
+            }
+        }
+
+        const token = crypto.randomBytes(24).toString('hex');
+
+        if (!mergeIntoSingle && outputPDFs.length > 1) {
+            // ZIP multiple PDFs
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/excel-to-pdf/download/${token}?type=zip&filename=converted-excel-files.zip`);
+        }
+
+        // Single file case (merged or only one input)
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/excel-to-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error(err);
+        return reply.status(500).send({
+            error: 'Excel to PDF conversion failed',
+            message: err.message
+        });
+    }
+}
+
+
 module.exports = {
     imageToPDFPOST,
     pdfStorage,
@@ -1216,5 +1425,6 @@ module.exports = {
     rotatePDFAllPagesPost,
     removePagesFromPDFPost,
     splitPDFPost,
-    wordToPDFPost
+    wordToPDFPost,
+    excelToPDFPost
 };

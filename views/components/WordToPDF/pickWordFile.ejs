@@ -1,6 +1,6 @@
 <div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
     <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
-        Upload Word Files
+        Convert WORD to PDF
     </h2>
 
     <div 
@@ -13,7 +13,7 @@
 
         <input 
             type="file" 
-            id="wordInput" 
+            id="excelInput" 
             accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             multiple 
             class="hidden"
@@ -30,7 +30,7 @@
 
 <script>
     const dropZone = document.getElementById('dropZone');
-    const wordInput = document.getElementById('wordInput');
+    const excelInput = document.getElementById('excelInput');
 
     dropZone.addEventListener('dragover', (event) => {
         event.preventDefault();
@@ -54,14 +54,14 @@
     });
 
     dropZone.addEventListener('click', () => {
-        wordInput.click();
+        excelInput.click();
     });
 
     function handleDrop(event) {
         const files = event.dataTransfer.files;
 
         if (files.length) {
-            wordInput.files = files;
+            excelInput.files = files;
             handleFileSelect({ target: { files } });
         }
     }

@@ -506,6 +506,95 @@ async function wordToPDFDownloadFile(request, reply) {
 
 }
 
+async function excelToPDF(request, reply) {
+  return reply.view("pages/excelToPDF.ejs");
+}
+
+async function excelToPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "excel-to-pdf";
+
+    // Validate token exists
+    if (!token || !pdfStorage.has(token)) {
+      // Redirect back to the tool page if token is invalid/expired
+      return reply.redirect('/excel-to-pdf');
+    }
+
+    // console.log(request.query.filename)
+
+    // Optional: you can check query param to know if it's a zip
+    const isZip = request.query.type === 'zip';
+
+    // console.log("Iszip "+isZip);
+
+    // Render the same download view you use for remove-pages
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint,
+      title: "Excel to PDF",
+      isZip
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function excelToPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({
+        error: 'Invalid or expired token'
+      });
+    }
+
+    // Get the stored buffer (can be PDF or ZIP)
+    const fileBuffer = pdfStorage.get(token);
+
+    // Clean up storage immediately (good practice)
+    pdfStorage.delete(token);
+
+    // Determine file type from previous processing
+    // (we used ?type=zip in redirect when keepDifferentPDF=true)
+    const isZip = request.query.type === 'zip';
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', 'attachment; filename="excel-to-pdfs.zip"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', 'attachment; filename="excel-to-pdfs.pdf"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function powerPointToPDF(request, reply) {
+  return reply.view("pages/powerPointToPDF.ejs");
+}
+
 async function pageNotFound(request, reply) {
   return reply.status(404).view("pages/404.ejs");
 }
@@ -539,5 +628,9 @@ module.exports = {
   editPDFPages,
   wordToPDF,
   wordToPDFDownload,
-  wordToPDFDownloadFile
+  wordToPDFDownloadFile,
+  excelToPDF,
+  excelToPDFDownload,
+  excelToPDFDownloadFile,
+  powerPointToPDF
 };

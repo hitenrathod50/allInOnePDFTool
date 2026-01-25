@@ -1,0 +1,89 @@
+<div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
+    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
+        Convert EXCEL to PDF
+    </h1>
+
+    <div 
+        id="dropZone" 
+        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
+    >
+        <h2 class="text-gray-600 mb-4">
+            Drag and drop Excel files here or click to select
+        </h2>
+
+        <input 
+            type="file" 
+            id="excelInput" 
+            accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            multiple 
+            class="hidden"
+            onchange="handleFileSelect(event)"
+        >
+
+        <button
+            class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+        >
+            Select Excel Files
+        </button>
+    </div>
+</div>
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const excelInput = document.getElementById('excelInput');
+
+    dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    dropZone.addEventListener('dragenter', (event) => {
+        event.preventDefault();
+        dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    dropZone.addEventListener('dragleave', (event) => {
+        event.preventDefault();
+        dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+        handleDrop(event);
+    });
+
+    dropZone.addEventListener('click', () => {
+        excelInput.click();
+    });
+
+    function handleDrop(event) {
+        const files = event.dataTransfer.files;
+
+        if (files.length) {
+            excelInput.files = files;
+            handleFileSelect({ target: { files } });
+        }
+    }
+
+    function handleFileSelect(event) {
+        const files = event.target.files;
+
+        const allowedExtensions = ['xls', 'xlsx'];
+        const validFiles = [];
+
+        for (const file of files) {
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (allowedExtensions.includes(ext)) {
+                validFiles.push(file);
+            } else {
+                alert(`Invalid file type: ${file.name}`);
+            }
+        }
+
+        if (validFiles.length) {
+            console.log('Selected Excel files:', validFiles);
+            // 👉 Upload / process Excel files here
+        }
+    }
+</script>

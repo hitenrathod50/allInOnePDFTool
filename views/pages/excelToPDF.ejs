@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Excel to PDF Online</title>
+    <meta name="description" content="Convert Excel file to PDF. Convert Image to PDF online, easily, fast and free."/>
+    <meta name="keywords" content="Remove PDf pages, Image to PDF, Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF, Add Pages to PDF"/>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/excelToPDF.css">
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+<body>
+
+        <div class="mx-auto">
+            <div id="pickExcelContainer">
+                <%- include('../components/excelToPDF/pickExcelFile.ejs') %>
+            </div>
+            <div id="excelToPDFEnableContainer" class="hidden">
+                <%- include('../components/excelToPDF/excelToPDFEnable.ejs') %>
+            </div>
+        </div>
+
+        <%- include("../components/footer") %>
+</body>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+
+<script src="/js/excelToPDF.js"></script>
+
+</html>

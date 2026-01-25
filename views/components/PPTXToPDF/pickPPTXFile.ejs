@@ -1,0 +1,88 @@
+<div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
+    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
+        Convert POWERPOINT to PDF
+    </h1>
+
+    <div 
+        id="pptDropZone" 
+        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
+    >
+        <h2 class="text-gray-600 mb-4">
+            Drag and drop PPT files here or click to select
+        </h2>
+
+        <input 
+            type="file" 
+            id="pptInput" 
+            accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            multiple 
+            class="hidden"
+            onchange="handleFileSelect(event)"
+        >
+
+        <button
+            class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
+        >
+            Select PowerPoint Files
+        </button>
+    </div>
+</div>
+
+<script>
+    const pptDropZone = document.getElementById('pptDropZone');
+    const pptInput = document.getElementById('pptInput');
+
+    pptDropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    pptDropZone.addEventListener('dragenter', (event) => {
+        event.preventDefault();
+        pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    pptDropZone.addEventListener('dragleave', (event) => {
+        event.preventDefault();
+        pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+    });
+
+    pptDropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+        handleDrop(event);
+    });
+
+    pptDropZone.addEventListener('click', () => {
+        pptInput.click();
+    });
+
+    function handleDrop(event) {
+        const files = event.dataTransfer.files;
+        if (files.length) {
+            pptInput.files = files;
+            handleFileSelect({ target: { files } });
+        }
+    }
+
+    function handleFileSelect(event) {
+        const files = event.target.files;
+
+        const allowedExtensions = ['ppt', 'pptx'];
+        const validFiles = [];
+
+        for (const file of files) {
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (allowedExtensions.includes(ext)) {
+                validFiles.push(file);
+            } else {
+                alert(`Invalid file type: ${file.name}`);
+            }
+        }
+
+        if (validFiles.length) {
+            console.log('Selected PowerPoint files:', validFiles);
+            // 👉 Upload / convert PowerPoint files here
+        }
+    }
+</script>
