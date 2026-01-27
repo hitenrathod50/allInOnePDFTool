@@ -1415,6 +1415,131 @@ async function excelToPDFPost(request, reply) {
     }
 }
 
+async function mergePdfBuffers(buffers) {
+    if (buffers.length === 0) throw new Error('No PDFs to merge');
+    if (buffers.length === 1) return buffers[0];
+
+    const mergedPdf = await PDFDocument.create();
+
+    for (const pdfBuffer of buffers) {
+        const srcDoc = await PDFDocument.load(pdfBuffer);
+        const copiedPages = await mergedPdf.copyPages(srcDoc, srcDoc.getPageIndices());
+        copiedPages.forEach(page => mergedPdf.addPage(page));
+    }
+
+    const mergedBuffer = await mergedPdf.save();
+    return Buffer.from(mergedBuffer);
+}
+
+async function powerpointTOPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pptFiles = [];           // [ { buffer, filename, contentType? } ]
+        let mergeIntoSingle = false;
+
+        for await (const part of parts) {
+            if (part.file) {
+                if (/^files\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    pptFiles.push({
+                        buffer,
+                        filename: part.filename || `presentation_${pptFiles.length + 1}.pptx`,
+                        contentType: part.mimetype || 'application/octet-stream'
+                    });
+                }
+            } else {
+                // Form fields
+                const value = part.value;
+                if (part.fieldname === 'mergeIntoSingle') {
+                    mergeIntoSingle =
+                        value === 'true' || value === 'True' ||
+                        (value && JSON.parse(value) === true);
+                }
+            }
+        }
+
+        console.log(`merge into single ${mergeIntoSingle}`);
+
+        if (pptFiles.length === 0) {
+            return reply.status(400).send({ error: 'No PowerPoint files received' });
+        }
+
+        const outputPDFs = [];
+
+        if (mergeIntoSingle) {
+            // Strategy: convert each PPTX → PDF, then merge the PDFs
+            const pdfBuffers = [];
+
+            for (const file of pptFiles) {
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, '.pptx');
+                pdfBuffers.push(pdfBuffer);
+            }
+
+            const mergedPdfBuffer = await mergePdfBuffers(pdfBuffers);
+
+            outputPDFs.push({
+                name: 'merged-presentations.pdf',
+                buffer: mergedPdfBuffer
+            });
+        } else {
+            // Convert each separately
+            for (const file of pptFiles) {
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, '.pptx');
+
+                let safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, ''); // remove extension
+
+                safeName += '.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: pdfBuffer
+                });
+            }
+        }
+
+        const token = crypto.randomBytes(24).toString('hex');
+
+        if (!mergeIntoSingle && outputPDFs.length > 1) {
+            // ZIP multiple PDFs
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/powerpoint-to-pdf/download/${token}?type=zip&filename=converted-powerpoint-files.zip`);
+        }
+
+        // Single file case (merged or only one input)
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/powerpoint-to-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('PowerPoint → PDF error:', err);
+        return reply.status(500).send({
+            error: 'PowerPoint to PDF conversion failed',
+            message: err.message
+        });
+    }
+}
+
 
 module.exports = {
     imageToPDFPOST,
@@ -1426,5 +1551,6 @@ module.exports = {
     removePagesFromPDFPost,
     splitPDFPost,
     wordToPDFPost,
-    excelToPDFPost
+    excelToPDFPost,
+    powerpointTOPDFPost
 };

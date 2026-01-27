@@ -135,6 +135,9 @@ pptFileInput?.addEventListener('change', handleFileSelect);
 // Merge Toggle
 // ===============================
 document.querySelectorAll('#mergePDF, #mergePDFMobile').forEach(cb => {
+
+  console.log("mmmmmmmmmm");
+
   cb.addEventListener('change', e => {
     mergeIntoSingle = e.target.checked;
     document.querySelectorAll('#mergePDF, #mergePDFMobile')

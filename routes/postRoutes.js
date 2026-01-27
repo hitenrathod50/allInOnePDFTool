@@ -1,4 +1,4 @@
-const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost } = require("../controllers/postController");
+const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost, powerpointTOPDFPost } = require("../controllers/postController");
 
 async function postRoutes(fastify, options) {
 
@@ -16,9 +16,11 @@ async function postRoutes(fastify, options) {
 
   fastify.post("/splitPDFPost", splitPDFPost);
 
-  fastify.post("/wordTOPDFPost", wordToPDFPost)
+  fastify.post("/wordTOPDFPost", wordToPDFPost);
 
-  fastify.post("/excelTOPDFPost", excelToPDFPost)
+  fastify.post("/excelTOPDFPost", excelToPDFPost);
+
+  fastify.post("/powerpointTOPDFPost", powerpointTOPDFPost);
 
 }
 

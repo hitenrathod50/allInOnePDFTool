@@ -132,6 +132,7 @@ excelFileInput?.addEventListener('change', handleFileSelect);
 // ===============================
 // Merge Toggle
 // ===============================
+
 document.querySelectorAll('#mergePDF, #mergePDFMobile').forEach(cb => {
   cb.addEventListener('change', e => {
     mergeIntoSingle = e.target.checked;
