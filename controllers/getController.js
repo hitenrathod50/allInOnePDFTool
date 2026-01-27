@@ -676,6 +676,11 @@ async function powerPointToPDFDownloadFile(request, reply) {
 
 }
 
+
+async function odtTOPDF(request, reply) {
+  return reply.view("pages/odtToPDF.ejs");
+}
+
 async function pageNotFound(request, reply) {
   return reply.status(404).view("pages/404.ejs");
 }
@@ -715,5 +720,6 @@ module.exports = {
   excelToPDFDownloadFile,
   powerPointToPDF,
   powerPointToPDFDownload,
-  powerPointToPDFDownloadFile
+  powerPointToPDFDownloadFile,
+  odtTOPDF
 };
