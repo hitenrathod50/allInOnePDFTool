@@ -681,6 +681,138 @@ async function odtTOPDF(request, reply) {
   return reply.view("pages/odtToPDF.ejs");
 }
 
+async function odtTOPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "odt-to-pdf";
+
+    // Validate token exists
+    if (!token || !pdfStorage.has(token)) {
+      // Redirect back to the tool page if token is invalid/expired
+      return reply.redirect('/odt-to-pdf');
+    }
+
+    // console.log(request.query.filename)
+
+    // Optional: you can check query param to know if it's a zip
+    const isZip = request.query.type === 'zip';
+
+    // console.log("Iszip "+isZip);
+
+    // Render the same download view you use for remove-pages
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint,
+      title: "ODT to PDF",
+      isZip
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function odtTOPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({
+        error: 'Invalid or expired token'
+      });
+    }
+
+    // Get the stored buffer (can be PDF or ZIP)
+    const fileBuffer = pdfStorage.get(token);
+
+    // Clean up storage immediately (good practice)
+    pdfStorage.delete(token);
+
+    // Determine file type from previous processing
+    // (we used ?type=zip in redirect when keepDifferentPDF=true)
+    const isZip = request.query.type === 'zip';
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', 'attachment; filename="odt-to-pdfs.zip"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', 'attachment; filename="odt-to-pdfs.pdf"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function htmlToPDF(request, reply) {
+  return reply.view("pages/htmlToPDF.ejs");
+}
+
+async function htmlToPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "html-to-pdf";
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.redirect('/html-to-pdf');
+    }
+
+    // Render the downloadPDF.ejs view with the token
+    return reply.view('pages/downloadPDF.ejs', { token, endPoint, title: "HTML to PDF" });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
+async function htmlToPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    // Retrieve PDF buffer
+    const pdfBuffer = pdfStorage.get(token);
+
+    // Delete the PDF from storage after retrieval
+    pdfStorage.delete(token);
+
+    // Send PDF response
+    reply.header('Content-Type', 'application/pdf');
+    reply.header('Content-Disposition', `attachment; filename="output.pdf"`);
+    reply.send(pdfBuffer);
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
 async function pageNotFound(request, reply) {
   return reply.status(404).view("pages/404.ejs");
 }
@@ -721,5 +853,10 @@ module.exports = {
   powerPointToPDF,
   powerPointToPDFDownload,
   powerPointToPDFDownloadFile,
-  odtTOPDF
+  odtTOPDF,
+  odtTOPDFDownload,
+  odtTOPDFDownloadFile,
+  htmlToPDF,
+  htmlToPDFDownload,
+  htmlToPDFDownloadFile
 };

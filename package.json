@@ -23,6 +23,7 @@
     "fastify": "^5.6.0",
     "libreoffice-convert": "^1.7.0",
     "pdf-lib": "^1.17.1",
+    "puppeteer": "^24.36.1",
     "sharp": "^0.34.4"
   }
 }

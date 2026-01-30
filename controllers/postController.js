@@ -1,6 +1,7 @@
 const { PDFDocument, StandardFonts, rgb, degrees } = require('pdf-lib');
 const sharp = require('sharp');
 const crypto = require('crypto');
+const puppeteer = require('puppeteer');
 const archiver = require('archiver')
 const pdfStorage = new Map();
 
@@ -11,6 +12,12 @@ const DocxMerger = require('docx-merger');
 const ExcelJS = require('exceljs');
 
 const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp', 'word-to-pdf');
+
+const VIEWPORTS = {
+    desktop: { width: 1440, height: 900, deviceScaleFactor: 1 },
+    tablet: { width: 768, height: 1024, deviceScaleFactor: 1 },
+    mobile: { width: 390, height: 844, deviceScaleFactor: 2 }, // ≈ iPhone 12/13/14 size @2x
+};
 
 // Helper to convert PDF page size to points
 const pageSizes = {
@@ -1081,7 +1088,7 @@ async function convertToPdfBuffer(inputBuffer, inputExtension) {
         });
 
         const pdfBuffer = await fs.readFile(outputPath);
-        console.log(pdfBuffer);
+        // console.log(pdfBuffer);
         return pdfBuffer;
 
     } finally {
@@ -1540,6 +1547,207 @@ async function powerpointTOPDFPost(request, reply) {
     }
 }
 
+async function odtTOPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let odtFiles = [];
+        let mergeIntoSingle = false;
+
+        for await (const part of parts) {
+            if (part.file && /^files\[\d+\]$/.test(part.fieldname)) {
+                const buffer = await part.toBuffer();
+
+                odtFiles.push({
+                    buffer,
+                    filename: part.filename || `document_${odtFiles.length + 1}.odt`
+                });
+
+            } else if (part.fieldname === 'mergeIntoSingle') {
+                mergeIntoSingle =
+                    part.value === 'true' ||
+                    part.value === 'True' ||
+                    (part.value && JSON.parse(part.value) === true);
+            }
+        }
+
+        if (odtFiles.length === 0) {
+            return reply.status(400).send({ error: 'No ODT files received' });
+        }
+
+        const outputPDFs = [];
+
+        if (mergeIntoSingle) {
+            const pdfBuffers = [];
+
+            for (const file of odtFiles) {
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, '.odt');
+                pdfBuffers.push(pdfBuffer);
+            }
+
+            const mergedPdf = await mergePdfBuffers(pdfBuffers);
+
+            outputPDFs.push({
+                name: 'merged-documents.pdf',
+                buffer: mergedPdf
+            });
+
+        } else {
+            for (const file of odtFiles) {
+                const pdfBuffer = await convertToPdfBuffer(file.buffer, '.odt');
+
+                const safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, '') + '.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: pdfBuffer
+                });
+            }
+        }
+
+        const token = crypto.randomBytes(24).toString('hex');
+
+        if (!mergeIntoSingle && outputPDFs.length > 1) {
+            // ZIP multiple PDFs
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', c => chunks.push(c));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(f => zip.append(f.buffer, { name: f.name }));
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(
+                `/odt-to-pdf/download/${token}?type=zip&filename=converted-odt-files.zip`
+            );
+        }
+
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/odt-to-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('ODT → PDF error:', err);
+        return reply.status(500).send({
+            error: 'ODT to PDF conversion failed',
+            message: err.message
+        });
+    }
+}
+
+
+async function htmlToPDFPost(request, reply) {
+
+    try {
+
+
+        const { url, screen_size, page_size, orientation, margin } = request.body;
+
+        if (!url || typeof url !== 'string' || !url.startsWith('http')) {
+            return reply.code(400).send({ error: 'Valid http(s) url is required' });
+        }
+
+        if (!['desktop', 'tablet', 'mobile'].includes(screen_size)) {
+            return reply.code(400).send({ error: 'screen_size must be desktop|tablet|mobile' });
+        }
+
+        if (!['fit', 'a4', 'usletter'].includes(page_size?.toLowerCase())) {
+            return reply.code(400).send({ error: 'page_size must be fit|a4|usletter' });
+        }
+
+        const normalizedPageSize = page_size.toLowerCase() === 'usletter' ? 'LETTER' : page_size.toUpperCase();
+
+        if (normalizedPageSize !== 'FIT') {
+            if (!['portrait', 'landscape'].includes(orientation)) {
+                return reply.code(400).send({ error: 'orientation must be portrait|landscape when page_size ≠ fit' });
+            }
+        }
+
+        if (!['none', 'small', 'big'].includes(margin)) {
+            return reply.code(400).send({ error: 'margin must be none|small|big' });
+        }
+
+        const browser = await puppeteer.launch({
+      headless: 'new',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      // timeout: 45000, // optional
+    });
+
+    try {
+      const page = await browser.newPage();
+
+      // Set viewport / device emulation
+      await page.setViewport(VIEWPORTS[screen_size]);
+
+      // Wait for network idle → better for JS-heavy/SPA pages
+      await page.goto(url, {
+        waitUntil: 'networkidle2',   // or 'networkidle0' if you want stricter
+        timeout: 60000,
+      });
+
+      // Optional: wait extra time for lazy-loaded content, animations, etc.
+      // await page.waitForTimeout(1500);
+
+      // ────────────────────────────────────────────────
+      // 3. PDF generation settings
+      // ────────────────────────────────────────────────
+      const pdfOptions = {
+        printBackground: true,
+        margin: { top: marginSizes[margin], right: marginSizes[margin], bottom: marginSizes[margin], left: marginSizes[margin] },
+      };
+
+      if (normalizedPageSize === 'FIT') {
+        // Content-fit mode — no fixed page size
+        pdfOptions.format = undefined;
+        pdfOptions.width  = undefined;
+        pdfOptions.height = undefined;
+        pdfOptions.scale  = 1;           // you can experiment with 0.9–1.1
+      } else {
+        // Fixed page size + orientation
+        pdfOptions.format = normalizedPageSize;   // 'A4' or 'LETTER'
+        pdfOptions.landscape = orientation === 'landscape';
+      }
+
+      const pdfBuffer = await page.pdf(pdfOptions);
+
+      await page.close();
+
+      // ────────────────────────────────────────────────
+      // 4. Store PDF temporarily & redirect
+      // ────────────────────────────────────────────────
+      const token = crypto.randomBytes(32).toString('hex');
+
+      pdfStorage.set(token, pdfBuffer);           // ← your storage (Map, Redis, …)
+
+      // Optional: set expiration (if using Map + some cleanup logic)
+      // setTimeout(() => pdfStorage.delete(token), 1000 * 60 * 30); // 30 min
+
+      return reply.redirect(`/html-to-pdf/download/${token}`);
+
+    } finally {
+      await browser.close().catch(() => {});     // always try to close
+    }
+
+
+    } catch (err) {
+        return reply.status(500).send({
+            error: 'Fail to generate HTML to PDF',
+            message: err.message
+        });
+    }
+
+}
+
 
 module.exports = {
     imageToPDFPOST,
@@ -1552,5 +1760,7 @@ module.exports = {
     splitPDFPost,
     wordToPDFPost,
     excelToPDFPost,
-    powerpointTOPDFPost
+    powerpointTOPDFPost,
+    odtTOPDFPost,
+    htmlToPDFPost
 };

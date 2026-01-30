@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML to PDF Convert Online</title>
+    <meta name="description" content="Convert HTML to PDF file. Convert Image to PDF online, easily, fast and free." />
+    <meta name="keywords"
+        content="Remove PDf pages, Image to PDF, Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF, Add Pages to PDF" />
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/htmlToPDF.css">
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+    <body>
+
+        <div class="bg-white w-full rounded-lg p-5 mx-auto flex flex-col md:flex-row gap-4 h-[80vh]">
+            <div class="md:w-[70%] w-full h-full">
+                <%- include('../components/HTMLtoPDF/htmlURL.ejs') %>
+            </div>
+            <div class="md:flex-1 w-full h-full relative md:block overflow-y-auto no-scrollbar">
+                <%- include('../components/HTMLtoPDF/settingViewSectionHTMLToPDF.ejs') %>
+            </div>
+
+        </div>
+
+    </body>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+
+    <script src="/js/htmlToPDF.js"></script>
+
+</html>

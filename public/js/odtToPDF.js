@@ -159,7 +159,7 @@ cardsContainer.addEventListener('click', e => {
         logOdtArray();
 
         if (!odtArray.length) {
-            document.getElementById('pickOdtContainer')?.classList.remove('hidden');
+            document.getElementById('pickODTContainer')?.classList.remove('hidden');
             document.getElementById('odtToPDFEnableContainer')?.classList.add('hidden');
         }
     }, 300);
