@@ -421,6 +421,57 @@ async function editPDFPages(request, reply) {
     return reply.view("pages/editPDFPages.ejs");
 }
 
+async function editPDFPagesDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    console.log(token);
+    const endPoint = "edit-pdf-pages";
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.redirect('/edit-pdf-pages');
+    }
+
+    // Render the downloadPDF.ejs view with the token
+    return reply.view('pages/downloadPDF.ejs', { token, endPoint, title: "Edit PDF Pages Online" });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
+async function editPDFPagesDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    console.log(token);
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    // Retrieve PDF buffer
+    const pdfBuffer = pdfStorage.get(token);
+
+    // Delete the PDF from storage after retrieval
+    pdfStorage.delete(token);
+
+    // Send PDF response
+    reply.header('Content-Type', 'application/pdf');
+    reply.header('Content-Disposition', `attachment; filename="output.pdf"`);
+    reply.send(pdfBuffer);
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
 async function wordToPDF(request, reply) {
   return reply.view("pages/wordToPDF.ejs");
 }
@@ -858,5 +909,7 @@ module.exports = {
   odtTOPDFDownloadFile,
   htmlToPDF,
   htmlToPDFDownload,
-  htmlToPDFDownloadFile
+  htmlToPDFDownloadFile,
+  editPDFPagesDownload,
+  editPDFPagesDownloadFile
 };

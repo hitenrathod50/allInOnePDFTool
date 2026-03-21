@@ -1,4 +1,5 @@
 node_modules/
+ruff images delete/
 .env
 .DS_Store
 npm-debug.log

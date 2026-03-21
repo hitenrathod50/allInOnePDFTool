@@ -7,6 +7,7 @@
     <meta name="keywords" content="Remove PDf pages, Image to PDF, Merge PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF, Add Pages to PDF"/>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/editPDFPages.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <meta name="robots" content="index,follow">
 </head>
 
@@ -16,18 +17,19 @@
 
         <div class="mx-auto">
             <div id="pickPDFContainer">
-                <%- include('../components/editPDFPages/pickPDF.ejs') %>
+                <%- include('../components/EditPDFPages/pickPDF.ejs') %>
             </div>
-            <div id="editPDFPagesContainer" class="hidden">
-                <%- include('../components/editPDFPages/editPDFPagesEnable.ejs') %>
+            <div id="editPDFPagesContainer" class="measure-hidden">
+                <%- include('../components/EditPDFPages/editPDFPagesEnable.ejs') %>
             </div>
         </div>
 
-        <%- include("../components/footer") %>
+        
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
 
+<script src="/js/editPDFPages-jasrfibc.js"></script>
 <script src="/js/editPDFPages.js"></script>
 
 </html>

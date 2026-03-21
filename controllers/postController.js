@@ -1678,70 +1678,228 @@ async function htmlToPDFPost(request, reply) {
         }
 
         const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-      // timeout: 45000, // optional
-    });
+            headless: 'new',
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+            // timeout: 45000, // optional
+        });
 
-    try {
-      const page = await browser.newPage();
+        try {
+            const page = await browser.newPage();
 
-      // Set viewport / device emulation
-      await page.setViewport(VIEWPORTS[screen_size]);
+            // Set viewport / device emulation
+            await page.setViewport(VIEWPORTS[screen_size]);
 
-      // Wait for network idle → better for JS-heavy/SPA pages
-      await page.goto(url, {
-        waitUntil: 'networkidle2',   // or 'networkidle0' if you want stricter
-        timeout: 60000,
-      });
+            // Wait for network idle → better for JS-heavy/SPA pages
+            await page.goto(url, {
+                waitUntil: 'networkidle2',   // or 'networkidle0' if you want stricter
+                timeout: 60000,
+            });
 
-      // Optional: wait extra time for lazy-loaded content, animations, etc.
-      // await page.waitForTimeout(1500);
+            // Optional: wait extra time for lazy-loaded content, animations, etc.
+            // await page.waitForTimeout(1500);
 
-      // ────────────────────────────────────────────────
-      // 3. PDF generation settings
-      // ────────────────────────────────────────────────
-      const pdfOptions = {
-        printBackground: true,
-        margin: { top: marginSizes[margin], right: marginSizes[margin], bottom: marginSizes[margin], left: marginSizes[margin] },
-      };
+            // ────────────────────────────────────────────────
+            // 3. PDF generation settings
+            // ────────────────────────────────────────────────
+            const pdfOptions = {
+                printBackground: true,
+                margin: { top: marginSizes[margin], right: marginSizes[margin], bottom: marginSizes[margin], left: marginSizes[margin] },
+            };
 
-      if (normalizedPageSize === 'FIT') {
-        // Content-fit mode — no fixed page size
-        pdfOptions.format = undefined;
-        pdfOptions.width  = undefined;
-        pdfOptions.height = undefined;
-        pdfOptions.scale  = 1;           // you can experiment with 0.9–1.1
-      } else {
-        // Fixed page size + orientation
-        pdfOptions.format = normalizedPageSize;   // 'A4' or 'LETTER'
-        pdfOptions.landscape = orientation === 'landscape';
-      }
+            if (normalizedPageSize === 'FIT') {
+                // Content-fit mode — no fixed page size
+                pdfOptions.format = undefined;
+                pdfOptions.width = undefined;
+                pdfOptions.height = undefined;
+                pdfOptions.scale = 1;           // you can experiment with 0.9–1.1
+            } else {
+                // Fixed page size + orientation
+                pdfOptions.format = normalizedPageSize;   // 'A4' or 'LETTER'
+                pdfOptions.landscape = orientation === 'landscape';
+            }
 
-      const pdfBuffer = await page.pdf(pdfOptions);
+            const pdfBuffer = await page.pdf(pdfOptions);
 
-      await page.close();
+            await page.close();
 
-      // ────────────────────────────────────────────────
-      // 4. Store PDF temporarily & redirect
-      // ────────────────────────────────────────────────
-      const token = crypto.randomBytes(32).toString('hex');
+            // ────────────────────────────────────────────────
+            // 4. Store PDF temporarily & redirect
+            // ────────────────────────────────────────────────
+            const token = crypto.randomBytes(32).toString('hex');
 
-      pdfStorage.set(token, pdfBuffer);           // ← your storage (Map, Redis, …)
+            pdfStorage.set(token, pdfBuffer);           // ← your storage (Map, Redis, …)
 
-      // Optional: set expiration (if using Map + some cleanup logic)
-      // setTimeout(() => pdfStorage.delete(token), 1000 * 60 * 30); // 30 min
+            // Optional: set expiration (if using Map + some cleanup logic)
+            // setTimeout(() => pdfStorage.delete(token), 1000 * 60 * 30); // 30 min
 
-      return reply.redirect(`/html-to-pdf/download/${token}`);
+            return reply.redirect(`/html-to-pdf/download/${token}`);
 
-    } finally {
-      await browser.close().catch(() => {});     // always try to close
-    }
+        } finally {
+            await browser.close().catch(() => { });     // always try to close
+        }
 
 
     } catch (err) {
         return reply.status(500).send({
             error: 'Fail to generate HTML to PDF',
+            message: err.message
+        });
+    }
+
+}
+
+async function svgToPng(svgString, targetWidth, targetHeight) {
+    let svg = svgString.trim();
+
+    // 1. Add overflow visible (very important for strokes & shadows)
+    if (!svg.includes('overflow="visible"')) {
+        svg = svg.replace(/<svg([^>]*)/, '<svg$1 overflow="visible"');
+    }
+
+    // 2. Convert to Buffer
+    const svgBuffer = Buffer.from(svg);
+
+    // 3. Use Sharp with proper density + padding (NO unreliable regex)
+    return sharp(svgBuffer, {
+        density: 300,                    // High DPI for sharp output
+    })
+        .resize({
+            width: Math.round(targetWidth * 3),
+            height: Math.round(targetHeight * 3),
+            fit: 'contain',              // Keep aspect ratio
+            background: { r: 0, g: 0, b: 0, alpha: 0 },
+            withoutEnlargement: false,
+        })
+        .png({
+            compressionLevel: 6,
+            adaptiveFiltering: true,
+            force: true
+        })
+        .toBuffer();
+}
+
+// ───────────────────────────────
+// MAIN CONTROLLER
+// ───────────────────────────────
+async function editPDFPagesPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+        let annotations = [];
+
+        // ───────────────────────────────
+        // Parse multipart form
+        // ───────────────────────────────
+        for await (const part of parts) {
+            if (part.file && part.fieldname === "pdf") {
+                pdfBuffer = await part.toBuffer();
+            }
+
+            if (part.fieldname === "annotations") {
+                annotations = JSON.parse(part.value || "[]");
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({ error: "PDF file is required" });
+        }
+
+        // Load original PDF
+        const srcDoc = await PDFDocument.load(pdfBuffer);
+        const totalPages = srcDoc.getPageCount();
+
+        const pdfDoc = await PDFDocument.create();
+        const embeddedPages = await pdfDoc.embedPages(srcDoc.getPages());
+
+        // ───────────────────────────────
+        // Process pages
+        // ───────────────────────────────
+        for (let i = 0; i < totalPages; i++) {
+            const srcPage = srcDoc.getPage(i);
+            const embPage = embeddedPages[i];
+
+            const pageWidth = srcPage.getWidth();
+            const pageHeight = srcPage.getHeight();
+
+            const page = pdfDoc.addPage([pageWidth, pageHeight]);
+
+            // Draw original page
+            page.drawPage(embPage, {
+                x: 0,
+                y: 0,
+                width: pageWidth,
+                height: pageHeight,
+            });
+
+            // Find shapes for this page
+            const pageEntry = annotations.find(
+                entry => Number(entry.page) === i + 1
+            );
+
+            if (!pageEntry?.shapesArray?.length) continue;
+
+            // ───────────────────────────────
+            // Draw shapes
+            // ───────────────────────────────
+            for (const shape of pageEntry.shapesArray) {
+                if (!shape) continue;
+
+                const x = Number(shape.left) || 0;
+                const y = pageHeight - Number(shape.top) - Number(shape.height);
+
+                // ==================== IMAGE ====================
+                if (shape.type === 'image' && shape.dataUrl) {
+                    const base64Data = shape.dataUrl.split(',')[1];
+                    const imgBuffer = Buffer.from(base64Data, 'base64');
+
+                    const embeddedImg = await pdfDoc.embedPng(imgBuffer);   // or embedJpg if needed
+
+                    page.drawImage(embeddedImg, {
+                        x,
+                        y,
+                        width: Number(shape.width),
+                        height: Number(shape.height),
+                        opacity: Number(shape.opacity) ?? 1,
+                        rotate: degrees(Number(shape.angle) || 0)
+                    });
+                    continue;
+                }
+
+                // ==================== SHAPE (SVG) ====================
+                if (shape.type === 'shape' && shape.svg) {
+                    const pngBuffer = await svgToPng(shape.svg, shape.width, shape.height);
+
+                    const embeddedImg = await pdfDoc.embedPng(pngBuffer);
+
+                    page.drawImage(embeddedImg, {
+                        x,
+                        y,
+                        width: Number(shape.width),
+                        height: Number(shape.height),
+                        opacity: Number(shape.opacity) ?? 1,
+                        // rotate: degrees(Number(shape.angle) || 0)   // add later
+                    });
+                }
+            }
+        }
+
+        // ───────────────────────────────
+        // Save PDF
+        // ───────────────────────────────
+        const pdfBytes = await pdfDoc.save();
+
+        const token = crypto.randomBytes(32).toString("hex");
+        pdfStorage.set(token, Buffer.from(pdfBytes));
+
+        return reply.redirect(`/edit-pdf-pages/download/${token}`);
+
+    } catch (err) {
+        request.log.error(err);
+        console.error("editPDFPagesPost error:", err);
+
+        return reply.status(500).send({
+            error: "Failed to process PDF",
             message: err.message
         });
     }
@@ -1762,5 +1920,6 @@ module.exports = {
     excelToPDFPost,
     powerpointTOPDFPost,
     odtTOPDFPost,
-    htmlToPDFPost
+    htmlToPDFPost,
+    editPDFPagesPost
 };

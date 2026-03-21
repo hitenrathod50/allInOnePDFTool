@@ -1,13 +1,13 @@
 <div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
-    <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Edit PDF Pages</h2>
+    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Edit PDF Pages</h1>
     <div 
         id="dropZone" 
         class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
     >
-        <p class="text-gray-600 mb-4">Drag and drop PDF here or click to select</p>
+        <h2 class="text-gray-600 mb-4">Drag and drop PDF here or click to select</h2>
         <input 
             type="file" 
-            id="pdfInput" 
+            id="pdfInputFirst" 
             accept="application/pdf"
             class="hidden"
             onchange="handleFileSelect(event)"
@@ -45,13 +45,13 @@
     });
 
     dropZone.addEventListener('click', () => {
-        document.getElementById('pdfInput').click();
+        document.getElementById('pdfInputFirst').click();
     });
 
     function handleDrop(event) {
         const files = event.dataTransfer.files;
         if (files.length) {
-            document.getElementById('pdfInput').files = files;
+            document.getElementById('pdfInputFirst').files = files;
             handleFileSelect({ target: { files } });
         }
     }

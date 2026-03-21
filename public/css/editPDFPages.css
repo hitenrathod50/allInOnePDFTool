@@ -71,7 +71,6 @@
     border-radius: 3px;
 }
 
-
 @media (max-width: 640px) {
     .settings-card {
         padding: 1rem;
@@ -81,4 +80,141 @@
         padding: 0.5rem;
         min-height: 60px;
     }
+}
+
+
+/* Fabric CSS */
+
+.tool-btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tool-btn:hover {
+    background: #f3f4f6;
+}
+
+.tool-btn.active {
+    background: #f3f4f6;
+    box-shadow: 0 0 0 2px #7100ad;
+}
+
+.tool-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tool-btn:disabled:hover {
+    background: transparent;
+}
+
+/* Separator */
+.toolbar-separator {
+    width: 100%;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 8px 0;
+}
+
+.toolbar-separator-vertical {
+    width: 1px;
+    height: 32px;
+    background: #e5e7eb;
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+
+/* Dropdown animations */
+#shapesDropdown {
+    animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile toolbar horizontal scroll */
+@media (max-width: 1023px) {
+    #mobile-toolbar>div {
+        display: flex;
+        flex-wrap: nowrap;
+        min-width: 100%;
+    }
+}
+
+/* Ensure canvas fills container */
+.measure-hidden {
+    visibility: hidden;
+}
+
+#container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--muted);
+    background-image:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.03) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+#canvas-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fabric-canvas {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+input[type="color"] {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 9999px;
+}
+
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#page-input {
+    -moz-appearance: textfield;
 }
