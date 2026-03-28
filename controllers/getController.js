@@ -3,7 +3,26 @@
 const { pdfStorage } = require("./postController");
 
 async function homePage(request, reply) {
+
   return reply.view("pages/index.ejs");
+}
+
+async function loginRoute(request, reply) {
+
+  if (request.user) {
+    return reply.redirect("/");
+  }
+
+  return reply.view("pages/login.ejs");
+}
+
+async function signUpRoute(request, reply) {
+
+  if (request.user) {
+    return reply.redirect("/");
+  }
+
+  return reply.view("pages/signup.ejs");
 }
 
 async function imageToPDF(request, reply) {
@@ -418,7 +437,7 @@ async function splitPDFDownloadFile(request, reply) {
 }
 
 async function editPDFPages(request, reply) {
-    return reply.view("pages/editPDFPages.ejs");
+  return reply.view("pages/editPDFPages.ejs");
 }
 
 async function editPDFPagesDownload(request, reply) {
@@ -872,6 +891,8 @@ async function pageNotFound(request, reply) {
 
 module.exports = {
   homePage,
+  loginRoute,
+  signUpRoute,
   imageToPDF,
   imageToPDFDownload,
   imageToPDFDownloadFile,

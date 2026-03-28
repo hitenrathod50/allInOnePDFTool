@@ -1,8 +1,106 @@
-const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile } = require("../controllers/getController");
+const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile, signUpRoute, loginRoute } = require("../controllers/getController");
+
+const axios = require('axios');
+const User = require("../models/User");
+
+const jwt = require("jsonwebtoken");
 
 async function getRoutes(fastify, options) {
 
   fastify.get("/", homePage);        // Calls homePage controller
+
+  // Authentication routes are herez
+
+  fastify.get('/auth/google/callback', async (request, reply) => {
+
+    console.log("here it is");
+
+    try {
+      const token = await fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request);
+
+      console.log("Token is : ");
+      console.log(token);
+
+      const userInfo = await axios.get(
+        'https://www.googleapis.com/oauth2/v2/userinfo',
+        {
+          headers: {
+            Authorization: `Bearer ${token.token.access_token}`
+          }
+        }
+      );
+
+      console.log("User Data : ");
+
+      console.log(userInfo.data);
+
+      let user = await User.findOne({ email: userInfo.data.email });
+
+      console.log("Again user is ");
+      console.log(user);
+
+      let JWTtoken = "";
+
+      if (user) {
+
+        if (!user.googleId) {
+          user.googleId = userInfo.data.id;
+          user.provider = "Google";
+          user.name = userInfo.data.name;
+          await user.save();
+        }
+
+        JWTtoken = jwt.sign({
+          id: user._id,
+          provider: "Google",
+          email: user.email
+        }, process.env.JWT_SECRET);
+
+        reply.setCookie("token", JWTtoken, {
+          httpOnly: true,
+          sameSite: "strict",
+          path: "/"
+        });
+      } else {
+
+        const user = await User.create({
+          email: userInfo.data.email,
+          provider: "Google",
+          googleId: userInfo.data.id,
+          name: userInfo.data.name
+        });
+
+        JWTtoken = jwt.sign({
+          id: user._id,
+          provider: user.provider,
+          email: user.email
+        }, process.env.JWT_SECRET);
+
+        reply.setCookie("token", JWTtoken, {
+          httpOnly: true,
+          sameSite: "strict",
+          path: "/"
+        });
+
+
+        console.log(user)
+
+      }
+
+      return reply.view("pages/redirecting.ejs");
+
+
+
+    } catch (err) {
+      console.error(err);
+      reply.send('Authentication failed');
+    }
+  });
+
+  fastify.get("/login", loginRoute)
+
+  fastify.get("/register", signUpRoute);
+
 
   // Image to PDF routes
 
@@ -34,7 +132,7 @@ async function getRoutes(fastify, options) {
   fastify.get("/rotate-pages/download/file/:token", rotateAllPagesDownloadFile);
 
   // remove pages from pdf by selecting them
-  
+
   fastify.get("/remove-pages", removePDFPages);
   fastify.get("/remove-pages/download/:token", removePDFPagesDownload);
   fastify.get("/remove-pages/download/file/:token", removePDFPagesDownloadFile);

@@ -6,13 +6,45 @@ const ejs = require("ejs");
 const fastifyStatic = require("@fastify/static");
 const getRoutes = require("./routes/getRoutes");
 const postRoutes = require("./routes/postRoutes");
+const userRoutes = require("./routes/userRoutes");
 const { pageNotFound } = require("./controllers/getController");
+const { connectDB } = require("./controllers/dbConnection");
+const jwt = require("jsonwebtoken");
+const User = require("./models/User");
+
+const rateLimit = require("@fastify/rate-limit");
+
+require('dotenv').config();
+
+
+const oauthPlugin = require('@fastify/oauth2');
+
+connectDB();
 
 // Serve all static files from "public" folder
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, "public"),
   prefix: "/", // Now CSS, JS, images are all served directly
 });
+
+async function rateLimitxHelmetImpose() {
+
+  // await fastify.register(require('@fastify/helmet'));
+
+  await fastify.register(rateLimit, {
+    max: 20,
+    timeWindow: '1 minute',
+    keyGenerator: (req) => req.ip,
+    errorResponseBuilder: function (req, context) {
+      return {
+        statusCode: 429,
+        error: 'Too Many Requests',
+        message: `You exceeded the limit. Try again in ${context.after}ms`
+      }
+    }
+  })
+};
+rateLimitxHelmetImpose();
 
 // Register EJS
 fastify.register(pointOfView, {
@@ -23,8 +55,80 @@ fastify.register(pointOfView, {
 
 fastify.register(multipart, { limits: { fileSize: 30 * 1024 * 1024 } });
 
+fastify.register(require('@fastify/cookie'));
+
+fastify.register(oauthPlugin, {
+  name: 'googleOAuth2',
+  scope: ['profile', 'email'],
+  credentials: {
+    client: {
+      id: "327539219656-o050io2e9n4svv3amftv0bktj85gk16v.apps.googleusercontent.com",
+      secret: "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"
+    },
+    auth: oauthPlugin.GOOGLE_CONFIGURATION
+  },
+  startRedirectPath: '/auth/google',
+  callbackUri: 'http://localhost:3000/auth/google/callback'
+});
+
+fastify.addHook('preHandler', async (request, reply) => {
+
+  // console.clear();
+
+  // console.log("preHandler is working");
+
+  const token = request.cookies.token;
+
+  if (!token) {
+    request.user = null;
+    reply.locals.user = null;
+    return;
+  }
+
+  // console.log("token is " + token)
+
+  try {
+    // 1. Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // console.log("decoded:", decoded);
+
+    // 2. Find user in DB
+    const user = await User.findById(decoded.id);
+
+    // console.log("Index hai ");
+    // console.log(user);
+
+    // console.log("user is " + user);
+
+    if (!user) {
+      request.user = null;
+      reply.locals.user = null;
+      return;
+    }
+
+    // 3. Attach full user object
+    request.user = user;
+
+    // optional (for frontend templating)
+    if (user.name) {
+      reply.locals.user = user.name;
+    } else {
+      reply.locals.user = user.email;
+    }
+
+  } catch (err) {
+    console.log("JWT error:", err.message);
+
+    request.user = null;
+    reply.locals.user = null;
+  }
+});
+
 // GET Routes
 fastify.register(getRoutes);
+
+fastify.register(userRoutes, { prefix: '/user' });
 
 fastify.register(postRoutes);
 

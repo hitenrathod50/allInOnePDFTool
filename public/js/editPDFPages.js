@@ -231,86 +231,49 @@ function saveCurrentPageShapes() {
 }
 
 async function fabricObjectToData(obj) {
-  return new Promise((resolve) => {
+    return new Promise((resolve) => {
+        // Get the exact axis-aligned bounding box AFTER rotation/scale/flip
+        const bound = obj.getBoundingRect();           // ← this is the key
 
-    // ==================== IMAGE ====================
-    if (obj.type === 'image') {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+        const bw = Math.ceil(bound.width);
+        const bh = Math.ceil(bound.height);
 
-      const scaledWidth = obj.width * obj.scaleX;
-      const scaledHeight = obj.height * obj.scaleY;
+        // Temporary fabric canvas sized exactly to the bounding box
+        const tempFabric = new fabric.StaticCanvas(null, {
+            width: bw,
+            height: bh
+        });
 
-      canvas.width = scaledWidth;
-      canvas.height = scaledHeight;
+        // Clone and shift so the bounding box sits at (0,0) in the temp canvas
+        const cloned = fabric.util.object.clone(obj);
+        cloned.set({
+            left: cloned.left - bound.left,
+            top:  cloned.top  - bound.top,
+            // IMPORTANT: do NOT touch angle, scaleX, scaleY, flipX, flipY, etc.
+        });
 
-      // Draw image with current transformation
-      ctx.save();
-      ctx.translate(scaledWidth / 2, scaledHeight / 2);
-      ctx.rotate((obj.angle || 0) * Math.PI / 180);
-      ctx.scale(obj.flipX ? -1 : 1, obj.flipY ? -1 : 1);
-      ctx.drawImage(
-        obj._element,
-        -scaledWidth / 2,
-        -scaledHeight / 2,
-        scaledWidth,
-        scaledHeight
-      );
-      ctx.restore();
+        tempFabric.add(cloned);
+        tempFabric.renderAll();
 
-      const base64 = canvas.toDataURL('image/png');
+        const dataUrl = tempFabric.toDataURL({
+            format: 'png',
+            quality: 1,
+            multiplier: 1
+        });
 
-      resolve({
-        type: 'image',
-        dataUrl: base64,
-        left: obj.left,
-        top: obj.top,
-        width: scaledWidth,
-        height: scaledHeight,
-        opacity: obj.opacity ?? 1,
-        angle: obj.angle || 0
-      });
-      return;
-    }
+        tempFabric.dispose();
 
-    // ==================== SHAPES / TEXT / PATHS ====================
-    obj.clone((cloned) => {
-      const padding = 40;   // Important to prevent stroke clipping
-
-      const width = (cloned.width * cloned.scaleX) + padding * 2;
-      const height = (cloned.height * cloned.scaleY) + padding * 2;
-
-      cloned.set({
-        left: padding,
-        top: padding,
-        angle: 0,                    // We'll apply rotation on backend if needed
-        dirty: true
-      });
-
-      const tempCanvas = new fabric.StaticCanvas(null, { width, height });
-      tempCanvas.add(cloned);
-      tempCanvas.renderAll();
-
-      let svg = tempCanvas.toSVG({ suppressPreamble: true });
-
-      if (!svg.includes('overflow="visible"')) {
-        svg = svg.replace('<svg', '<svg overflow="visible"');
-      }
-
-      tempCanvas.dispose();
-
-      resolve({
-        type: 'shape',
-        svg: svg,
-        left: obj.left - padding,     // compensate padding
-        top: obj.top - padding,
-        width: width,
-        height: height,
-        opacity: obj.opacity ?? 1,
-        angle: obj.angle || 0
-      });
+        resolve({
+            type: 'image',           // everything becomes a PNG now
+            dataUrl: dataUrl,
+            left: bound.left,        // real position on the PDF page
+            top: bound.top,
+            width: bw,
+            height: bh,
+            opacity: obj.opacity ?? 1
+            // angle is no longer needed
+        });
     });
-  });
 }
 
 function loadShapesForPage(pageNum) {

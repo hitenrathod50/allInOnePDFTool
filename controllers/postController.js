@@ -1843,44 +1843,24 @@ async function editPDFPagesPost(request, reply) {
             // Draw shapes
             // ───────────────────────────────
             for (const shape of pageEntry.shapesArray) {
-                if (!shape) continue;
+                if (!shape?.dataUrl) continue;
+
+                const base64Data = shape.dataUrl.split(',')[1];
+                const imgBuffer = Buffer.from(base64Data, 'base64');
+
+                const embeddedImg = await pdfDoc.embedPng(imgBuffer);
 
                 const x = Number(shape.left) || 0;
                 const y = pageHeight - Number(shape.top) - Number(shape.height);
 
-                // ==================== IMAGE ====================
-                if (shape.type === 'image' && shape.dataUrl) {
-                    const base64Data = shape.dataUrl.split(',')[1];
-                    const imgBuffer = Buffer.from(base64Data, 'base64');
-
-                    const embeddedImg = await pdfDoc.embedPng(imgBuffer);   // or embedJpg if needed
-
-                    page.drawImage(embeddedImg, {
-                        x,
-                        y,
-                        width: Number(shape.width),
-                        height: Number(shape.height),
-                        opacity: Number(shape.opacity) ?? 1,
-                        rotate: degrees(Number(shape.angle) || 0)
-                    });
-                    continue;
-                }
-
-                // ==================== SHAPE (SVG) ====================
-                if (shape.type === 'shape' && shape.svg) {
-                    const pngBuffer = await svgToPng(shape.svg, shape.width, shape.height);
-
-                    const embeddedImg = await pdfDoc.embedPng(pngBuffer);
-
-                    page.drawImage(embeddedImg, {
-                        x,
-                        y,
-                        width: Number(shape.width),
-                        height: Number(shape.height),
-                        opacity: Number(shape.opacity) ?? 1,
-                        // rotate: degrees(Number(shape.angle) || 0)   // add later
-                    });
-                }
+                page.drawImage(embeddedImg, {
+                    x,
+                    y,
+                    width: Number(shape.width),
+                    height: Number(shape.height),
+                    opacity: Number(shape.opacity) ?? 1
+                    // NO rotate needed anymore
+                });
             }
         }
 

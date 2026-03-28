@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Register in all in one PDF tools">
+    <meta name="keywords" content="image to pdf, pdf tools">
+    <title>Register to All in One PDF Tools</title>
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+
+    <body>
+
+
+
+        <div class="bg-white lg:bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4">
+
+            <div class="max-w-md w-full bg-white rounded-3xl lg:shadow-xl overflow-hidden">
+
+                <!-- Logo -->
+                <div class="pt-10 pb-8 flex justify-center">
+                    <a href="/"
+                        class="text-fluid-xl font-bold text-primary hover:text-purple-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1">
+                        HR TOOLS
+                    </a>
+                </div>
+
+                <div class="px-3 lg:px-8 pb-10">
+                    <h2 class="text-3xl font-semibold text-gray-900 text-center mb-8">Create new account</h2>
+
+                    <form id="signupForm" class="space-y-6">
+
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+                            <input type="email" id="email" required
+                                class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400"
+                                placeholder="you@example.com" />
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+                            <input type="password" id="password" minlength="6" required
+                                class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400"
+                                placeholder="Enter your password" />
+                        </div>
+
+                        
+
+                        <!-- Verification Code (Hidden by default) -->
+                        <div id="verificationField" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5">Verification Code</label>
+                            <input type="number" id="verification" maxlength="6" max="999999" inputmode="numeric"
+                                class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400 text-center text-2xl tracking-widest"
+                                placeholder="123456" oninput="this.value = this.value.slice(0, 6)" />
+                        </div>
+
+                        <!-- Sign Up Button -->
+                        <button type="submit"
+                            class="primary w-full py-4 bg-primary rounded-2xl text-white font-semibold text-lg  hover:bg-purple-600 hover:shadow-xl transition-all active:scale-[0.98]">
+                            Sign Up
+                        </button>
+
+                    </form>
+
+                    <!-- OR Separator -->
+                    <div class="relative my-8">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="bg-white px-6 text-gray-500">or</span>
+                        </div>
+                    </div>
+
+                    <!-- Sign up with Google -->
+                    <button type="button" onclick="googleSignUp()"
+                        class="w-full flex items-center justify-center gap-3 border border-gray-300 hover:border-gray-400 rounded-2xl py-3.5 font-medium text-gray-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                            <path fill="#EA4335"
+                                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                            <path fill="#4285F4"
+                                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                            <path fill="#FBBC05"
+                                d="M10.53 28.59c-.69-2.05-1.1-4.25-1.1-6.59s.41-4.54 1.1-6.59L2.56 13.22C1.02 16.39 0 20.1 0 24c0 3.9 1.02 7.61 2.56 10.78l7.97-6.19z" />
+                            <path fill="#34A853"
+                                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                        </svg>
+                        <span>Sign up with Google</span>
+                    </button>
+
+                    <!-- Login Link -->
+                    <p class="text-center text-sm text-gray-600 mt-8">
+                        Already have an account?
+                        <a href="/login" class="font-medium text-[#7100ad] hover:underline">Log in</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+    <script src="/js/signup.js"></script>
+
+</html>
