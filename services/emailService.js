@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendOtpEmail(to, otp) {
+
   const htmlTemplate = `
 <!DOCTYPE html>
 <html lang="en">

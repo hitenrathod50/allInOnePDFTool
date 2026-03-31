@@ -9,9 +9,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: function () {
-      return !this.googleId; // ❗ password not required if Google user
-    }
+    required: false
   },
   googleId: {
     type: String,

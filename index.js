@@ -62,8 +62,8 @@ fastify.register(oauthPlugin, {
   scope: ['profile', 'email'],
   credentials: {
     client: {
-      id: "327539219656-o050io2e9n4svv3amftv0bktj85gk16v.apps.googleusercontent.com",
-      secret: "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"
+      id: process.env.OAUTH_CLIENT_ID,
+      secret: process.env.OAUTH_CLIENT_SECRET
     },
     auth: oauthPlugin.GOOGLE_CONFIGURATION
   },

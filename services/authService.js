@@ -49,6 +49,9 @@ async function loginUser(email, password, reply) {
             });
         }
 
+
+        console.log(user);
+
         // 3. Compare password
         const isMatch = await bcrypt.compare(password, user.password);
 
