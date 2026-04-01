@@ -1,15 +1,1 @@
-document.querySelectorAll(".logout-btn").forEach(button => {
-  button.addEventListener("click", async () => {
-    try {
-      const res = await fetch("/logout", {
-        method: "POST",
-      });
-
-      if (res.ok) {
-        window.location.href = "/";
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  });
-});
+function _0x6b92(_0x25edbd,_0x3f4559){_0x25edbd=_0x25edbd-0x145;var _0x5b852b=_0x5b85();var _0x6b926b=_0x5b852b[_0x25edbd];return _0x6b926b;}var _0x5a8c1a=_0x6b92;(function(_0x3ba37e,_0x4a5675){var _0x1aaa3e=_0x6b92,_0xbba62e=_0x3ba37e();while(!![]){try{var _0x210601=-parseInt(_0x1aaa3e(0x151))/0x1*(parseInt(_0x1aaa3e(0x14f))/0x2)+parseInt(_0x1aaa3e(0x147))/0x3+parseInt(_0x1aaa3e(0x149))/0x4+parseInt(_0x1aaa3e(0x152))/0x5*(-parseInt(_0x1aaa3e(0x14d))/0x6)+parseInt(_0x1aaa3e(0x14a))/0x7+parseInt(_0x1aaa3e(0x145))/0x8+-parseInt(_0x1aaa3e(0x14e))/0x9;if(_0x210601===_0x4a5675)break;else _0xbba62e['push'](_0xbba62e['shift']());}catch(_0x3a8af3){_0xbba62e['push'](_0xbba62e['shift']());}}}(_0x5b85,0x25d4c),document[_0x5a8c1a(0x148)]('.logout-btn')[_0x5a8c1a(0x150)](_0x2b2283=>{var _0x5c6f9f=_0x5a8c1a;_0x2b2283[_0x5c6f9f(0x14b)](_0x5c6f9f(0x146),async()=>{var _0x5dd795=_0x5c6f9f;try{(await fetch('/logout',{'method':_0x5dd795(0x14c)}))['ok']&&(window['location']['href']='/');}catch(_0x1516eb){}});}));function _0x5b85(){var _0x4894ab=['192668mkoXES','1014580YfDscK','addEventListener','POST','6BSOELZ','2536245NolEmw','60PUMKrH','forEach','2260ZJhiuE','512955FTtWFM','2449096ErRtQU','click','323724wsKavC','querySelectorAll'];_0x5b85=function(){return _0x4894ab;};return _0x5b85();}

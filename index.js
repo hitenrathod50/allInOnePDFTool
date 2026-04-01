@@ -39,7 +39,7 @@ async function rateLimitxHelmetImpose() {
       return {
         statusCode: 429,
         error: 'Too Many Requests',
-        message: `You exceeded the limit. Try again in ${context.after}ms`
+        message: `You exceeded the limit. Try again after some time`
       }
     }
   })

@@ -1,5 +1,8 @@
 node_modules/
 ruff images delete/
+src/
+src_backup/
+public_backup/
 .env
 .DS_Store
 npm-debug.log

@@ -1,6 +1,12 @@
+<!DOCTYPE html>
+
+<html>
+
 <head>
-    <title>Download - <%= title %></title>
-    <meta name="description" content="Download the processed file with All in One PDF tool and share the link with who you want."/>
+    <title>Download - <%= title %>
+    </title>
+    <meta name="description"
+        content="Download the processed file with All in One PDF tool and share the link with who you want." />
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/imagetopdf.css">
     <meta name="robots" content="noindex,follow">
@@ -9,19 +15,19 @@
 <%- include("../components/header") %>
 
     <body>
-        
+
         <div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
             <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Download Your PDF</h2>
             <p class="text-gray-600 mb-6">Your PDF is ready! Hit the button below to download.</p>
             <button id="downloadButton"
                 class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-opacity-90 hover:bg-purple-700 transition active:bg-purple-800">
-                
+
             </button>
         </div>
 
         <%- include("../components/toolsList") %>
 
-        <%- include("../components/footer") %>
+            <%- include("../components/footer") %>
 
     </body>
 
@@ -33,10 +39,10 @@
         downloadButton.textContent = "Processing...";
         const token = '<%= token %>';
         const endPoint = '<%= endPoint %>';
-        
+
         const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
 
-        console.log(isZip);
+        // console.log(isZip);
 
         const link = document.createElement('a');
 
@@ -79,3 +85,5 @@
 
 
     </script>
+
+</html> 
