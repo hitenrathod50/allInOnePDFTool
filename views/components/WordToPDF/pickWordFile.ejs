@@ -3,87 +3,130 @@
         Convert WORD to PDF
     </h2>
 
-    <div 
-        id="dropZone" 
-        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
-    >
+    <div id="dropZone"
+        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
         <p class="text-gray-600 mb-4">
             Drag and drop Word files here or click to select
         </p>
 
-        <input 
-            type="file" 
-            id="excelInput" 
+        <input type="file" id="excelInput"
             accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            multiple 
-            class="hidden"
-            onchange="handleFileSelect(event)"
-        >
+            multiple class="hidden" onchange="handleFileSelect(event)">
 
-        <button
-            class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-        >
+        <button class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
             Select Word Files
         </button>
     </div>
 </div>
 
-<script>
-    const dropZone = document.getElementById('dropZone');
-    const excelInput = document.getElementById('excelInput');
 
-    dropZone.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
 
-    dropZone.addEventListener('dragenter', (event) => {
-        event.preventDefault();
-        dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+    <!-- Card 1 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Drop/Select Word Files
+        </h3>
+        <p class="text-gray-600">
+            select/drop word files to convert them into pdf.
+        </p>
+    </div>
 
-    dropZone.addEventListener('dragleave', (event) => {
-        event.preventDefault();
-        dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+    <!-- Card 2 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Move Cards
+        </h3>
+        <p class="text-gray-600">
+            move cards to change the word file position.
+        </p>
+    </div>
 
-    dropZone.addEventListener('drop', (event) => {
-        event.preventDefault();
-        dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-        handleDrop(event);
-    });
+    <!-- Card 3 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Advance Settings
+        </h3>
+        <p class="text-gray-600">
+            can merge those word files into single pdf.
+        </p>
+    </div>
 
-    dropZone.addEventListener('click', () => {
-        excelInput.click();
-    });
+    <!-- Card 4 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Single Click Conversion
+        </h3>
+        <p class="text-gray-600">
+            word to pdf in single click within some time.
+        </p>
+    </div>
 
-    function handleDrop(event) {
-        const files = event.dataTransfer.files;
+</div>
 
-        if (files.length) {
-            excelInput.files = files;
-            handleFileSelect({ target: { files } });
-        }
-    }
+<%- include("../footer") %>
 
-    function handleFileSelect(event) {
-        const files = event.target.files;
 
-        const allowedExtensions = ['doc', 'docx'];
-        const validFiles = [];
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const excelInput = document.getElementById('excelInput');
 
-        for (const file of files) {
-            const ext = file.name.split('.').pop().toLowerCase();
-            if (allowedExtensions.includes(ext)) {
-                validFiles.push(file);
-            } else {
-                alert(`Invalid file type: ${file.name}`);
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+            handleDrop(event);
+        });
+
+        dropZone.addEventListener('click', () => {
+            excelInput.click();
+        });
+
+        function handleDrop(event) {
+            const files = event.dataTransfer.files;
+
+            if (files.length) {
+                excelInput.files = files;
+                handleFileSelect({ target: { files } });
             }
         }
 
-        if (validFiles.length) {
-            console.log('Selected Word files:', validFiles);
-            // 👉 Upload / process files here
+        function handleFileSelect(event) {
+            const files = event.target.files;
+
+            const allowedExtensions = ['doc', 'docx'];
+            const validFiles = [];
+
+            for (const file of files) {
+                const ext = file.name.split('.').pop().toLowerCase();
+                if (allowedExtensions.includes(ext)) {
+                    validFiles.push(file);
+                } else {
+                    alert(`Invalid file type: ${file.name}`);
+                }
+            }
+
+            if (validFiles.length) {
+                console.log('Selected Word files:', validFiles);
+                // 👉 Upload / process files here
+            }
         }
-    }
-</script>
+    </script>

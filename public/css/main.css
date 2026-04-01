@@ -1,1 +1,1 @@
-:root{--primary-color:#7100ad}.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+:root{--primary-color:#7100ad}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#9f9f9f;border-radius:10px}::-webkit-scrollbar-thumb:hover{background:#7e7e7e}.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
