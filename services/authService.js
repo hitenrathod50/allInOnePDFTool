@@ -36,7 +36,7 @@ async function createUser(email, password) {
 async function loginUser(email, password, reply) {
 
     try {
-        
+
 
         // 1. Find user by email
         const user = await User.findOne({ email });
@@ -86,5 +86,51 @@ async function loginUser(email, password, reply) {
 
 }
 
+async function changeUserPassword(req, reply) {
+    try {
+        const { password } = req.body;
 
-module.exports = { isEmailExists, createUser, loginUser }
+        // Validation
+        if (!password || password.length < 6) {
+            return reply.status(400).send({
+                success: false,
+                message: "Password must be at least 6 characters"
+            });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Update user
+        const response = await User.findByIdAndUpdate(
+            req.user._id,
+            { password: hashedPassword },
+            { new: true } // returns updated document
+        );
+
+        if (!response) {
+            return reply.status(404).send({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        return reply.send({
+            success: true,
+            message: "Password updated successfully"
+        });
+
+    } catch (error) {
+        console.error("Password update error:", error);
+
+        return reply.status(500).send({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+}
+
+
+
+
+module.exports = { isEmailExists, createUser, loginUser, changeUserPassword }

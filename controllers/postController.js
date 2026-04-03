@@ -1075,7 +1075,7 @@ async function convertToPdfBuffer(inputBuffer, inputExtension) {
         await fs.mkdir(tmpDir, { recursive: true });
         await fs.writeFile(inputPath, inputBuffer);
 
-        const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}" "${inputPath}"`;
+        const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}"   "${inputPath}"`;
 
         await new Promise((resolve, reject) => {
             exec(cmd, { timeout: 120000 }, (error, stdout, stderr) => {

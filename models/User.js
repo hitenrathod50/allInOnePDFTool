@@ -21,6 +21,22 @@ const userSchema = new mongoose.Schema({
     default: "Local"
   },
 
+  pdfData: {
+    type: [
+      {
+        date: {
+          type: Date,
+          default: Date.now
+        },
+        url: {
+          type: String,
+          required: true
+        }
+      }
+    ],
+    default: []   // 👈 important (empty array by default)
+  },
+
   name: String,
   createdOn: {
     type: Date,

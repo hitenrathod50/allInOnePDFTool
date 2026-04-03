@@ -9,7 +9,22 @@ async function userRoutes(fastify, options) {
   });
 
   fastify.get('/dashboard', async (request, reply) => {
-    return reply.view("pages/dashboard.ejs");
+
+    const formatted = request.user.createdOn.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
+
+    const user = {
+      email: request.user.email || "email",
+      name: request.user.name || request.user.email || "username",
+      creationDate: formatted || "creation date ",
+      subscription: request.user.subscription || "none",
+      pdfData: request.user.pdfData || [],
+    };
+
+    return reply.view("pages/dashboard.ejs", user);
   });
 
   fastify.get('/downloads', async (request, reply) => {

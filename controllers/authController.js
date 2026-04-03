@@ -52,6 +52,12 @@ async function loginUser(req, reply) {
 
 }
 
+async function changeUserPassword(req, reply) {
+
+    await authService.changeUserPassword(req, reply);
+
+}
+
 async function logOutUser(req, reply) {
 
     const token = req.cookies.token;
@@ -70,4 +76,4 @@ async function logOutUser(req, reply) {
 
 }
 
-module.exports = { sendOtp, verifyOtpAndRegister, logOutUser, loginUser }
+module.exports = { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword }

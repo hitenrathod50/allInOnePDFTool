@@ -1,4 +1,4 @@
-const { sendOtp, verifyOtpAndRegister, logOutUser, loginUser } = require("../controllers/authController");
+const { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword } = require("../controllers/authController");
 const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost, powerpointTOPDFPost, odtTOPDFPost, htmlToPDFPost, editPDFPagesPost } = require("../controllers/postController");
 
 async function postRoutes(fastify, options) {
@@ -34,6 +34,23 @@ async function postRoutes(fastify, options) {
   fastify.post("/verify-otp", verifyOtpAndRegister);
 
   fastify.post("/logout", logOutUser)
+
+  fastify.post("/changeUserPassword", {
+    config: {
+      rateLimit: {
+        max: 2,
+        timeWindow: '1 minute',
+        keyGenerator: (req) => req.ip,
+        errorResponseBuilder: function (req, context) {
+          return {
+            statusCode: 429,
+            error: 'Too Many Attempts',
+            message: `Please try after sometime`
+          }
+        }
+      }
+    }
+  }, changeUserPassword)
 
 
   fastify.post("/loginUser", {
