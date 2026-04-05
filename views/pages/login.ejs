@@ -8,6 +8,14 @@
     <meta name="robots" content="index,follow">
 </head>
 
+<style>
+    .required::after {
+        content: " *";
+        color: #7100ad;
+        font-weight: 600;
+    }
+</style>
+
 <%- include("../components/header") %>
 
 
@@ -20,10 +28,19 @@
 
                 <!-- Logo -->
                 <div class="pt-10 pb-8 flex justify-center">
-                    <a href="/"
-                        class="text-fluid-xl font-bold text-primary hover:text-purple-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1">
-                        HR TOOLS
-                    </a>
+                    <div class="flex-shrink-0">
+                        <a href="/"
+                            class="flex items-center space-x-2 text-fluid-xl font-bold text-primary hover:text-purple-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1">
+
+
+                            <!-- Logo Image -->
+                            <img src="/images/favicon.png" alt="Logo" class="w-12 h-12" />
+
+                            <!-- Text -->
+                            <span>PdfVersatile</span>
+
+                        </a>
+                    </div>
                 </div>
 
                 <div class="px-3 lg:px-8 pb-10">
@@ -33,7 +50,7 @@
 
                         <!-- Email -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 required">Email address</label>
                             <input type="email" id="email" required
                                 class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400"
                                 placeholder="you@example.com" />
@@ -41,10 +58,19 @@
 
                         <!-- Password -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5 required">Password</label>
                             <input type="password" id="password" minlength="6" required
                                 class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400"
                                 placeholder="Enter your password" />
+
+                            <p id="credentialError" class="text-red-600 text-sm mt-2 hidden">
+                                Invalid credentials
+                            </p>
+
+                            <p id="somethingWrong" class="text-red-600 text-sm mt-2 hidden">
+                                Something went wrong. Please try again later
+                            </p>
+
                         </div>
 
                         <!-- Login Button -->

@@ -6,7 +6,7 @@
     content="Best tool for pdf operations like converting image to PDF, PDF spliting, Merge PDf, Edit PDF Pages...">
   <meta name="keywords" content="image to pdf, pdf tools">
   <title>User Dashboard | All in One PDF Tool</title>
-  <link rel="stylesheet" href="/css/main.css">
+  <!-- <link rel="stylesheet" href="/css/main.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <meta name="robots" content="noindex,follow">
 </head>
@@ -17,7 +17,7 @@
 
     <div class="bg-gray-50 py-4">
       <div class="max-w-7xl mx-auto p-4 md:p-0">
-        <h1 class="text-3xl font-semibold text-gray-900 mb-8 flex items-center gap-3">
+        <h1 class="text-3xl font-semibold text-gray-900 mb-8 flex items-center gap-3 break-all">
 
           Hi, <%= name %>
         </h1>
@@ -35,7 +35,7 @@
             <div class="space-y-6">
               <!-- Greeting -->
               <div>
-                <p class="text-2xl md:text-3xl font-semibold text-gray-900">
+                <p class="text-2xl md:text-3xl font-semibold text-gray-900 break-all">
                   <%= name %>
                 </p>
                 <p class="text-gray-600 mt-1">
@@ -181,7 +181,24 @@
 
     <%- include("../components/toolsList") %>
 
-    <%- include("../components/footer") %>
+
+      <div class="bg-gray-50 mb-4">
+        <div class="max-w-7xl mx-auto p-4 md:p-0">
+
+          <p id="accountDeletionError" class="text-red-600 text-sm mb-3 hidden">
+            Something went wrong
+          </p>
+
+          <button
+            class="delete-account-btn primary w-fit p-4 bg-red-600 rounded-2xl text-white font-semibold text-lg hover:bg-red-500 hover:shadow-xl transition-all active:scale-[0.98]">
+            Delete Account
+          </button>
+
+        </div>
+
+      </div>
+
+      <%- include("../components/footer") %>
   </body>
 
   <script src="/js/dorpwastrsee.js"></script>

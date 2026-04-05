@@ -1,0 +1,22 @@
+
+URL - relishpdf, vibepdf, delightpdf
+
+
+
+
+Nginx
+
+
+
+Change Website Name, Logo
+
+SMTP Information (Like Credentials etc.)
+
+Support Mails (contact us, support etc.)
+
+Database URL
+
+
+
+
+

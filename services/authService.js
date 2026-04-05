@@ -131,6 +131,38 @@ async function changeUserPassword(req, reply) {
 }
 
 
+async function deleteAccount(req, reply) {
+
+    console.log("dellereer");
 
 
-module.exports = { isEmailExists, createUser, loginUser, changeUserPassword }
+    try {
+        const userId = req.user._id;
+
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        if (!deletedUser) {
+            return reply.status(404).send({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        return reply.status(200).send({
+            success: true,
+            message: "User deleted successfully"
+        });
+
+    } catch (error) {
+        return reply.status(500).send({
+            success: false,
+            message: "Server error",
+            error: error.message
+        });
+    }
+
+}
+
+
+
+module.exports = { isEmailExists, createUser, loginUser, changeUserPassword, deleteAccount }

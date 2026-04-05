@@ -101,6 +101,31 @@ async function getRoutes(fastify, options) {
 
   fastify.get("/register", signUpRoute);
 
+  fastify.get("/about", async (request, reply) => {
+
+    return reply.view("pages/about-us.ejs");
+
+  });
+
+  fastify.get("/contact", async (request, reply) => {
+
+    return reply.view("pages/contact-us.ejs");
+
+  });
+
+  fastify.get("/privacy", async (request, reply) => {
+
+    return reply.view("pages/privacy-policy.ejs");
+
+  });
+
+  fastify.get("/terms-conditions", async (request, reply) => {
+
+    return reply.view("pages/terms-conditions.ejs");
+
+  });
+
+
 
   // Image to PDF routes
 

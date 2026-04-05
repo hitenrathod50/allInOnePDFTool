@@ -63,4 +63,15 @@ async function sendOtpEmail(to, otp) {
   });
 }
 
-module.exports = { sendOtpEmail }
+
+async function contactFormSubmit(request, reply) {
+
+  return reply.status(500).send({
+    success: false,
+    message: "Internal server error"
+  });
+
+
+}
+
+module.exports = { sendOtpEmail, contactFormSubmit }

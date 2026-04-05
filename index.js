@@ -16,6 +16,8 @@ const rateLimit = require("@fastify/rate-limit");
 
 require('dotenv').config();
 
+const PORT = process.env.PORT || 3000;
+
 
 const oauthPlugin = require('@fastify/oauth2');
 
@@ -136,7 +138,7 @@ fastify.register(postRoutes);
 fastify.setNotFoundHandler(pageNotFound);
 
 // Start server
-fastify.listen({ port: 3000, host: "0.0.0.0" }, (err) => {
+fastify.listen({ port: PORT, host: "0.0.0.0" }, (err) => {
   if (err) throw err;
-  console.log("Server running at http://0.0.0.0:3000");
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });

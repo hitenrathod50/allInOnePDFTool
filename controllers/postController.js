@@ -883,6 +883,9 @@ async function removePagesFromPDFPost(request, reply) {
 }
 
 async function splitPDFPost(request, reply) {
+
+    console.log("splitpdf is here");
+
     try {
         const parts = await request.parts();
 
@@ -941,8 +944,6 @@ async function splitPDFPost(request, reply) {
         const margin = marginSizes[settings.margin] || 0;
 
         // ── Validate ranges strictly ───────────────────────────────
-        const usedPages = new Set();
-
         for (const r of splitRanges) {
             if (
                 !Number.isInteger(r.startPage) ||
@@ -952,13 +953,6 @@ async function splitPDFPost(request, reply) {
                 r.endPage > pageCount
             ) {
                 return reply.status(400).send({ error: 'Invalid page range detected' });
-            }
-
-            for (let p = r.startPage; p <= r.endPage; p++) {
-                if (usedPages.has(p)) {
-                    return reply.status(400).send({ error: 'Overlapping page ranges are not allowed' });
-                }
-                usedPages.add(p);
             }
         }
 
@@ -1017,7 +1011,7 @@ async function splitPDFPost(request, reply) {
         }
 
         // ── ZIP or single response ─────────────────────────────────
-        const token = crypto.randomBytes(24).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
 
         if (keepDifferentPDF && outputPDFs.length > 1) {
             const zipBuffer = await new Promise((resolve, reject) => {
@@ -1214,7 +1208,7 @@ async function wordToPDFPost(request, reply) {
             }
         }
 
-        const token = crypto.randomBytes(24).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
 
         if (!mergeIntoSingle && outputPDFs.length > 1) {
             // ZIP multiple PDFs
@@ -1382,7 +1376,7 @@ async function excelToPDFPost(request, reply) {
             }
         }
 
-        const token = crypto.randomBytes(24).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
 
         if (!mergeIntoSingle && outputPDFs.length > 1) {
             // ZIP multiple PDFs
@@ -1507,7 +1501,7 @@ async function powerpointTOPDFPost(request, reply) {
             }
         }
 
-        const token = crypto.randomBytes(24).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
 
         if (!mergeIntoSingle && outputPDFs.length > 1) {
             // ZIP multiple PDFs
@@ -1607,7 +1601,7 @@ async function odtTOPDFPost(request, reply) {
             }
         }
 
-        const token = crypto.randomBytes(24).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
 
         if (!mergeIntoSingle && outputPDFs.length > 1) {
             // ZIP multiple PDFs

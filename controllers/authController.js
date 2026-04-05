@@ -76,4 +76,10 @@ async function logOutUser(req, reply) {
 
 }
 
-module.exports = { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword }
+async function deleteUserAccount(req, reply) {
+
+    await authService.deleteAccount(req, reply);
+
+}
+
+module.exports = { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword, deleteUserAccount }

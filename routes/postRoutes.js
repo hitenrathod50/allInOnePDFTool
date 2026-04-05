@@ -1,5 +1,6 @@
-const { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword } = require("../controllers/authController");
+const { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword, deleteUserAccount } = require("../controllers/authController");
 const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost, powerpointTOPDFPost, odtTOPDFPost, htmlToPDFPost, editPDFPagesPost } = require("../controllers/postController");
+const { contactFormSubmit } = require("../services/emailService");
 
 async function postRoutes(fastify, options) {
 
@@ -31,7 +32,22 @@ async function postRoutes(fastify, options) {
 
   fastify.post("/send-otp", sendOtp);
 
-  fastify.post("/verify-otp", verifyOtpAndRegister);
+  fastify.post("/verify-otp", {
+    config: {
+      rateLimit: {
+        max: 5,
+        timeWindow: '1 minute',
+        keyGenerator: (req) => req.ip,
+        errorResponseBuilder: function (req, context) {
+          return {
+            statusCode: 429,
+            error: 'Too Many Attempts',
+            message: `Please try after sometime`
+          }
+        }
+      }
+    }
+  }, verifyOtpAndRegister);
 
   fastify.post("/logout", logOutUser)
 
@@ -70,6 +86,9 @@ async function postRoutes(fastify, options) {
     }
   }, loginUser)
 
+  fastify.post("/contactFormPost", contactFormSubmit)
+
+  fastify.post("/delete-account", deleteUserAccount);
 
 
 }
