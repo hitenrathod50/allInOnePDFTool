@@ -29,6 +29,20 @@ fastify.register(fastifyStatic, {
   prefix: "/", // Now CSS, JS, images are all served directly
 });
 
+
+fastify.setErrorHandler((error, request, reply) => {
+  if (error.statusCode === 429) {
+    return reply
+      .code(429)
+      .type('text/html')
+      .send('Please wait a moment and try again.')
+  }
+
+  reply.send(error)
+})
+
+
+
 async function rateLimitxHelmetImpose() {
 
   // await fastify.register(require('@fastify/helmet'));
@@ -37,13 +51,6 @@ async function rateLimitxHelmetImpose() {
     max: 20,
     timeWindow: '1 minute',
     keyGenerator: (req) => req.ip,
-    errorResponseBuilder: function (req, context) {
-      return {
-        statusCode: 429,
-        error: 'Too Many Requests',
-        message: `You exceeded the limit. Try again after some time`
-      }
-    }
   })
 };
 rateLimitxHelmetImpose();
