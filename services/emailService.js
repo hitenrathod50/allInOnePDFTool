@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "rathodhiten50@gmail.com",
-    pass: "nvzt wjkh lipi ppjh" // use app password
+    user: "pdfversatile.tool@gmail.com",
+    pass: "byah izlk hxqg ypcv" // use app password
   }
 });
 
@@ -33,30 +33,30 @@ async function sendOtpEmail(to, otp) {
 <body>
   <div class="container">
     <div class="header">
-      <a href="#" class="logo">HR TOOLS</a>
+      <a href="#" class="logo">PdfVersatile</a>
     </div>
     <div class="content">
       <h1>Validate your email</h1>
       <p>Hi,</p>
-      <p>Thank you for creating an account in HR Tools. Please use the code below to validate your email address.</p>
+      <p>Thank you for creating an account in PdfVersatile. Please use the code below to validate your email address.</p>
       
       <div class="otp-box">${otp}</div>
       
       <p>If you didn't create a new account, please ignore this email.</p>
       <p>So long, and thanks for all the fish,</p>
-      <p><strong>HR Tools Team</strong></p>
+      <p><strong>PdfVersatile Team</strong></p>
     </div>
     <hr>
     <div class="footer">
-      <p>© 2026 HR Tools</p>
-      <p>For any questions contact <a href="mailto:support@hrtools.net" style="color:#7100ad;">support@hrtools.net</a></p>
+      <p>© 2026 PdfVersatile</p>
+      <p>For any questions contact <a href="mailto:support@pdfversatile.com" style="color:#7100ad;">support@pdfversatile.com</a></p>
     </div>
   </div>
 </body>
 </html>`;
 
   await transporter.sendMail({
-    from: "rathodhiten50@gmail.com",
+    from: "pdfversatile.tool@gmail.com",
     to,
     subject: `Email Varification OTP`,
     html: htmlTemplate   // ← Important: use html instead of text
