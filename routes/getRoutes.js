@@ -93,7 +93,7 @@ async function getRoutes(fastify, options) {
 
     } catch (err) {
       console.error(err);
-      reply.send('Authentication failed');
+      return reply.view("pages/redirecting.ejs");
     }
   });
 

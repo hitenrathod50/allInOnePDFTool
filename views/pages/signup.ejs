@@ -77,7 +77,8 @@
                         <div id="verificationField" class="hidden">
                             <label class="block text-sm font-medium text-gray-700 mb-1.5 required">Verification
                                 Code</label>
-                            <input type="number" id="verification" minlength="6" maxlength="6" max="999999" inputmode="numeric"
+                            <input type="number" id="verification" minlength="6" maxlength="6" max="999999"
+                                inputmode="numeric"
                                 class="input-focus w-full px-5 py-3.5 border border-gray-300 rounded-2xl focus:outline-none text-gray-900 placeholder-gray-400 text-center text-2xl tracking-widest"
                                 placeholder="123456" oninput="this.value = this.value.slice(0, 6)" />
 
@@ -85,10 +86,16 @@
                                 Invalid OTP
                             </p>
 
+
+
+
+                        </div>
+
+                        <div>
+
                             <p id="somethingWrong" class="text-red-600 text-sm mt-2 hidden">
                                 Something went wrong. Please try again later
                             </p>
-
 
                         </div>
 

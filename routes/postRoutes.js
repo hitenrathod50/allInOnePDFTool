@@ -86,7 +86,22 @@ async function postRoutes(fastify, options) {
     }
   }, loginUser)
 
-  fastify.post("/contactFormPost", contactFormSubmit)
+  fastify.post("/contactFormPost", {
+    config: {
+      rateLimit: {
+        max: 1,
+        timeWindow: '1 minute',
+        keyGenerator: (req) => req.ip,
+        errorResponseBuilder: function (req, context) {
+          return {
+            statusCode: 429,
+            error: 'Too Many Attempts',
+            message: `Please try after sometime`
+          }
+        }
+      }
+    }
+  }, contactFormSubmit)
 
   fastify.post("/delete-account", deleteUserAccount);
 

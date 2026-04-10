@@ -19,10 +19,25 @@
         <div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
             <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Download Your PDF</h2>
             <p class="text-gray-600 mb-6">Your PDF is ready! Hit the button below to download.</p>
-            <button id="downloadButton"
-                class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-opacity-90 hover:bg-purple-700 transition active:bg-purple-800">
 
-            </button>
+            <div class="flex flex-col sm:flex-row gap-4 w-full">
+
+                <a id="downloadButton" class="w-full sm:w-1/2 text-white bg-primary px-4 py-2 border border-primary 
+        hover:bg-purple-600 transition-all duration-200 rounded-md 
+        flex items-center justify-center min-h-[44px]">
+                    Download
+                </a>
+
+                <a id="previewPDF" class="w-full sm:w-1/2 px-4 py-2 border border-primary 
+        bg-white text-primary hover:bg-primary hover:text-white 
+        transition-all duration-200 rounded-md 
+        flex items-center justify-center min-h-[44px]">
+                    Preview
+                </a>
+
+            </div>
+
+
         </div>
 
         <%- include("../components/toolsList") %>
@@ -37,6 +52,8 @@
         // document.getElementById("explore-more").classList.add("hidden");
 
         const downloadButton = document.getElementById("downloadButton");
+
+        const previewPDF = document.getElementById("previewPDF");
 
         downloadButton.textContent = "Processing...";
         const token = '<%= token %>';
@@ -64,6 +81,10 @@
 
                 // Create a temporary URL for the blob
                 const pdfUrl = window.URL.createObjectURL(pdfBlob);
+
+                previewPDF.addEventListener('click', (event) => {
+                    window.open(pdfUrl, '_blank');
+                })
 
                 // Create a temporary link element to trigger the download
 
