@@ -1,4 +1,4 @@
-const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile, signUpRoute, loginRoute } = require("../controllers/getController");
+const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile, signUpRoute, loginRoute, extractPDFPages, extractPDFPagesDownload, extractPDFPagesDownloadFile, compressPDF, compressPDFDownload, compressPDFDownloadFile, addWatermarkPDF, addWatermarkPDFDownload, addWatermarkPDFDownloadFile, protectPDF, protectPDFDownload, protectPDFDownloadFile, unlockPDF, unlockPDFDownload, unlockPDFDownloadFile } = require("../controllers/getController");
 
 const axios = require('axios');
 const User = require("../models/User");
@@ -191,6 +191,27 @@ async function getRoutes(fastify, options) {
   fastify.get("/html-to-pdf", htmlToPDF)
   fastify.get("/html-to-pdf/download/:token", htmlToPDFDownload);
   fastify.get("/html-to-pdf/download/file/:token", htmlToPDFDownloadFile);
+  
+  fastify.get("/extract-pdf-pages", extractPDFPages)
+  fastify.get("/extract-pdf-pages/download/:token", extractPDFPagesDownload);
+  fastify.get("/extract-pdf-pages/download/file/:token", extractPDFPagesDownloadFile);
+
+  fastify.get("/compress-pdf", compressPDF)
+  fastify.get("/compress-pdf/download/:token", compressPDFDownload);
+  fastify.get("/compress-pdf/download/file/:token", compressPDFDownloadFile);
+
+  fastify.get("/add-watermark", addWatermarkPDF)
+  fastify.get("/add-watermark/download/:token", addWatermarkPDFDownload);
+  fastify.get("/add-watermark/download/file/:token", addWatermarkPDFDownloadFile);
+
+  fastify.get("/protect-pdf", protectPDF)
+  fastify.get("/protect-pdf/download/:token", protectPDFDownload);
+  fastify.get("/protect-pdf/download/file/:token", protectPDFDownloadFile);
+  
+  fastify.get("/unlock-pdf", unlockPDF)
+  fastify.get("/unlock-pdf/download/:token", unlockPDFDownload);
+  fastify.get("/unlock-pdf/download/file/:token", unlockPDFDownloadFile);
+
 
 }
 

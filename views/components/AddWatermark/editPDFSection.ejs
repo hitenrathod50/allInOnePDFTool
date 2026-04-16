@@ -1,0 +1,329 @@
+<!-- Updated cardViewSection.ejs -->
+<div id="editPDFSection" class="bg-gray-50 h-full relative">
+
+    <div id="app" class="h-[79vh] w-full flex flex-col lg:flex-row lg:h-full">
+
+        <!-- Mobile/Tablet Toolbar (Horizontal) -->
+        <div id="mobile-toolbar" class="lg:hidden w-full bg-white border-b border-gray-200 shrink-0">
+            <div class="flex no-scrollbar items-center gap-2 p-3 overflow-x-scroll">
+
+                <button class="tool-btn bg-purple-50 active" data-tool="move" onclick="switchTool('move')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="5 9 2 12 5 15" />
+                        <polyline points="9 5 12 2 15 5" />
+                        <polyline points="15 19 12 22 9 19" />
+                        <polyline points="19 9 22 12 19 15" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <line x1="12" y1="2" x2="12" y2="22" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50" data-tool="select" onclick="switchTool('select')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                        <path d="M13 13l6 6" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50" data-tool="text" onclick="switchTool('text')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7" />
+                        <line x1="9" y1="20" x2="15" y2="20" />
+                        <line x1="12" y1="4" x2="12" y2="20" />
+                    </svg>
+                </button>
+
+                <button class="tool-btn bg-purple-50 addWatermarkEl" data-tool="draw" onclick="switchTool('draw')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                        <path d="M2 2l7.586 7.586" />
+                        <circle cx="11" cy="11" r="2" />
+                    </svg>
+                </button>
+
+                <button class="tool-btn bg-purple-50 addWatermarkEl" data-tool="highlight"
+                    onclick="switchTool('highlight')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l-6 6v3h9l3-3" />
+                        <path d="M22 12l-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" />
+                    </svg>
+                </button>
+
+                <!-- Shapes with dropdown -->
+                <div class="relative addWatermarkEl">
+                    <button class="tool-btn bg-purple-50 shapesBtn" data-tool="shapes" onclick="switchTool('shapes')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <circle cx="17.5" cy="6.5" r="4.5" />
+                            <polygon points="12 14 8 22 16 22 12 14" />
+                        </svg>
+                    </button>
+
+                </div>
+
+                <!-- Image tool -->
+                <button class="tool-btn bg-purple-50" data-tool="image" onclick="switchTool('image')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                </button>
+
+                <button class="tool-btn bg-purple-50 undoBtn" onclick="undo()" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="1 4 1 10 7 10" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50 redoBtn" onclick="redo()" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10" />
+                        <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50 delete-btn deleteBtn" onclick="deleteSelected()" disabled>
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+        <!-- Desktop Toolbar (Vertical) -->
+        <div id="desktop-toolbar"
+            class="hidden lg:flex w-[10%] min-w-[70px] max-w-[100px] h-full flex-col bg-white border-r border-gray-200 shrink-0">
+            <div class="flex no-scrollbar flex-col items-center gap-2 p-3 overflow-y-scroll flex-1">
+
+                <button class="tool-btn bg-purple-50 active" data-tool="move" onclick="switchTool('move')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="5 9 2 12 5 15" />
+                        <polyline points="9 5 12 2 15 5" />
+                        <polyline points="15 19 12 22 9 19" />
+                        <polyline points="19 9 22 12 19 15" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <line x1="12" y1="2" x2="12" y2="22" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50" data-tool="select" onclick="switchTool('select')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                        <path d="M13 13l6 6" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50" data-tool="text" onclick="switchTool('text')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7" />
+                        <line x1="9" y1="20" x2="15" y2="20" />
+                        <line x1="12" y1="4" x2="12" y2="20" />
+                    </svg>
+                </button>
+
+                <button class="tool-btn bg-purple-50 addWatermarkEl" data-tool="draw" onclick="switchTool('draw')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                        <path d="M2 2l7.586 7.586" />
+                        <circle cx="11" cy="11" r="2" />
+                    </svg>
+                </button>
+
+                <button class="tool-btn bg-purple-50 addWatermarkEl" data-tool="highlight"
+                    onclick="switchTool('highlight')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l-6 6v3h9l3-3" />
+                        <path d="M22 12l-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" />
+                    </svg>
+                </button>
+
+                <!-- Shapes with dropdown -->
+                <div class="relative addWatermarkEl">
+                    <button class="tool-btn bg-purple-50 shapesBtn" data-tool="shapes" onclick="switchTool('shapes')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <circle cx="17.5" cy="6.5" r="4.5" />
+                            <polygon points="12 14 8 22 16 22 12 14" />
+                        </svg>
+                    </button>
+
+                </div>
+
+                <!-- Image tool -->
+                <button class="tool-btn bg-purple-50" data-tool="image" onclick="switchTool('image')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50 undoBtn" onclick="undo()" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="1 4 1 10 7 10" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50 redoBtn" onclick="redo()" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10" />
+                        <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10" />
+                    </svg>
+                </button>
+
+
+                <button class="tool-btn bg-purple-50 delete-btn deleteBtn" onclick="deleteSelected()" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+        <!-- Canvas Container -->
+        <!-- <div id="canvas-container" class="flex-1 h-full min-w-0 bg-gray-50 flex items-center justify-center p-4">
+            <div class="w-full h-full bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+                <canvas id="fabric-canvas" height="100%" width="100%"></canvas>
+            </div>
+        </div> -->
+
+        <!-- <div class="canvas-area" id="canvasArea">
+            <canvas id="fabricCanvas"></canvas>
+        </div> -->
+
+        <div class="relative" id="container">
+            <div id="canvas-wrapper">
+                <canvas id="fabric-canvas"></canvas>
+            </div>
+
+
+            <div class="addWatermarkEl">
+                <div id="page-nav"
+                    class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg z-50">
+
+                    <input type="number" id="page-input" value="1" min="1"
+                        class="w-14 text-center rounded border border-gray-300 bg-white text-gray-900 px-1 py-1 text-sm font-mono" />
+
+                    <span id="page-total" class="text-gray-500 text-sm font-mono">/ 0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="shapesDropdown"
+            class="hidden absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-1 min-w-fit">
+            <button class="shape-option w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                data-shape="rect">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                </svg>
+            </button>
+
+            <button class="shape-option w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                data-shape="circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+            </button>
+
+            <button class="shape-option w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                data-shape="triangle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                    <polygon points="12 2 2 22 22 22 12 2" />
+                </svg>
+            </button>
+
+            <button class="shape-option w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                data-shape="line">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7100ad" stroke-width="2">
+                    <line x1="5" y1="19" x2="19" y2="5" />
+                </svg>
+            </button>
+        </div>
+
+        <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
+
+
+
+
+    </div>
+
+
+</div>
+
+<script>
+    const shapeBtns = document.querySelectorAll(".shapesBtn");
+    const dropdown = document.getElementById("shapesDropdown");
+
+    const elements = document.querySelectorAll('.addWatermarkEl');
+
+    shapeBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+
+            const rect = btn.getBoundingClientRect();
+
+            // console.log(rect.top +" "+ typeof(rect.top));
+
+            if (window.innerWidth >= 1024) {
+                // Desktop → dropdown right side
+                dropdown.style.top = rect.top - 80 + "px";
+                dropdown.style.left = rect.right + 5 + "px";
+            } else {
+                // Mobile / Tablet → dropdown below
+                dropdown.style.top = rect.top + "px";
+                dropdown.style.left = rect.left + "px";
+            }
+
+            dropdown.classList.toggle("hidden");
+
+            e.stopPropagation();
+        });
+    });
+
+
+    elements.forEach(el => {
+        el.classList.add('hidden');
+    });
+
+
+</script>

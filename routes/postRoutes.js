@@ -1,5 +1,5 @@
 const { sendOtp, verifyOtpAndRegister, logOutUser, loginUser, changeUserPassword, deleteUserAccount } = require("../controllers/authController");
-const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost, powerpointTOPDFPost, odtTOPDFPost, htmlToPDFPost, editPDFPagesPost } = require("../controllers/postController");
+const { imageToPDFPOST, addPagestoPDFPOST, mergePDFPost, addPageNumberToPDF, addPageNumberToPDFPost, rotatePDFAllPagesPost, removePagesFromPDFPost, splitPDFPost, wordToPDFPost, excelToPDFPost, powerpointTOPDFPost, odtTOPDFPost, htmlToPDFPost, editPDFPagesPost, extractPDFPagesPost, compressPDFPost, addWatermarkPDFPost, protectPDFPost, unlockPDFPost } = require("../controllers/postController");
 const { contactFormSubmit } = require("../services/emailService");
 
 async function postRoutes(fastify, options) {
@@ -27,6 +27,20 @@ async function postRoutes(fastify, options) {
   fastify.post("/odtTOPDFPost", odtTOPDFPost)
 
   fastify.post("/htmlToPDFPost", htmlToPDFPost)
+
+  fastify.post("/extractPDFPagesPost", extractPDFPagesPost)
+
+
+  fastify.post("/compressPDFPost", compressPDFPost)
+
+
+
+  fastify.post("/protectPDFPost", protectPDFPost)
+
+  fastify.post("/unlockPDFPost", unlockPDFPost)
+
+
+  fastify.post("/addWatermarkPDFPost", addWatermarkPDFPost)
 
   fastify.post("/editPDFPagesPost", editPDFPagesPost)
 

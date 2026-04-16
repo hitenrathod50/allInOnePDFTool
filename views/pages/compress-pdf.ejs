@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <title>Compress PDFs Online</title>
+    <meta name="description" content="Compress PDF online tool, simple user interface drag and drop, no headache, fast and absolutely free."/>
+    <meta name="keywords" content="Compress PDF, Image to PDF, split PDF, combine PDF, extract PDF, compress PDF, convert PDF, Word to PDF, JPG to PDF"/>
+    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+    <link rel="stylesheet" href="/css/compressPDF.css">
+    <meta name="robots" content="index,follow">
+</head>
+
+<%- include("../components/header") %>
+
+<body>
+
+        <div class="mx-auto">
+            <div id="pickPDFContainer">
+                <%- include('../components/CompressPDF/pickPdf.ejs') %>
+            </div>
+            <div id="compressPDFEnableContainer" class="hidden">
+                <%- include('../components/CompressPDF/compressPDFEnable.ejs') %>
+            </div>
+        </div>
+
+        
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
+
+<script src="/js/compressPDF.js"></script>
+
+</html>

@@ -836,6 +836,8 @@ async function htmlToPDF(request, reply) {
   return reply.view("pages/htmlToPDF.ejs");
 }
 
+
+
 async function htmlToPDFDownload(request, reply) {
 
   try {
@@ -882,6 +884,424 @@ async function htmlToPDFDownloadFile(request, reply) {
   }
 
 }
+
+
+async function extractPDFPages(request, reply) {
+  return reply.view("pages/extract-pages.ejs");
+}
+
+async function extractPDFPagesDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      // You can redirect to a common page or home
+      return reply.redirect('/extract-pdf-pages');
+    }
+
+    const stored = pdfStorage.get(token);   // Buffer or {path, filename, type}
+
+    const isZip = request.query.type === 'zip' ||
+      (typeof stored === 'object' && stored.type === 'zip');
+
+    const filename = request.query.filename || 'download.zip';
+
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint: "extract-pdf-pages",           // or dynamically pass tool name if needed
+      title: "Extract PDF Pages",
+      isZip,
+      filename                     // pass original filename
+    });
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
+
+}
+
+async function extractPDFPagesDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    const storedData = pdfStorage.get(token);
+    pdfStorage.delete(token);        // Clean up immediately
+
+    let fileBuffer;
+    let isZip = false;
+    let downloadFilename = 'download.pdf';
+
+    // Handle both simple Buffer and Object cases
+    if (Buffer.isBuffer(storedData)) {
+      fileBuffer = storedData;
+      // Try to detect from query
+      isZip = request.query.type === 'zip';
+    }
+    else if (typeof storedData === 'object' && storedData !== null) {
+      // New improved structure (recommended)
+      fileBuffer = storedData.buffer || storedData.path ? await fs.readFile(storedData.path) : null;
+      isZip = storedData.type === 'zip' || request.query.type === 'zip';
+      downloadFilename = storedData.filename || (isZip ? 'export.zip' : 'export.pdf');
+    }
+
+    if (!fileBuffer) {
+      return reply.status(500).send({ error: 'File data corrupted' });
+    }
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+
+async function compressPDF(request, reply) {
+  return reply.view("pages/compress-pdf.ejs");
+}
+
+async function compressPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      // You can redirect to a common page or home
+      return reply.redirect('/compress-pdf');
+    }
+
+    const stored = pdfStorage.get(token);   // Buffer or {path, filename, type}
+
+    const isZip = request.query.type === 'zip' ||
+      (typeof stored === 'object' && stored.type === 'zip');
+
+    const filename = request.query.filename || 'download.zip';
+
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint: "compress-pdf",           // or dynamically pass tool name if needed
+      title: "Compress PDF",
+      isZip,
+      filename                     // pass original filename
+    });
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
+
+}
+
+async function compressPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    const storedData = pdfStorage.get(token);
+    pdfStorage.delete(token);        // Clean up immediately
+
+    let fileBuffer;
+    let isZip = false;
+    let downloadFilename = 'download.pdf';
+
+    // Handle both simple Buffer and Object cases
+    if (Buffer.isBuffer(storedData)) {
+      fileBuffer = storedData;
+      // Try to detect from query
+      isZip = request.query.type === 'zip';
+    }
+    else if (typeof storedData === 'object' && storedData !== null) {
+      // New improved structure (recommended)
+      fileBuffer = storedData.buffer || storedData.path ? await fs.readFile(storedData.path) : null;
+      isZip = storedData.type === 'zip' || request.query.type === 'zip';
+      downloadFilename = storedData.filename || (isZip ? 'export.zip' : 'export.pdf');
+    }
+
+    if (!fileBuffer) {
+      return reply.status(500).send({ error: 'File data corrupted' });
+    }
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+
+async function addWatermarkPDF(request, reply) {
+  return reply.view("pages/add-watermark.ejs");
+}
+
+async function addWatermarkPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    console.log(token);
+    const endPoint = "add-watermark";
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.redirect('/add-watermark');
+    }
+
+    // Render the downloadPDF.ejs view with the token
+    return reply.view('pages/downloadPDF.ejs', { token, endPoint, title: "Add Watermark to PDF" });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
+async function addWatermarkPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    console.log(token);
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    // Retrieve PDF buffer
+    const pdfBuffer = pdfStorage.get(token);
+
+    // Delete the PDF from storage after retrieval
+    pdfStorage.delete(token);
+
+    // Send PDF response
+    reply.header('Content-Type', 'application/pdf');
+    reply.header('Content-Disposition', `attachment; filename="output.pdf"`);
+    reply.send(pdfBuffer);
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error', message: error.message });
+  }
+
+}
+
+
+async function protectPDF(request, reply) {
+  return reply.view("pages/protect-pdf.ejs");
+}
+
+
+async function protectPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "protect-pdf";
+
+    // Validate token exists
+    if (!token || !pdfStorage.has(token)) {
+      // Redirect back to the tool page if token is invalid/expired
+      return reply.redirect('/protect-pdf');
+    }
+
+    // console.log(request.query.filename)
+
+    // Optional: you can check query param to know if it's a zip
+    const isZip = request.query.type === 'zip';
+
+    // console.log("Iszip "+isZip);
+
+    // Render the same download view you use for remove-pages
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint,
+      title: "Protected PDFs",
+      isZip
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function protectPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({
+        error: 'Invalid or expired token'
+      });
+    }
+
+    // Get the stored buffer (can be PDF or ZIP)
+    const fileBuffer = pdfStorage.get(token);
+
+    // Clean up storage immediately (good practice)
+    pdfStorage.delete(token);
+
+    // Determine file type from previous processing
+    // (we used ?type=zip in redirect when keepDifferentPDF=true)
+    const isZip = request.query.type === 'zip';
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', 'attachment; filename="protected-pdfs.zip"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', 'attachment; filename="protected-pdfs.pdf"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+
+async function unlockPDF(request, reply) {
+  return reply.view("pages/unlock-pdf.ejs");
+}
+
+async function unlockPDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "unlock-pdf";
+
+    // Validate token exists
+    if (!token || !pdfStorage.has(token)) {
+      // Redirect back to the tool page if token is invalid/expired
+      return reply.redirect('/unlock-pdf');
+    }
+
+    // console.log(request.query.filename)
+
+    // Optional: you can check query param to know if it's a zip
+    const isZip = request.query.type === 'zip';
+
+    // console.log("Iszip "+isZip);
+
+    // Render the same download view you use for remove-pages
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint,
+      title: "Unlocked PDFs",
+      isZip
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function unlockPDFDownloadFile(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({
+        error: 'Invalid or expired token'
+      });
+    }
+
+    // Get the stored buffer (can be PDF or ZIP)
+    const fileBuffer = pdfStorage.get(token);
+
+    // Clean up storage immediately (good practice)
+    pdfStorage.delete(token);
+
+    // Determine file type from previous processing
+    // (we used ?type=zip in redirect when keepDifferentPDF=true)
+    const isZip = request.query.type === 'zip';
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', 'attachment; filename="unlocked-pdfs.zip"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', 'attachment; filename="unlocked-pdfs.pdf"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
 
 async function pageNotFound(request, reply) {
   return reply.status(404).view("pages/404.ejs");
@@ -932,5 +1352,20 @@ module.exports = {
   htmlToPDFDownload,
   htmlToPDFDownloadFile,
   editPDFPagesDownload,
-  editPDFPagesDownloadFile
+  editPDFPagesDownloadFile,
+  extractPDFPages,
+  extractPDFPagesDownload,
+  extractPDFPagesDownloadFile,
+  compressPDF,
+  compressPDFDownload,
+  compressPDFDownloadFile,
+  addWatermarkPDF,
+  addWatermarkPDFDownload,
+  addWatermarkPDFDownloadFile,
+  protectPDF,
+  protectPDFDownload,
+  protectPDFDownloadFile,
+  unlockPDF,
+  unlockPDFDownload,
+  unlockPDFDownloadFile,
 };

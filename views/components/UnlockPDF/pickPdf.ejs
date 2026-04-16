@@ -1,0 +1,108 @@
+<div class="bg-white rounded-lg shadow-lg p-6 m-3 sm:mb-0 max-w-md mx-auto text-center">
+    <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Unlock PDF Files</h2>
+    <div id="dropZone"
+        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+        <p class="text-gray-600 mb-4">Drag and drop PDFs here or click to select</p>
+        <input type="file" id="pdfInputFirst" accept="application/pdf" multiple class="hidden"
+            onchange="handleFileSelect(event)">
+        <button class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+            Select PDFs
+        </button>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
+
+    <!-- Card 1 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Drop/Select PDF Files
+        </h3>
+        <p class="text-gray-600">
+            select/drop PDF files to unlock them.
+        </p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Move PDF Cards
+        </h3>
+        <p class="text-gray-600">
+            move pdf cards by dragging to change it's position.
+        </p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Multiple PDFs
+        </h3>
+        <p class="text-gray-600">
+            can unlock multiple pdfs at a time.
+        </p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+                  aspect-[5/3] flex flex-col items-center justify-center text-center">
+        <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
+            Single Click Conversion
+        </h3>
+        <p class="text-gray-600">
+            unlock pdfs within single click.
+        </p>
+    </div>
+
+</div>
+
+<%- include("../footer") %>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+            handleDrop(event);
+
+        });
+
+        dropZone.addEventListener('click', () => {
+            document.getElementById('pdfInputFirst').click();
+        });
+
+        function handleDrop(event) {
+            const files = event.dataTransfer.files;
+
+            if (files.length) {
+                document.getElementById('pdfInputFirst').files = files;
+                handleFileSelect({ target: { files } });
+            }
+        }
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+
+            // Add your file handling logic here
+            console.log('Selected files:', files);
+        }
+    </script>

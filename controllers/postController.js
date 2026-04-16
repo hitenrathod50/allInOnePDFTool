@@ -11,6 +11,17 @@ const path = require('path');
 const DocxMerger = require('docx-merger');
 const ExcelJS = require('exceljs');
 
+const pdfPoppler = require('pdf-poppler');
+
+const gsPath = `"C:\\Program Files\\gs\\gs10.07.0\\bin\\gswin64c.exe"`;
+
+const COMPRESSION_SETTINGS = {
+    low: '/printer',      // Good quality, moderate compression
+    medium: '/ebook',  // Default - smaller size, acceptable quality
+    high: '/screen'     // Even smaller (you can use '/screen' or experiment with custom params)
+    // Note: /printer and /prepress are larger, so we stick with /screen for high compression
+};
+
 const PROJECT_TEMP_ROOT = path.join(__dirname, '..', 'temp', 'word-to-pdf');
 
 const VIEWPORTS = {
@@ -1092,43 +1103,6 @@ async function convertToPdfBuffer(inputBuffer, inputExtension) {
     }
 }
 
-// async function convertDocxToPdfBuffer(docxBuffer) {
-//     const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-//     const tmpDir = path.join(PROJECT_TEMP_ROOT, `conv-${uniqueId}`);
-
-//     const inputPath  = path.join(tmpDir, 'input.docx');
-//     const outputPath = path.join(tmpDir, 'input.pdf');   // soffice default naming
-
-//     try {
-//         await fs.mkdir(tmpDir, { recursive: true });
-//         await fs.writeFile(inputPath, docxBuffer);
-
-//         const cmd = `soffice --headless --convert-to pdf --outdir "${tmpDir}" "${inputPath}"`;
-
-//         await new Promise((resolve, reject) => {
-//             exec(cmd, { timeout: 90000 }, (error, stdout, stderr) => {
-//                 if (error) {
-//                     console.error('soffice error:', stderr || error.message);
-//                     return reject(error);
-//                 }
-//                 resolve();
-//             });
-//         });
-
-//         let pdfBuffer;
-//         try {
-//             pdfBuffer = await fs.readFile(outputPath);
-//         } catch (e) {
-//             throw new Error(`PDF not generated - file missing: ${outputPath}`);
-//         }
-
-//         return pdfBuffer;
-//     } finally {
-//         // Cleanup – best effort
-//         fs.rm(tmpDir, { recursive: true, force: true })
-//             .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
-//     } 
-// }
 
 
 async function mergeDocxBuffers(buffers) {
@@ -1880,6 +1854,746 @@ async function editPDFPagesPost(request, reply) {
 
 }
 
+async function extractPDFPagesPost(request, reply) {
+
+
+    try {
+
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+        let settings = {
+            export_type: "pdf",   // default
+            margin: "none",
+        };
+
+        // ---------------- Parse multipart ----------------
+        for await (const part of parts) {
+            if (part.file && part.fieldname === 'pdf') {
+                pdfBuffer = await part.toBuffer();
+
+                if (!part.filename.toLowerCase().endsWith('.pdf')) {
+                    return reply.status(400).send({ error: 'Uploaded file must be a PDF' });
+                }
+            }
+
+            if (!part.file && part.fieldname === 'settings') {
+                try {
+                    const parsed = JSON.parse(part.value);
+
+                    if (['pdf', 'image'].includes(parsed.export_type)) {
+                        settings.export_type = parsed.export_type;
+                    }
+
+                    if (['none', 'small', 'big'].includes(parsed.margin)) {
+                        settings.margin = parsed.margin;
+                    }
+                } catch (e) {
+                    return reply.status(400).send({ error: 'Invalid settings JSON' });
+                }
+            }
+        }
+
+
+
+        const srcPdf = await PDFDocument.load(pdfBuffer);
+        const pageCount = srcPdf.getPageCount();
+        const margin = marginSizes[settings.margin] || 0;
+
+        if (pageCount === 0) {
+            return reply.status(400).send({ error: 'PDF has no pages' });
+        }
+
+        console.log(`Export type: ${settings.export_type} | Total Pages: ${pageCount} | Margin: ${settings.margin}`);
+
+        const outputFiles = [];   // { name: string, buffer: Buffer }
+
+        // ── Helper: Create single-page PDF with margin ─────────────
+        async function createSinglePagePDF(pageIndex) {
+            const outPdf = await PDFDocument.create();
+            const srcPage = srcPdf.getPage(pageIndex);
+            const { width, height } = srcPage.getSize();
+
+            const newWidth = width + margin * 2;
+            const newHeight = height + margin * 2;
+
+            const page = outPdf.addPage([newWidth, newHeight]);
+            const [embedded] = await outPdf.embedPages([srcPage]);
+
+            page.drawPage(embedded, {
+                x: margin,
+                y: margin,
+                width,
+                height,
+            });
+
+            return await outPdf.save();
+        }
+
+        // ====================== PDF Export Case ======================
+        if (settings.export_type === 'pdf') {
+
+            for (let i = 0; i < pageCount; i++) {
+                const pdfBytes = await createSinglePagePDF(i);
+                const pageNum = String(i + 1).padStart(3, '0');
+
+                outputFiles.push({
+                    name: `page-${pageNum}.pdf`,
+                    buffer: Buffer.from(pdfBytes)
+                });
+            }
+        }
+        // ====================== Image Export Case ======================
+        else if (settings.export_type === 'image') {
+
+            console.log("image kehi hai")
+
+            const tempDir = path.join(PROJECT_TEMP_ROOT, `temp_${Date.now()}`);
+            await fs.mkdir(tempDir, { recursive: true });
+
+            for (let i = 0; i < pageCount; i++) {
+                const singlePageBuffer = await createSinglePagePDF(i);
+                const tempPdfPath = path.join(tempDir, `temp_page_${i}.pdf`);
+
+                await fs.writeFile(tempPdfPath, singlePageBuffer);
+
+                const outputPrefix = path.join(tempDir, `page_${i}`);
+
+                const options = {
+                    format: 'png',
+                    out_dir: tempDir,
+                    out_prefix: `page_${String(i + 1).padStart(3, '0')}`,
+                    page: null   // convert only this one page (but since file has only 1 page)
+                };
+
+                await pdfPoppler.convert(tempPdfPath, options);
+
+                // pdf-poppler creates file like: page_001-1.png (or page_001.png depending on version)
+                const generatedImagePath = path.join(tempDir, `page_${String(i + 1).padStart(3, '0')}-1.png`);
+
+                const imageBuffer = await fs.readFile(generatedImagePath);
+
+                outputFiles.push({
+                    name: `page-${String(i + 1).padStart(3, '0')}.png`,
+                    buffer: imageBuffer
+                });
+            }
+
+            // Clean up temp files
+            await fs.rm(tempDir, { recursive: true, force: true });
+        }
+
+        // ── Create ZIP (same style as your splitPDFPost) ───────────
+        const token = crypto.randomBytes(32).toString('hex');
+
+        const zipBuffer = await new Promise((resolve, reject) => {
+            const zip = archiver('zip', { zlib: { level: 6 } });
+            const chunks = [];
+
+            zip.on('data', chunk => chunks.push(chunk));
+            zip.on('end', () => resolve(Buffer.concat(chunks)));
+            zip.on('error', reject);
+
+            for (const file of outputFiles) {
+                zip.append(file.buffer, { name: file.name });
+            }
+
+            zip.finalize();
+        });
+
+        // Store in memory
+        pdfStorage.set(token, zipBuffer);
+
+        const downloadFilename = `${settings.export_type}_export_${pageCount}_pages.zip`;
+
+        return reply.redirect(`/extract-pdf-pages/download/${token}?type=zip&filename=${downloadFilename}`);
+
+    } catch (err) {
+
+        if (err.code === "FST_REQ_FILE_TOO_LARGE") {
+            return reply.status(413).send({
+                error: "File too large",
+                maxSize: "30MB"
+            });
+        }
+
+        request.log.error(err);
+        return reply.status(500).send({
+            error: 'Failed to rotate PDF',
+            message: err.message,
+        });
+    }
+
+
+}
+
+
+async function compressPdfBuffer(inputBuffer, settings) {
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    const tmpDir = path.join(PROJECT_TEMP_ROOT, `compress-${uniqueId}`);
+
+    const inputPath = path.join(tmpDir, 'input.pdf');
+    const outputPath = path.join(tmpDir, 'compressed.pdf');
+
+    try {
+        await fs.mkdir(tmpDir, { recursive: true });
+        await fs.writeFile(inputPath, inputBuffer);
+
+        const compressionLevel = settings.compression_level || 'medium';
+        const pdfSettings = COMPRESSION_SETTINGS[compressionLevel] || COMPRESSION_SETTINGS.medium;
+
+        // Basic Ghostscript command for compression
+        const command = `${gsPath} -sDEVICE=pdfwrite \
+-dCompatibilityLevel=1.4 \
+-dPDFSETTINGS=${pdfSettings} \
+-dNOPAUSE -dQUIET -dBATCH \
+-sOutputFile="${outputPath}" "${inputPath}"`;
+
+        await new Promise((resolve, reject) => {
+            exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                if (error) {
+                    console.error('Ghostscript error:', stderr || error.message);
+                    return reject(error);
+                }
+                resolve();
+            });
+        });
+
+        const compressedBuffer = await fs.readFile(outputPath);
+        return compressedBuffer;
+
+    } finally {
+        // Best-effort cleanup
+        fs.rm(tmpDir, { recursive: true, force: true })
+            .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
+    }
+}
+
+
+async function compressPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfFiles = [];        // [{ buffer, filename }]
+        let settings = {
+            margin: 'small',           // default
+            compression_level: 'medium' // default
+        };
+
+        for await (const part of parts) {
+            if (part.file) {
+                // Handle pdfs[0], pdfs[1], ...
+                if (/^pdfs\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    pdfFiles.push({
+                        buffer,
+                        filename: part.filename || `document_${pdfFiles.length + 1}.pdf`
+                    });
+                }
+            } else {
+                // Handle settings JSON
+                if (part.fieldname === 'settings') {
+                    try {
+                        const parsed = JSON.parse(part.value);
+                        settings = {
+                            ...settings,
+                            ...parsed
+                        };
+                    } catch (e) {
+                        console.warn('Failed to parse settings JSON:', e.message);
+                    }
+                }
+            }
+        }
+
+        if (pdfFiles.length === 0) {
+            return reply.status(400).send({ error: 'No PDF files received' });
+        }
+
+        const outputPDFs = [];
+
+        // Compress each PDF
+        for (const file of pdfFiles) {
+            const compressedBuffer = await compressPdfBuffer(file.buffer, settings);
+
+            let safeName = file.filename
+                .replace(/[^a-zA-Z0-9._-]/g, '_')
+                .replace(/\.[^.]+$/, ''); // remove extension
+
+            safeName += '_compressed.pdf';
+
+            outputPDFs.push({
+                name: safeName,
+                buffer: compressedBuffer
+            });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+
+        // If multiple files → create ZIP
+        if (outputPDFs.length > 1) {
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/compress-pdf/download/${token}?type=zip&filename=compressed-pdfs.zip`);
+        }
+
+        // Single file case
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/compress-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('PDF Compression error:', err);
+        return reply.status(500).send({
+            error: 'PDF compression failed',
+            message: err.message
+        });
+    }
+}
+
+
+async function addWatermarkPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+        let annotations = [];
+
+        // ───────────────────────────────
+        // Parse multipart form
+        // ───────────────────────────────
+        for await (const part of parts) {
+            if (part.file && part.fieldname === "pdf") {
+                pdfBuffer = await part.toBuffer();
+            }
+
+            if (part.fieldname === "annotations") {
+                annotations = JSON.parse(part.value || "[]");
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({ error: "PDF file is required" });
+        }
+
+        // Load original PDF
+        const srcDoc = await PDFDocument.load(pdfBuffer);
+        const totalPages = srcDoc.getPageCount();
+
+        const pdfDoc = await PDFDocument.create();
+        const embeddedPages = await pdfDoc.embedPages(srcDoc.getPages());
+
+        // ───────────────────────────────
+        // ✅ TAKE SHAPES FROM FIRST PAGE ONLY
+        // ───────────────────────────────
+        const commonShapes = annotations?.[0]?.shapesArray || [];
+
+        // ───────────────────────────────
+        // Process pages
+        // ───────────────────────────────
+        for (let i = 0; i < totalPages; i++) {
+            const srcPage = srcDoc.getPage(i);
+            const embPage = embeddedPages[i];
+
+            const pageWidth = srcPage.getWidth();
+            const pageHeight = srcPage.getHeight();
+
+            const page = pdfDoc.addPage([pageWidth, pageHeight]);
+
+            // Draw original page
+            page.drawPage(embPage, {
+                x: 0,
+                y: 0,
+                width: pageWidth,
+                height: pageHeight,
+            });
+
+            // ───────────────────────────────
+            // ✅ APPLY SAME SHAPES TO ALL PAGES
+            // ───────────────────────────────
+            for (const shape of commonShapes) {
+                if (!shape?.dataUrl) continue;
+
+                const base64Data = shape.dataUrl.split(',')[1];
+                const imgBuffer = Buffer.from(base64Data, 'base64');
+
+                const embeddedImg = await pdfDoc.embedPng(imgBuffer);
+
+                const x = Number(shape.left) || 0;
+                const y = pageHeight - Number(shape.top) - Number(shape.height);
+
+                page.drawImage(embeddedImg, {
+                    x,
+                    y,
+                    width: Number(shape.width),
+                    height: Number(shape.height),
+                    opacity: Number(shape.opacity) ?? 1
+                });
+            }
+        }
+
+        // ───────────────────────────────
+        // Save PDF
+        // ───────────────────────────────
+        const pdfBytes = await pdfDoc.save();
+
+        const token = crypto.randomBytes(32).toString("hex");
+        pdfStorage.set(token, Buffer.from(pdfBytes));
+
+        return reply.redirect(`/add-watermark/download/${token}`);
+
+    } catch (err) {
+        request.log.error(err);
+        console.error("editPDFPagesPost error:", err);
+
+        return reply.status(500).send({
+            error: "Failed to process PDF",
+            message: err.message
+        });
+    }
+}
+
+
+async function protectPdfBuffer(inputBuffer, password) {
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    const tmpDir = path.join(PROJECT_TEMP_ROOT, `protect-${uniqueId}`);
+
+    const inputPath = path.join(tmpDir, 'input.pdf');
+    const outputPath = path.join(tmpDir, 'protected.pdf');
+
+    try {
+        await fs.mkdir(tmpDir, { recursive: true });
+        await fs.writeFile(inputPath, inputBuffer);
+
+        // Ghostscript command to protect PDF with password
+        const command = `${gsPath} -sDEVICE=pdfwrite \
+-dCompatibilityLevel=1.4 \
+-dPDFSETTINGS=/default \
+-dNOPAUSE -dQUIET -dBATCH \
+-sOwnerPassword=${password} \
+-sUserPassword=${password} \
+-dEncryptionR=3 \
+-dKeyLength=128 \
+-dPermissions=-4 \
+-sOutputFile="${outputPath}" \
+"${inputPath}"`;
+
+        await new Promise((resolve, reject) => {
+            exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                if (error) {
+                    console.error('Ghostscript Protect Error:', stderr || error.message);
+                    return reject(new Error('Failed to protect PDF with password'));
+                }
+                resolve();
+            });
+        });
+
+        const protectedBuffer = await fs.readFile(outputPath);
+        return protectedBuffer;
+
+    } finally {
+        // Cleanup temp files
+        fs.rm(tmpDir, { recursive: true, force: true })
+            .catch(err => console.warn(`Cleanup failed for ${tmpDir}:`, err.message));
+    }
+}
+
+async function protectPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfFiles = [];           // [{ buffer, filename }]
+        let settings = { password: '' };
+
+        for await (const part of parts) {
+            if (part.file) {
+                // Handle pdfs[0], pdfs[1], ...
+                if (/^pdfs\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    pdfFiles.push({
+                        buffer,
+                        filename: part.filename || `document_${pdfFiles.length + 1}.pdf`
+                    });
+                }
+            } else {
+                // Handle settings JSON
+                if (part.fieldname === 'settings') {
+                    try {
+                        const parsed = JSON.parse(part.value);
+                        settings = { ...settings, ...parsed };
+                    } catch (e) {
+                        console.warn('Failed to parse settings:', e.message);
+                    }
+                }
+            }
+        }
+
+        if (pdfFiles.length === 0) {
+            return reply.status(400).send({ error: 'No PDF files received' });
+        }
+
+        // ================== Validation ==================
+        if (!settings.password || typeof settings.password !== 'string') {
+            return reply.status(400).send({ error: 'Password is required' });
+        }
+
+        if (settings.password.length < 6) {
+            return reply.status(400).send({ error: 'Password must be at least 6 characters long' });
+        }
+
+        // Note: Password matching is already done in frontend, but we can add extra safety
+        if (settings.confirmPassword && settings.password !== settings.confirmPassword) {
+            return reply.status(400).send({ error: 'Passwords do not match' });
+        }
+
+        // ================== Process PDFs ==================
+        const outputPDFs = [];
+
+        for (const file of pdfFiles) {
+            const protectedBuffer = await protectPdfBuffer(file.buffer, settings.password);
+
+            let safeName = file.filename
+                .replace(/[^a-zA-Z0-9._-]/g, '_')
+                .replace(/\.[^.]+$/, ''); // remove .pdf
+
+            safeName += '_protected.pdf';
+
+            outputPDFs.push({
+                name: safeName,
+                buffer: protectedBuffer
+            });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+
+        // Multiple files → ZIP
+        if (outputPDFs.length > 1) {
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/protect-pdf/download/${token}?type=zip&filename=protected-pdfs.zip`);
+        }
+
+        // Single file
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/protect-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('PDF Protection error:', err);
+        return reply.status(500).send({
+            error: 'PDF protection failed',
+            message: err.message
+        });
+    }
+}
+
+async function unlockPdfBuffer(inputBuffer, password) {
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    const tmpDir = path.join(PROJECT_TEMP_ROOT, `unlock-${uniqueId}`);
+
+    const inputPath = path.join(tmpDir, 'input.pdf');
+    const outputPath = path.join(tmpDir, 'unlocked.pdf');
+
+    try {
+        await fs.mkdir(tmpDir, { recursive: true });
+        await fs.writeFile(inputPath, inputBuffer);
+
+        // Ghostscript command to remove PDF password (decrypt)
+        const command = `${gsPath} -sDEVICE=pdfwrite \
+-dCompatibilityLevel=1.4 \
+-dPDFSETTINGS=/default \
+-dNOPAUSE -dQUIET -dBATCH \
+-sPDFPassword="${password}" \
+-sOutputFile="${outputPath}" \
+"${inputPath}"`;
+
+        await new Promise((resolve, reject) => {
+            exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                if (error) {
+                    // Ghostscript returns error + message in stderr when password is wrong
+                    const errorMsg = (stderr || error.message || '').toLowerCase();
+                    if (errorMsg.includes('password') || 
+                        errorMsg.includes('incorrect') || 
+                        errorMsg.includes('invalid') ||
+                        errorMsg.includes('not authorized')) {
+                        
+                        console.warn(`Wrong password for PDF: ${inputPath}`);
+                        return reject(new Error('WRONG_PASSWORD'));
+                    }
+
+                    console.error('Ghostscript Unlock Error:', stderr || error.message);
+                    return reject(new Error('Failed to unlock PDF'));
+                }
+                resolve();
+            });
+        });
+
+        const unlockedBuffer = await fs.readFile(outputPath);
+        return unlockedBuffer;
+
+    } finally {
+        // Cleanup
+        fs.rm(tmpDir, { recursive: true, force: true })
+            .catch(err => console.warn(`Cleanup failed for ${tmpDir}:`, err.message));
+    }
+}
+
+async function unlockPDFPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfFiles = [];           // [{ buffer, filename }]
+        let settings = { password: '' };
+
+        for await (const part of parts) {
+            if (part.file) {
+                if (/^pdfs\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    pdfFiles.push({
+                        buffer,
+                        filename: part.filename || `document_${pdfFiles.length + 1}.pdf`
+                    });
+                }
+            } else {
+                if (part.fieldname === 'settings') {
+                    try {
+                        const parsed = JSON.parse(part.value);
+                        settings = { ...settings, ...parsed };
+                    } catch (e) {
+                        console.warn('Failed to parse settings:', e.message);
+                    }
+                }
+            }
+        }
+
+        if (pdfFiles.length === 0) {
+            return reply.status(400).send({ error: 'No PDF files received' });
+        }
+
+        // Validation
+        if (!settings.password || typeof settings.password !== 'string') {
+            return reply.status(400).send({ error: 'Password is required' });
+        }
+
+        if (settings.password.length < 6) {   // optional, adjust as needed
+            return reply.status(400).send({ error: 'Password must be at least 6 characters long' });
+        }
+
+        // ================== Process PDFs ==================
+        const outputPDFs = [];
+        const skippedFiles = [];
+
+        for (const file of pdfFiles) {
+            try {
+                const unlockedBuffer = await unlockPdfBuffer(file.buffer, settings.password);
+
+                let safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, ''); // remove extension
+
+                safeName += '_unlocked.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: unlockedBuffer
+                });
+            } catch (err) {
+                if (err.message === 'WRONG_PASSWORD') {
+                    skippedFiles.push(file.filename);
+                    console.log(`Skipped ${file.filename} - incorrect password`);
+                } else {
+                    throw err; // rethrow real errors
+                }
+            }
+        }
+
+        if (outputPDFs.length === 0) {
+            return reply.status(400).send({ 
+                error: 'No PDFs could be unlocked',
+                message: 'All files had incorrect password or failed to process'
+            });
+        }
+
+        // Optional: inform user about skipped files
+        const responseInfo = skippedFiles.length > 0 
+            ? ` (${skippedFiles.length} file(s) skipped due to wrong password)` 
+            : '';
+
+        const token = crypto.randomBytes(32).toString('hex');
+
+        // Multiple files → ZIP
+        if (outputPDFs.length > 1 || skippedFiles.length > 0) {
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/unlock-pdf/download/${token}?type=zip&filename=unlocked-pdfs${responseInfo ? '_partial' : ''}.zip`);
+        }
+
+        // Single file
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/unlock-pdf/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('PDF Unlock error:', err);
+        return reply.status(500).send({
+            error: 'PDF unlock failed',
+            message: err.message
+        });
+    }
+}
+
+
 
 module.exports = {
     imageToPDFPOST,
@@ -1895,5 +2609,10 @@ module.exports = {
     powerpointTOPDFPost,
     odtTOPDFPost,
     htmlToPDFPost,
-    editPDFPagesPost
+    editPDFPagesPost,
+    extractPDFPagesPost,
+    compressPDFPost,
+    addWatermarkPDFPost,
+    protectPDFPost,
+    unlockPDFPost
 };
