@@ -35,7 +35,7 @@ async function sendOtpEmail(to, otp) {
 <body>
   <div class="container">
     <div class="header">
-      <a href="#" class="logo">PdfVersatile</a>
+      <a href="https://www.pdfversatile.com/" class="logo">PdfVersatile</a>
     </div>
     <div class="content">
       <h1>Validate your email</h1>

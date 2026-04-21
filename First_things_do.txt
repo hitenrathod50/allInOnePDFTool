@@ -17,6 +17,47 @@ Support Mails (contact us, support etc.)
 Database URL
 
 
+Installtion commands :
+
+
+Installing Node and NPM:
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+nvm install 22.19.0
+
+nvm install 22
+
+nvm use 22.19.0
+
+nvm alias default 22.19.0
+
+node -v    # Should show v22.19.0 (or the installed version)
+npm -v     # Should show around 10.9.x or newer
+
+
+
+Install pm2:
+
+sudo npm install -g pm2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

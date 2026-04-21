@@ -17,6 +17,11 @@ module.exports = {
         'drawer-bg': '#ffffff',
         'overlay-bg': 'rgba(15, 23, 42, 0.8)',
       },
+
+      screens: {
+        md: '980px',
+      },
+
     },
   },
   plugins: [],

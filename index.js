@@ -23,6 +23,12 @@ const oauthPlugin = require('@fastify/oauth2');
 
 connectDB();
 
+fastify.addHook("onSend", async (request, reply, payload) => {
+  reply.header("X-Frame-Options", "DENY");
+  reply.header("Content-Security-Policy", "frame-ancestors 'none';");
+  return payload;
+});
+
 // Serve all static files from "public" folder
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, "public"),
@@ -40,6 +46,8 @@ fastify.setErrorHandler((error, request, reply) => {
 
   reply.send(error)
 })
+
+
 
 
 
