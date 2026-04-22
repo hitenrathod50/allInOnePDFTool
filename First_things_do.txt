@@ -46,6 +46,97 @@ Install pm2:
 sudo npm install -g pm2
 
 
+Check live bandwidth usage (real-time):
+
+
+sudo apt install iftop
+
+
+sudo iftop
+
+
+Check total data usage with vnstat:
+
+sudo apt install vnstat
+
+sudo systemctl enable vnstat
+
+
+sudo systemctl start vnstat
+
+
+vnstat
+
+
+Check cpu cores or worker processes ->
+
+nproc
+
+check worker connections ->
+
+ulimit -n
+
+check all connections on any port ->
+
+
+ss -ant | grep :80 | wc -l (all connections)
+
+for active connections ->
+
+ss -ant state established | grep :80 | wc -l
+
+
+Minimize commands ->
+
+
+
+vim ~/.bashrc
+
+alias ngr='sudo systemctl reload nginx'
+
+source ~/.bashrc
+
+Now you can run the command directly $ ngr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
