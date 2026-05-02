@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Convert HTML Pages to PDF | All in One PDF Tools</title>
-    <meta name="description" content="Convert HTML pages to PDF for free. Enter the website URL you want to convert to pdf and get pdf in single click."/>
-    <meta name="keywords" content="HTML Pages to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/htmlToPDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Convert HTML Pages to PDF | All in One PDF Tools",
+      description : "Convert HTML pages to PDF for free. Enter the website URL you want to convert to pdf and get pdf in single click.",
+      keywords : "HTML Pages to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/html-to-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/htmlToPDF.css">
+        <link rel="canonical" href="https://pdfversatile.com/html-to-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-    <body>
+<body>
+
+    <%- include("../components/header") %>
+
 
         <div class="bg-white w-full rounded-lg p-5 mx-auto flex flex-col md:flex-row gap-4 h-[80vh]">
             <div class="md:w-[70%] w-full h-full">
@@ -24,10 +40,11 @@
 
         </div>
 
-    </body>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+        
+        <script src="/js/htmlToPDF.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+</body>
 
-    <script src="/js/htmlToPDF.js"></script>
 
 </html>

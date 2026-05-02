@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="description"
-        content="contact us - a fast, free, and all-in-one PDF tool designed to simplify PDF operations like merge, split, compress, and edit.">
-    <meta name="keywords" content="Contact Us PdfVersatile, Extract PDF Pages, Word to PDF, Protect PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <title>Get Solution of Your All Questions regarding PdfVersatile by Submitting the Form</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <meta name="robots" content="index,follow">
+
+    <%- include("../components/meta",{ title : "Contact Us | All in One PDF Tool" , description
+        : "contact us - a fast, free, and all-in-one PDF tool designed to simplify PDF operations like merge, split, compress, and edit."
+        , keywords
+        : "Contact Us PdfVersatile, Extract PDF Pages, Word to PDF, Protect PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"
+        , og_url : "/contact" , robots : "index,follow" }) %>
+
+
+        <link rel="canonical" href="https://pdfversatile.com/contact" />
+
+        <style>
+            .required::after {
+                content: " *";
+                color: #7100ad;
+                font-weight: 600;
+            }
+        </style>
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
 </head>
 
-<style>
-    .required::after {
-        content: " *";
-        color: #7100ad;
-        font-weight: 600;
-    }
-</style>
 
-<%- include("../components/header") %>
-
-    <body>
-
+<body>
+    
+    <%- include("../components/header") %>
+    
         <div class="bg-transparent px-4" bis_skin_checked="1">
 
             <div class="max-w-7xl mx-auto py-10" bis_skin_checked="1">
@@ -99,17 +108,19 @@
                                     <div bis_skin_checked="1">
                                         <div class="text-sm text-gray-600 text-justify" bis_skin_checked="1">I accept
                                             the
-                                            <a target="_blank" href="/terms-conditions" class="text-purple-600 hover:text-purple-800 underline">Terms &
+                                            <a target="_blank" href="/terms-conditions"
+                                                class="text-purple-600 hover:text-purple-800 underline">Terms &
                                                 Conditions</a>
                                             and
-                                            <a target="_blank" href="/privacy" class="text-purple-600 hover:text-purple-800 underline">Privacy
+                                            <a target="_blank" href="/privacy"
+                                                class="text-purple-600 hover:text-purple-800 underline">Privacy
                                                 Policy</a>
                                         </div>
 
                                     </div>
                                 </label>
 
-                                
+
 
                                 <p id="messageSent" class="text-green-600 text-sm mt-2 hidden">
                                     Message sent Successfully
@@ -141,9 +152,11 @@
         </div>
 
         <%- include("../components/footer") %>
+
+            <script src="/js/contact-us.js"></script>
+
     </body>
 
 
-    <script src="/js/contact-us.js"></script>
 
 </html>

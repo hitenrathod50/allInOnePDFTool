@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Download - <%= title %>
-    </title>
-    <meta name="description"
-        content="Download the processed file with All in One PDF tool and share the link with who you want." />
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/imagetopdf.css">
-    <meta name="robots" content="noindex,follow">
+
+  <%- include("../components/meta",{
+
+    title : typeof title !== "undefined" ? `Download - ${title}` : "Download Processed PDF",
+    description : "Download you processed file with PdfVersatile, download or preview it.",
+    keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+    og_url : typeof endPoint !== "undefined" ? `/${endPoint}` : "/",
+    robots : "noindex,follow"
+
+}) %>
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-    <body>
+<body>
+
+    <%- include("../components/header") %>
+
 
         <div class="flex justify-center">
 
-            <div class="bg-white rounded-lg shadow-lg p-6 m-4 max-w-md text-center">
-                <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Download Your PDF</h2>
-                <p class="text-gray-600 mb-6">Your PDF is ready! Hit the button below to download.</p>
+            <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
 
-                <div class="flex flex-col justify-center sm:flex-row gap-4 w-full">
 
-                    <a id="downloadButton" class="cursor-pointer w-full sm:w-1/2 text-white bg-primary px-4 py-2 border border-primary 
+
+            <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Download Your PDF</h1>
+            <p class="text-gray-600 mb-6 sm:text-lg tracking-wide">Your PDF is ready! Hit the button below to download.
+            </p>
+
+            <div class="flex flex-col justify-center sm:flex-row gap-4 w-full">
+
+                <a id="downloadButton" class="cursor-pointer w-full sm:w-1/2 text-white bg-primary px-4 py-2 border border-primary 
         hover:bg-purple-600 transition-all duration-200 rounded-md 
         flex items-center justify-center min-h-[44px]">
-                        Download
-                    </a>
+                    Download
+                </a>
 
-                    <a id="previewPDF" class="cursor-pointer w-full sm:w-1/2 px-4 py-2 border border-primary 
+                <a id="previewPDF" class="cursor-pointer w-full sm:w-1/2 px-4 py-2 border border-primary 
         bg-white text-primary hover:bg-primary hover:text-white 
         transition-all duration-200 rounded-md 
         flex items-center justify-center min-h-[44px]">
-                        Preview
-                    </a>
-
-                </div>
-
+                    Preview
+                </a>
 
             </div>
+
+
+
+
+
+        </div>
 
         </div>
 
@@ -48,73 +66,77 @@
 
             <%- include("../components/footer") %>
 
-    </body>
 
 
-    <script>
+        <script>
 
-        // document.getElementById("explore-more").classList.add("hidden");
+    // document.getElementById("explore-more").classList.add("hidden");
 
-        const downloadButton = document.getElementById("downloadButton");
+    const downloadButton = document.getElementById("downloadButton");
 
-        const previewPDF = document.getElementById("previewPDF");
+    const previewPDF = document.getElementById("previewPDF");
 
-        downloadButton.textContent = "Processing...";
-        const token = '<%= token %>';
-        const endPoint = '<%= endPoint %>';
+    downloadButton.textContent = "Processing...";
+    const token = '<%= token %>';
+    const endPoint = '<%= endPoint %>';
 
-        const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
+    const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
 
-        console.log(isZip);
+    console.log(isZip);
 
-        if (isZip === 'true') {
-            previewPDF.classList.add('hidden');
-        }
+    if (isZip === 'true') {
+        previewPDF.classList.add('hidden');
+    }
 
-        const link = document.createElement('a');
+    const link = document.createElement('a');
 
-        async function getPDFLink() {
-            try {
+    async function getPDFLink() {
+        try {
 
-                // Fetch the PDF using the token
-                const response = await fetch(`/${endPoint}/download/file/${token}`);
+            // Fetch the PDF using the token
+            const response = await fetch(`/${endPoint}/download/file/${token}`);
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Failed to download PDF');
-                }
-
-                // Get the PDF as a blob
-                const pdfBlob = await response.blob();
-
-                // Create a temporary URL for the blob
-                const pdfUrl = window.URL.createObjectURL(pdfBlob);
-
-                previewPDF.addEventListener('click', (event) => {
-                    window.open(pdfUrl, '_blank');
-                })
-
-                // Create a temporary link element to trigger the download
-
-                link.href = pdfUrl;
-                link.download = isZip === 'true' ? 'output.zip' : 'output.pdf';
-                document.body.appendChild(link);
-
-            } catch (error) {
-                console.error('Error downloading PDF:', error);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to download PDF');
             }
-        }
 
-        getPDFLink()
-            .then(() => {
-                downloadButton.textContent = "Download PDF";
-                downloadButton.addEventListener('click', async function downloadPDF() {
-                    link.click();
-                })
+            // Get the PDF as a blob
+            const pdfBlob = await response.blob();
+
+            // Create a temporary URL for the blob
+            const pdfUrl = window.URL.createObjectURL(pdfBlob);
+
+            previewPDF.addEventListener('click', (event) => {
+                window.open(pdfUrl, '_blank');
             })
 
+            // Create a temporary link element to trigger the download
+
+            link.href = pdfUrl;
+            link.download = isZip === 'true' ? 'output.zip' : 'output.pdf';
+            document.body.appendChild(link);
+
+        } catch (error) {
+            console.error('Error downloading PDF:', error);
+        }
+    }
+
+    getPDFLink()
+        .then(() => {
+            downloadButton.textContent = "Download PDF";
+            downloadButton.addEventListener('click', async function downloadPDF() {
+                link.click();
+            })
+        })
 
 
-    </script>
+
+</script>
+
+</body>
+
+
+
 
 </html>

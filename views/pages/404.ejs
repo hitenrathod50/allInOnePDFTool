@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Error 404 | page not found</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <meta name="robots" content="noindex,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Error 404 | page not found",
+      description : "Error 404. Page not found",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/",
+      robots : "noindex,follow"
+
+  }) %>
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-    <body>
-
+<body>
+    
+    <%- include("../components/header") %>
 
         <div class="flex items-center justify-center my-5">
             <div class="text-center p-8 bg-white rounded-lg shadow-lg">
@@ -23,9 +36,9 @@
             </div>
         </div>
 
+        <%- include("../components/footer") %>
 
     </body>
 
-    <%- include("../components/footer") %>
 
 </html>

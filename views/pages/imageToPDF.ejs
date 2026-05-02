@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    
-    <title>Image to PDF Converter | Convert Images to PDF Online</title>
-    <meta name="description" content="Conver you jpg/png images to pdf online by dragging them, you can rotate images, select page size and give margin to it, and convert images to pdf in single click."/>
-    <meta name="keywords" content="Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/imagetopdf.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Image to PDF Converter | Convert Images to PDF Online",
+      description : "Conver you jpg/png images to pdf online by dragging them, you can rotate images, select page size and give margin to it, and convert images to pdf in single click.",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/imagetopdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/imagetopdf.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/imagetopdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
-
 <body>
+
+
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickImageContainer">
@@ -24,10 +39,14 @@
             </div>
         </div>
 
-        
+
+
+        <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script>
+        <script src="/js/imagetopdf.js"></script>
+        <script src="/js/carousel.js"></script>
+
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script>
-<script src="/js/imagetopdf.js"></script>
+
 
 </html>

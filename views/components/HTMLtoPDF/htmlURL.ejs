@@ -1,30 +1,27 @@
-<div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-md mx-auto text-center">
-    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
-        Convert Website to PDF
-    </h1>
+<div class="bg-white rounded-lg shadow-lg p-6 m-3 max-w-xl mx-auto text-center">
+
+
+    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Convert Website to PDF</h1>
 
     <div class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg">
         <p class="text-gray-600 mb-4">
             Add a website URL to convert it into PDF
         </p>
 
-        <input
-            type="url"
-            id="urlInput"
-            placeholder="https://example.com"
-            class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hidden"
-        />
+        <input type="url" id="urlInput" placeholder="https://example.com"
+            class="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 hidden" />
 
-        <button
-            id="addUrlBtn"
-            class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-        >
+        
+
+
+        <button id="addUrlBtn" class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-purple-700 transition  mb-4">
             Add URL
         </button>
 
-        
+
     </div>
 </div>
+
 
 
 
@@ -35,7 +32,7 @@
 
     const addUrlBtn = document.getElementById('addUrlBtn');
     const urlInput = document.getElementById('urlInput');
-    
+
 
     function urlExists(url) {
 
@@ -52,12 +49,12 @@
         validateURL = false;
         webURL = null;
         addUrlBtn.textContent = 'Validate URL';
-        
+
     });
 
     addUrlBtn.addEventListener('click', () => {
 
-        
+
 
         // Step 1: Show input
         if (!inputVisible) {

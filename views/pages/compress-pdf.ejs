@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    
-    <title>Compress PDF Files | Reduce PDF Files Size for Free</title>
-    <meta name="description" content="Compress pdf files online for free, select the pdf files you want to compress and select the compression type and get compressed pdfs in single click."/>
-    <meta name="keywords" content="Compress PDF Files, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/compressPDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Compress PDF Files | Reduce PDF Files Size for Free",
+      description : "Compress pdf files online for free, select the pdf files you want to compress and select the compression type and get compressed pdfs in single click.",
+      keywords : "Compress PDF Files, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/compress-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/compressPDF.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/compress-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+    
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickPDFContainer">
@@ -24,13 +38,15 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
+        
+        <script src="/js/compressPDF.js"></script>
+
+        <script src="/js/carousel.js"></script>
         
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
-
-<script src="/js/compressPDF.js"></script>
 
 </html>

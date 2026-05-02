@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <meta name="description" content="Register in all in one PDF tools">
-    <meta name="keywords" content="image to pdf, pdf tools">
-    <title>Register to PdfVersatile - All in One PDF Tools</title>
-    <meta name="robots" content="index,follow">
-</head>
 
-<style>
+  <%- include("../components/meta",{
+
+      title : "Register to PdfVersatile - All in One PDF Tools",
+      description : "Register in all in one PDF tool. ",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/register",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <style>
     .required::after {
         content: " *";
         color: #7100ad;
@@ -16,11 +23,19 @@
     }
 </style>
 
-<%- include("../components/header") %>
+  <link rel="canonical" href="https://pdfversatile.com/register" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
+</head>
 
 
-    <body>
 
+<body>
+    
+    <%- include("../components/header") %>
 
 
         <div class="bg-white lg:bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4">
@@ -45,7 +60,7 @@
                 </div>
 
                 <div class="px-3 lg:px-8 pb-10">
-                    <h2 class="text-3xl font-semibold text-gray-900 text-center mb-8">Create new account</h2>
+                    <h1 class="text-3xl font-semibold text-gray-900 text-center mb-8">Create new account</h1>
 
                     <form id="signupForm" class="space-y-6">
 
@@ -142,9 +157,9 @@
             </div>
 
         </div>
+        <script src="/js/signup.js"></script>
 
     </body>
 
-    <script src="/js/signup.js"></script>
 
 </html>

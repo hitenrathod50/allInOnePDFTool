@@ -19,6 +19,19 @@ Database URL
 
 Installtion commands :
 
+Nginx :
+
+
+sudo apt update
+
+sudo apt install nginx -y
+
+sudo systemctl start nginx
+
+sudo systemctl enable nginx
+
+sudo systemctl status nginx
+
 
 Installing Node and NPM:
 
@@ -44,6 +57,12 @@ npm -v     # Should show around 10.9.x or newer
 Install pm2:
 
 sudo npm install -g pm2
+
+
+During running the npm install you will get an error and to solve that ->
+
+
+sudo chown -R ubuntu:ubuntu /var/www/pdf-versatile
 
 
 Check live bandwidth usage (real-time):

@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+
+
 
 <head>
-    <meta name="description" content="Login all in one PDF tools">
-    <meta name="keywords" content="image to pdf, pdf tools">
-    <title>Login to PdfVersatile - All in One PDF Tools</title>
-    <meta name="robots" content="index,follow">
-</head>
 
-<style>
+  <%- include("../components/meta",{
+
+      title : "Login to PdfVersatile - All in One PDF Tools",
+      description : "Login all in one PDF tool PdfVersatile, facilitates all the operations you need with pdfs in daily life",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/login",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="canonical" href="https://pdfversatile.com/login" />
+
+  <style>
     .required::after {
         content: " *";
         color: #7100ad;
@@ -16,11 +27,17 @@
     }
 </style>
 
-<%- include("../components/header") %>
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
+</head>
 
 
-    <body>
 
+<body>
+    
+    <%- include("../components/header") %>
 
         <div class="bg-white lg:bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4">
 
@@ -44,7 +61,7 @@
                 </div>
 
                 <div class="px-3 lg:px-8 pb-10">
-                    <h2 class="text-3xl font-semibold text-gray-900 text-center mb-8">Login to your account</h2>
+                    <h1 class="text-3xl font-semibold text-gray-900 text-center mb-8">Login to your account</h1>
 
                     <form id="loginForm" class="space-y-6">
 
@@ -117,9 +134,9 @@
 
         </div>
 
+        <script src="/js/login.js"></script>
 
     </body>
 
-    <script src="/js/login.js"></script>
 
 </html>

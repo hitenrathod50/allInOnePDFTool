@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Word to PDF Online | Convert Word Doc to PDF Online</title>
-    <meta name="description" content="Convert your word document files to pdf in single click with fast and free all in pdf tools, select the word files and convert them into pdf in single click."/>
-    <meta name="keywords" content="Word to PDF , Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/wordToPDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Word to PDF Online | Convert Word Doc to PDF Online",
+      description : "Convert your word document files to pdf in single click with fast and free all in pdf tools, select the word files and convert them into pdf in single click.",
+      keywords : "Word to PDF , Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/word-to-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+   <link rel="stylesheet" href="/css/wordToPDF.css">
+        <link rel="canonical" href="https://pdfversatile.com/word-to-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
+  
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+    
+    <%- include("../components/header") %>
+
 
         <div class="mx-auto">
             <div id="pickWordContainer">
@@ -23,11 +41,13 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+        
+        <script src="/js/wordToPDF.js"></script>
+
+        <script src="/js/carousel.js"></script>
         
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
-
-<script src="/js/wordToPDF.js"></script>
 
 </html>

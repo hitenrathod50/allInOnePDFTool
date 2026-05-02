@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /user/dashboard
+
+Sitemap: https://pdfversatile.com/sitemap.xml

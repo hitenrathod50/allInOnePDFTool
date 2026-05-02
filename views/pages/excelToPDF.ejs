@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Excel to PDF Converter | Convert Excel files to PDF Online</title>
-    <meta name="description" content="Convert Excel files to pdf online with PdfVersatile. Select Excel files you want to convert and get pdfs in single click."/>
-    <meta name="keywords" content="Excel to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/excelToPDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Excel to PDF Converter | Convert Excel files to PDF Online",
+      description : "Convert Excel files to pdf online with PdfVersatile. Select Excel files you want to convert and get pdfs in single click.",
+      keywords : "Excel to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/excel-to-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/excelToPDF.css">
+        <link rel="canonical" href="https://pdfversatile.com/excel-to-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickExcelContainer">
@@ -24,10 +39,12 @@
         </div>
 
         
+        <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+        
+        <script src="/js/excelToPDF.js"></script>
+
+        <script src="/js/carousel.js"></script>
+        
 </body>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
-
-<script src="/js/excelToPDF.js"></script>
 
 </html>

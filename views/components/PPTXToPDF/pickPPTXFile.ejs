@@ -1,141 +1,187 @@
-<div class="bg-white rounded-lg shadow-lg p-6 m-3 sm:mb-0 max-w-md mx-auto text-center">
-    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
-        Convert POWERPOINT to PDF
+<div class="flex justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">
+      Convert POWERPOINT to PDF
     </h1>
 
-    <div 
-        id="pptDropZone" 
-        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
-    >
-        <h1 class="text-gray-600 mb-4">
-            Drag and drop PPT files here or click to select
-        </h1>
+    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
+      Convert PowerPoint presentations (.ppt, .pptx) to high-quality PDF files instantly.
+    </h2>
 
-        <input 
-            type="file" 
-            id="pptInput" 
-            accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
-            multiple 
-            class="hidden"
-            onchange="handleFileSelect(event)"
-        >
-
-        <button
-            class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
-        >
-            Select PowerPoint Files
-        </button>
+    <div id="pptDropZone"
+      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      <input type="file" id="pptInput"
+        accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        multiple class="hidden" onchange="handleFileSelect(event)">
+      <button
+        class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-purple-700 transition mb-4">
+        Select PowerPoint Files
+      </button>
+      <p class="text-gray-600 text-sm">Drag and drop PPT files here or click to select</p>
     </div>
+  </div>
 </div>
 
+<% const tool = {
+  "tool-description": {
+    name: "Drop/Select Powerpoint Files",
+    desc: "select/drop Powerpoint files to convert them into pdf."
+  },
+  "tool-process": {
+    name: "Move Cards",
+    desc: "move cards to change the powerpoint file position."
+  },
+  "tool-setting": {
+    name: "Advance Settings",
+    desc: "can merge those powerpoint files into single pdf."
+  },
+  "download-info": {
+    name: "Single Click Conversion",
+    desc: "powerpoint to pdf in single click within some time."
+  }
+}; %>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
+<%- include("../toolOperations", {tool_info : tool}) %>
 
-    <!-- Card 1 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Drop/Select Powerpoint Files
-        </h2>
-        <p class="text-gray-600">
-            select/drop Powerpoint files to convert them into pdf.
+<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+      How to use PowerPoint to PDF Converter
+    </p>
+
+    <!-- Step 1 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/powerpointtopdf-laptop-1.webp", "/images/powerpointtopdf-tablet-1.webp", "/images/powerpointtopdf-mobile-1.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Upload PowerPoint Files</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Drag & drop or select one or multiple PowerPoint (.ppt, .pptx) files.
         </p>
+      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Move Cards
-        </h2>
-        <p class="text-gray-600">
-            move cards to change the powerpoint file position.
+    <!-- Step 2 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="space-y-6 order-2 lg:order-1">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Reorder Files</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Drag the file cards to change the order of your presentations before conversion.
         </p>
+      </div>
+      <div class="order-1 lg:order-2">
+        <%- include("../carousel", { images: ["/images/powerpointtopdf-laptop-2.webp", "/images/powerpointtopdf-tablet-2.webp", "/images/powerpointtopdf-mobile-2.webp"] }) %>
+      </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Advance Settings
-        </h2>
-        <p class="text-gray-600">
-            can merge those powerpoint files into single pdf.
+    <!-- Step 3 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/powerpointtopdf-laptop-3.webp", "/images/powerpointtopdf-tablet-3.webp", "/images/powerpointtopdf-mobile-3.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Convert & Download</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Convert to PDF with one click. Option available to merge multiple presentations into a single PDF.
         </p>
+      </div>
     </div>
-
-    <!-- Card 4 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Single Click Conversion
-        </h2>
-        <p class="text-gray-600">
-            powerpoint to pdf in single click within some time.
-        </p>
-    </div>
-
+  </div>
 </div>
+
+<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+      Frequently Asked Questions
+    </p>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        What is PowerPoint to PDF Converter?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        It converts Microsoft PowerPoint presentations (.ppt and .pptx) into PDF format while preserving slides, animations, and layout.
+      </p>
+    </div>
+
+    <div class="border-t border-gray-200 mx-0 sm:mx-10"></div>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        Can I merge multiple PowerPoint files?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        Yes. You can convert them individually or merge all selected presentations into one PDF.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+
+<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+  Explore More Tools
+</p>
+
+<%- include("../toolsListIcons", { removeCards: ["/powerpoint-to-pdf"] }) %>
 
 <%- include("../footer") %>
 
-
-
 <script>
-    const pptDropZone = document.getElementById('pptDropZone');
-    const pptInput = document.getElementById('pptInput');
+  const pptDropZone = document.getElementById('pptDropZone');
+  const pptInput = document.getElementById('pptInput');
 
-    pptDropZone.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+  pptDropZone.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-    pptDropZone.addEventListener('dragenter', (event) => {
-        event.preventDefault();
-        pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+  pptDropZone.addEventListener('dragenter', (event) => {
+    event.preventDefault();
+    pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-    pptDropZone.addEventListener('dragleave', (event) => {
-        event.preventDefault();
-        pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    });
+  pptDropZone.addEventListener('dragleave', (event) => {
+    event.preventDefault();
+    pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-    pptDropZone.addEventListener('drop', (event) => {
-        event.preventDefault();
-        pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-        handleDrop(event);
-    });
+  pptDropZone.addEventListener('drop', (event) => {
+    event.preventDefault();
+    pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+    handleDrop(event);
+  });
 
-    pptDropZone.addEventListener('click', () => {
-        pptInput.click();
-    });
+  pptDropZone.addEventListener('click', () => {
+    pptInput.click();
+  });
 
-    function handleDrop(event) {
-        const files = event.dataTransfer.files;
-        if (files.length) {
-            pptInput.files = files;
-            handleFileSelect({ target: { files } });
-        }
+  function handleDrop(event) {
+    const files = event.dataTransfer.files;
+    if (files.length) {
+      pptInput.files = files;
+      handleFileSelect({ target: { files } });
+    }
+  }
+
+  function handleFileSelect(event) {
+    const files = event.target.files;
+    const allowedExtensions = ['ppt', 'pptx'];
+    const validFiles = [];
+
+    for (const file of files) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (allowedExtensions.includes(ext)) {
+        validFiles.push(file);
+      } else {
+        alert(`Invalid file type: ${file.name}. Only .ppt and .pptx files are allowed.`);
+      }
     }
 
-    function handleFileSelect(event) {
-        const files = event.target.files;
-
-        const allowedExtensions = ['ppt', 'pptx'];
-        const validFiles = [];
-
-        for (const file of files) {
-            const ext = file.name.split('.').pop().toLowerCase();
-            if (allowedExtensions.includes(ext)) {
-                validFiles.push(file);
-            } else {
-                alert(`Invalid file type: ${file.name}`);
-            }
-        }
-
-        if (validFiles.length) {
-            console.log('Selected PowerPoint files:', validFiles);
-            // 👉 Upload / convert PowerPoint files here
-        }
+    if (validFiles.length) {
+      console.log('Selected PowerPoint files:', validFiles);
+      // Add your conversion logic here
     }
+  }
 </script>

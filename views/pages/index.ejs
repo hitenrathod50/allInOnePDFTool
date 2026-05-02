@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta name="description"
-    content="pdf versatile is the best online tools for all pdf operations like image to pdf, merge pdf, split pdf, compress pdf, word to pdf, extract pdf pages and many more!">
-  <meta name="keywords"
-    content="Image to PDF, Merge PDF, Split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF" />
-  <title>PdfVersatile | Online All in One PDF Tools</title>
-  <!-- <link rel="stylesheet" href="/css/main.css"> -->
-  <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{ title : "PdfVersatile | Online All in One PDF Tools" , description
+    : "PdfVersatile is the best online tools for all pdf operations like image to pdf, merge pdf, split pdf, compress pdf, word to pdf, extract pdf pages and many more!"
+    , keywords
+    : "Image to PDF, Merge PDF, Split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"
+    , og_url : "/" , robots : "index,follow" }) %>
+
+
+    <link rel="canonical" href="https://pdfversatile.com/" />
+
+    <%- include("../components/metaCommanCSS") %>
+
+      <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-  <body>
+<body>
 
+  <%- include("../components/header") %>
 
     <div class="bg-gray-50 font-sans">
 
       <!-- HERO SECTION -->
-      <section class="bg-white pt-10 md:pt-20 pb-4">
+      <section class="bg-white pt-10 md:pt-15 pb-4">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
           <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
 
@@ -52,7 +59,7 @@
 
             <!-- Right Image (Hidden on mobile & tablet) -->
             <div class="hidden lg:block">
-              <img src="/images/hero-image.webp" alt="All in One PDF Tools"
+              <img src="/images/hero-image.webp" loading="lazy" alt="PdfVersatile Hero Image"
                 class="rounded-3xl w-full h-auto object-cover" />
             </div>
           </div>
@@ -62,7 +69,7 @@
       <!-- TOOLS SECTION -->
       <section id="tools" class="py-10 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-700 mb-0 md:mb-20">
+          <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-700 mb-0 md:mb-5">
             Start Here - Popular Tools
           </h2>
 
@@ -70,7 +77,7 @@
           <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-24">
             <div class="space-y-6 order-2 lg:order-1">
               <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Image to PDF</h3>
-              <p class="text-base text-gray-600">
+              <p class="sm:text-lg text-gray-600">
                 Convert images to high-quality PDFs effortlessly with our interactive and user-friendly Image to PDF
                 tool. Enjoy advanced PDF customization options, seamless drag & drop support, and lightning-fast
                 processing all in one place. Perfect for creating professional PDFs from your images in seconds.
@@ -86,7 +93,7 @@
               </div>
             </div>
             <div class="order-1 lg:order-2">
-              <img src="/images/imagetopdf-image.webp" alt="Image to PDF"
+              <img src="/images/imagetopdf-image.webp" loading="lazy" alt="Image to PDF"
                 class="rounded-3xl shadow-xl w-full h-auto object-cover" />
             </div>
           </div>
@@ -94,12 +101,12 @@
           <!-- Split PDF -->
           <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-24">
             <div class="lg:order-1">
-              <img src="/images/split-pdf-image.webp" alt="Split PDF"
+              <img src="/images/split-pdf-image.webp" loading="lazy" alt="Split PDF"
                 class="rounded-3xl shadow-xl w-full h-auto object-cover" />
             </div>
             <div class="space-y-6 lg:order-2">
               <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Split PDF</h3>
-              <p class="text-base text-gray-600">
+              <p class="sm:text-lg text-gray-600">
                 Easily split your PDF files with our intuitive and interactive Split PDF tool. Select custom page
                 ranges, adjust page margins, and choose to merge selected pages into one file or download them
                 separately. Fast, flexible, and designed for complete control over your PDFs.
@@ -119,7 +126,7 @@
           <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div class="space-y-6 order-2 lg:order-1">
               <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Edit PDF Pages</h3>
-              <p class="text-base text-gray-600">
+              <p class="sm:text-lg text-gray-600">
                 Edit your PDF pages effortlessly with our interactive and feature-rich editor. Add text, shapes,
                 highlights, drawings, and images while customizing properties to match your needs. Enjoy complete
                 control and create polished, professional PDFs with ease.
@@ -134,7 +141,7 @@
               </div>
             </div>
             <div class="order-1 lg:order-2">
-              <img src="/images/edit-pdf-image.webp" alt="Edit PDF Pages"
+              <img src="/images/edit-pdf-image.webp" loading="lazy" alt="Edit PDF Pages"
                 class="rounded-3xl shadow-xl w-full h-auto object-cover" />
             </div>
           </div>
@@ -165,6 +172,26 @@
         </div>
       </section>
 
+
+      <section class="bg-white pb-5">
+
+        <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+
+
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-700 mb-0 md:mb-5 mt-10">
+            Explore More Tools
+          </h2>
+        
+
+        
+
+        <%- include("../components/toolsListIcons", removeCards=["/imagetopdf", "/split-pdf", "/edit-pdf-pages"]) %>
+
+        
+
+      </section>
+
+
       <!-- WHY CHOOSE PDFVERSATILE -->
       <section class="py-10 md:py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
@@ -180,7 +207,8 @@
             <!-- Card 1 -->
             <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition">
               <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/fast-processing.png" alt="Fast Processing" class="w-8 h-8 object-contain" />
+                <img src="/images/fast-processing.png" loading="lazy" alt="Fast Processing"
+                  class="w-8 h-8 object-contain" />
               </div>
               <h4 class="text-2xl font-semibold mb-3 text-gray-700">Fast Processing</h4>
               <p class="text-gray-600 text-base">Lightning-fast conversions and edits with optimized performance.</p>
@@ -189,7 +217,8 @@
             <!-- Card 2 -->
             <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition">
               <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/interactive-ui.png" alt="Fast Processing" class="w-8 h-8 object-contain" />
+                <img src="/images/interactive-ui.png" loading="lazy" alt="Fast Processing"
+                  class="w-8 h-8 object-contain" />
 
               </div>
               <h4 class="text-2xl font-semibold mb-3 text-gray-700">Interactive UI</h4>
@@ -199,7 +228,8 @@
             <!-- Card 3 -->
             <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition">
               <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/free-to-use.png" alt="Fast Processing" class="w-8 h-8 object-contain" />
+                <img src="/images/free-to-use.png" loading="lazy" alt="Fast Processing"
+                  class="w-8 h-8 object-contain" />
               </div>
               <h4 class="text-2xl font-semibold mb-3 text-gray-700">Free to Use</h4>
               <p class="text-gray-600 text-base">Most essential tools are completely free with no hidden limits.</p>
@@ -208,7 +238,8 @@
             <!-- Card 4 -->
             <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition">
               <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/affordable-premium.png" alt="Fast Processing" class="w-8 h-8 object-contain" />
+                <img src="/images/affordable-premium.png" loading="lazy" alt="Fast Processing"
+                  class="w-8 h-8 object-contain" />
               </div>
               <h4 class="text-2xl font-semibold mb-3 text-gray-700">Affordable Premium</h4>
               <p class="text-gray-600 text-base">Unlock advanced features at a very reasonable price.</p>
@@ -222,7 +253,7 @@
 
     <%- include("../components/footer") %>
 
-  </body>
+</body>
 
 
 

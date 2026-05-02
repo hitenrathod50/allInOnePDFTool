@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-  <meta name="description"
-    content="Best tool for pdf operations like converting image to PDF, PDF spliting, Merge PDf, Edit PDF Pages...">
-  <meta name="keywords" content="image to pdf, pdf tools">
-  <title>User Dashboard | PdfVersatile - All in One PDF Tools</title>
-  <!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+  <%- include("../components/meta",{
+
+      title : "User Dashboard | PdfVersatile - All in One PDF Tools",
+      description : "Best tool for pdf operations like converting image to PDF, PDF spliting, Merge PDf, Edit PDF Pages...",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/user/dashboard",
+      robots : "noindex,nofollow"
+
+  }) %>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <meta name="robots" content="noindex,follow">
+  
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-  <body>
 
+
+<body>
+  
+  <%- include("../components/header") %>
+  
     <div class="bg-gray-50 py-4">
       <div class="max-w-7xl mx-auto p-4 ">
         <h1 class="text-3xl font-semibold text-gray-900 mb-8 flex items-center gap-3 break-all">
@@ -199,8 +213,10 @@
       </div>
 
       <%- include("../components/footer") %>
+
+      <script src="/js/dorpwastrsee.js"></script>
+
   </body>
 
-  <script src="/js/dorpwastrsee.js"></script>
 
 </html>

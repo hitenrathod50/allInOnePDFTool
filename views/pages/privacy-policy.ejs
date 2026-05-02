@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <meta name="description"
-        content="Privacy Policy for PDF Versatile - All in One PDF Tool. Learn how we collect, use, and protect your personal data including files, email, and cookies." />
-    <meta name="keywords" content="Privacy Policy, PDF Versatile, PDF Tool, Data Protection, User Privacy" />
-    <title>Privacy Policy | PdfVersatile - All in One PDF Tools</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Privacy Policy | PdfVersatile - All in One PDF Tools",
+      description : "Privacy Policy for PDF Versatile - All in One PDF Tool. Learn how we collect, use, and protect your personal data including files, email, and cookies.",
+      keywords : "Privacy Policy, PDF Versatile, PDF Tool, Data Protection, User Privacy",
+      og_url : "/privacy",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="canonical" href="https://pdfversatile.com/privacy" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-    <body>
+<body>
+    
+    <%- include("../components/header") %>
 
         <div class="bg-gray-50 text-gray-800">
 

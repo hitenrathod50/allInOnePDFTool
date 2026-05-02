@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <title>Split PDF File | Separate PDF Pages Online</title>
-    <meta name="description" content="Split pdf file in single click using PdfVersatile. Select ranges you want or you can set the margin to pages and split pdf in single click."/>
-    <meta name="keywords" content="Split PDF, Image to PDF, Merge PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/splitpdf.css">
-    <meta name="robots" content="index,follow">
+
+    <%- include("../components/meta",{ title : "Split PDF File | Separate PDF Pages Online" , description
+        : "Split pdf file in single click using PdfVersatile. Select ranges you want or you can set the margin to pages and split pdf in single click."
+        , keywords
+        : "Split PDF, Image to PDF, Merge PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"
+        , og_url : "/split-pdf" , robots : "index,follow" }) %>
+
+
+        <link rel="stylesheet" href="/css/splitpdf.css">
+        <link rel="canonical" href="https://pdfversatile.com/split-pdf" />
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
 </head>
 
 <%- include("../components/header") %>
 
-<body>
+    <body>
 
         <div class="mx-auto">
             <div id="pickPDFContainer">
@@ -23,11 +33,14 @@
             </div>
         </div>
 
-        
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+        <script src="/js/splitpdf.js"></script>
 
-<script src="/js/splitpdf.js"></script>
+        <script src="/js/carousel.js"></script>
+
+    </body>
+
+
 
 </html>

@@ -11,7 +11,7 @@ const path = require('path');
 const DocxMerger = require('docx-merger');
 const ExcelJS = require('exceljs');
 
-const pdfPoppler = require('pdf-poppler');
+// const pdfPoppler = require('pdf-poppler');
 
 const gsPath = `"C:\\Program Files\\gs\\gs10.07.0\\bin\\gswin64c.exe"`;
 
@@ -1931,56 +1931,15 @@ async function extractPDFPagesPost(request, reply) {
         }
 
         // ====================== PDF Export Case ======================
-        if (settings.export_type === 'pdf') {
 
-            for (let i = 0; i < pageCount; i++) {
-                const pdfBytes = await createSinglePagePDF(i);
-                const pageNum = String(i + 1).padStart(3, '0');
+        for (let i = 0; i < pageCount; i++) {
+            const pdfBytes = await createSinglePagePDF(i);
+            const pageNum = String(i + 1).padStart(3, '0');
 
-                outputFiles.push({
-                    name: `page-${pageNum}.pdf`,
-                    buffer: Buffer.from(pdfBytes)
-                });
-            }
-        }
-        // ====================== Image Export Case ======================
-        else if (settings.export_type === 'image') {
-
-            console.log("image kehi hai")
-
-            const tempDir = path.join(PROJECT_TEMP_ROOT, `temp_${Date.now()}`);
-            await fs.mkdir(tempDir, { recursive: true });
-
-            for (let i = 0; i < pageCount; i++) {
-                const singlePageBuffer = await createSinglePagePDF(i);
-                const tempPdfPath = path.join(tempDir, `temp_page_${i}.pdf`);
-
-                await fs.writeFile(tempPdfPath, singlePageBuffer);
-
-                const outputPrefix = path.join(tempDir, `page_${i}`);
-
-                const options = {
-                    format: 'png',
-                    out_dir: tempDir,
-                    out_prefix: `page_${String(i + 1).padStart(3, '0')}`,
-                    page: null   // convert only this one page (but since file has only 1 page)
-                };
-
-                await pdfPoppler.convert(tempPdfPath, options);
-
-                // pdf-poppler creates file like: page_001-1.png (or page_001.png depending on version)
-                const generatedImagePath = path.join(tempDir, `page_${String(i + 1).padStart(3, '0')}-1.png`);
-
-                const imageBuffer = await fs.readFile(generatedImagePath);
-
-                outputFiles.push({
-                    name: `page-${String(i + 1).padStart(3, '0')}.png`,
-                    buffer: imageBuffer
-                });
-            }
-
-            // Clean up temp files
-            await fs.rm(tempDir, { recursive: true, force: true });
+            outputFiles.push({
+                name: `page-${pageNum}.pdf`,
+                buffer: Buffer.from(pdfBytes)
+            });
         }
 
         // ── Create ZIP (same style as your splitPDFPost) ───────────
@@ -2446,11 +2405,11 @@ async function unlockPdfBuffer(inputBuffer, password) {
                 if (error) {
                     // Ghostscript returns error + message in stderr when password is wrong
                     const errorMsg = (stderr || error.message || '').toLowerCase();
-                    if (errorMsg.includes('password') || 
-                        errorMsg.includes('incorrect') || 
+                    if (errorMsg.includes('password') ||
+                        errorMsg.includes('incorrect') ||
                         errorMsg.includes('invalid') ||
                         errorMsg.includes('not authorized')) {
-                        
+
                         console.warn(`Wrong password for PDF: ${inputPath}`);
                         return reject(new Error('WRONG_PASSWORD'));
                     }
@@ -2542,15 +2501,15 @@ async function unlockPDFPost(request, reply) {
         }
 
         if (outputPDFs.length === 0) {
-            return reply.status(400).send({ 
+            return reply.status(400).send({
                 error: 'No PDFs could be unlocked',
                 message: 'All files had incorrect password or failed to process'
             });
         }
 
         // Optional: inform user about skipped files
-        const responseInfo = skippedFiles.length > 0 
-            ? ` (${skippedFiles.length} file(s) skipped due to wrong password)` 
+        const responseInfo = skippedFiles.length > 0
+            ? ` (${skippedFiles.length} file(s) skipped due to wrong password)`
             : '';
 
         const token = crypto.randomBytes(32).toString('hex');

@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const oauthPlugin = require('@fastify/oauth2');
+const generateSitemap = require("./controllers/generateSiteMap");
 
 connectDB();
 
@@ -55,11 +56,30 @@ async function rateLimitxHelmetImpose() {
 
   // await fastify.register(require('@fastify/helmet'));
 
+  // await fastify.register(rateLimit, {
+  //   max: 20,
+  //   timeWindow: '1 minute',
+  //   keyGenerator: (req) => req.ip,
+  // })
+
+
   await fastify.register(rateLimit, {
-    max: 20,
+    max: 100,
     timeWindow: '1 minute',
     keyGenerator: (req) => req.ip,
-  })
+
+    skip: (req) => {
+      const ua = req.headers['user-agent'] || '';
+
+      return (
+        ua.includes('Googlebot') ||   // Google
+        ua.includes('Bingbot') ||     // Bing
+        ua.includes('Slurp') ||       // Yahoo
+        ua.includes('DuckDuckBot')    // DuckDuckGo
+      );
+    }
+  });
+
 };
 rateLimitxHelmetImpose();
 
@@ -141,6 +161,8 @@ fastify.addHook('preHandler', async (request, reply) => {
     reply.locals.user = null;
   }
 });
+
+generateSitemap();
 
 // GET Routes
 fastify.register(getRoutes);

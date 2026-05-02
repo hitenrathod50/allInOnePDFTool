@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>ODT to PDF Online | Convert ODT files to PDF Free</title>
-    <meta name="description" content="Convert ODT files to pdf for free. Select the ODT files you want to convert to pdf and complete the operation in single click."/>
-    <meta name="keywords" content="ODT to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/odtToPDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "ODT to PDF Online | Convert ODT files to PDF Free",
+      description : "Convert ODT files to pdf for free. Select the ODT files you want to convert to pdf and complete the operation in single click.",
+      keywords : "ODT to PDF, Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/odt-to-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/odtToPDF.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/odt-to-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+    
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickODTContainer">
@@ -23,11 +38,13 @@
             </div>
         </div>
 
+        <!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
+        
+        <script src="/js/odtToPDF.js"></script>
+
+        <script src="/js/carousel.js"></script>
         
 </body>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script> -->
-
-<script src="/js/odtToPDF.js"></script>
 
 </html>

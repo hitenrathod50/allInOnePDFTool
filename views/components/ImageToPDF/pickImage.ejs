@@ -1,108 +1,203 @@
-<div class="bg-white rounded-lg shadow-lg p-6 m-3 sm:mb-0 max-w-md mx-auto text-center">
-    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Image to PDF</h1>
+<div class="flex justify-center">
+
+  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Image to PDF</h1>
+
+    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
+      Combine Photos into one PDF. Without Quality loss or Compression & Sign Up.
+    </h2>
+
     <div id="dropZone"
-        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-        <p class="text-gray-600 mb-4">Drag and drop images here or click to select</p>
-        <input type="file" id="imageInputFirst" accept="image/png, image/jpeg, image/svg+xml" multiple class="hidden"
-            onchange="handleFileSelect(event)">
-        <button class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-            Select Images
-        </button>
+      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      <input type="file" id="imageInputFirst" accept="image/png, image/jpeg, image/svg+xml" multiple class="hidden"
+        onchange="handleFileSelect(event)">
+      <button
+        class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-purple-700 transition  mb-4">
+        Select Images
+      </button>
+      <p class="text-gray-600 text-sm">Drag and drop images here or click to select</p>
     </div>
-</div>
-
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
-
-    <!-- Card 1 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Drop/Select Image Files
-        </h2>
-        <p class="text-gray-600">
-            select/drop any types of images to convert them into pdf.
-        </p>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Move Image Cards
-        </h2>
-        <p class="text-gray-600">
-            move image cards by dragging to change it's position.
-        </p>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Advance Settings
-        </h2>
-        <p class="text-gray-600">
-            set page size, page orientation and set margin also.
-        </p>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Single Click Conversion
-        </h2>
-        <p class="text-gray-600">
-            convert images to pdf in single click within some time.
-        </p>
-    </div>
+  </div>
 
 </div>
 
-<%- include("../footer") %>
 
-    <script>
-        const dropZone = document.getElementById('dropZone');
+<% const tool={ "tool-description" : { name: "Drop/Select Image Files" ,
+  desc: "select/drop any types of images to convert them into pdf." }, "tool-process" : { name: "Move Image Cards" ,
+  desc: "move image cards by dragging to change it's position." }, "tool-setting" : { name: "Advance Settings" ,
+  desc: "set page size, page orientation and set margin also." }, "download-info" : { name: "Single Click Conversion" ,
+  desc: "convert images to pdf in single click within some time." } }; %>
 
-        dropZone.addEventListener('dragover', (event) => {
+
+  <%- include("../toolOperations", {tool_info : tool}) %>
+
+
+    
+
+
+
+    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+          How to use Image to PDF Tool
+        </p>
+
+        <!-- Split PDF -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="lg:order-1">
+
+
+            <%- include("../carousel", { images: ["/images/imagetopdf-laptop-1.webp", "/images/imagetopdf-tablet-1.webp"
+              , "/images/imagetopdf-mobile-1.webp" ] }) %>
+
+          </div>
+
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Images</h3>
+            <p class=" text-gray-600 sm:text-lg tracking-wide">
+              Easily split your PDF files with our intuitive and interactive Split PDF tool. Select custom page
+              ranges, adjust page margins, and choose to merge selected pages into one file or download them
+              separately. Fast, flexible, and designed for complete control over your PDFs.
+            </p>
+
+          </div>
+        </div>
+
+
+        <!-- Image to PDF -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="space-y-6 order-2 lg:order-1">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Move Image Cards</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Convert images to high-quality PDFs effortlessly with our interactive and user-friendly Image to PDF
+              tool. Enjoy advanced PDF customization options, seamless drag & drop support, and lightning-fast
+              processing all in one place. Perfect for creating professional PDFs from your images in seconds.
+            </p>
+
+          </div>
+          <div class="order-1 lg:order-2">
+            <%- include("../carousel", { images: ["/images/imagetopdf-laptop-2.webp", "/images/imagetopdf-tablet-2.webp"
+              , "/images/imagetopdf-mobile-2.webp" ] }) %>
+          </div>
+        </div>
+
+
+
+        <!-- Split PDF -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images: ["/images/imagetopdf-laptop-3.webp", "/images/imagetopdf-tablet-3.webp"
+              , "/images/imagetopdf-mobile-3.webp" ] }) %>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Easily split your PDF files with our intuitive and interactive Split PDF tool. Select custom page
+              ranges, adjust page margins, and choose to merge selected pages into one file or download them
+              separately. Fast, flexible, and designed for complete control over your PDFs.
+            </p>
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+    
+
+
+    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
+      <div class="max-w-5xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+          What People Frequently Ask
+        </p>
+
+        
+        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+            What is Image to PDF converter?
+          </h3>
+          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+            An Image to PDF converter allows you to combine multiple images into a single PDF file quickly and easily, without losing quality.
+          </p>
+        </div>
+
+
+        <div class="border-t border-gray-200 mx-0 sm:mx-10"></div>
+
+
+        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+            What is Image to PDF converter?
+          </h3>
+          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+            An Image to PDF converter allows you to combine multiple images into a single PDF file quickly and easily, without losing quality.
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+
+
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+      Explore More Tools
+    </p>
+
+
+    <%- include("../toolsListIcons", removeCards = ["/imagetopdf"]) %>
+
+
+      <%- include("../footer") %>
+
+        <script>
+          const dropZone = document.getElementById('dropZone');
+
+          dropZone.addEventListener('dragover', (event) => {
             event.preventDefault();
             dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+          });
 
-        dropZone.addEventListener('dragenter', (event) => {
+          dropZone.addEventListener('dragenter', (event) => {
             event.preventDefault();
             dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+          });
 
-        dropZone.addEventListener('dragleave', (event) => {
+          dropZone.addEventListener('dragleave', (event) => {
             event.preventDefault();
             dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+          });
 
-        dropZone.addEventListener('drop', (event) => {
+          dropZone.addEventListener('drop', (event) => {
             event.preventDefault();
             dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
             handleDrop(event);
 
-        });
+          });
 
-        dropZone.addEventListener('click', () => {
+          dropZone.addEventListener('click', () => {
             document.getElementById('imageInputFirst').click();
-        });
+          });
 
-        function handleDrop(event) {
+          function handleDrop(event) {
             const files = event.dataTransfer.files;
 
             if (files.length) {
-                document.getElementById('imageInputFirst').files = files;
-                handleFileSelect({ target: { files } });
+              document.getElementById('imageInputFirst').files = files;
+              handleFileSelect({ target: { files } });
             }
-        }
+          }
 
-        function handleFileSelect(event) {
+          function handleFileSelect(event) {
             const files = event.target.files;
 
             // Add your file handling logic here
             console.log('Selected files:', files);
-        }
-    </script>
+          }
+        </script>

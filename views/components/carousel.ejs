@@ -1,0 +1,33 @@
+<div class="carousel relative group overflow-hidden rounded-3xl shadow-xl aspect-[16/10]">
+
+    <!-- Sliding track -->
+    <div class="track flex h-full w-full transition-transform duration-500 ease-out">
+        <% images.forEach((src)=> { %>
+            <img src="<%= src %>" alt="Tools Using Processes" loading="lazy" class="h-full w-full flex-shrink-0 object-contain select-none"
+                draggable="false" />
+            <% }) %>
+    </div>
+
+    <!-- Soft gradient for better arrow visibility -->
+    
+
+    <!-- Prev button -->
+    <button type="button" aria-label="Previous image"
+        class="prevBtn absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center text-slate-600 hover:text-slate-700 transition-colors duration-200 focus:outline-none disabled:text-slate-500 disabled:cursor-not-allowed">
+        <!-- Chevron Left -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+
+    <!-- Next button -->
+    <button type="button" aria-label="Next image"
+        class="nextBtn absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center text-slate-600 hover:text-slate-700 transition-colors duration-200 focus:outline-none disabled:text-slate-500 disabled:cursor-not-allowed">
+        <!-- Chevron Right -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+</div>

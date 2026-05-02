@@ -2,6 +2,8 @@
 
 const { pdfStorage } = require("./postController");
 
+const main_url = "https://www.pdfversatile.com";
+
 async function homePage(request, reply) {
 
   return reply.view("pages/index.ejs");
@@ -41,7 +43,13 @@ async function imageToPDFDownload(request, reply) {
     }
 
     // Render the downloadPDF.ejs view with the token
-    return reply.view('pages/downloadPDF.ejs', { token, endPoint, title: "Image to PDF" });
+    return reply.view('pages/downloadPDF.ejs', {
+      token, endPoint,
+
+      title: "Image to PDF",
+
+
+    });
   } catch (error) {
     fastify.log.error(error);
     return reply.status(500).send({ error: 'Internal server error', message: error.message });

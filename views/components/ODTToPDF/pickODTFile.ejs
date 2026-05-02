@@ -1,130 +1,188 @@
-<div class="bg-white rounded-lg shadow-lg p-6 m-3 sm:mb-0 max-w-md mx-auto text-center">
-    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
-        Convert ODT to PDF
+<div class="flex justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">
+      Convert ODT to PDF
     </h1>
 
+    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
+      Convert OpenDocument Text (.odt) files to high-quality PDF documents.
+    </h2>
+
     <div id="dropZone"
-        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-        <p class="text-gray-600 mb-4">
-            Drag and drop ODT files here or click to select
-        </p>
-
-        <input type="file" id="odtInput" accept=".odt,application/vnd.oasis.opendocument.text" multiple class="hidden"
-            onchange="handleFileSelect(event)">
-
-        <button class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-            Select ODT Files
-        </button>
+      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      <input type="file" id="odtInput" 
+        accept=".odt,application/vnd.oasis.opendocument.text" 
+        multiple class="hidden"
+        onchange="handleFileSelect(event)">
+      <button
+        class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-purple-700 transition mb-4">
+        Select ODT Files
+      </button>
+      <p class="text-gray-600 text-sm">Drag and drop ODT files here or click to select</p>
     </div>
+  </div>
 </div>
 
+<% const tool = {
+  "tool-description": {
+    name: "Drop/Select ODT Files",
+    desc: "select/drop ODT files to convert them into pdf."
+  },
+  "tool-process": {
+    name: "Move Cards",
+    desc: "move cards to change the odt file position."
+  },
+  "tool-setting": {
+    name: "Advance Settings",
+    desc: "can merge those odt files into single pdf."
+  },
+  "download-info": {
+    name: "Single Click Conversion",
+    desc: "odt to pdf in single click within some time."
+  }
+}; %>
 
+<%- include("../toolOperations", {tool_info : tool}) %>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
+<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+      How to use ODT to PDF Converter
+    </p>
 
-    <!-- Card 1 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Drop/Select ODT Files
-        </h2>
-        <p class="text-gray-600">
-            select/drop ODT files to convert them into pdf.
+    <!-- Step 1 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/odttopdf-laptop-1.webp", "/images/odttopdf-tablet-1.webp", "/images/odttopdf-mobile-1.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Upload ODT Files</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Drag & drop or select your OpenDocument Text (.odt) files.
         </p>
+      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Move Cards
-        </h2>
-        <p class="text-gray-600">
-            move cards to change the odt file position.
+    <!-- Step 2 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="space-y-6 order-2 lg:order-1">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Reorder Files</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Drag the file cards to arrange the order before conversion.
         </p>
+      </div>
+      <div class="order-1 lg:order-2">
+        <%- include("../carousel", { images: ["/images/odttopdf-laptop-2.webp", "/images/odttopdf-tablet-2.webp", "/images/odttopdf-mobile-2.webp"] }) %>
+      </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Advance Settings
-        </h2>
-        <p class="text-gray-600">
-            can merge those odt files into single pdf.
+    <!-- Step 3 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/odttopdf-laptop-3.webp", "/images/odttopdf-tablet-3.webp", "/images/odttopdf-mobile-3.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Convert & Download</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Convert to PDF with one click. You can also merge multiple ODT files into a single PDF.
         </p>
+      </div>
     </div>
-
-    <!-- Card 4 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Single Click Conversion
-        </h2>
-        <p class="text-gray-600">
-            odt to pdf in single click within some time.
-        </p>
-    </div>
-
+  </div>
 </div>
+
+<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+      Frequently Asked Questions
+    </p>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        What is ODT to PDF Converter?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        It converts OpenDocument Text files (.odt) used by LibreOffice and OpenOffice into standard PDF format.
+      </p>
+    </div>
+
+    <div class="border-t border-gray-200 mx-0 sm:mx-10"></div>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        Can I merge multiple ODT files?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        Yes. You can convert them individually or merge multiple ODT files into one PDF.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+
+<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+  Explore More Tools
+</p>
+
+<%- include("../toolsListIcons", { removeCards: ["/odt-to-pdf"] }) %>
 
 <%- include("../footer") %>
 
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const odtInput = document.getElementById('odtInput');
 
+  dropZone.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-    <script>
-        const dropZone = document.getElementById('dropZone');
-        const odtInput = document.getElementById('odtInput');
+  dropZone.addEventListener('dragenter', (event) => {
+    event.preventDefault();
+    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-        dropZone.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('dragleave', (event) => {
+    event.preventDefault();
+    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-        dropZone.addEventListener('dragenter', (event) => {
-            event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('drop', (event) => {
+    event.preventDefault();
+    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+    handleDrop(event);
+  });
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('click', () => {
+    odtInput.click();
+  });
 
-        dropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-            handleDrop(event);
-        });
+  function handleDrop(event) {
+    const files = event.dataTransfer.files;
+    if (files.length) {
+      odtInput.files = files;
+      handleFileSelect({ target: { files } });
+    }
+  }
 
-        dropZone.addEventListener('click', () => {
-            odtInput.click();
-        });
+  function handleFileSelect(event) {
+    const files = event.target.files;
+    const allowedExtensions = ['odt'];
+    const validFiles = [];
 
-        function handleDrop(event) {
-            const files = event.dataTransfer.files;
-            if (files.length) {
-                odtInput.files = files;
-                handleFileSelect({ target: { files } });
-            }
-        }
+    for (const file of files) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (allowedExtensions.includes(ext)) {
+        validFiles.push(file);
+      } else {
+        alert(`Invalid file type: ${file.name}. Only .odt files are allowed.`);
+      }
+    }
 
-        function handleFileSelect(event) {
-            const files = event.target.files;
-            const allowedExtensions = ['odt'];
-            const validFiles = [];
-
-            for (const file of files) {
-                const ext = file.name.split('.').pop().toLowerCase();
-                if (allowedExtensions.includes(ext)) {
-                    validFiles.push(file);
-                } else {
-                    alert(`Invalid file type: ${file.name}`);
-                }
-            }
-
-            if (validFiles.length) {
-                console.log('Selected ODT files:', validFiles);
-                // 👉 Upload / convert ODT → PDF here
-            }
-        }
-    </script>
+    if (validFiles.length) {
+      console.log('Selected ODT files:', validFiles);
+      // Add your conversion logic here
+    }
+  }
+</script>

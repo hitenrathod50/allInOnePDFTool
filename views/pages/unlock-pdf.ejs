@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    
-    <title>Unlock PDF Files Online | Decrypt PDF Files using Password</title>
-    <meta name="description" content="Remove PDF files password using this tools, If you know the pdf password and want to remove it then use this tool, select the pdf files, enter the correct password for those pdfs and get unlocked pdf files in single click."/>
-    <meta name="keywords" content="Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/mergePDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Unlock PDF Files Online | Decrypt PDF Files using Password",
+      description : "Remove PDF files password using this tools, If you know the pdf password and want to remove it then use this tool, select the pdf files, enter the correct password for those pdfs and get unlocked pdf files in single click.",
+      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/unlock-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/mergePDF.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/unlock-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+    
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickPDFContainer">
@@ -24,13 +38,15 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
+        
+        <script src="/js/unlockPDF.js"></script>
+
+        <script src="/js/carousel.js"></script>
         
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
-
-<script src="/js/unlockPDF.js"></script>
 
 </html>

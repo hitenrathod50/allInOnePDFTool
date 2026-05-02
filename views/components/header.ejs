@@ -1,20 +1,6 @@
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-  <link rel="apple-touch-icon" href="/images/favicon.ico">
 
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/output.css">
-  <!-- <script src="/js/color.js"></script> -->
 
-</head>
-
-<body class="bg-gray-50">
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-header-bg border-b border-header-border backdrop-blur-sm shadow-sm">
     <div class="container mx-auto px-4 sm:px-4 lg:px-8">
@@ -99,6 +85,9 @@
                       <li><a href="/split-pdf"
                           class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                           role="menuitem">Split PDF</a></li>
+                      <li><a href="/edit-pdf-pages"
+                          class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                          role="menuitem">Edit PDF Pages</a></li>
                     </ul>
                   </div>
                   <div class="space-y-2">
@@ -220,6 +209,7 @@
   </header>
 
   <!-- Mobile Drawer Overlay -->
+   
   <div id="mobile-overlay"
     class="fixed inset-0 bg-overlay-bg z-40 md:hidden opacity-0 invisible transition-all duration-300"></div>
 
@@ -303,6 +293,9 @@
                     <li><a href="/split-pdf"
                         class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Split
                         PDF</a></li>
+                    <li><a href="/edit-pdf-pages"
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">
+                      Edit PDF Pages</a></li>
                   </ul>
                 </div>
                 <div>
@@ -339,18 +332,24 @@
                   </h3>
                   <ul class="space-y-1">
                     <li><a href="/extract-pdf-pages"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Extract Pages</a></li>
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Extract
+                        Pages</a></li>
                     <li><a href="/compress-pdf"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Compress PDF</a></li>
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Compress
+                        PDF</a></li>
                     <li><a href="/add-pages-pdf"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Organize PDF</a></li>
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Organize
+                        PDF</a></li>
                     <li><a href="/add-watermark"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Add Watermark</a></li>
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Add
+                        Watermark</a></li>
                     <li><a href="/protect-pdf"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Protect PDF</a></li>
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Protect
+                        PDF</a></li>
                     <li><a href="/unlock-pdf"
-                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Unlock PDF</a></li>
-                    
+                        class="block text-fluid-sm pl-8 px-4 py-2 text-gray-500 hover:text-nav-hover hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Unlock
+                        PDF</a></li>
+
                   </ul>
                 </div>
               </div>
@@ -432,6 +431,3 @@
 
   </script>
 
-</body>
-
-</html>

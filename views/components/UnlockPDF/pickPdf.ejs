@@ -1,108 +1,169 @@
-<div class="bg-white rounded-lg shadow-lg p-6 m-3 sm:mb-0 max-w-md mx-auto text-center">
-    <h1 class="text-2xl font-bold text-[var(--primary-color)] mb-4">Unlock PDF Files</h1>
+<div class="flex justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Unlock PDF Files</h1>
+
+    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
+      Remove password protection from your PDF files quickly and easily.
+    </h2>
+
     <div id="dropZone"
-        class="border-2 border-dashed border-[var(--primary-color)] p-8 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-        <p class="text-gray-600 mb-4">Drag and drop PDFs here or click to select</p>
-        <input type="file" id="pdfInputFirst" accept="application/pdf" multiple class="hidden"
-            onchange="handleFileSelect(event)">
-        <button class="bg-[var(--primary-color)] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-            Select PDFs
-        </button>
+      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      <input type="file" id="pdfInputFirst" accept="application/pdf" multiple class="hidden"
+        onchange="handleFileSelect(event)">
+      <button
+        class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-purple-700 transition mb-4">
+        Select PDFs
+      </button>
+      <p class="text-gray-600 text-sm">Drag and drop PDFs here or click to select</p>
     </div>
+  </div>
 </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:p-5">
+<% const tool = {
+  "tool-description": {
+    name: "Drop/Select PDF Files",
+    desc: "select/drop PDF files to unlock them."
+  },
+  "tool-process": {
+    name: "Move PDF Cards",
+    desc: "move pdf cards by dragging to change it's position."
+  },
+  "tool-setting": {
+    name: "Multiple PDFs",
+    desc: "can unlock multiple pdfs at a time."
+  },
+  "download-info": {
+    name: "Single Click Conversion",
+    desc: "unlock pdfs within single click."
+  }
+}; %>
 
-    <!-- Card 1 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Drop/Select PDF Files
-        </h2>
-        <p class="text-gray-600">
-            select/drop PDF files to unlock them.
+<%- include("../toolOperations", {tool_info : tool}) %>
+
+<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+      How to use Unlock PDF Tool
+    </p>
+
+    <!-- Step 1 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/unlockpdf-laptop-1.webp", "/images/unlockpdf-tablet-1.webp", "/images/unlockpdf-mobile-1.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Upload Protected PDF</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Drag & drop or select the password-protected PDF files you want to unlock.
         </p>
+      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Move PDF Cards
-        </h2>
-        <p class="text-gray-600">
-            move pdf cards by dragging to change it's position.
+    <!-- Step 2 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+      <div class="space-y-6 order-2 lg:order-1">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Enter Password</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Enter the correct password to unlock the PDF. You can process multiple files at once.
         </p>
+      </div>
+      <div class="order-1 lg:order-2">
+        <%- include("../carousel", { images: ["/images/unlockpdf-laptop-2.webp", "/images/unlockpdf-tablet-2.webp", "/images/unlockpdf-mobile-2.webp"] }) %>
+      </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Multiple PDFs
-        </h2>
-        <p class="text-gray-600">
-            can unlock multiple pdfs at a time.
+    <!-- Step 3 -->
+    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+      <div class="lg:order-1">
+        <%- include("../carousel", { images: ["/images/unlockpdf-laptop-3.webp", "/images/unlockpdf-tablet-3.webp", "/images/unlockpdf-mobile-3.webp"] }) %>
+      </div>
+      <div class="space-y-6 lg:order-2">
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download Unlocked PDF</h3>
+        <p class="text-gray-600 sm:text-lg tracking-wide">
+          Download your unlocked PDF files instantly after successful password removal.
         </p>
+      </div>
     </div>
-
-    <!-- Card 4 -->
-    <div class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
-                  aspect-[5/3] flex flex-col items-center justify-center text-center">
-        <h2 class="text-2xl font-bold text-[var(--primary-color)] mb-3">
-            Single Click Conversion
-        </h2>
-        <p class="text-gray-600">
-            unlock pdfs within single click.
-        </p>
-    </div>
-
+  </div>
 </div>
+
+<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+      Frequently Asked Questions
+    </p>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        What is Unlock PDF?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        It removes password protection from PDF files so you can open and edit them freely.
+      </p>
+    </div>
+
+    <div class="border-t border-gray-200 mx-0 sm:mx-10"></div>
+
+    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+        Can I unlock multiple PDFs at once?
+      </h3>
+      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
+        Yes. You can select and unlock multiple password-protected PDFs in one go.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+
+<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+  Explore More Tools
+</p>
+
+<%- include("../toolsListIcons", { removeCards: ["/unlockpdf"] }) %>
 
 <%- include("../footer") %>
 
-    <script>
-        const dropZone = document.getElementById('dropZone');
+<script>
+  const dropZone = document.getElementById('dropZone');
 
-        dropZone.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-        dropZone.addEventListener('dragenter', (event) => {
-            event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('dragenter', (event) => {
+    event.preventDefault();
+    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-        dropZone.addEventListener('dragleave', (event) => {
-            event.preventDefault();
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-        });
+  dropZone.addEventListener('dragleave', (event) => {
+    event.preventDefault();
+    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+  });
 
-        dropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-            handleDrop(event);
+  dropZone.addEventListener('drop', (event) => {
+    event.preventDefault();
+    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+    handleDrop(event);
+  });
 
-        });
+  dropZone.addEventListener('click', () => {
+    document.getElementById('pdfInputFirst').click();
+  });
 
-        dropZone.addEventListener('click', () => {
-            document.getElementById('pdfInputFirst').click();
-        });
+  function handleDrop(event) {
+    const files = event.dataTransfer.files;
+    if (files.length) {
+      document.getElementById('pdfInputFirst').files = files;
+      handleFileSelect({ target: { files } });
+    }
+  }
 
-        function handleDrop(event) {
-            const files = event.dataTransfer.files;
-
-            if (files.length) {
-                document.getElementById('pdfInputFirst').files = files;
-                handleFileSelect({ target: { files } });
-            }
-        }
-
-        function handleFileSelect(event) {
-            const files = event.target.files;
-
-            // Add your file handling logic here
-            console.log('Selected files:', files);
-        }
-    </script>
+  function handleFileSelect(event) {
+    const files = event.target.files;
+    // Add your file handling logic here
+    console.log('Selected files:', files);
+  }
+</script>

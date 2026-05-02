@@ -1,0 +1,139 @@
+<%
+  const tools = [
+  {
+    tool_url: "/merge-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Merge PDF",
+    tool_desc: "Combine multiple PDF files into a single document."
+  },
+  {
+    tool_url: "/split-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Split PDF",
+    tool_desc: "Split a PDF into multiple smaller files."
+  },
+  {
+    tool_url: "/imagetopdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Image to PDF",
+    tool_desc: "Convert images into a PDF document"
+  },
+  {
+    tool_url: "/edit-pdf-pages",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Edit PDF Pages",
+    tool_desc: "Reorder, delete, or modify PDF pages easily."
+  },
+  {
+    tool_url: "/rotate-pages",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Rotate All Pages",
+    tool_desc: "Rotate all pages in your PDF to the desired orientation."
+  },
+  {
+    tool_url: "/add-page-numbers",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Add Page Number",
+    tool_desc: "Insert page numbers into your PDF document."
+  },
+  {
+    tool_url: "/add-pages-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Add Pages to PDF",
+    tool_desc: "Insert Pages to PDF document."
+  },
+  {
+    tool_url: "/remove-pages",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Remove Pages",
+    tool_desc: "Delete unwanted pages from your PDF file."
+  },
+  {
+    tool_url: "/add-watermark",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Add Watermark",
+    tool_desc: "Add text or image watermark to your PDF."
+  },
+  {
+    tool_url: "/word-to-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Word to PDF",
+    tool_desc: "Convert Word documents into PDF format."
+  },
+  {
+    tool_url: "/excel-to-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Excel to PDF",
+    tool_desc: "Convert Excel spreadsheets into PDF files."
+  },
+  {
+    tool_url: "/powerpoint-to-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "PowerPoint to PDF",
+    tool_desc: "Convert PowerPoint presentations into PDF."
+  },
+  {
+    tool_url: "/extract-pdf-pages",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Extract Pages",
+    tool_desc: "Extract selected pages from a PDF file."
+  },
+  {
+    tool_url: "/compress-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Compress PDF",
+    tool_desc: "Reduce PDF file size without losing quality."
+  },
+  {
+    tool_url: "/protect-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Protect PDF",
+    tool_desc: "Secure your PDF with password protection."
+  },
+  {
+    tool_url: "/unlock-pdf",
+    tool_icon: "/images/favicon.png",
+    tool_name: "Unlock PDF",
+    tool_desc: "Remove password protection from PDF files."
+  }
+];
+
+  // fallback if not passed
+  const remove = typeof removeCards !== "undefined" ? removeCards : [];
+%>
+
+
+<div class="md:px-6">
+<div class="tools-icon-list grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 p-4 sm:p-5">
+
+  <% tools.forEach(tool => { %>
+
+    <% if (!remove.includes(tool.tool_url)) { %>
+
+      <a href="<%= tool.tool_url %>" 
+   class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+          aspect-auto sm:aspect-square flex flex-col items-start justify-start text-left
+          border border-transparent hover:border-gray-400
+          hover:shadow-xl transition duration-300">
+
+          <img src="<%= tool.tool_icon %>" 
+               alt="<%= tool.tool_name %>" 
+               loading="lazy" 
+               class="w-16 h-16 mb-3">
+
+          <h3 class="text-xl sm:text-2xl font-semibold text-primary mb-3">
+              <%= tool.tool_name %>
+          </h3>
+
+          <p class="text-gray-600">
+              <%= tool.tool_desc %>
+          </p>
+
+      </a>
+
+    <% } %>
+
+  <% }) %>
+
+</div>
+</div>

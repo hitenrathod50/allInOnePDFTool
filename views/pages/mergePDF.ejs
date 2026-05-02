@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    
-    <title>Merge PDF Files | Combine PDF Files Online</title>
-    <meta name="description" content="Merge PDF files online with PdfVersatile, free tool. Drag & Drop or select PDFs you want to merge and Merge them in single click."/>
-    <meta name="keywords" content="Merge PDF, Image to PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"/>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link rel="stylesheet" href="/css/mergePDF.css">
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Merge PDF Files | Combine PDF Files Online",
+      description : "Merge PDF files online with PdfVersatile, free tool. Drag & Drop or select PDFs you want to merge and Merge them in single click.",
+      keywords : "Merge PDF, Image to PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
+      og_url : "/merge-pdf",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/mergePDF.css">
+        <link rel="canonical" href="https://pdfversatile.com/merge-pdf" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
 <body>
+
+    <%- include("../components/header") %>
 
         <div class="mx-auto">
             <div id="pickPDFContainer">
@@ -24,13 +38,17 @@
             </div>
         </div>
 
-        
-</body>
 
+        
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
 
 <script src="/js/mergepdf.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+</body>
+
 
 </html>

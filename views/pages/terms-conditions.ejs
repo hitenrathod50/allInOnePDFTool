@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 
 <head>
-    <meta name="description"
-        content="terms and conditions for All in One PDF Tool - a fast, free, and all-in-one PDF tool designed to simplify PDF operations like merge, split, compress, and edit.">
-    <meta name="keywords" content="terms and conditions, image to pdf, merge pdf, split pdf">
-    <title>Terms & Conditions | PdfVersatile - All in One PDF Tool</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <meta name="robots" content="index,follow">
+
+  <%- include("../components/meta",{
+
+      title : "Terms & Conditions | PdfVersatile - All in One PDF Tool",
+      description : "terms and conditions for All in One PDF Tool - a fast, free, and all-in-one PDF tool designed to simplify PDF operations like merge, split, compress, and edit.",
+      keywords : "terms and conditions, image to pdf, merge pdf, split pdf",
+      og_url : "/terms-conditions",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <link rel="stylesheet" href="/css/imagetopdf.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/terms-conditions" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
 </head>
 
-<%- include("../components/header") %>
 
-    <body>
+<body>
+        <%- include("../components/header") %>
 
         <div class="bg-gray-50 text-gray-800">
 
