@@ -1,9 +1,9 @@
 <div class="flex justify-center">
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Merge PDF Files</h1>
+    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Convert multiple files to PDF</h1>
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Combine multiple PDF files into one. Fast, secure & without quality loss.
+      Convert multiple files to single PDF. Without Compression & Sign Up.
     </h2>
 
     <div id="dropZone"
@@ -12,39 +12,28 @@
         onchange="handleFileSelect(event)">
       <button
         class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-purple-700 transition mb-4">
-        Select PDFs
+        Select Files
       </button>
       <p class="text-gray-600 text-sm">Drag and drop PDF files here or click to select</p>
     </div>
   </div>
 </div>
 
-<% const tool = {
-  "tool-description": {
-    name: "Drop/Select PDF Files",
-    desc: "select/drop any number of PDF files to merge them into a single PDF."
-  },
-  "tool-process": {
-    name: "Move PDF Cards",
-    desc: "reorder PDF cards by dragging to change their position in the final file."
-  },
-  "tool-setting": {
-    name: "Advance Settings",
-    desc: "set page margins, orientation, and other PDF options."
-  },
-  "download-info": {
-    name: "Single Click Conversion",
-    desc: "merge PDFs in one click with fast processing."
-  }
-}; %>
+<% const tool={ "tool-description" : { name: "Convert multiple files to PDF" ,
+  desc: "Select/drop multiple files and combine them into single PDF." }, "tool-process" : {
+  name: "Drag/Move PDF cards" , desc: "Move PDF cards in order to change it's position." }, "tool-setting" : {
+  name: "Advance settings Option" , desc: "In advance setting option you can set margin to PDF pages" }, "download-info" : {
+  name: "Convert in few moment" , desc: "Convert multiple files into PDF in few moment and download or preview PDF." } }; %>
 
 <%- include("../toolOperations", {tool_info : tool}) %>
 
 <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
   <div class="max-w-7xl mx-auto px-4 md:px-6">
     <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
-      How to use Merge PDF Tool
-    </p>
+          How to use
+          <span class="underline underline-offset-4">Merge PDF</span>
+          Tool
+        </p>
 
     <!-- Step 1 -->
     <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
@@ -52,9 +41,9 @@
         <%- include("../carousel", { images: ["/images/mergepdf-laptop-1.webp", "/images/mergepdf-tablet-1.webp", "/images/mergepdf-mobile-1.webp"] }) %>
       </div>
       <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drop or Select PDF Files</h3>
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Files</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          Upload multiple PDF files by dragging & dropping or clicking the select button. No signup required.
+          Select multiple files by clicking the button or drag & drop in order to merge multiple files into single PDF.
         </p>
       </div>
     </div>
@@ -64,7 +53,7 @@
       <div class="space-y-6 order-2 lg:order-1">
         <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Move PDF Cards</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          Reorder the uploaded PDFs by dragging the cards. The final merged PDF will follow your custom order.
+          Move PDF cards in order to change the specific PDF's position in merged PDF file. Also you can set the margin to the each Pages in Merged PDF and after setting up all things click on Convert to PDF.
         </p>
       </div>
       <div class="order-1 lg:order-2">
@@ -78,9 +67,9 @@
         <%- include("../carousel", { images: ["/images/mergepdf-laptop-3.webp", "/images/mergepdf-tablet-3.webp", "/images/mergepdf-mobile-3.webp"] }) %>
       </div>
       <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download Merged PDF</h3>
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Convert in few moment</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          Preview and download your combined PDF with a single click. Fast, secure, and high quality.
+          Wait a moment and you will have Download or Preview option where you can download or preview merged PDF.
         </p>
       </div>
     </div>
@@ -88,32 +77,54 @@
 </div>
 
 <div id="faq-section" class="bg-white sm:mt-0 mb-10">
-  <div class="max-w-5xl mx-auto px-4 md:px-6">
-    <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
-      Frequently Asked Questions
-    </p>
+      <div class="max-w-5xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+          What People Frequently Ask
+        </p>
 
-    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-        What is a Merge PDF tool?
-      </h3>
-      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
-        It allows you to combine multiple PDF files into a single PDF document quickly and easily.
-      </p>
+
+        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+            How to merge multiple files into single PDF?
+          </h3>
+          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+            This tool is very easy with attractive interface. In order to merge multiple files into single PDF just follow <a href="#tool-usage"
+                                                class="text-purple-600 hover:text-purple-800 underline">few steps</a>.
+          </p>
+        </div>
+
+
+        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
+
+
+        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+            What will be the quality of PDF pages after merging them into single PDF?
+          </h3>
+          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+            Not at all. We don't compress the PDF files during merging them. So you will get original page quality in merged PDF.
+          </p>
+        </div>
+
+        
+
+        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
+
+
+
+
+        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
+          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+            How many files can I merge into single PDF at once?
+          </h3>
+          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+            You can merge upto 3 PDF files into single PDF in free plan.
+          </p>
+        </div>
+
+
+      </div>
     </div>
-
-    <div class="border-t border-gray-200 mx-0 sm:mx-10"></div>
-
-    <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-      <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-        Does the order of PDFs matter?
-      </h3>
-      <p class="text-gray-600 mt-3 sm:text-lg leading-relaxed">
-        Yes. You can drag and drop the PDF cards to arrange them in any order you want before merging.
-      </p>
-    </div>
-  </div>
-</div>
 
 <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
