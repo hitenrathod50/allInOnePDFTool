@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196" width="196" height="196">
+	<defs>
+		<image width="128" height="128" id="img1" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmZmZmYiIGNsYXNzPSJiaSBiaS10d2l0dGVyLXgiIHZpZXdCb3g9IjAgMCAxNiAxNiIgaWQ9IlR3aXR0ZXItWC0tU3RyZWFtbGluZS1Cb290c3RyYXAiIGhlaWdodD0iMTYiIHdpZHRoPSIxNiI+CiAgPGRlc2M+CiAgICBUd2l0dGVyIFggU3RyZWFtbGluZSBJY29uOiBodHRwczovL3N0cmVhbWxpbmVocS5jb20KICA8L2Rlc2M+CiAgPHBhdGggZD0iTTEyLjYgMC43NWgyLjQ1NGwtNS4zNiA2LjE0MkwxNiAxNS4yNWgtNC45MzdsLTMuODY3IC01LjA3IC00LjQyNSA1LjA3SDAuMzE2bDUuNzMzIC02LjU3TDAgMC43NWg1LjA2M2wzLjQ5NSA0LjYzM0wxMi42MDEgMC43NVptLTAuODYgMTMuMDI4aDEuMzZMNC4zMjMgMi4xNDVIMi44NjV6IiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+"/>
+	</defs>
+	<style>
+	</style>
+	<use id="twitter-icon" href="#img1" transform="matrix(1.531,0,0,1.531,-0.5,0)"/>
+</svg>
