@@ -62,7 +62,7 @@ sudo npm install -g pm2
 During running the npm install you will get an error and to solve that ->
 
 
-sudo chown -R ubuntu:ubuntu /var/www/pdf-versatile
+sudo chown -R ubuntu:ubuntu /var/www/pdfversatile
 
 
 Check live bandwidth usage (real-time):
