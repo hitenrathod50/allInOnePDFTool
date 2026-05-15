@@ -533,7 +533,7 @@
     const href = link.getAttribute("href").replace(/\/$/, "");
 
     if (href !== "/" && path.startsWith(href)) {
-      link.classList.add("active", "text-nav-hover");
+      link.classList.add("active", "text-nav-hover", "font-semibold");
     }
   });
 
