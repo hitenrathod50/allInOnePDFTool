@@ -73,16 +73,28 @@
     tool_desc: "Convert PowerPoint presentations into PDF."
   },
   {
+    tool_url: "/odt-to-pdf",
+    tool_icon: "/images/odt-to-pdf-icon.webp",
+    tool_name: "ODT to PDF",
+    tool_desc: "Convert OpenDocument Text to PDF online."
+  },
+  {
+    tool_url: "/html-to-pdf",
+    tool_icon: "/images/html-to-pdf-icon.webp",
+    tool_name: "HTML to PDF",
+    tool_desc: "Convert website URL to PDF online free."
+  },
+  {
     tool_url: "/extract-pdf-pages",
     tool_icon: "/images/extract-pdf-pages-icon.webp",
     tool_name: "Extract Pages",
-    tool_desc: "Extract selected pages from a PDF file."
+    tool_desc: "Extract PDF pages online in image or PDF format."
   },
   {
     tool_url: "/compress-pdf",
     tool_icon: "/images/compress-pdf-icon.webp",
     tool_name: "Compress PDF",
-    tool_desc: "Reduce PDF file size without losing quality."
+    tool_desc: "Compress PDF files without losing quality."
   },
   {
     tool_url: "/protect-pdf",
@@ -111,10 +123,10 @@
     <% if (!remove.includes(tool.tool_url)) { %>
 
       <a href="<%= tool.tool_url %>" 
-   class="bg-white shadow-lg rounded-xl p-5 sm:p-6 
+   class="bg-white shadow-md rounded-xl p-5 sm:p-6 
           aspect-auto sm:aspect-square flex flex-col items-start justify-start text-left
-          border border-transparent hover:border-gray-400
-          hover:shadow-xl transition duration-300">
+          border border-transparent hover:border-gray-300
+          hover:shadow-lg transition duration-300">
 
           <img src="<%= tool.tool_icon %>" 
                alt="<%= tool.tool_name %>" 

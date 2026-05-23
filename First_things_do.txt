@@ -118,6 +118,16 @@ source ~/.bashrc
 Now you can run the command directly $ ngr
 
 
+For html to pdf ->
+
+sudo apt install chromium-browser
+
+const browser = await puppeteer.launch({
+  executablePath: '/usr/bin/chromium-browser', // add only this line
+  headless: true,
+  args: ['--no-sandbox']
+});
+
 
 
 
