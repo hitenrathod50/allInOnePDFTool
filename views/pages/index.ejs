@@ -61,9 +61,20 @@
 
     <section class="bg-gray-50 pb-5">
 
-        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-700 py-5 md:py-10">All important PDF tools in one place</h1>
 
-        <%- include("../components/toolsListIcons") %>
+      <div class="pt-5 md:pt-10">
+
+        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-700">All important PDF tools in one place</h1>
+            
+          <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
+            Every tool you need for PDF operations in one place. All tools are completely free with interactive UI. Explore Merge, Split, Rotate, Convert, Edit PDFs and many more.
+          </p>
+
+          </div>
+
+          
+
+        <%- include("../components/toolsListIcons", removeCards=[]) %>
 
     </section>
 
@@ -73,7 +84,7 @@
             Start Here - Popular Tools
           </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-5  md:mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-5  md:mb-10">
       
       <!-- Card 1 -->
       <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
@@ -87,7 +98,7 @@
             Convert multiple Images into single PDF in few clicks. Without any quality loss or compression.
           </p>
           <a href="/imagetopdf" style="color: white !important;"
-              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 min-h-[44px] font-medium text-center items-center justify-center">
+              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
               Convert Now
             </a>
         </div>
@@ -105,7 +116,7 @@
             Split PDF into multiple files or merge them into single PDF file.
           </p>
           <a href="/split-pdf" style="color: white !important;"
-              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 min-h-[44px] font-medium text-center items-center justify-center">
+              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
               Split Now
             </a>
         </div>
@@ -123,7 +134,7 @@
             Drop shapes, text, image or draw, highlight on PDF pages.
           </p>
           <a href="/edit-pdf-pages" style="color: white !important;"
-              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 min-h-[44px] font-medium text-center items-center justify-center">
+              class="w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
               Edit Now
             </a>
         </div>
@@ -139,8 +150,8 @@
       <div class="flex flex-col m-0 lg:m-8 md:flex-row-reverse gap-10 lg:gap-20">
         
         <!-- Image Side -->
-        <div class="w-full lg:w-5/12 flex justify-center">
-          <div class="bg-yellow-50 md:bg-transparent rounded-xl p-5 lg:p-0">
+        <div class="w-full bg-yellow-50 md:bg-transparent rounded-xl lg:w-5/12 flex justify-center">
+          <div class="p-5 lg:p-0">
             <img 
               src="/images/get-pro.svg" 
               alt="Get Pro Now"
@@ -205,7 +216,7 @@
 
             <!-- Button -->
             <div class="mt-5 lg:mt-10">
-            <a href="/" style="color: black !important;" class="sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-2 bg-yellow-400 text-black hover:bg-yellow-500 hover:shadow-lg transition-all duration-200 rounded-md focus:outline-none  min-h-[44px] font-medium text-center items-center justify-center">
+            <a href="/pricing" style="color: black !important;" class="sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-2 bg-yellow-400 text-black hover:bg-yellow-500 hover:shadow-lg transition-all duration-200 rounded-md  min-h-[44px] font-medium text-center items-center justify-center">
               Get Pro Now
             </a>
             </div>
@@ -226,7 +237,7 @@
             Built for speed, simplicity, and reliability
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
             <!-- Card 1 -->
             <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">

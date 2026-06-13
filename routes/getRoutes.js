@@ -107,6 +107,12 @@ async function getRoutes(fastify, options) {
 
   });
 
+  fastify.get("/pricing", async (request, reply) => {
+
+    return reply.view("pages/pricing.ejs");
+
+  });
+
   fastify.get("/contact", async (request, reply) => {
 
     return reply.view("pages/contact-us.ejs");

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <%- include("../components/meta",{ title : "pricing" , description
+        : "Use PdfVersatile pro version with best and affordable subscriptions. Utilize more features of PdfVersatile."
+        , keywords : "pricing, subscription" , og_url : "/pricing" , robots : "index,follow" }) %>
+
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+        <link rel="canonical" href="https://pdfversatile.com/pricing" />
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+</head>
+
+
+<body>
+
+    <%- include("../components/header") %>
+
+        <div class="bg-gray-50 text-gray-800">
+
+            <section class="py-12 px-6">
+                <div class="max-w-5xl mx-auto">
+
+                    <!-- Header -->
+                    <div class="text-center mb-8 md:mb-12">
+                        <div>
+
+                            <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">Pricing</h1>
+
+                            <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
+                                Choose the perfect plan for your PDF needs
+                            </p>
+
+                        </div>
+                        <div class="hidden mt-6 inline-flex items-center gap-2 bg-white rounded-2xl p-1 shadow-sm">
+                            <button onclick="toggleBilling(this)" id="monthly-btn"
+                                class="px-6 py-2.5 rounded-xl font-medium text-sm transition-all active-plan">
+                                Monthly
+                            </button>
+                            <button onclick="toggleBilling(this)" id="yearly-btn"
+                                class="px-6 py-2.5 rounded-xl font-medium text-sm transition-all">
+                                Yearly <span class="text-emerald-600 text-xs font-semibold">(Save 25%)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+                        <!-- Free Plan -->
+                        <div
+                            class="pricing-card bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden border-transparent hover:border-gray-300">
+                            <div class="p-8">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span
+                                            class="inline-block px-4 py-1.5 bg-slate-100 text-slate-700 text-sm font-semibold rounded-2xl">Basic</span>
+                                        <h2 class="text-3xl font-bold text-slate-900 mt-10">Free</h2>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-5xl font-bold text-slate-900">$0</span>
+                                        <span class="text-slate-500">/mo</span>
+                                    </div>
+                                </div>
+
+                                <p class="mt-10 text-slate-600">Perfect for occasional use with limited facilities.</p>
+
+                                <ul class="mt-3 lg:mt-10 space-y-4">
+                                    <li class="flex items-center gap-4">
+                                        <div
+                                            class="w-8 h-8 flex-shrink-0  text-green-600 rounded-2xl flex items-center justify-center">
+                                            <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">Limited file processing</p>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="flex items-center gap-4">
+                                        <div
+                                            class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
+                                            <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">No cloud storage</p>
+
+                                        </div>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+
+                            <div class="border-t border-slate-100 p-8">
+                                <a href="/" style="color: white !important;"
+                                    class="block w-full sm:w-auto text-fluid-sm px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 hover:shadow-lg transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
+                                    Get Started Free
+                                </a>
+                                <p class="text-center text-xs text-slate-500 mt-4">No sign up required</p>
+                            </div>
+                        </div>
+
+                        <!-- Premium Plan -->
+                        <div
+                            class="hidden pricing-card bg-white rounded-3xl shadow-2xl border-2 border-primary-500 relative overflow-hidden">
+
+
+                            <div class="p-8">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span
+                                            class="inline-block px-4 py-1.5 bg-primary-100 text-primary-700 text-sm font-semibold rounded-2xl">Pro</span>
+                                        <h2 class="text-3xl font-bold text-slate-900 mt-6">Premium</h2>
+                                    </div>
+                                    <div class="text-right">
+                                        <span id="premium-price" class="text-5xl font-bold text-slate-900">$19</span>
+                                        <span class="text-slate-500">/mo</span>
+                                    </div>
+                                </div>
+
+                                <p class="mt-6 text-slate-600">For power users and professionals who need unlimited
+                                    access.</p>
+
+                                <ul class="mt-10 space-y-5">
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-emerald-500"></i>
+                                        <span class="text-slate-700 font-medium">Unlimited document processing</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-emerald-500"></i>
+                                        <span class="text-slate-700">Cloud storage (10GB)</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-emerald-500"></i>
+                                        <span class="text-slate-700">Priority customer support</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-emerald-500"></i>
+                                        <span class="text-slate-700">Completely ad-free experience</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i class="fa-solid fa-check text-emerald-500"></i>
+                                        <span class="text-slate-700">Advanced PDF tools &amp; batch processing</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="border-t border-slate-100 p-8">
+                                <button onclick="selectPlan('premium')"
+                                    class="w-full bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-2xl font-semibold text-lg transition-all shadow-lg">
+                                    Upgrade to Premium
+                                </button>
+                                <p class="text-center text-xs text-slate-500 mt-4">Cancel anytime • 14-day money-back
+                                    guarantee</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </section>
+
+        </div>
+
+        <%- include("../components/footer") %>
+
+
+            <script>
+                function toggleBilling(btn) {
+                    document.querySelectorAll('#monthly-btn, #yearly-btn').forEach(b => {
+                        b.classList.remove('active-plan', 'bg-slate-900', 'text-white');
+                        b.classList.add('text-slate-700');
+                    });
+
+                    btn.classList.add('active-plan', 'bg-slate-900', 'text-white');
+
+                    const isYearly = btn.id === 'yearly-btn';
+                    const priceEl = document.getElementById('premium-price');
+
+                    if (isYearly) {
+                        priceEl.textContent = '$14';
+                    } else {
+                        priceEl.textContent = '$19';
+                    }
+                }
+
+                function selectPlan(plan) {
+                    if (plan === 'free') {
+                        alert("🎉 Welcome! Your free account has been activated.");
+                    } else {
+                        alert("✅ Redirecting to secure checkout for Premium plan...");
+                    }
+                }
+            </script>
+
+
+</body>
+
+</html>
