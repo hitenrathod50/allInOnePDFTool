@@ -219,6 +219,14 @@ async function getRoutes(fastify, options) {
   fastify.get("/unlock-pdf/download/file/:token", unlockPDFDownloadFile);
 
 
+  // Inspection Tools routes
+
+  fastify.get("/pdf-size-checker", async (request, reply) => {
+
+    return reply.view("pages/pdf-size-checker.ejs");
+
+  })
+
 }
 
 module.exports = getRoutes;
