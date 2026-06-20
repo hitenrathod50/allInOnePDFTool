@@ -15,6 +15,8 @@ const ExcelJS = require('exceljs');
 
 const gsPath = `"C:\\Program Files\\gs\\gs10.07.0\\bin\\gswin64c.exe"`;
 
+const qpdfPath = `C:\\Program Files\\qpdf 12.3.2\\bin\\qpdf.exe`;
+
 const COMPRESSION_SETTINGS = {
     low: '/printer',      // Good quality, moderate compression
     medium: '/ebook',  // Default - smaller size, acceptable quality
@@ -2553,6 +2555,257 @@ async function unlockPDFPost(request, reply) {
 }
 
 
+// PDF Inspection controllers
+
+async function getPDFObjectsPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+
+        // Parse multipart form
+        for await (const part of parts) {
+            try {
+                if (part.file && part.fieldname === 'pdf') {
+                    if (!part.filename?.toLowerCase().endsWith('.pdf')) {
+                        return reply.status(400).send({
+                            error: 'Uploaded file must be a PDF'
+                        });
+                    }
+
+                    pdfBuffer = await part.toBuffer();
+                }
+            } catch {
+                return reply.status(400).send({
+                    error: 'Invalid form data'
+                });
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({
+                error: 'No PDF provided'
+            });
+        }
+
+        const uniqueId =
+            Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+        const tmpDir = path.join(
+            PROJECT_TEMP_ROOT,
+            `object-${uniqueId}`
+        );
+
+        const inputPath = path.join(tmpDir, 'input.pdf');
+
+        let qpdfData = null;
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            const command = `"${qpdfPath}" --json "${inputPath}"`;
+
+            const qpdfJSON = await new Promise((resolve, reject) => {
+                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(stderr || error.message);
+                        return reject(error);
+                    }
+
+                    resolve(stdout);
+                });
+            });
+
+            qpdfData = JSON.parse(qpdfJSON);
+        } finally {
+            try {
+                await fs.rm(tmpDir, {
+                    recursive: true,
+                    force: true
+                });
+            } catch (err) {
+                console.warn('Cleanup failed:', err.message);
+            }
+        }
+
+        const counts = {
+            catalogObjects: 0,
+            pageObjects: 0,
+            fontObjects: 0,
+            imageObjects: 0,
+            annotationObjects: 0,
+            formObjects: 0,
+            metadataObjects: 0,
+            embeddedFiles: 0,
+            javaScriptObjects: 0
+        };
+
+        function walk(obj) {
+            if (!obj || typeof obj !== 'object') {
+                return;
+            }
+
+            if (obj['/Type'] === '/Catalog') {
+                counts.catalogObjects++;
+            }
+
+            if (obj['/Type'] === '/Page') {
+                counts.pageObjects++;
+            }
+
+            if (obj['/Type'] === '/Font') {
+                counts.fontObjects++;
+            }
+
+            if (obj['/Type'] === '/Annot') {
+                counts.annotationObjects++;
+            }
+
+            if (obj['/Type'] === '/Metadata') {
+                counts.metadataObjects++;
+            }
+
+            if (obj['/Type'] === '/Filespec') {
+                counts.embeddedFiles++;
+            }
+
+            if (
+                obj['/Type'] === '/Action' &&
+                obj['/S'] === '/JavaScript'
+            ) {
+                counts.javaScriptObjects++;
+            }
+
+            if (obj['/Subtype'] === '/Image') {
+                counts.imageObjects++;
+            }
+
+            if (obj['/AcroForm']) {
+                counts.formObjects++;
+            }
+
+            for (const value of Object.values(obj)) {
+                walk(value);
+            }
+        }
+
+        walk(qpdfData);
+
+        return reply.send(counts);
+
+    } catch (err) {
+        request.log.error(err);
+
+        return reply.status(500).send({
+            error: 'Failed to Count PDF Objects.',
+            message: err.message
+        });
+    }
+}
+
+
+async function getPDFSecurityPost(request, reply) {
+    try {
+        const parts = await request.parts();
+        let pdfBuffer = null;
+
+        // Parse multipart form
+        for await (const part of parts) {
+            try {
+                if (part.file && part.fieldname === 'pdf') {
+                    if (!part.filename?.toLowerCase().endsWith('.pdf')) {
+                        return reply.status(400).send({ error: 'Uploaded file must be a PDF' });
+                    }
+                    pdfBuffer = await part.toBuffer();
+                }
+            } catch {
+                return reply.status(400).send({ error: 'Invalid form data' });
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({ error: 'No PDF provided' });
+        }
+
+        const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+        const tmpDir = path.join(PROJECT_TEMP_ROOT, `security-${uniqueId}`);
+        const inputPath = path.join(tmpDir, 'input.pdf');
+        let qpdfData = null;
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            const command = `"${qpdfPath}" --json "${inputPath}"`;
+            const qpdfJSON = await new Promise((resolve, reject) => {
+                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(stderr || error.message);
+                        return reject(error);
+                    }
+                    resolve(stdout);
+                });
+            });
+
+            qpdfData = JSON.parse(qpdfJSON);
+        } finally {
+            try {
+                await fs.rm(tmpDir, { recursive: true, force: true });
+            } catch (err) {
+                console.warn('Cleanup failed:', err.message);
+            }
+        }
+
+        // Extract security details from qpdf JSON
+        const encrypt = qpdfData.encrypt || {};
+
+        const securityDetails = {
+            encryptionStatus: !!encrypt.encryption || false,
+            encryptionMethod: encrypt.encryption ? 
+                (encrypt.encryption === 5 ? 'AES-256' : 
+                 encrypt.encryption === 4 ? 'AES-128' : 
+                 encrypt.encryption === 3 ? 'RC4-128' : 
+                 encrypt.encryption === 2 ? 'RC4-40' : `V${encrypt.encryption || ''}`) : 
+                null,
+            userPassword: !!encrypt.userPassword || false,     // true if user password is set
+            ownerPassword: !!encrypt.ownerPassword || false,   // true if owner password is set
+            printingPermission: getPermission(encrypt, 'print'),
+            copyContent: getPermission(encrypt, 'extract'),
+            editingPermission: getPermission(encrypt, 'modify'),
+            digitalSignatures: 0,   // qpdf JSON doesn't directly count signatures easily; extend if needed
+            certification: !!encrypt.certified || false,
+        };
+
+        return reply.send(securityDetails);
+
+    } catch (err) {
+        request.log.error(err);
+        return reply.status(500).send({ 
+            error: 'Failed to get PDF security details.', 
+            message: err.message 
+        });
+    }
+}
+
+// Helper to map permissions (P bitfield or explicit flags in encrypt)
+function getPermission(encrypt, type) {
+    if (!encrypt || !encrypt.permissions) return true; // default unencrypted = allowed
+
+    const perms = encrypt.permissions;
+    switch (type) {
+        case 'print':
+            return !!perms.print || !!perms.printLow || !!perms.printHigh;
+        case 'extract':
+            return !!perms.extract || !!perms.accessibility;
+        case 'modify':
+            return !!perms.modify || !!perms.modifyAnnotations || !!perms.formFill;
+        default:
+            return true;
+    }
+}
+
+
 
 module.exports = {
     imageToPDFPOST,
@@ -2573,5 +2826,7 @@ module.exports = {
     compressPDFPost,
     addWatermarkPDFPost,
     protectPDFPost,
-    unlockPDFPost
+    unlockPDFPost,
+    getPDFObjectsPost,
+    getPDFSecurityPost
 };

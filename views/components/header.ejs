@@ -271,7 +271,7 @@
 
             <!-- Desktop Submenu -->
             <div id="inspection-submenu"
-              class="absolute top-full right-0 mt-1 w-[670px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
+              class="absolute top-full right-0 mt-1 w-[680px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
               role="menu">
 
 
@@ -298,44 +298,58 @@
                     </li>
 
                     <li>
-                      <a href="/add-page-numbers"
+                      <a href="/pdf-page-counter"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Page Numbers
+                        PDF Page Counter
                       </a>
                     </li>
 
                     <li>
-                      <a href="/add-pages-pdf"
+                      <a href="/pdf-word-counter"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Pages
+                        PDF Word Counter
                       </a>
                     </li>
 
                     <li>
-                      <a href="/remove-pages"
+                      <a href="/pdf-page-size-detector"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Remove Pages
+                        PDF Page Size Detector
                       </a>
                     </li>
 
                     <li>
-                      <a href="/split-pdf"
+                      <a href="/pdf-linearization-checker"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Split PDF
+                        PDF Linearization Checker
                       </a>
                     </li>
 
                     <li>
-                      <a href="/edit-pdf-pages"
+                      <a href="/pdf-object-counter"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Edit PDF Pages
+                        PDF Object Counter
                       </a>
                     </li>
+
+
+                    <li>
+                      <a href="/pdf-security-checker"
+                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        PDF Security Checker
+                      </a>
+                    </li>
+
+                   
+
+
+
                   </ul>
 
 
@@ -343,105 +357,120 @@
                 <div class="space-y-2">
 
                   <ul class="space-y-1">
+                    
+
                     <li>
-                      <a href="/rotate-pages"
+                      <a href="/pdf-language-detector"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Rotate All Pages
+                        PDF Language Detector
                       </a>
                     </li>
 
                     <li>
-                      <a href="/add-page-numbers"
+                      <a href="/blank-page-detector"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Page Numbers
+                        Blank Page Detector
                       </a>
                     </li>
 
                     <li>
-                      <a href="/add-pages-pdf"
+                      <a href="/pdf-image-counter"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Pages
+                        PDF Image Counter
                       </a>
                     </li>
 
                     <li>
-                      <a href="/remove-pages"
+                      <a href="/pdf-font-detector"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Remove Pages
+                        PDF Font Detector
                       </a>
                     </li>
 
                     <li>
-                      <a href="/split-pdf"
+                      <a href="/pdf-links-extractor"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Split PDF
+                        PDF Links Extractor
+                      </a>
+                    </li>
+
+
+                    <li>
+                      <a href="/corrupted-pdf-detector"
+                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        Corrupted PDF Detector
                       </a>
                     </li>
 
                     <li>
-                      <a href="/edit-pdf-pages"
+                      <a href="/pdf-compatibility-checker"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Edit PDF Pages
+                        PDF Compatibility Checker
                       </a>
                     </li>
+
+
+                    
+
                   </ul>
                 </div>
                 <div class="space-y-2">
 
                   <ul class="space-y-1">
+
+
                     <li>
-                      <a href="/rotate-pages"
+                      <a href="/pdf-tamper-checker"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Rotate All Pages
+                        PDF Tamper Checker
+                      </a>
+                    </li>
+
+                     
+
+
+                    <li>
+                      <a href="/pdf-signature-checker"
+                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        PDF Signature Checker
                       </a>
                     </li>
 
                     <li>
-                      <a href="/add-page-numbers"
+                      <a href="/pdf-standards-validator"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Page Numbers
+                        PDF Standards Validator
                       </a>
                     </li>
 
                     <li>
-                      <a href="/add-pages-pdf"
+                      <a href="/pdf-compliance-checker"
                         class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        Add Pages
+                        PDF Compliance Checker
+                      </a>
+                    </li>
+                    
+
+                    <li>
+                      <a href="/ai-pdf-summary"
+                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        AI PDF Summary
                       </a>
                     </li>
 
-                    <li>
-                      <a href="/remove-pages"
-                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        Remove Pages
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="/split-pdf"
-                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        Split PDF
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="/edit-pdf-pages"
-                        class="block text-fluid-sm px-2 py-1.5 text-gray-600 hover:text-nav-hover hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        Edit PDF Pages
-                      </a>
-                    </li>
+                    
                   </ul>
                 </div>
               </div>
@@ -487,7 +516,7 @@
             </a>
 
             <a href="/register" style="color: white !important;"
-              class="hidden sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-600 hover:shadow-lg  transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
+              class="hidden sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-2 bg-primary text-white hover:bg-purple-700 hover:shadow-md  transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
               Get Started
             </a>
 
@@ -699,7 +728,7 @@
             <!-- Get Started -->
             <a href="/register" class="block">
               <button
-                class="w-full text-fluid-base px-4 py-3 bg-primary text-primary-foreground hover:bg-purple-600 hover:shadow-lg transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
+                class="w-full text-fluid-base px-4 py-3 bg-primary text-primary-foreground hover:bg-purple-700 hover:shadow-md transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
                 Get Started
               </button>
             </a>

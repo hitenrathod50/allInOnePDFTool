@@ -25,8 +25,8 @@ async function minifyJS() {
             // 🔹 Step 1: Minify
             const minified = await minify(code, {
                 compress: {
-                    drop_console: true,
-                    drop_debugger: true,
+                    drop_console: false,
+                    drop_debugger: false,
                 },
                 mangle: true,
             });

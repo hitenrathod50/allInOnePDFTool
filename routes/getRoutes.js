@@ -227,6 +227,42 @@ async function getRoutes(fastify, options) {
 
   })
 
+  fastify.get("/pdf-page-counter", async (request, reply) => {
+
+    return reply.view("pages/pdf-page-counter.ejs");
+
+  })
+
+  fastify.get("/pdf-page-size-detector", async (request, reply) => {
+
+    return reply.view("pages/pdf-page-size-detector.ejs");
+
+  })
+
+  fastify.get("/pdf-linearization-checker", async (request, reply) => {
+
+    return reply.view("pages/pdf-linearization-checker.ejs");
+
+  })
+
+  fastify.get("/pdf-word-counter", async (request, reply) => {
+
+    return reply.view("pages/pdf-word-counter.ejs");
+
+  })
+
+  fastify.get("/pdf-object-counter", async (request, reply) => {
+
+    return reply.view("pages/pdf-object-counter.ejs");
+
+  })
+
+  fastify.get("/pdf-security-checker", async (request, reply) => {
+
+    return reply.view("pages/pdf-security-checker.ejs");
+
+  })
+
 }
 
 module.exports = getRoutes;
