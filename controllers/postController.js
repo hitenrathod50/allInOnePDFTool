@@ -2705,103 +2705,331 @@ async function getPDFObjectsPost(request, reply) {
 }
 
 
+function countDigitalSignatures(obj) {
+    let count = 0;
+
+    function walk(node) {
+        if (!node || typeof node !== "object")
+            return;
+
+        if (
+            node["/Type"] === "/Sig" ||
+            node.Type === "/Sig" ||
+            node.Type === "Sig"
+        ) {
+            count++;
+        }
+
+        for (const key in node) {
+            walk(node[key]);
+        }
+    }
+
+    walk(obj);
+
+    return count;
+}
+
+function isCertified(obj) {
+    let certified = false;
+
+    function walk(node) {
+        if (!node || typeof node !== "object")
+            return;
+
+        if (
+            node["/TransformMethod"] === "/DocMDP" ||
+            node.TransformMethod === "/DocMDP"
+        ) {
+            certified = true;
+        }
+
+        for (const key in node) {
+            walk(node[key]);
+        }
+    }
+
+    walk(obj);
+
+    return certified;
+}
+
 async function getPDFSecurityPost(request, reply) {
     try {
         const parts = await request.parts();
         let pdfBuffer = null;
 
-        // Parse multipart form
         for await (const part of parts) {
-            try {
-                if (part.file && part.fieldname === 'pdf') {
-                    if (!part.filename?.toLowerCase().endsWith('.pdf')) {
-                        return reply.status(400).send({ error: 'Uploaded file must be a PDF' });
-                    }
-                    pdfBuffer = await part.toBuffer();
+            if (part.file && part.fieldname === "pdf") {
+                if (!part.filename?.toLowerCase().endsWith(".pdf")) {
+                    return reply.status(400).send({
+                        error: "Uploaded file must be a PDF"
+                    });
                 }
-            } catch {
-                return reply.status(400).send({ error: 'Invalid form data' });
+
+                pdfBuffer = await part.toBuffer();
             }
         }
 
         if (!pdfBuffer) {
-            return reply.status(400).send({ error: 'No PDF provided' });
+            return reply.status(400).send({
+                error: "No PDF provided"
+            });
         }
 
-        const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-        const tmpDir = path.join(PROJECT_TEMP_ROOT, `security-${uniqueId}`);
-        const inputPath = path.join(tmpDir, 'input.pdf');
-        let qpdfData = null;
+        const uniqueId =
+            Date.now() + "-" + Math.random().toString(36).slice(2);
+
+        const tmpDir = path.join(
+            PROJECT_TEMP_ROOT,
+            `security-${uniqueId}`
+        );
+
+        const inputPath = path.join(tmpDir, "input.pdf");
+
+        let qpdfData;
+        let encryptionInfo;
 
         try {
             await fs.mkdir(tmpDir, { recursive: true });
+
             await fs.writeFile(inputPath, pdfBuffer);
 
             const command = `"${qpdfPath}" --json "${inputPath}"`;
-            const qpdfJSON = await new Promise((resolve, reject) => {
-                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
-                    if (error) {
-                        console.error(stderr || error.message);
-                        return reject(error);
-                    }
+
+            const stdout = await new Promise((resolve, reject) => {
+                exec(command, { timeout: 60000 }, (err, stdout, stderr) => {
+                    if (err)
+                        return reject(stderr || err.message);
+
                     resolve(stdout);
                 });
             });
 
-            qpdfData = JSON.parse(qpdfJSON);
+            qpdfData = JSON.parse(stdout);
+
+            const encryptionOutput = await new Promise((resolve, reject) => {
+                exec(
+                    `"${qpdfPath}" --show-encryption "${inputPath}"`,
+                    { timeout: 60000 },
+                    (err, stdout, stderr) => {
+                        if (err) {
+                            return reject(stderr || err.message);
+                        }
+
+                        resolve(stdout);
+                    }
+                );
+            });
+
+            encryptionInfo = parseEncryptionInfo(encryptionOutput);
+
         } finally {
-            try {
-                await fs.rm(tmpDir, { recursive: true, force: true });
-            } catch (err) {
-                console.warn('Cleanup failed:', err.message);
-            }
+            await fs.rm(tmpDir, {
+                recursive: true,
+                force: true
+            }).catch(() => { });
         }
 
-        // Extract security details from qpdf JSON
-        const encrypt = qpdfData.encrypt || {};
+
+
 
         const securityDetails = {
-            encryptionStatus: !!encrypt.encryption || false,
-            encryptionMethod: encrypt.encryption ? 
-                (encrypt.encryption === 5 ? 'AES-256' : 
-                 encrypt.encryption === 4 ? 'AES-128' : 
-                 encrypt.encryption === 3 ? 'RC4-128' : 
-                 encrypt.encryption === 2 ? 'RC4-40' : `V${encrypt.encryption || ''}`) : 
-                null,
-            userPassword: !!encrypt.userPassword || false,     // true if user password is set
-            ownerPassword: !!encrypt.ownerPassword || false,   // true if owner password is set
-            printingPermission: getPermission(encrypt, 'print'),
-            copyContent: getPermission(encrypt, 'extract'),
-            editingPermission: getPermission(encrypt, 'modify'),
-            digitalSignatures: 0,   // qpdf JSON doesn't directly count signatures easily; extend if needed
-            certification: !!encrypt.certified || false,
+            encryptionStatus:
+                encryptionInfo.encryptionStatus
+                    ? "Encrypted"
+                    : "Not Encrypted",
+
+            encryptionMethod:
+                encryptionInfo.encryptionMethod,
+
+            userPassword:
+                encryptionInfo.userPassword
+                    ? "Yes"
+                    : "No",
+
+            ownerPassword:
+                encryptionInfo.ownerPassword
+                    ? "Yes"
+                    : "Not Provided",
+
+            printingPermission:
+                encryptionInfo.printingPermission
+                    ? "Allowed"
+                    : "Not Allowed",
+
+            copyContent:
+                encryptionInfo.copyContent
+                    ? "Allowed"
+                    : "Not Allowed",
+
+            editingPermission:
+                encryptionInfo.editingPermission
+                    ? "Allowed"
+                    : "Not Allowed",
+
+            digitalSignatures:
+                countDigitalSignatures(qpdfData),
+
+            certification:
+                isCertified(qpdfData)
+                    ? "Yes"
+                    : "No"
         };
 
         return reply.send(securityDetails);
 
     } catch (err) {
         request.log.error(err);
-        return reply.status(500).send({ 
-            error: 'Failed to get PDF security details.', 
-            message: err.message 
+
+        return reply.status(500).send({
+            error: "Failed to get PDF security details.",
+            message: err.message
         });
     }
 }
 
-// Helper to map permissions (P bitfield or explicit flags in encrypt)
-function getPermission(encrypt, type) {
-    if (!encrypt || !encrypt.permissions) return true; // default unencrypted = allowed
 
-    const perms = encrypt.permissions;
-    switch (type) {
-        case 'print':
-            return !!perms.print || !!perms.printLow || !!perms.printHigh;
-        case 'extract':
-            return !!perms.extract || !!perms.accessibility;
-        case 'modify':
-            return !!perms.modify || !!perms.modifyAnnotations || !!perms.formFill;
-        default:
-            return true;
+function parseEncryptionInfo(output) {
+    const text = output.toLowerCase();
+
+    const has = (value) => text.includes(value.toLowerCase());
+
+    let encryptionMethod = "Unknown";
+
+    if (has("aesv3")) {
+        encryptionMethod = "AES-256";
+    } else if (has("aesv2")) {
+        encryptionMethod = "AES-128";
+    } else if (has("rc4")) {
+        const match = output.match(/R\s*=\s*(\d+)/i);
+
+        if (match) {
+            encryptionMethod =
+                parseInt(match[1], 10) >= 3
+                    ? "RC4-128"
+                    : "RC4-40";
+        } else {
+            encryptionMethod = "RC4";
+        }
+    }
+
+    return {
+        encryptionStatus: !has("file is not encrypted"),
+
+        encryptionMethod,
+
+        userPassword: has("user password = yes"),
+
+        ownerPassword:
+            has("supplied password is owner password"),
+
+        printingPermission:
+            has("print low resolution: allowed") ||
+            has("print high resolution: allowed"),
+
+        copyContent:
+            has("extract for any purpose: allowed"),
+
+        editingPermission:
+            has("modify anything: allowed")
+    };
+}
+
+
+async function getPDFFontPost(request, reply) {
+    try {
+        const parts = await request.parts();
+        let pdfBuffer = null;
+
+        for await (const part of parts) {
+            if (part.file && part.fieldname === "pdf") {
+                if (!part.filename?.toLowerCase().endsWith(".pdf")) {
+                    return reply.status(400).send({
+                        error: "Uploaded file must be a PDF"
+                    });
+                }
+
+                pdfBuffer = await part.toBuffer();
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({
+                error: "No PDF provided"
+            });
+        }
+
+        const uniqueId =
+            Date.now() + "-" + Math.random().toString(36).slice(2);
+
+        const tmpDir = path.join(
+            PROJECT_TEMP_ROOT,
+            `fonts-${uniqueId}`
+        );
+
+        const inputPath = path.join(tmpDir, "input.pdf");
+        const qdfPath = path.join(tmpDir, "output.qdf.pdf");
+
+        let fontData = [];
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            // Convert PDF to QDF
+            await new Promise((resolve, reject) => {
+                exec(
+                    `"${qpdfPath}" --qdf --object-streams=disable "${inputPath}" "${qdfPath}"`,
+                    { timeout: 60000 },
+                    (err, stdout, stderr) => {
+                        if (err) {
+                            return reject(new Error(stderr || err.message));
+                        }
+                        resolve();
+                    }
+                );
+            });
+
+            // Read QDF file
+            const qdfText = await fs.readFile(qdfPath, "latin1");
+
+            // Extract BaseFont names
+            const matches = [
+                ...qdfText.matchAll(/\/BaseFont\s*\/([^\s\/]+)/g)
+            ];
+
+            fontData = [
+                ...new Set(
+                    matches.map(match =>
+                        match[1]
+                            .replace(/^[A-Z]{6}\+/, "") // Remove subset prefix
+                            .replace(/#20/g, " ")       // Decode spaces
+                    )
+                )
+            ];
+
+        } finally {
+            await fs.rm(tmpDir, {
+                recursive: true,
+                force: true
+            }).catch(() => { });
+        }
+
+        return reply.send({
+            success: true,
+            totalFonts: fontData.length,
+            fonts: fontData
+        });
+
+    } catch (err) {
+        request.log.error(err);
+
+        return reply.status(500).send({
+            error: "Failed to fetch font details.",
+            message: err.message
+        });
     }
 }
 
@@ -2828,5 +3056,6 @@ module.exports = {
     protectPDFPost,
     unlockPDFPost,
     getPDFObjectsPost,
-    getPDFSecurityPost
+    getPDFSecurityPost,
+    getPDFFontPost
 };

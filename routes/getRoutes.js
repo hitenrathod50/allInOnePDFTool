@@ -263,6 +263,30 @@ async function getRoutes(fastify, options) {
 
   })
 
+  fastify.get("/pdf-language-detector", async (request, reply) => {
+
+    return reply.view("pages/pdf-language-detector.ejs");
+
+  })
+
+  fastify.get("/blank-page-detector", async (request, reply) => {
+
+    return reply.view("pages/blank-page-detector.ejs");
+
+  })
+
+  fastify.get("/pdf-font-detector", async (request, reply) => {
+
+    return reply.view("pages/pdf-font-detector.ejs");
+
+  })
+
+  fastify.get("/pdf-links-extractor", async (request, reply) => {
+
+    return reply.view("pages/pdf-links-extractor.ejs");
+
+  })
+
 }
 
 module.exports = getRoutes;
