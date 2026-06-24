@@ -1,7 +1,7 @@
 <!-- Header -->
 <header class="sticky top-0 z-50 bg-header-bg border-b border-header-border backdrop-blur-sm shadow-sm">
-  <div class="container mx-auto px-4 sm:px-4 lg:px-8">
-    <div class="flex items-center justify-between h-16 lg:h-20">
+  <div class="mx-auto px-4 sm:px-4 lg:px-8">
+    <div class="flex items-center justify-between h-14 sm:h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/"
@@ -26,7 +26,7 @@
               Image to PDF
             </a>
           </li>
-          <li>
+          <li class="hidden cst:block">
             <a href="/merge-pdf"
               class="px-3 py-2 rounded-md text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200  min-h-[44px] flex items-center">
               Merge PDF
@@ -38,7 +38,7 @@
               Split PDF
             </a>
           </li>
-          <li>
+          <li class="hidden cst:block">
             <a href="/edit-pdf-pages"
               class="px-3 py-2 rounded-md text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200  min-h-[44px] flex items-center">
               Edit PDF Pages
@@ -46,7 +46,7 @@
           </li>
 
           <!-- All PDF Tools with submenu -->
-          <li class="relative" id="desktop-submenu-container">
+          <li class="static cst:relative" id="desktop-submenu-container">
             <button id="desktop-submenu-trigger"
               class="px-3 py-2 rounded-md text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200  min-h-[44px] flex items-center space-x-1"
               aria-haspopup="true" aria-expanded="false">
@@ -258,7 +258,7 @@
             </div>
           </li>
 
-          <li class="relative" id="inspection-submenu-container">
+          <li class="static cst:relative" id="inspection-submenu-container">
             <button id="inspection-submenu-trigger"
               class="px-3 py-2 rounded-md text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200  min-h-[44px] flex items-center space-x-1"
               aria-haspopup="true" aria-expanded="false">
@@ -346,7 +346,7 @@
                       </a>
                     </li>
 
-                   
+
 
 
 
@@ -357,7 +357,7 @@
                 <div class="space-y-2">
 
                   <ul class="space-y-1">
-                    
+
 
                     <li>
                       <a href="/pdf-language-detector"
@@ -375,7 +375,7 @@
                       </a>
                     </li>
 
-                    
+
 
                     <li>
                       <a href="/pdf-font-detector"
@@ -411,7 +411,7 @@
                     </li>
 
 
-                    
+
 
                   </ul>
                 </div>
@@ -428,7 +428,7 @@
                       </a>
                     </li>
 
-                     
+
 
 
                     <li>
@@ -454,7 +454,7 @@
                         PDF Compliance Checker
                       </a>
                     </li>
-                    
+
 
                     <li>
                       <a href="/ai-pdf-summary"
@@ -464,7 +464,7 @@
                       </a>
                     </li>
 
-                    
+
                   </ul>
                 </div>
               </div>
@@ -482,7 +482,7 @@
           <!-- Desktop Profile Dropdown -->
           <div class="relative hidden sm:block group" id="desktop-profile-dropdown">
             <button
-              class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-semibold hover:bg-purple-600 transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              class="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-semibold hover:bg-secondary transition-all focus:outline-none"
               aria-haspopup="true" aria-expanded="false">
               <%= user ? user.charAt(0).toUpperCase() : 'U' %>
             </button>
@@ -491,11 +491,11 @@
             <div
               class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-1">
               <a href="/user/dashboard"
-                class="block px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 hover:text-primary transition-colors">
+                class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 hover:text-primary transition-colors">
                 Dashboard
               </a>
               <button
-                class="logout-btn w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 transition-colors">
+                class="logout-btn w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 transition-colors">
                 Logout
               </button>
             </div>
@@ -539,12 +539,12 @@
 
 <!-- Mobile Drawer -->
 <div id="mobile-drawer"
-  class="fixed top-0 right-0 h-full w-[min(92vw,420px)] bg-drawer-bg shadow-2xl z-50 md:hidden transform translate-x-full"
+  class="fixed top-0 right-0 h-full w-[min(92vw,450px)] bg-drawer-bg shadow-2xl z-50 md:hidden transform translate-x-full"
   role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
   <div class="flex flex-col h-full">
     <!-- Drawer Header -->
-    <div class="flex items-center justify-between p-4 border-b border-gray-200">
-      <span class="text-fluid-lg font-semibold text-primary">Explore More</span>
+    <div class="flex items-center justify-between py-3 px-4 sm:p-4 border-b border-gray-200">
+      <span class="font-semibold text-primary">Explore More</span>
       <button id="drawer-close-button"
         class="p-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-colors rounded-md"
         aria-label="Close menu">
@@ -556,28 +556,37 @@
 
     <!-- Drawer Content: Navigation (scrollable) -->
     <nav class="flex-1 overflow-y-auto p-4 drawer-scroll" role="navigation">
-      <ul class="space-y-2 pb-6"> <!-- Added pb-6 for extra bottom padding -->
+      <ul class="pb-6"> <!-- Added pb-6 for extra bottom padding -->
         <li>
           <a href="/imagetopdf"
-            class="block px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[44px] flex items-center">
+            class="flex items-center gap-3 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+            role="menuitem">
+            <img src="/images/imagetopdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
             Image to PDF
           </a>
         </li>
         <li>
           <a href="/merge-pdf"
-            class="block px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[44px] flex items-center">
+            class="flex items-center gap-3 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+            role="menuitem">
+            <img src="/images/merge-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
             Merge PDF
           </a>
         </li>
         <li>
           <a href="/split-pdf"
-            class="block px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[44px] flex items-center">
+            class="flex items-center gap-3 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+            role="menuitem">
+            <img src="/images/split-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
             Split PDF
           </a>
         </li>
+
         <li>
           <a href="/edit-pdf-pages"
-            class="block px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[44px] flex items-center">
+            class="flex items-center gap-3 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+            role="menuitem">
+            <img src="/images/edit-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
             Edit PDF Pages
           </a>
         </li>
@@ -585,7 +594,7 @@
         <!-- Mobile All PDF Tools -->
         <li>
           <button id="mobile-submenu-trigger"
-            class="w-full text-left px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[44px] flex items-center justify-between"
+            class="w-full text-left px-4 py-3 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md min-h-[40px] flex items-center justify-between"
             aria-expanded="false">
             <span>All PDF Tools</span>
             <svg id="mobile-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor"
@@ -602,24 +611,59 @@
                   Edit PDF
                 </h3>
                 <ul class="space-y-1">
-                  <li><a href="/rotate-pages"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Rotate
-                      All pages</a></li>
-                  <li><a href="/add-page-numbers"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Add
-                      page numbers</a></li>
-                  <li><a href="/add-pages-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Add
-                      Pages</a></li>
-                  <li><a href="/remove-pages"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Remove
-                      Pages</a></li>
-                  <li><a href="/split-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Split
-                      PDF</a></li>
-                  <li><a href="/edit-pdf-pages"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">
-                      Edit PDF Pages</a></li>
+                  <li>
+                      <a href="/rotate-pages"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/rotate-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Rotate All pages
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/add-page-numbers"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/add-page-numbers-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Add page numbers
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/add-pages-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Add Pages
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/remove-pages"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/remove-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Remove Pages
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/split-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/split-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Split PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/edit-pdf-pages"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/edit-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Edit PDF Pages
+                      </a>
+                    </li>
                 </ul>
               </div>
               <div>
@@ -627,27 +671,68 @@
                   Create PDF
                 </h3>
                 <ul class="space-y-1">
-                  <li><a href="/imagetopdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Image
-                      to PDF</a></li>
-                  <li><a href="/merge-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Merge
-                      PDF</a></li>
-                  <li><a href="/word-to-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Word
-                      to PDF</a></li>
-                  <li><a href="/excel-to-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Excel
-                      to PDF</a></li>
-                  <li><a href="/powerpoint-to-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">PowerPoint
-                      to PDF</a></li>
-                  <li><a href="/html-to-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">HTML
-                      to PDF</a></li>
-                  <li><a href="/odt-to-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">ODT
-                      to PDF</a></li>
+                  <li>
+                      <a href="/imagetopdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/imagetopdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Image to PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/merge-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/merge-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Merge PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/word-to-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/word-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Word to PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/excel-to-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/excel-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Excel to PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/powerpoint-to-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/powerpoint-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        PowerPoint to PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/html-to-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/html-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        HTML to PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/odt-to-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/odt-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        ODT to PDF
+                      </a>
+                    </li>
                 </ul>
               </div>
               <div>
@@ -655,24 +740,59 @@
                   Other Tools
                 </h3>
                 <ul class="space-y-1">
-                  <li><a href="/extract-pdf-pages"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Extract
-                      Pages</a></li>
-                  <li><a href="/compress-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Compress
-                      PDF</a></li>
-                  <li><a href="/add-pages-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Organize
-                      PDF</a></li>
-                  <li><a href="/add-watermark"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Add
-                      Watermark</a></li>
-                  <li><a href="/protect-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Protect
-                      PDF</a></li>
-                  <li><a href="/unlock-pdf"
-                      class="block pl-8 px-4 py-2 text-gray-500 hover:text-primary hover:bg-nav-hover-bg transition-all duration-150 rounded-md">Unlock
-                      PDF</a></li>
+                  <li>
+                      <a href="/extract-pdf-pages"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/extract-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Extract Pages
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/compress-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/compress-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Compress PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/add-pages-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Organize PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/add-watermark"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/add-watermark-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Add Watermark
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/protect-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/protect-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Protect PDF
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="/unlock-pdf"
+                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/unlock-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Unlock PDF
+                      </a>
+                    </li>
 
                 </ul>
               </div>
@@ -684,8 +804,8 @@
 
     <!-- Mobile Auth Buttons (fixed at bottom) -->
 
-    <div class="sm:hidden p-4 border-t border-gray-200 bg-drawer-bg">
-      <div class="flex flex-col gap-4">
+    <div class="sm:hidden px-4 py-3 sm:p-4 border-t border-gray-200 bg-drawer-bg">
+      <div class="flex gap-4">
 
         <% if (user) { %>
 
@@ -704,7 +824,7 @@
           <!-- Logout -->
           <a class="block">
             <button
-              class="logout-btn w-full px-4 py-3 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px] font-medium">
+              class="logout-btn w-full px-4 py-2 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px] font-medium">
               Logout
             </button>
           </a>
@@ -714,7 +834,7 @@
             <!-- Login -->
             <a href="/login" class="block">
               <button
-                class="w-full px-4 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
+                class="w-full px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
                 Login
               </button>
             </a>
@@ -722,7 +842,7 @@
             <!-- Get Started -->
             <a href="/register" class="block">
               <button
-                class="w-full px-4 py-3 bg-primary text-primary-foreground hover:bg-secondary hover:shadow-md transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
+                class="w-full px-4 py-2 bg-primary text-primary-foreground hover:bg-secondary hover:shadow-md transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
                 Get Started
               </button>
             </a>
