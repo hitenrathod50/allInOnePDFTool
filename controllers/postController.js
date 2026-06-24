@@ -3034,6 +3034,294 @@ async function getPDFFontPost(request, reply) {
 }
 
 
+async function getCorruptionDataPost(request, reply) {
+    try {
+        const parts = await request.parts();
+        let pdfBuffer = null;
+
+        // Parse multipart form
+        for await (const part of parts) {
+            try {
+                if (part.file && part.fieldname === "pdf") {
+                    if (!part.filename?.toLowerCase().endsWith(".pdf")) {
+                        return reply.status(400).send({
+                            error: "Uploaded file must be a PDF"
+                        });
+                    }
+
+                    pdfBuffer = await part.toBuffer();
+                }
+            } catch {
+                return reply.status(400).send({
+                    error: "Invalid form data"
+                });
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({
+                error: "No PDF provided"
+            });
+        }
+
+        const uniqueId =
+            Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+
+        const tmpDir = path.join(
+            PROJECT_TEMP_ROOT,
+            `corruption-${uniqueId}`
+        );
+
+        const inputPath = path.join(tmpDir, "input.pdf");
+
+        let corrupted = false;
+        let output = "";
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            const command = `"${qpdfPath}" --check "${inputPath}"`;
+
+            await new Promise((resolve) => {
+                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                    output = `${stdout}\n${stderr}`.trim();
+
+                    if (error) {
+                        corrupted = true;
+                    }
+
+                    resolve();
+                });
+            });
+        } finally {
+            try {
+                await fs.rm(tmpDir, {
+                    recursive: true,
+                    force: true
+                });
+            } catch (err) {
+                console.warn("Cleanup failed:", err.message);
+            }
+        }
+
+        return reply.send({
+            corrupted,
+        });
+
+    } catch (err) {
+        request.log.error(err);
+
+        return reply.status(500).send({
+            error: "Failed to fetch corruption details.",
+            message: err.message
+        });
+    }
+}
+
+
+async function getCompatibilityDataPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+
+        // Parse multipart form
+        for await (const part of parts) {
+            try {
+                if (part.file && part.fieldname === 'pdf') {
+                    if (!part.filename?.toLowerCase().endsWith('.pdf')) {
+                        return reply.status(400).send({
+                            error: 'Uploaded file must be a PDF'
+                        });
+                    }
+
+                    pdfBuffer = await part.toBuffer();
+                }
+            } catch {
+                return reply.status(400).send({
+                    error: 'Invalid form data'
+                });
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({
+                error: 'No PDF provided'
+            });
+        }
+
+        const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+        const tmpDir = path.join(PROJECT_TEMP_ROOT, `object-${uniqueId}`);
+        const inputPath = path.join(tmpDir, 'input.pdf');
+
+        let qpdfData = null;
+        let compatibilityReport = null;
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            // Run qpdf with JSON output (you can add --json-stream-data=none if you want smaller output)
+            const command = `"${qpdfPath}" --json "${inputPath}"`;
+
+            const qpdfJSON = await new Promise((resolve, reject) => {
+                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(stderr || error.message);
+                        return reject(error);
+                    }
+                    resolve(stdout);
+                });
+            });
+
+            qpdfData = JSON.parse(qpdfJSON);
+
+            // === Extract Compatibility Data ===
+            const header = qpdfData.qpdf?.[0] || {};
+            const objects = qpdfData.qpdf?.[1] || {};
+            const trailer = objects.trailer?.value || {};
+
+            // Basic info
+            const pdfVersion = header.pdfversion || '1.0';
+            const majorVersion = parseFloat(pdfVersion);
+
+            // Encryption check
+            const isEncrypted = !!trailer['/Encrypt'];
+            let encryptionDetails = null;
+            if (isEncrypted) {
+                const encryptObj = objects[trailer['/Encrypt']]?.value || {};
+                encryptionDetails = {
+                    filter: encryptObj['/Filter'],
+                    version: encryptObj['/V'],
+                    length: encryptObj['/Length'],
+                    hasOwnerPassword: !!encryptObj['/O'],
+                    // More details available if needed
+                };
+            }
+
+            // Feature detection
+            let usesObjectStreams = false;
+            let usesCompression = false;
+            let hasJavaScript = false;
+            let hasForms = false;
+            let hasEmbeddedFiles = false;
+            let hasTransparency = false;
+            let hasAnnotations = false;
+
+            Object.keys(objects).forEach(key => {
+                const obj = objects[key];
+                const value = obj?.value || obj?.stream?.dict;
+
+                if (!value) return;
+
+                const type = value['/Type'];
+
+                // Object streams (PDF 1.5+)
+                if (value['/Type'] === '/ObjStm' || value['/Extends']) {
+                    usesObjectStreams = true;
+                }
+
+                // Compression
+                if (obj.stream?.dict?.['/Filter']) {
+                    usesCompression = true;
+                }
+
+                // JavaScript
+                if (value['/JS'] || value['/JavaScript'] || 
+                    (value['/S'] === '/JavaScript')) {
+                    hasJavaScript = true;
+                }
+
+                // AcroForms / XFA
+                if (value['/AcroForm'] || value['/XFA']) {
+                    hasForms = true;
+                }
+
+                // Embedded files
+                if (value['/EF'] || value['/EmbeddedFiles']) {
+                    hasEmbeddedFiles = true;
+                }
+
+                // Transparency / Blend modes
+                if (value['/BM'] || value['/SMask']) {
+                    hasTransparency = true;
+                }
+
+                // Annotations
+                if (type === '/Annot' || value['/Annots']) {
+                    hasAnnotations = true;
+                }
+            });
+
+            // Compatibility assessment
+            const compatibilityIssues = [];
+
+            if (majorVersion < 1.4) {
+                compatibilityIssues.push("Very old PDF version (pre-1.4) — limited modern viewer support");
+            }
+            if (majorVersion > 2.0) {
+                compatibilityIssues.push("PDF 2.0+ — may not be fully supported by older viewers");
+            }
+            if (isEncrypted) {
+                compatibilityIssues.push("Encrypted PDF — may require password in some contexts");
+            }
+            if (usesObjectStreams && majorVersion < 1.5) {
+                compatibilityIssues.push("Object streams detected in pre-1.5 PDF");
+            }
+            if (hasJavaScript) {
+                compatibilityIssues.push("Contains JavaScript — potential security concern");
+            }
+
+            compatibilityReport = {
+                success: true,
+                fileInfo: {
+                    pdfVersion,
+                    pageCount: trailer['/Size'] ? trailer['/Size'] - 1 : null, // rough estimate
+                    fileSize: pdfBuffer.length,
+                    isEncrypted,
+                    encryption: encryptionDetails,
+                },
+                features: {
+                    usesObjectStreams,
+                    usesCompression,
+                    hasJavaScript,
+                    hasForms,
+                    hasEmbeddedFiles,
+                    hasTransparency,
+                    hasAnnotations,
+                },
+                compatibility: {
+                    versionCompatible: majorVersion >= 1.4 && majorVersion <= 2.0,
+                    recommendedActions: compatibilityIssues.length > 0 ? compatibilityIssues : ["No major compatibility issues detected"],
+                    modernViewerSupport: majorVersion >= 1.5 && !isEncrypted,
+                },
+                rawQpdf: {
+                    jsonVersion: header.jsonversion,
+                    maxObjectId: header.maxobjectid,
+                }
+            };
+
+        } finally {
+            try {
+                await fs.rm(tmpDir, { recursive: true, force: true });
+            } catch (err) {
+                console.warn('Cleanup failed:', err.message);
+            }
+        }
+
+        // Return the compatibility report
+        return reply.send(compatibilityReport);
+
+    } catch (err) {
+        request.log.error(err);
+        return reply.status(500).send({
+            error: 'Failed to analyze PDF.',
+            message: err.message
+        });
+    }
+}
+
 
 module.exports = {
     imageToPDFPOST,
@@ -3057,5 +3345,7 @@ module.exports = {
     unlockPDFPost,
     getPDFObjectsPost,
     getPDFSecurityPost,
-    getPDFFontPost
+    getPDFFontPost,
+    getCorruptionDataPost,
+    getCompatibilityDataPost
 };

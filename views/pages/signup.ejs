@@ -4,40 +4,36 @@
 
 <head>
 
-  <%- include("../components/meta",{
-
-      title : "Register",
-      description : "Register in PdfVersatile to leverage more facilities like storing PDFs, view history, buy subscription etc.",
-      keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
-      og_url : "/register",
-      robots : "index,follow"
-
-  }) %>
+    <%- include("../components/meta",{ title : "Register" , description
+        : "Register in PdfVersatile to leverage more facilities like storing PDFs, view history, buy subscription etc."
+        , keywords
+        : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"
+        , og_url : "/register" , robots : "index,follow" }) %>
 
 
-  <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
 
 
-  <style>
-    .required::after {
-        content: " *";
-        color: #7100ad;
-        font-weight: 600;
-    }
-</style>
+        <style>
+            .required::after {
+                content: " *";
+                color: #00006a;
+                font-weight: 600;
+            }
+        </style>
 
-  <link rel="canonical" href="https://pdfversatile.com/register" />
+        <link rel="canonical" href="https://pdfversatile.com/register" />
 
-  <%- include("../components/metaCommanCSS") %>
+        <%- include("../components/metaCommanCSS") %>
 
-  <%- include("../components/metaGA") %>
+            <%- include("../components/metaGA") %>
 
 </head>
 
 
 
 <body>
-    
+
     <%- include("../components/header") %>
 
 
@@ -49,7 +45,7 @@
                 <div class="pt-10 pb-8 flex justify-center">
                     <div class="flex-shrink-0">
                         <a href="/"
-                            class="flex items-center space-x-2 text-fluid-xl font-bold text-primary hover:text-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-1">
+                            class="flex items-center space-x-2 text-fluid-xl font-bold text-primary hover:text-secondary transition-colors duration-200 rounded-md px-1">
 
 
                             <!-- Logo Image -->
@@ -119,7 +115,7 @@
 
                         <!-- Sign Up Button -->
                         <button type="submit"
-                            class="primary w-full py-4 bg-primary rounded-2xl text-white font-semibold text-lg  hover:bg-purple-600 hover:shadow-xl transition-all active:scale-[0.98]">
+                            class="primary w-full py-4 bg-primary rounded-2xl text-white font-semibold text-lg  hover:bg-secondary hover:shadow-xl transition-all active:scale-[0.98]">
                             Sign Up
                         </button>
 
@@ -154,7 +150,7 @@
                     <!-- Login Link -->
                     <p class="text-center text-sm text-gray-600 mt-8">
                         Already have an account?
-                        <a href="/login" class="font-medium text-[#7100ad] hover:underline">Log in</a>
+                        <a href="/login" class="text-blue-600 hover:text-blue-700 hover:underline">Log in</a>
                     </p>
                 </div>
             </div>
@@ -162,7 +158,7 @@
         </div>
         <script src="/js/signup.js"></script>
 
-    </body>
+</body>
 
 
 </html>

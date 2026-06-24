@@ -287,6 +287,18 @@ async function getRoutes(fastify, options) {
 
   })
 
+  fastify.get("/corrupted-pdf-detector", async (request, reply) => {
+
+    return reply.view("pages/corrupted-pdf-detector.ejs");
+
+  })
+
+  fastify.get("/pdf-compatibility-checker", async (request, reply) => {
+
+    return reply.view("pages/pdf-compatibility-checker.ejs");
+
+  })
+
 }
 
 module.exports = getRoutes;

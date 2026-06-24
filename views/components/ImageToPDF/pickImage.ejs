@@ -1,17 +1,17 @@
 <div class="flex justify-center">
 
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Merges Images into PDF</h1>
+    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Merges Images into PDF</h1>
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
       Convert multiple images to PDF. Without Quality loss or Compression & Sign Up.
     </h2>
 
     <div id="dropZone"
-      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
       <input type="file" id="imageInputFirst" accept="image/*" multiple class="hidden"
         onchange="handleFileSelect(event)">
-      <button class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-purple-700 transition  mb-4">
+      <button class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-secondary transition  mb-4">
         Select Images
       </button>
       <p class="text-gray-600 text-sm">select/drop images here (.jpg, .jpeg, .png, .gif, .webp, .bmp)</p>
@@ -68,7 +68,9 @@
           <div class="space-y-6 order-2 lg:order-1">
             <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Move Image Cards</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
-              After picking the image files you will image cards interface where you can change the position of images card by moving them. Also set the page size, page orientation and page margin and after setting up everything click on Convert to PDF.
+              After picking the image files you will image cards interface where you can change the position of images
+              card by moving them. Also set the page size, page orientation and page margin and after setting up
+              everything click on Convert to PDF.
             </p>
 
           </div>
@@ -89,7 +91,8 @@
           <div class="space-y-6 lg:order-2">
             <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
-              Wait a moment and you will have Download or Preview option where you can download or preview PDF. Once you refresh the page you won't able to download or preview PDF anymore.
+              Wait a moment and you will have Download or Preview option where you can download or preview PDF. Once you
+              refresh the page you won't able to download or preview PDF anymore.
             </p>
 
           </div>
@@ -116,8 +119,8 @@
             How to convert multiple images to one PDF?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to merge multiple images into single PDF just follow <a href="#tool-usage"
-                                                class="text-purple-600 hover:text-purple-800 underline">few steps</a>.
+            This tool is very easy with attractive interface. In order to merge multiple images into single PDF just
+            follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
           </p>
         </div>
 
@@ -130,7 +133,9 @@
             What will be the quality of images after PDF creation?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            When converting images to PDF, we apply slight compression before uploading them to the server. This helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not noticeable.
+            When converting images to PDF, we apply slight compression before uploading them to the server. This helps
+            optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not
+            noticeable.
           </p>
         </div>
 
@@ -183,22 +188,29 @@
 
           dropZone.addEventListener('dragover', (event) => {
             event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+            console.log("dragover")
+            dropZone.classList.add('bg-gray-100');
           });
 
           dropZone.addEventListener('dragenter', (event) => {
             event.preventDefault();
-            dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+            console.log("dragenter")
+            dropZone.classList.remove('border-gray-400')
+            dropZone.classList.add('bg-gray-100', 'border-primary');
           });
 
           dropZone.addEventListener('dragleave', (event) => {
             event.preventDefault();
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+            console.log("dragleave")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
           });
 
           dropZone.addEventListener('drop', (event) => {
             event.preventDefault();
-            dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+            console.log("drop")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
             handleDrop(event);
 
           });
@@ -223,4 +235,3 @@
             console.log('Selected files:', files);
           }
         </script>
-        

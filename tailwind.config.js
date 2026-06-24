@@ -8,10 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#7100ad',
+        primary: '#00006a',
+        secondary : '#00004b',
         'primary-foreground': '#ffffff',
         'nav-hover': '#7100ad',
-        'nav-hover-bg': '#f8f4fc',
+        'nav-hover-bg': 'rgba(244, 244, 255, 0.61)',
         'header-bg': '#ffffff',
         'header-border': '#e2e8f0',
         'drawer-bg': '#ffffff',

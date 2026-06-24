@@ -1,105 +1,600 @@
-<footer class="bg-zinc-800 text-gray-300 mt-5 md:mt-0">
-    <div class="max-w-7xl mx-auto px-6 py-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+<footer class="bg-white border-t border-gray-200 pt-8 sm:pt-12">
+    <div class="mx-auto px-4 md:px-12">
+        <!-- 5 Columns -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-5 sm:gap-y-10">
 
-            <!-- Logo + Description -->
-            <div class="lg:col-span-5">
+            <!-- Column 1: Edit PDF Tools -->
+            <div>
+                <h3 class="column-title  text-gray-500 mb-2 sm:mb-5 flex items-center">
 
-                <div class="flex items-center gap-3 text-white text-3xl font-semibold mb-6">
+                    Edit PDF Tools
+                </h3>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="/rotate-pages"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/rotate-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Rotate All pages
+                        </a>
+                    </li>
 
-                    <!-- Logo Image -->
-                    <img src="/images/pdfversatile-logo.png" alt="Logo" class="w-12 h-12 bg-white rounded-2xl p-1" />
+                    <li>
+                        <a href="/add-page-numbers"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/add-page-numbers-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Add page numbers
+                        </a>
+                    </li>
 
-                    <!-- Brand Name -->
-                    <span>PDF VERSATILE</span>
+                    <li>
+                        <a href="/add-pages-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Add Pages
+                        </a>
+                    </li>
 
-                </div>
+                    <li>
+                        <a href="/remove-pages"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/remove-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Remove Pages
+                        </a>
+                    </li>
 
-                <p class="text-gray-300 text-justify max-w-md leading-relaxed">
-                    All-in-one PDF tool to convert <a href="/imagetopdf"
-                        class="underline text-gray-300 decoration-gray-300 hover:text-gray-200 hover:decoration-gray-200">
-                        Image to PDF
-                    </a>, <a href="/split-pdf"
-                        class="underline text-gray-300 decoration-gray-300 hover:text-gray-200 hover:decoration-gray-200">
-                        Split PDF
-                    </a>, <a href="/merge-pdf"
-                        class="underline text-gray-300 decoration-gray-300 hover:text-gray-200 hover:decoration-gray-200">
-                        Merge PDF
-                    </a>, <a href="/add-page-numbers"
-                        class="underline text-gray-300 decoration-gray-300 hover:text-gray-200 hover:decoration-gray-200">
-                        Add page number to PDF
-                    </a> etc.
-                    quickly with a simple, user-friendly interface. No need to jump on another tool for PDF operations.
-                </p>
+                    <li>
+                        <a href="/split-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/split-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Split PDF
+                        </a>
+                    </li>
 
-            </div>
-
-            <!-- Tools -->
-            <div class="lg:col-span-2">
-                <h3 class="text-white font-semibold mb-6 text-lg tracking-wide">TOOLS</h3>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="/imagetopdf" class="hover:text-white transition-colors">Image to PDF</a></li>
-                    <li><a href="/merge-pdf" class="hover:text-white transition-colors">Merge PDF</a></li>
-                    <li><a href="/split-pdf" class="hover:text-white transition-colors">Split PDF</a></li>
-                    <li><a href="/edit-pdf-pages" class="hover:text-white transition-colors">Edit Pages</a></li>
-                    <li><a href="/" class="hover:text-white transition-colors">All PDF Tools</a></li>
-                </ul>
-            </div>
-
-            <!-- Company -->
-            <div class="lg:col-span-2">
-                <h3 class="text-white font-semibold mb-6 text-lg tracking-wide">COMPANY</h3>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
-                    <!-- <li><a href="#" class="hover:text-white transition-colors">Blog</a></li> -->
-                    <li><a href="/contact" class="hover:text-white transition-colors">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Legal -->
-            <div class="lg:col-span-3">
-                <h3 class="text-white font-semibold mb-6 text-lg tracking-wide">LEGAL</h3>
-                <ul class="space-y-3 text-sm">
-                    <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="/terms-conditions" class="hover:text-white transition-colors">Terms & Conditions</a>
+                    <li>
+                        <a href="/edit-pdf-pages"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/edit-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Edit PDF Pages
+                        </a>
                     </li>
                 </ul>
             </div>
+
+            <!-- Column 2: Create PDF Tools -->
+            <div>
+                <h3 class="column-title  text-gray-500 mb-2 sm:mb-5 flex items-center">
+
+                    Create PDF Tools
+                </h3>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="/imagetopdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/imagetopdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Image to PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/merge-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/merge-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Merge PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/word-to-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/word-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Word to PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/excel-to-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/excel-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Excel to PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/powerpoint-to-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/powerpoint-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            PowerPoint to PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/html-to-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/html-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            HTML to PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/odt-to-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/odt-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            ODT to PDF
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Other PDF Tools -->
+            <div>
+                <h3 class="column-title  text-gray-500 mb-2 sm:mb-5 flex items-center">
+
+                    Other PDF Tools
+                </h3>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="/extract-pdf-pages"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/extract-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Extract Pages
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/compress-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/compress-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Compress PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/add-pages-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Organize PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/add-watermark"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/add-watermark-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Add Watermark
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/protect-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/protect-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Protect PDF
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/unlock-pdf"
+                            class="flex items-center gap-3 text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            <img src="/images/unlock-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                            Unlock PDF
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Inspection Tools -->
+            <div>
+                <h3 class="column-title  text-gray-500 mb-2 sm:mb-5 flex items-center">
+
+                    Inspection Tools
+                </h3>
+                <ul class="space-y-1">
+                    <li>
+                        <a href="/pdf-size-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Size Checker
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-page-counter"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Page Counter
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-word-counter"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Word Counter
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-page-size-detector"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Page Size Detector
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-linearization-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Linearization Checker
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-object-counter"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Object Counter
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/pdf-security-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Security Checker
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/pdf-tamper-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Tamper Checker
+                        </a>
+                    </li>
+
+
+
+
+                    <li>
+                        <a href="/pdf-signature-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Signature Checker
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-standards-validator"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Standards Validator
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+            <!-- Column 5: Inspection Tools (Second Set) -->
+            <div>
+                <h3 class="column-title  text-gray-500 mb-2 sm:mb-5 flex items-center">
+
+                    Inspection Tools
+                </h3>
+                <ul class="space-y-1">
+
+
+                    <li>
+                        <a href="/pdf-language-detector"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Language Detector
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/blank-page-detector"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Blank Page Detector
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/pdf-font-detector"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Font Detector
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-links-extractor"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Links Extractor
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/corrupted-pdf-detector"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Corrupted PDF Detector
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-compatibility-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Compatibility Checker
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/pdf-compliance-checker"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            PDF Compliance Checker
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/ai-pdf-summary"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                            role="menuitem">
+                            AI PDF Summary
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
         </div>
+
     </div>
 
-    <hr class="border-t border-gray-700">
+    <hr class="border-t border-gray-200 my-4 sm:my-10">
 
-    <!-- Footer Bottom - Centered -->
-    <div class="border-zinc-900 py-6">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="mx-auto px-4 md:px-12">
+        <!-- 5 Columns -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-5 sm:gap-y-10">
+
+            <!-- Column 1: Product   -->
+            <div>
+                <h3 class="column-title  font-semibold text-gray-900 mb-2 sm:mb-5 flex items-center">
+
+                    Product
+                </h3>
+                <ul class="space-y-1">
+
+
+                    <li>
+                        <a href="/"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Tools
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/pricing"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Pricing
+                        </a>
+                    </li>
+
+                    
+
+
+                </ul>
+            </div>
+
+            <!-- Column 2: resources -->
+            <div>
+                <h3 class="column-title  font-semibold text-gray-900 mb-2 sm:mb-5 flex items-center">
+
+                    Resources
+                </h3>
+                <ul class="space-y-1">
+
+
+                    <li>
+                        <a href="/tutorials"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Tutorials
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/documentation"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Documentation
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/api-reference"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            API Reference
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/faq"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            FAQ
+                        </a>
+                    </li>
+
+
+                    
+
+
+                </ul>
+            </div>
+
+            <!-- Column 3: Company -->
+            <div>
+                <h3 class="column-title  font-semibold text-gray-900 mb-2 sm:mb-5 flex items-center">
+
+                    Company
+                </h3>
+                <ul class="space-y-1">
+
+
+                    <li>
+                        <a href="/about"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/contact"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Contact
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="/blog"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Blog
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+            <!-- Column 4: Legal -->
+            <div>
+                <h3 class="column-title  font-semibold text-gray-900 mb-2 sm:mb-5 flex items-center">
+
+                    Legal
+                </h3>
+                <ul class="space-y-1">
+
+
+                    <li>
+                        <a href="/privacy"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Privacy Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/terms-conditions"
+                            class="block text-sm px-2 py-1.5 text-black hover:text-gray-600 rounded-md transition-all duration-150"
+                            role="menuitem">
+                            Terms & Conditions
+                        </a>
+                    </li>
+
+
+
+                    
+
+
+                </ul>
+            </div>
+
+            <!-- Column 5: Another applications -->
+            <div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="border-t border-gray-200 mt-4 sm:mt-8">
+
+    <!-- Bottom Bar -->
+    <div class="border-zinc-900 py-8" bis_skin_checked="1">
+        <div class="mx-auto px-4 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4"
+            bis_skin_checked="1">
 
             <!-- Copyright -->
-            <div class="text-center md:text-left text-sm text-gray-400">
+            <div class="text-center md:text-left text-sm text-black" bis_skin_checked="1">
                 © 2026 PdfVersatile - All in One PDF Tool.
             </div>
 
             <!-- Social Media Icons -->
-            <div class="social flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <div class="social flex flex-wrap justify-center gap-x-8  sm:gap-x-12 gap-y-4" bis_skin_checked="1">
 
                 <!-- Twitter/X -->
-                <a href="https://x.com/pdfversatile_" target="_blank" class="text-gray-400 hover:opacity-100 opacity-80 transition">
+                <a href="https://x.com/pdfversatile_" target="_blank"
+                    class="text-gray-400 opacity-90 hover:opacity-100 transition">
                     <img src="/images/twitter-icon.svg" alt="Twitter X" class="w-5 h-5">
                 </a>
 
                 <!-- Instagram -->
-                <a href="https://www.instagram.com/pdfversatile_official/" target="_blank" class="text-gray-400 hover:opacity-100 opacity-80 transition">
-                    <img src="/images/instagram-icon.svg" alt="Instagram" class="w-5 h-5">
+                <a href="https://www.instagram.com/pdfversatile_official/" target="_blank"
+                    class="text-gray-400 opacity-90 transition">
+                    <img src="/images/instagram-icon.svg" onmouseover="this.src='/images/instagram-icon-hover.svg'" onmouseout="this.src='/images/instagram-icon.svg'" alt="Instagram" class="w-5 h-5">
                 </a>
 
                 <!-- Reddit -->
-                <a href="https://www.reddit.com/user/pdfversatile/" target="_blank" class="text-gray-400 hover:opacity-100 opacity-80 transition">
-                    <img src="/images/reddit-icon.svg" alt="Reddit" class="w-5 h-5">
+                <a href="https://www.reddit.com/user/pdfversatile/" target="_blank"
+                    class="text-gray-400 opacity-90 transition">
+                    <img src="/images/reddit-icon.svg" onmouseover="this.src='/images/reddit-icon-hover.svg'" onmouseout="this.src='/images/reddit-icon.svg'" alt="Reddit" class="w-5 h-5">
                 </a>
 
                 <!-- YouTube -->
-                <a href="https://www.youtube.com/@PdfVersatile" target="_blank" class="text-gray-400 hover:opacity-100 opacity-80 transition">
-                    <img src="/images/youtube-icon.svg" alt="YouTube" class="w-5 h-5">
+                <a href="https://www.youtube.com/@PdfVersatile" target="_blank"
+                    class="text-gray-400 opacity-90 transition">
+                    <img src="/images/youtube-icon.svg" onmouseover="this.src='/images/youtube-icon-hover.svg'" onmouseout="this.src='/images/youtube-icon.svg'" alt="YouTube" class="w-5 h-5">
                 </a>
 
             </div>

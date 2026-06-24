@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <%- include("../components/meta",{ title : "PDF Compatibility Checker" , description
+        : "check pdf Compatibility like pdf version, linearization, corrupted etc." , keywords : "pdf Compatibility checker" ,
+        og_url : "/pdf-compatibility-checker" , robots : "index,follow" }) %>
+
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+        <link rel="canonical" href="https://pdfversatile.com/pdf-compatibility-checker" />
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+</head>
+
+
+<body>
+
+    <%- include("../components/header") %>
+
+        <div class="mx-auto">
+
+
+            <div class="flex justify-center">
+
+                <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+                    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">PDF Compatibility Checker</h1>
+
+                    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
+                        Check PDF Compatibility like PDF version, encryption, XFA etc.
+                    </h2>
+
+                    <div id="dropZone"
+                        class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+                        <input type="file" id="pdfInput" accept="application/pdf" class="hidden"
+                            onchange="handleFileSelect(event)">
+                        <button id="select-pdf-btn"
+                            class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-secondary transition  mb-4">
+                            Select PDF
+                        </button>
+                        <p class="text-gray-600 text-sm">Drag and drop PDF here or click to select
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div id="result-container">
+
+            </div>
+
+
+            
+
+
+            <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-5 md:mt-10">
+                Related PDF Tools
+            </p>
+
+
+            <%- include("../components/toolsListIcons", removeCards=["/merge-pdf", "/imagetopdf" , "/edit-pdf-pages", "/word-to-pdf", "/excel-to-pdf", "/powerpoint-to-pdf", "/odt-to-pdf", "/html-to-pdf" ])
+                %>
+
+
+        
+
+
+        </div>
+
+        <%- include("../components/footer") %>
+
+            <script>
+                const dropZone = document.getElementById('dropZone');
+
+                dropZone.addEventListener('dragover', (event) => {
+                    event.preventDefault();
+                    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+                });
+
+                dropZone.addEventListener('dragenter', (event) => {
+                    event.preventDefault();
+                    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+                });
+
+                dropZone.addEventListener('dragleave', (event) => {
+                    event.preventDefault();
+                    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+                });
+
+                dropZone.addEventListener('drop', (event) => {
+                    event.preventDefault();
+                    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+                    handleDrop(event);
+                });
+
+                dropZone.addEventListener('click', () => {
+                    document.getElementById('pdfInput').click();
+                });
+
+                function handleDrop(event) {
+                    const files = event.dataTransfer.files;
+                    if (files.length) {
+                        document.getElementById('pdfInput').files = files;
+                        handleFileSelect({ target: { files } });
+                    }
+                }
+
+                function handleFileSelect(event) {
+                    const files = event.target.files;
+                    // Add your file handling logic here
+                    console.log('Selected files:', files);
+                }
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+
+            <script src="/js/pdf-compatibility-checker.js"></script>
+
+</body>
+
+</html>
