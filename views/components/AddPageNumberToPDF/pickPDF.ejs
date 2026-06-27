@@ -7,9 +7,8 @@
     </h2>
 
     <div id="dropZone"
-      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-      <input type="file" id="pdfInputFirst" accept="application/pdf" class="hidden"
-        onchange="handleFileSelect(event)">
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      <input type="file" id="pdfInputFirst" accept="application/pdf" class="hidden" onchange="handleFileSelect(event)">
       <button
         class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-secondary transition mb-4">
         Select PDF
@@ -19,78 +18,74 @@
   </div>
 </div>
 
-<% const tool = {
-  "tool-description": {
-    name: "Insert Page Number to PDF",
-    desc: "Add page number to pdf online. With different page number formats."
-  },
-  "tool-process": {
-    name: "Select page number format",
-    desc: "Select the page number format like roman numbers, simple number, full page count etc."
-  },
-  "tool-setting": {
-    name: "Advance Settings",
-    desc: "In advance settings set the page number position, starting number, page size, page margin etc."
-  },
-  "download-info": {
-    name: "Convert in few moment",
-    desc: "Embbed page number to PDF in few moment and download or preview numbered PDF."
-  }
-}; %>
+<% const tool={ "tool-description" : { name: "Insert Page Number to PDF" ,
+  desc: "Add page number to pdf online. With different page number formats." }, "tool-process" : {
+  name: "Select page number format" ,
+  desc: "Select the page number format like roman numbers, simple number, full page count etc." }, "tool-setting" : {
+  name: "Advance Settings" ,
+  desc: "In advance settings set the page number position, starting number, page size, page margin etc."
+  }, "download-info" : { name: "Convert in few moment" ,
+  desc: "Embbed page number to PDF in few moment and download or preview numbered PDF." } }; %>
 
-<%- include("../toolOperations", {tool_info : tool}) %>
+  <%- include("../toolOperations", {tool_info : tool}) %>
 
-<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-  <div class="max-w-7xl mx-auto px-4 md:px-6">
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
           How to use
           <span class="underline underline-offset-4">Add Page Number</span>
           Tool
         </p>
 
-    <!-- Step 1 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/addpagenumber-laptop-1.webp", "/images/addpagenumber-tablet-1.webp", "/images/addpagenumber-mobile-1.webp"] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select File</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Select PDF file by clicking the button or drag & drop in order add page number to pages.
-        </p>
-      </div>
-    </div>
+        <!-- Step 1 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images:
+              ["/images/addpagenumber-laptop-1.webp", "/images/addpagenumber-tablet-1.webp"
+              , "/images/addpagenumber-mobile-1.webp" ] }) %>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select File</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Select PDF file by clicking the button or drag & drop in order add page number to pages.
+            </p>
+          </div>
+        </div>
 
-    <!-- Step 2 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="space-y-6 order-2 lg:order-1">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Select page number format</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Select page number format, page number position, starting page number, select the page from which you want to start numbering and set margin to page also. After setting up everything hit the convert to PDF button.
-        </p>
-      </div>
-      <div class="order-1 lg:order-2">
-        <%- include("../carousel", { images: ["/images/addpagenumber-laptop-2.webp", "/images/addpagenumber-tablet-2.webp", "/images/addpagenumber-mobile-2.webp"] }) %>
-      </div>
-    </div>
+        <!-- Step 2 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="space-y-6 order-2 lg:order-1">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Select page number format</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Select page number format, page number position, starting page number, select the page from which you want
+              to start numbering and set margin to page also. After setting up everything hit the convert to PDF button.
+            </p>
+          </div>
+          <div class="order-1 lg:order-2">
+            <%- include("../carousel", { images:
+              ["/images/addpagenumber-laptop-2.webp", "/images/addpagenumber-tablet-2.webp"
+              , "/images/addpagenumber-mobile-2.webp" ] }) %>
+          </div>
+        </div>
 
-    <!-- Step 3 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
+        <!-- Step 3 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
               , "/images/download-mobile.webp" ] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Wait a few moment and you will have download page for numbered PDF where you can download or preview numbered PDF file.
-        </p>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Wait a few moment and you will have download page for numbered PDF where you can download or preview
+              numbered PDF file.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
       <div class="max-w-5xl mx-auto px-4 md:px-6">
         <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
           What People Frequently Ask
@@ -102,8 +97,8 @@
             How to insert page number to PDF pages?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to add page number to PDF pages just follow <a href="#tool-usage"
-                                                class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+            This tool is very easy with attractive interface. In order to add page number to PDF pages just follow <a
+              href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
           </p>
         </div>
 
@@ -116,7 +111,8 @@
             Which page number formats do you support?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            We support page number formats like roman page number, numeric page number, full page count number format etc.
+            We support page number formats like roman page number, numeric page number, full page count number format
+            etc.
           </p>
         </div>
 
@@ -149,55 +145,65 @@
       </div>
     </div>
 
-<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
-<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
-  Explore More Tools
-</p>
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+      Explore More Tools
+    </p>
 
-<%- include("../toolsListIcons", { removeCards: ["/add-page-numbers"] }) %>
+    <%- include("../toolsListIcons", { removeCards: ["/add-page-numbers"] }) %>
 
-<%- include("../footer") %>
+      <%- include("../footer") %>
 
-<script>
-  const dropZone = document.getElementById('dropZone');
+        <script>
+          const dropZone = document.getElementById('dropZone');
 
-  dropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            console.log("dragover")
+            dropZone.classList.add('bg-gray-100');
+          });
 
-  dropZone.addEventListener('dragenter', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            console.log("dragenter")
+            dropZone.classList.remove('border-gray-400')
+            dropZone.classList.add('bg-gray-100', 'border-primary');
+          });
 
-  dropZone.addEventListener('dragleave', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            console.log("dragleave")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+          });
 
-  dropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    handleDrop(event);
-  });
+          dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            console.log("drop")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+            handleDrop(event);
 
-  dropZone.addEventListener('click', () => {
-    document.getElementById('pdfInputFirst').click();
-  });
+          });
 
-  function handleDrop(event) {
-    const files = event.dataTransfer.files;
-    if (files.length) {
-      document.getElementById('pdfInputFirst').files = files;
-      handleFileSelect({ target: { files } });
-    }
-  }
+          dropZone.addEventListener('click', () => {
+            document.getElementById('pdfInputFirst').click();
+          });
 
-  function handleFileSelect(event) {
-    const files = event.target.files;
-    // Add your file handling logic here
-    console.log('Selected files:', files);
-  }
-</script>
+          function handleDrop(event) {
+            const files = event.dataTransfer.files;
+
+            if (files.length) {
+              document.getElementById('pdfInputFirst').files = files;
+              handleFileSelect({ target: { files } });
+            }
+          }
+
+          function handleFileSelect(event) {
+            const files = event.target.files;
+
+            // Add your file handling logic here
+            console.log('Selected files:', files);
+          }
+        </script>

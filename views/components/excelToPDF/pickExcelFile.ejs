@@ -9,10 +9,10 @@
     </h2>
 
     <div id="dropZone"
-      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
       <input type="file" id="excelInput"
-            accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            multiple class="hidden" onchange="handleFileSelect(event)">
+        accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        multiple class="hidden" onchange="handleFileSelect(event)">
       <button
         class="bg-[var(--primary-color)] text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-secondary transition mb-4">
         Select Excel Files
@@ -22,78 +22,68 @@
   </div>
 </div>
 
-<% const tool = {
-  "tool-description": {
-    name: "Excel to PDF converter",
-    desc: "Convert Excel to PDF online or merge them into single PDF."
-  },
-  "tool-process": { 
-    name: "Move excel cards",
-    desc: "Change excel files position in order to merge them into single PDF."
-  },
-  "tool-setting": {
-    name: "Advance Settings",
-    desc: "In advance setting merge excel files into single PDF."
-  },
-  "download-info": {
-    name: "Convert & Download",
-    desc: "Convert Excel to PDF in few moment and download or preview PDF."
-  }
-}; %>
+<% const tool={ "tool-description" : { name: "Excel to PDF converter" ,
+  desc: "Convert Excel to PDF online or merge them into single PDF." }, "tool-process" : { name: "Move excel cards" ,
+  desc: "Change excel files position in order to merge them into single PDF." }, "tool-setting" : {
+  name: "Advance Settings" , desc: "In advance setting merge excel files into single PDF." }, "download-info" : {
+  name: "Convert & Download" , desc: "Convert Excel to PDF in few moment and download or preview PDF." } }; %>
 
-<%- include("../toolOperations", {tool_info : tool}) %>
+  <%- include("../toolOperations", {tool_info : tool}) %>
 
-<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-  <div class="max-w-7xl mx-auto px-4 md:px-6">
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
           How to use
           <span class="underline underline-offset-4">EXCEL to PDF</span>
           Tool
         </p>
 
-    <!-- Step 1 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/exceltopdf-laptop-1.webp", "/images/exceltopdf-tablet-1.webp", "/images/exceltopdf-mobile-1.webp"] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Select Excel Files</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Select multiple excel files by clicking the button or drag & drop in order to convert them into PDF.
-        </p>
-      </div>
-    </div>
+        <!-- Step 1 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images: ["/images/exceltopdf-laptop-1.webp", "/images/exceltopdf-tablet-1.webp"
+              , "/images/exceltopdf-mobile-1.webp" ] }) %>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Select Excel Files</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Select multiple excel files by clicking the button or drag & drop in order to convert them into PDF.
+            </p>
+          </div>
+        </div>
 
-    <!-- Step 2 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="space-y-6 order-2 lg:order-1">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Arrange Excel Files</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          After selecting the excel files set the position of it. If you want to merge all excel files into single PDF then tick the check box. After setting up everything click on Convert to PDF.
-        </p>
-      </div>
-      <div class="order-1 lg:order-2">
-        <%- include("../carousel", { images: ["/images/exceltopdf-laptop-2.webp", "/images/exceltopdf-tablet-2.webp", "/images/exceltopdf-mobile-2.webp"] }) %>
-      </div>
-    </div>
+        <!-- Step 2 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="space-y-6 order-2 lg:order-1">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Arrange Excel Files</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              After selecting the excel files set the position of it. If you want to merge all excel files into single
+              PDF then tick the check box. After setting up everything click on Convert to PDF.
+            </p>
+          </div>
+          <div class="order-1 lg:order-2">
+            <%- include("../carousel", { images: ["/images/exceltopdf-laptop-2.webp", "/images/exceltopdf-tablet-2.webp"
+              , "/images/exceltopdf-mobile-2.webp" ] }) %>
+          </div>
+        </div>
 
-    <!-- Step 3 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
+        <!-- Step 3 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
               , "/images/download-mobile.webp" ] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Wait a moment and you will be redirected to download page where you can download or preview output.
-        </p>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Wait a moment and you will be redirected to download page where you can download or preview output.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
       <div class="max-w-5xl mx-auto px-4 md:px-6">
         <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
           What People Frequently Ask
@@ -105,8 +95,8 @@
             How to convert Excel to PDF and merge them?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to convert Excel to PDF just follow <a href="#tool-usage"
-                                                class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+            This tool is very easy with attractive interface. In order to convert Excel to PDF just follow <a
+              href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
           </p>
         </div>
 
@@ -114,9 +104,9 @@
         <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
 
 
-       
-        
-        
+
+
+
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
             What is the maximum excel file size allowed?
@@ -140,70 +130,78 @@
       </div>
     </div>
 
-<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
-<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
-  Explore More Tools
-</p>
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+      Explore More Tools
+    </p>
 
-<%- include("../toolsListIcons", { removeCards: ["/excel-to-pdf"] }) %>
+    <%- include("../toolsListIcons", { removeCards: ["/excel-to-pdf"] }) %>
 
-<%- include("../footer") %>
+      <%- include("../footer") %>
 
-<script>
-  const dropZone = document.getElementById('dropZone');
-  const excelInput = document.getElementById('excelInput');
+        <script>
+          const dropZone = document.getElementById('dropZone');
 
-  dropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            console.log("dragover")
+            dropZone.classList.add('bg-gray-100');
+          });
 
-  dropZone.addEventListener('dragenter', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            console.log("dragenter")
+            dropZone.classList.remove('border-gray-400')
+            dropZone.classList.add('bg-gray-100', 'border-primary');
+          });
 
-  dropZone.addEventListener('dragleave', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            console.log("dragleave")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+          });
 
-  dropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    handleDrop(event);
-  });
+          dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            console.log("drop")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+            handleDrop(event);
 
-  dropZone.addEventListener('click', () => {
-    excelInput.click();
-  });
+          });
 
-  function handleDrop(event) {
-    const files = event.dataTransfer.files;
-    if (files.length) {
-      excelInput.files = files;
-      handleFileSelect({ target: { files } });
-    }
-  }
+          dropZone.addEventListener('click', () => {
+            document.getElementById('excelInput').click();
+          });
 
-  function handleFileSelect(event) {
-    const files = event.target.files;
-    const allowedExtensions = ['xls', 'xlsx'];
-    const validFiles = [];
+          function handleDrop(event) {
+            const files = event.dataTransfer.files;
 
-    for (const file of files) {
-      const ext = file.name.split('.').pop().toLowerCase();
-      if (allowedExtensions.includes(ext)) {
-        validFiles.push(file);
-      } else {
-        alert(`Invalid file type: ${file.name}. Only .xls and .xlsx files are allowed.`);
-      }
-    }
+            if (files.length) {
+              document.getElementById('excelInput').files = files;
+              handleFileSelect({ target: { files } });
+            }
+          }
 
-    if (validFiles.length) {
-      console.log('Selected Excel files:', validFiles);
-      // Add your conversion logic here
-    }
-  }
-</script>
+          function handleFileSelect(event) {
+            const files = event.target.files;
+            const allowedExtensions = ['xls', 'xlsx'];
+            const validFiles = [];
+
+            for (const file of files) {
+              const ext = file.name.split('.').pop().toLowerCase();
+              if (allowedExtensions.includes(ext)) {
+                validFiles.push(file);
+              } else {
+                alert(`Invalid file type: ${file.name}. Only .xls and .xlsx files are allowed.`);
+              }
+            }
+
+            if (validFiles.length) {
+              console.log('Selected Excel files:', validFiles);
+              // Add your conversion logic here
+            }
+          }
+        </script>

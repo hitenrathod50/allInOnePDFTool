@@ -5,14 +5,14 @@
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/"
-          class="flex items-center space-x-2 text-fluid-xl font-bold text-primary hover:text-secondary transition-colors duration-200 rounded-md px-1">
+          class="flex items-center space-x-2 font-bold text-primary hover:text-secondary transition-colors duration-200 rounded-md px-1">
 
 
           <!-- Logo Image -->
           <img src="/images/pdfversatile-logo.png" alt="Logo" class="w-12 h-12" />
 
           <!-- Text -->
-          <span>PdfVersatile</span>
+          <span class="text-fluid-lg lg:text-fluid-xl">PdfVersatile</span>
 
         </a>
       </div>
@@ -510,7 +510,7 @@
             </a>
 
             <a href="/register" style="color: white !important;"
-              class="hidden sm:inline-flex w-full sm:w-auto px-4 py-2 bg-primary text-white hover:bg-secondary hover:shadow-md  transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
+              class="hidden sm:inline-flex w-full sm:w-auto px-4 py-2 bg-secondary text-white hover:bg-primary hover:shadow-md  transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
               Get Started
             </a>
 
@@ -518,7 +518,7 @@
 
               <!-- Mobile menu button -->
               <button id="mobile-menu-button"
-                class="md:hidden p-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md "
+                class="md:hidden p-2 text-slate-950 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md "
                 aria-label="Open menu" aria-expanded="false">
                 <div id="hamburger-icon" class="w-6 h-6 flex flex-col justify-center items-center">
                   <span class="hamburger-line block h-0.5 w-6 bg-current mb-1"></span>
@@ -539,14 +539,14 @@
 
 <!-- Mobile Drawer -->
 <div id="mobile-drawer"
-  class="fixed top-0 right-0 h-full w-[min(92vw,450px)] bg-drawer-bg shadow-2xl z-50 md:hidden transform translate-x-full"
+  class="fixed top-0 right-0 h-full w-[min(92vw,450px)] bg-drawer-bg rounded-bl-3 xl shadow-2xl z-50 md:hidden transform translate-x-full"
   role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
   <div class="flex flex-col h-full">
     <!-- Drawer Header -->
     <div class="flex items-center justify-between py-3 px-4 sm:p-4 border-b border-gray-200">
       <span class="font-semibold text-primary">Explore More</span>
       <button id="drawer-close-button"
-        class="p-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg transition-colors rounded-md"
+        class="p-2 text-slate-950 hover:text-primary hover:bg-nav-hover-bg transition-colors rounded-md"
         aria-label="Close menu">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -804,7 +804,7 @@
 
     <!-- Mobile Auth Buttons (fixed at bottom) -->
 
-    <div class="sm:hidden px-4 py-3 sm:p-4 border-t border-gray-200 bg-drawer-bg">
+    <div class="sm:hidden px-4 py-3 sm:p-4 border-t border-gray-200">
       <div class="flex gap-4">
 
         <% if (user) { %>
@@ -824,7 +824,7 @@
           <!-- Logout -->
           <a class="block">
             <button
-              class="logout-btn w-full px-4 py-2 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px] font-medium">
+              class="logout-btn w-full px-4 py-1 text-sm border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px] font-medium">
               Logout
             </button>
           </a>
@@ -834,7 +834,7 @@
             <!-- Login -->
             <a href="/login" class="block">
               <button
-                class="w-full px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
+                class="w-full px-4 py-1 text-sm border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
                 Login
               </button>
             </a>
@@ -842,7 +842,7 @@
             <!-- Get Started -->
             <a href="/register" class="block">
               <button
-                class="w-full px-4 py-2 bg-primary text-primary-foreground hover:bg-secondary hover:shadow-md transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
+                class="w-full px-4 py-1 text-sm bg-primary text-primary-foreground hover:bg-secondary hover:shadow-md transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-primary min-h-[44px] font-medium">
                 Get Started
               </button>
             </a>

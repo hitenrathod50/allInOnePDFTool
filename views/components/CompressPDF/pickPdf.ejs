@@ -6,8 +6,7 @@
       Compress PDF online without reducing quality. No signup required.
     </h2>
 
-    <div id="dropZone"
-      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+    <div id="dropZone" class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
       <input type="file" id="pdfInputFirst" accept="application/pdf" multiple class="hidden"
         onchange="handleFileSelect(event)">
       <button
@@ -154,44 +153,54 @@
 <%- include("../footer") %>
 
 <script>
-  const dropZone = document.getElementById('dropZone');
+          const dropZone = document.getElementById('dropZone');
 
-  dropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            console.log("dragover")
+            dropZone.classList.add('bg-gray-100');
+          });
 
-  dropZone.addEventListener('dragenter', (event) => {
-    event.preventDefault();
-    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            console.log("dragenter")
+            dropZone.classList.remove('border-gray-400')
+            dropZone.classList.add('bg-gray-100', 'border-primary');
+          });
 
-  dropZone.addEventListener('dragleave', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            console.log("dragleave")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+          });
 
-  dropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    handleDrop(event);
-  });
+          dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            console.log("drop")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+            handleDrop(event);
 
-  dropZone.addEventListener('click', () => {
-    document.getElementById('pdfInputFirst').click();
-  });
+          });
 
-  function handleDrop(event) {
-    const files = event.dataTransfer.files;
-    if (files.length) {
-      document.getElementById('pdfInputFirst').files = files;
-      handleFileSelect({ target: { files } });
-    }
-  }
+          dropZone.addEventListener('click', () => {
+            document.getElementById('pdfInputFirst').click();
+          });
 
-  function handleFileSelect(event) {
-    const files = event.target.files;
-    // Add your file handling logic here
-    console.log('Selected files:', files);
-  }
-</script>
+          function handleDrop(event) {
+            const files = event.dataTransfer.files;
+
+            if (files.length) {
+              document.getElementById('pdfInputFirst').files = files;
+              handleFileSelect({ target: { files } });
+            }
+          }
+
+          function handleFileSelect(event) {
+            const files = event.target.files;
+
+            // Add your file handling logic here
+            console.log('Selected files:', files);
+          }
+        </script>

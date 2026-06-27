@@ -9,7 +9,7 @@
     </h2>
 
     <div id="pptDropZone"
-      class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
       <input type="file" id="pptInput"
         accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
         multiple class="hidden" onchange="handleFileSelect(event)">
@@ -22,78 +22,72 @@
   </div>
 </div>
 
-<% const tool = {
-  "tool-description": {
-    name: "PPTX to PDF Converter",
-    desc: "Convert powerpoint files to PDF online. Also merge them into single PDF."
-  },
-  "tool-process": {
-    name: "Move file cards",
-    desc: "To change the position of file move file cards."
-  },
-  "tool-setting": {
-    name: "Advance Settings",
-    desc: "In advance setting merge powerpoint files into single PDF."
-  },
-  "download-info": {
-    name: "Convert in few moment",
-    desc: "Convert Powerpoint files into PDF in few moment and download or preview PDF."
-  }
-}; %>
+<% const tool={ "tool-description" : { name: "PPTX to PDF Converter" ,
+  desc: "Convert powerpoint files to PDF online. Also merge them into single PDF." }, "tool-process" : {
+  name: "Move file cards" , desc: "To change the position of file move file cards." }, "tool-setting" : {
+  name: "Advance Settings" , desc: "In advance setting merge powerpoint files into single PDF." }, "download-info" : {
+  name: "Convert in few moment" , desc: "Convert Powerpoint files into PDF in few moment and download or preview PDF." }
+  }; %>
 
-<%- include("../toolOperations", {tool_info : tool}) %>
+  <%- include("../toolOperations", {tool_info : tool}) %>
 
-<div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-  <div class="max-w-7xl mx-auto px-4 md:px-6">
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
           How to use
           <span class="underline underline-offset-4">Powerpoint to PDF</span>
           Tool
         </p>
 
-    <!-- Step 1 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/powerpointtopdf-laptop-1.webp", "/images/powerpointtopdf-tablet-1.webp", "/images/powerpointtopdf-mobile-1.webp"] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Files</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Select multiple files by clicking the button or drag & drop in order to convert powerpoint files into PDF or merge powerpoint files into single PDF.
-        </p>
-      </div>
-    </div>
+        <!-- Step 1 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images:
+              ["/images/powerpointtopdf-laptop-1.webp", "/images/powerpointtopdf-tablet-1.webp"
+              , "/images/powerpointtopdf-mobile-1.webp" ] }) %>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Files</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Select multiple files by clicking the button or drag & drop in order to convert powerpoint files into PDF
+              or merge powerpoint files into single PDF.
+            </p>
+          </div>
+        </div>
 
-    <!-- Step 2 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-      <div class="space-y-6 order-2 lg:order-1">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Arrange files order</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          In order to merge powerpoint files into single PDF order all powerpoint files in correct position by moving file cards and after setting up everything click on Convert to PDF.
-        </p>
-      </div>
-      <div class="order-1 lg:order-2">
-        <%- include("../carousel", { images: ["/images/powerpointtopdf-laptop-2.webp", "/images/powerpointtopdf-tablet-2.webp", "/images/powerpointtopdf-mobile-2.webp"] }) %>
-      </div>
-    </div>
+        <!-- Step 2 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
+          <div class="space-y-6 order-2 lg:order-1">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Arrange files order</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              In order to merge powerpoint files into single PDF order all powerpoint files in correct position by
+              moving file cards and after setting up everything click on Convert to PDF.
+            </p>
+          </div>
+          <div class="order-1 lg:order-2">
+            <%- include("../carousel", { images:
+              ["/images/powerpointtopdf-laptop-2.webp", "/images/powerpointtopdf-tablet-2.webp"
+              , "/images/powerpointtopdf-mobile-2.webp" ] }) %>
+          </div>
+        </div>
 
-    <!-- Step 3 -->
-    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-      <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
+        <!-- Step 3 -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
+          <div class="lg:order-1">
+            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
               , "/images/download-mobile.webp" ] }) %>
-      </div>
-      <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
-        <p class="text-gray-600 sm:text-lg tracking-wide">
-          Wait a moment and you will have download page where you can download or preview the converted PDF.
-        </p>
+          </div>
+          <div class="space-y-6 lg:order-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
+            <p class="text-gray-600 sm:text-lg tracking-wide">
+              Wait a moment and you will have download page where you can download or preview the converted PDF.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="faq-section" class="bg-white sm:mt-0 mb-10">
+    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
       <div class="max-w-5xl mx-auto px-4 md:px-6">
         <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
           What People Frequently Ask
@@ -142,70 +136,78 @@
       </div>
     </div>
 
-<div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
-<p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
-  Explore More Tools
-</p>
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+      Explore More Tools
+    </p>
 
-<%- include("../toolsListIcons", { removeCards: ["/powerpoint-to-pdf"] }) %>
+    <%- include("../toolsListIcons", { removeCards: ["/powerpoint-to-pdf"] }) %>
 
-<%- include("../footer") %>
+      <%- include("../footer") %>
 
-<script>
-  const pptDropZone = document.getElementById('pptDropZone');
-  const pptInput = document.getElementById('pptInput');
+        <script>
+          const dropZone = document.getElementById('pptDropZone');
 
-  pptDropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            console.log("dragover")
+            dropZone.classList.add('bg-gray-100');
+          });
 
-  pptDropZone.addEventListener('dragenter', (event) => {
-    event.preventDefault();
-    pptDropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragenter', (event) => {
+            event.preventDefault();
+            console.log("dragenter")
+            dropZone.classList.remove('border-gray-400')
+            dropZone.classList.add('bg-gray-100', 'border-primary');
+          });
 
-  pptDropZone.addEventListener('dragleave', (event) => {
-    event.preventDefault();
-    pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-  });
+          dropZone.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            console.log("dragleave")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+          });
 
-  pptDropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    pptDropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
-    handleDrop(event);
-  });
+          dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            console.log("drop")
+            dropZone.classList.remove('bg-gray-100', 'border-primary');
+            dropZone.classList.add('border-gray-400')
+            handleDrop(event);
 
-  pptDropZone.addEventListener('click', () => {
-    pptInput.click();
-  });
+          });
 
-  function handleDrop(event) {
-    const files = event.dataTransfer.files;
-    if (files.length) {
-      pptInput.files = files;
-      handleFileSelect({ target: { files } });
-    }
-  }
+          dropZone.addEventListener('click', () => {
+            document.getElementById('pptInput').click();
+          });
 
-  function handleFileSelect(event) {
-    const files = event.target.files;
-    const allowedExtensions = ['ppt', 'pptx'];
-    const validFiles = [];
+          function handleDrop(event) {
+            const files = event.dataTransfer.files;
 
-    for (const file of files) {
-      const ext = file.name.split('.').pop().toLowerCase();
-      if (allowedExtensions.includes(ext)) {
-        validFiles.push(file);
-      } else {
-        alert(`Invalid file type: ${file.name}. Only .ppt and .pptx files are allowed.`);
-      }
-    }
+            if (files.length) {
+              document.getElementById('pptInput').files = files;
+              handleFileSelect({ target: { files } });
+            }
+          }
 
-    if (validFiles.length) {
-      console.log('Selected PowerPoint files:', validFiles);
-      // Add your conversion logic here
-    }
-  }
-</script>
+          function handleFileSelect(event) {
+            const files = event.target.files;
+            const allowedExtensions = ['ppt', 'pptx'];
+            const validFiles = [];
+
+            for (const file of files) {
+              const ext = file.name.split('.').pop().toLowerCase();
+              if (allowedExtensions.includes(ext)) {
+                validFiles.push(file);
+              } else {
+                alert(`Invalid file type: ${file.name}. Only .ppt and .pptx files are allowed.`);
+              }
+            }
+
+            if (validFiles.length) {
+              console.log('Selected PowerPoint files:', validFiles);
+              // Add your conversion logic here
+            }
+          }
+        </script>
