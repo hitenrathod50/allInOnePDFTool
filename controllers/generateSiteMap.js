@@ -37,6 +37,8 @@ stream.write({ url: "/powerpoint-to-pdf", changefreq: "daily" });
 stream.write({ url: "/html-to-pdf", changefreq: "daily" });
 stream.write({ url: "/odt-to-pdf", changefreq: "daily" });
 stream.write({ url: "/extract-pdf-pages", changefreq: "daily" });
+stream.write({ url: "/pdf-linearization", changefreq: "daily" });
+stream.write({ url: "/pdf-image-extractor", changefreq: "daily" });
 
 // 🧰 Editing tools
 stream.write({ url: "/edit-pdf-pages", changefreq: "daily" });
@@ -49,6 +51,27 @@ stream.write({ url: "/remove-pages", changefreq: "daily" });
 stream.write({ url: "/add-watermark", changefreq: "daily" });
 stream.write({ url: "/protect-pdf", changefreq: "daily" });
 stream.write({ url: "/unlock-pdf", changefreq: "daily" });
+
+stream.write({ url: "/pdf-size-checker", changefreq: "daily" });
+stream.write({ url: "/pdf-page-counter", changefreq: "daily" });
+stream.write({ url: "/pdf-word-counter", changefreq: "daily" });
+stream.write({ url: "/pdf-page-size-detector", changefreq: "daily" });
+stream.write({ url: "/pdf-linearization-checker", changefreq: "daily" });
+stream.write({ url: "/pdf-object-counter", changefreq: "daily" });
+stream.write({ url: "/pdf-security-checker", changefreq: "daily" });
+
+stream.write({ url: "/pdf-language-detector", changefreq: "daily" });
+stream.write({ url: "/blank-page-detector", changefreq: "daily" });
+stream.write({ url: "/pdf-font-detector", changefreq: "daily" });
+stream.write({ url: "/pdf-links-extractor", changefreq: "daily" });
+stream.write({ url: "/corrupted-pdf-detector", changefreq: "daily" });
+stream.write({ url: "/pdf-compatibility-checker", changefreq: "daily" });
+
+stream.write({ url: "/pdf-tamper-checker", changefreq: "daily" });
+stream.write({ url: "/pdf-signature-checker", changefreq: "daily" });
+stream.write({ url: "/pdf-standards-validator", changefreq: "daily" });
+stream.write({ url: "/pdf-compliance-checker", changefreq: "daily" });
+stream.write({ url: "/ai-pdf-summary", changefreq: "daily" });
 
 // 📄 Legal / Info pages (low SEO priority)
 stream.write({ url: "/about", changefreq: "daily" });

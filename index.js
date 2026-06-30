@@ -81,7 +81,7 @@ async function rateLimitxHelmetImpose() {
   });
 
 };
-rateLimitxHelmetImpose();
+// rateLimitxHelmetImpose();
 
 // Register EJS
 fastify.register(pointOfView, {
@@ -105,7 +105,7 @@ fastify.register(oauthPlugin, {
     auth: oauthPlugin.GOOGLE_CONFIGURATION
   },
   startRedirectPath: '/auth/google',
-  callbackUri: 'http://localhost:3000/auth/google/callback'
+  callbackUri: 'https://pdfversatile.com/auth/google/callback'
 });
 
 fastify.addHook('preHandler', async (request, reply) => {

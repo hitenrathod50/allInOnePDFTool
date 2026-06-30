@@ -59,7 +59,7 @@
 
             <!-- Desktop Submenu -->
             <div id="desktop-submenu"
-              class="absolute top-full right-0 mt-1 w-[670px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
+              class="absolute top-full right-0 mt-1 w-[792px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
               role="menu">
               <div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="space-y-2">
@@ -121,6 +121,16 @@
                         Edit PDF Pages
                       </a>
                     </li>
+
+                    <li>
+                      <a href="/pdf-linearization"
+                        class="flex items-center gap-3 px-2 py-1.5 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/pdf-linearization-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Linearize PDF
+                      </a>
+                    </li>
+
                   </ul>
 
 
@@ -252,6 +262,19 @@
                         Unlock PDF
                       </a>
                     </li>
+
+
+
+
+                    <li>
+                      <a href="/pdf-image-extractor"
+                        class="flex items-center gap-3 px-2 py-1.5 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                        role="menuitem">
+                        <img src="/images/pdf-image-extractor-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                        Image Extractor
+                      </a>
+                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -271,7 +294,7 @@
 
             <!-- Desktop Submenu -->
             <div id="inspection-submenu"
-              class="absolute top-full right-0 mt-1 w-[680px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
+              class="absolute top-full right-0 mt-1 w-[792px] bg-white border border-gray-200 rounded-lg shadow-xl z-50 opacity-0 invisible transition-all duration-200"
               role="menu">
 
 
@@ -612,58 +635,68 @@
                 </h3>
                 <ul class="space-y-1">
                   <li>
-                      <a href="/rotate-pages"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/rotate-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Rotate All pages
-                      </a>
-                    </li>
+                    <a href="/rotate-pages"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/rotate-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Rotate All pages
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/add-page-numbers"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/add-page-numbers-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Add page numbers
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/add-page-numbers"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/add-page-numbers-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Add page numbers
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/add-pages-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Add Pages
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/add-pages-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Add Pages
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/remove-pages"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/remove-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Remove Pages
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/remove-pages"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/remove-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Remove Pages
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/split-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/split-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Split PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/split-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/split-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Split PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/edit-pdf-pages"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/edit-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Edit PDF Pages
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/edit-pdf-pages"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/edit-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Edit PDF Pages
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/pdf-linearization"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/pdf-linearization-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Linearize PDF
+                    </a>
+                  </li>
+
                 </ul>
               </div>
               <div>
@@ -672,67 +705,67 @@
                 </h3>
                 <ul class="space-y-1">
                   <li>
-                      <a href="/imagetopdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/imagetopdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Image to PDF
-                      </a>
-                    </li>
+                    <a href="/imagetopdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/imagetopdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Image to PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/merge-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/merge-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Merge PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/merge-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/merge-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Merge PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/word-to-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/word-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Word to PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/word-to-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/word-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Word to PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/excel-to-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/excel-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Excel to PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/excel-to-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/excel-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Excel to PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/powerpoint-to-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/powerpoint-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        PowerPoint to PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/powerpoint-to-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/powerpoint-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      PowerPoint to PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/html-to-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/html-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        HTML to PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/html-to-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/html-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      HTML to PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/odt-to-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/odt-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        ODT to PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/odt-to-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/odt-to-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      ODT to PDF
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div>
@@ -741,58 +774,67 @@
                 </h3>
                 <ul class="space-y-1">
                   <li>
-                      <a href="/extract-pdf-pages"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/extract-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Extract Pages
-                      </a>
-                    </li>
+                    <a href="/extract-pdf-pages"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/extract-pdf-pages-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Extract Pages
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/compress-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/compress-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Compress PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/compress-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/compress-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Compress PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/add-pages-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Organize PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/add-pages-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/add-pages-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Organize PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/add-watermark"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/add-watermark-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Add Watermark
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/add-watermark"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/add-watermark-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Add Watermark
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/protect-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/protect-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Protect PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/protect-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/protect-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Protect PDF
+                    </a>
+                  </li>
 
-                    <li>
-                      <a href="/unlock-pdf"
-                        class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
-                        role="menuitem">
-                        <img src="/images/unlock-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
-                        Unlock PDF
-                      </a>
-                    </li>
+                  <li>
+                    <a href="/unlock-pdf"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/unlock-pdf-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Unlock PDF
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/pdf-image-extractor"
+                      class="flex items-center gap-3 pl-8 px-2 py-2 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
+                      role="menuitem">
+                      <img src="/images/pdf-image-extractor-icon.webp" alt="icon" class="w-8 h-8 shrink-0">
+                      Image Extractor
+                    </a>
+                  </li>
 
                 </ul>
               </div>
@@ -863,13 +905,15 @@
 
   const path = location.pathname.replace(/\/$/, "");
 
-  document.querySelectorAll("a[href]").forEach(link => {
+  document.querySelectorAll("header a[href]").forEach(link => {
     const href = link.getAttribute("href").replace(/\/$/, "");
 
-    if (href !== "/" && path.startsWith(href)) {
+    if (
+      href !== "/" &&
+      (path === href || path.startsWith(href + "/"))
+    ) {
       link.classList.add("active", "text-primary", "font-semibold");
     }
   });
-
 
 </script>

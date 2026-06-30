@@ -1,9 +1,12 @@
-const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile, signUpRoute, loginRoute, extractPDFPages, extractPDFPagesDownload, extractPDFPagesDownloadFile, compressPDF, compressPDFDownload, compressPDFDownloadFile, addWatermarkPDF, addWatermarkPDFDownload, addWatermarkPDFDownloadFile, protectPDF, protectPDFDownload, protectPDFDownloadFile, unlockPDF, unlockPDFDownload, unlockPDFDownloadFile } = require("../controllers/getController");
+const { homePage, aboutPage, imageToPDF, imageToPDFDownload, imageToPDFDownloadFile, addPagesToPDF, addPagesToPDFDownload, addPagesToPDFDownloadFile, mergePDF, mergePDFDownload, mergePDFDownloadFile, addPageNumberToPDF, addPageNumberToPDFDownload, addPageNumberToPDFDownloadFile, rotateAllPages, rotateAllPagesDownload, rotateAllPagesDownloadFile, removePDFPages, removePDFPagesDownload, removePDFPagesDownloadFile, splitPDF, splitPDFDownload, splitPDFDownloadFile, editPDFPages, wordToPDF, wordToPDFDownload, wordToPDFDownloadFile, excelToPDF, excelToPDFDownload, excelToPDFDownloadFile, powerPointToPDF, powerPointToPDFDownload, powerPointToPDFDownloadFile, odtTOPDF, odtTOPDFDownload, odtTOPDFDownloadFile, htmlToPDF, htmlToPDFDownload, htmlToPDFDownloadFile, editPDFPagesDownload, editPDFPagesDownloadFile, signUpRoute, loginRoute, extractPDFPages, extractPDFPagesDownload, extractPDFPagesDownloadFile, compressPDF, compressPDFDownload, compressPDFDownloadFile, addWatermarkPDF, addWatermarkPDFDownload, addWatermarkPDFDownloadFile, protectPDF, protectPDFDownload, protectPDFDownloadFile, unlockPDF, unlockPDFDownload, unlockPDFDownloadFile, linearizePDF, linearizePDFDownload, linearizePDFDownloadFile } = require("../controllers/getController");
 
 const axios = require('axios');
 const User = require("../models/User");
 
 const jwt = require("jsonwebtoken");
+const { blogList, singleBlog } = require("../controllers/blogController");
+
+
 
 async function getRoutes(fastify, options) {
 
@@ -132,6 +135,11 @@ async function getRoutes(fastify, options) {
   });
 
 
+  // fastify.get("/blog", blogList);
+  // fastify.get("/blog/:slug", singleBlog);
+
+
+
 
   // Image to PDF routes
 
@@ -177,6 +185,10 @@ async function getRoutes(fastify, options) {
   fastify.get("/edit-pdf-pages", editPDFPages);
   fastify.get("/edit-pdf-pages/download/:token", editPDFPagesDownload);
   fastify.get("/edit-pdf-pages/download/file/:token", editPDFPagesDownloadFile);
+
+  fastify.get("/pdf-linearization", linearizePDF)
+  fastify.get("/pdf-linearization/download/:token", linearizePDFDownload);
+  fastify.get("/pdf-linearization/download/file/:token", linearizePDFDownloadFile);
 
   fastify.get("/word-to-pdf", wordToPDF)
   fastify.get("/word-to-pdf/download/:token", wordToPDFDownload);

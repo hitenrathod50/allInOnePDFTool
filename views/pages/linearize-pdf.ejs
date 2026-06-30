@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <%- include("../components/meta",{
+
+      title : "PDF Linearization",
+      description : "Linearize PDF file for fast web view for free.",
+      keywords : "linearize pdf, pdf linearization",
+      og_url : "/pdf-linearization",
+      robots : "index,follow"
+
+  }) %>
+
+
+  <meta property="og:image" content="https://pdfversatile.com/images/pdf-linearization-og.webp" />
+
+
+  <link rel="stylesheet" href="/css/linearizepdf.css">
+
+  <link rel="canonical" href="https://pdfversatile.com/pdf-linearization" />
+
+  <%- include("../components/metaCommanCSS") %>
+
+  <%- include("../components/metaGA") %>
+
+</head>
+
+
+<body>
+    
+    <%- include("../components/header") %>
+
+        <div class="mx-auto">
+            <div id="pickPDFContainer">
+                <%- include('../components/LinearizePDF/pickPdf.ejs') %>
+            </div>
+            <div id="LinearizePDFEnableContainer" class="hidden">
+                <%- include('../components/LinearizePDF/LinearizePDFEnable.ejs') %>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
+        
+        <script src="/js/linearizepdf.js"></script>
+
+        <script src="/js/carousel.js"></script>
+
+        <script src="/js/rollsc-othms.js"></script>
+        
+</body>
+
+
+</html>

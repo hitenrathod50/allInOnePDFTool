@@ -1856,6 +1856,152 @@ async function editPDFPagesPost(request, reply) {
 
 }
 
+
+async function convertToLinearize(inputBuffer) {
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    const tmpDir = path.join(PROJECT_TEMP_ROOT, `linearize-${uniqueId}`);
+
+    const inputPath = path.join(tmpDir, 'input.pdf');
+    const outputPath = path.join(tmpDir, 'linearized.pdf');
+
+    try {
+        await fs.mkdir(tmpDir, { recursive: true });
+        await fs.writeFile(inputPath, inputBuffer);
+
+        // Basic Ghostscript command for compression
+        const command = `"${qpdfPath}" --linearize --object-streams=generate --compression-level=9 "${inputPath}" "${outputPath}"`;
+
+        await new Promise((resolve, reject) => {
+            exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                if (error) {
+                    console.error('qpdf error:', stderr || error.message);
+                    return reject(error);
+                }
+                resolve();
+            });
+        });
+
+        const linearizedBuffer = await fs.readFile(outputPath);
+        return linearizedBuffer;
+
+    } finally {
+        // Best-effort cleanup
+        fs.rm(tmpDir, { recursive: true, force: true })
+            .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
+    }
+}
+
+async function linearizePDFPost(request, reply) {
+
+    try {
+        const parts = await request.parts();
+
+        let pdfFiles = [];
+
+        let mergeIntoSingle = false;
+
+        for await (const part of parts) {
+            if (part.file) {
+                // Handle pdfs[0], pdfs[1], ...
+                if (/^pdfs\[\d+\]$/.test(part.fieldname)) {
+                    const buffer = await part.toBuffer();
+                    pdfFiles.push({
+                        buffer,
+                        filename: part.filename || `document_${pdfFiles.length + 1}.pdf`
+                    });
+                }
+            } else {
+                // Handle settings JSON
+                const value = part.value;
+                if (part.fieldname === 'mergeIntoSingle') {
+                    mergeIntoSingle =
+                        value === 'true' || value === 'True' ||
+                        (value && JSON.parse(value) === true);
+                }
+            }
+        }
+
+        if (pdfFiles.length === 0) {
+            return reply.status(400).send({ error: 'No PDF files received' });
+        }
+
+        const outputPDFs = [];
+
+        if (mergeIntoSingle) {
+
+            const pdfBuffers = [];
+
+            for (const file of pptFiles) {
+                const pdfBuffer = await convertToLinearize(file.buffer);
+                pdfBuffers.push(pdfBuffer);
+            }
+
+            const mergedPdfBuffer = await mergePdfBuffers(pdfBuffers);
+
+            outputPDFs.push({
+                name: 'pdf-linearization.pdf',
+                buffer: mergedPdfBuffer
+            });
+        } else {
+            // Convert each separately
+            for (const file of pdfFiles) {
+                // const pdfBuffer = await convertDocxToPdfBuffer(file.buffer);
+                const pdfBuffer = await convertToLinearize(file.buffer);
+
+                let safeName = file.filename
+                    .replace(/[^a-zA-Z0-9._-]/g, '_')
+                    .replace(/\.[^.]+$/, ''); // remove extension
+
+                safeName += '.pdf';
+
+                outputPDFs.push({
+                    name: safeName,
+                    buffer: pdfBuffer
+                });
+            }
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+
+        if (!mergeIntoSingle && outputPDFs.length > 1) {
+            // ZIP multiple PDFs
+            const zipBuffer = await new Promise((resolve, reject) => {
+                const zip = archiver('zip', { zlib: { level: 6 } });
+                const chunks = [];
+
+                zip.on('data', chunk => chunks.push(chunk));
+                zip.on('end', () => resolve(Buffer.concat(chunks)));
+                zip.on('error', reject);
+
+                outputPDFs.forEach(file => {
+                    zip.append(file.buffer, { name: file.name });
+                });
+
+                zip.finalize();
+            });
+
+            pdfStorage.set(token, zipBuffer);
+            return reply.redirect(`/pdf-linearization/download/${token}?type=zip&filename=pdf-linearization.zip`);
+        }
+
+        // Single file case (merged or only one input)
+        pdfStorage.set(token, outputPDFs[0].buffer);
+        return reply.redirect(`/pdf-linearization/download/${token}`);
+
+    } catch (err) {
+        if (err.code === 'FST_REQ_FILE_TOO_LARGE') {
+            return reply.status(413).send({ error: 'File too large', maxSize: '30MB' });
+        }
+
+        console.error('PDF Compression error:', err);
+        return reply.status(500).send({
+            error: 'PDF linearization failed',
+            message: err.message
+        });
+    }
+
+}
+
 async function extractPDFPagesPost(request, reply) {
 
 
@@ -3228,7 +3374,7 @@ async function getCompatibilityDataPost(request, reply) {
                 }
 
                 // JavaScript
-                if (value['/JS'] || value['/JavaScript'] || 
+                if (value['/JS'] || value['/JavaScript'] ||
                     (value['/S'] === '/JavaScript')) {
                     hasJavaScript = true;
                 }
@@ -3347,5 +3493,6 @@ module.exports = {
     getPDFSecurityPost,
     getPDFFontPost,
     getCorruptionDataPost,
-    getCompatibilityDataPost
+    getCompatibilityDataPost,
+    linearizePDFPost
 };

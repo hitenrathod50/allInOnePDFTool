@@ -22,7 +22,7 @@ module.exports = {
       screens: {
         md: '980px',
         cst : '1235px',
-        lgd: '1800px'
+        lgd: '1700px'
       },
 
       fontSize: {

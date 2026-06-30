@@ -24,10 +24,10 @@ async function sendOtpEmail(to, otp) {
     body { margin:0; padding:0; background:#f4f4f4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     .container { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
     .header { padding:30px 40px 20px; }
-    .logo { font-size:28px; font-weight:700; color:#7100ad !important; text-decoration:none; }
+    .logo { font-size:28px; font-weight:700; color:#00006a !important; text-decoration:none; }
     .content { padding:0 40px 30px; color:#374151; line-height:1.6; }
     h1 { font-size:24px; margin:0 0 20px 0; color:#111827; }
-    .otp-box { background:#f8fafc; border:2px dashed #7100ad; border-radius:12px; padding:20px; margin:30px 0; text-align:center; font-size:32px; font-weight:700; letter-spacing:8px; color:#7100ad; }
+    .otp-box { background:#f8fafc; border:2px dashed #00006a; border-radius:12px; padding:20px; margin:30px 0; text-align:center; font-size:32px; font-weight:700; letter-spacing:8px; color:#00006a; }
     .footer { padding:10px 40px; text-align:center; color:#6b7280; font-size:14px; }
     hr { border:none; border-top:1px solid #e5e7eb; margin:10px 0; }
   </style>
@@ -51,7 +51,7 @@ async function sendOtpEmail(to, otp) {
     <hr>
     <div class="footer">
       <p>© 2026 PdfVersatile</p>
-      <p>For any questions contact <a href="mailto:support@pdfversatile.com" style="color:#7100ad;">support@pdfversatile.com</a></p>
+      <p>For any questions contact <a href="mailto:support@pdfversatile.com" style="color:#00006a;">support@pdfversatile.com</a></p>
     </div>
   </div>
 </body>
@@ -102,10 +102,10 @@ async function contactFormSubmit(request, reply) {
     body { margin:0; padding:0; background:#f4f4f4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     .container { max-width:600px; margin:20px auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
     .header { padding:30px 40px 20px; }
-    .logo { font-size:28px; font-weight:700; color:#7100ad !important; text-decoration:none; }
+    .logo { font-size:28px; font-weight:700; color:#00006a !important; text-decoration:none; }
     .content { padding:0 40px 30px; color:#374151; line-height:1.6; }
     h1 { font-size:24px; margin:0 0 20px 0; color:#111827; }
-    .box { background:#f8fafc; border:2px dashed #7100ad; border-radius:12px; padding:20px; margin:30px 0; color:#111827; }
+    .box { background:#f8fafc; border:2px dashed #00006a; border-radius:12px; padding:20px; margin:30px 0; color:#111827; }
     .footer { padding:10px 40px; text-align:center; color:#6b7280; font-size:14px; }
     hr { border:none; border-top:1px solid #e5e7eb; margin:10px 0; }
   </style>

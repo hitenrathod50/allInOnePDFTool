@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <%- include("../../components/meta",{ title : "Blog - Index" , description
+        : "PdfVersatile is the best all in one pdf tools, which provides all tools you need for pdf operations like conversion, compression, extraction etc. and many more!"
+        , keywords : "about us, about pdfversatile, story of pdfversatile, pdfversatile" , og_url : "/about" , robots
+        : "index,follow" }) %>
+
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+        <link rel="canonical" href="https://pdfversatile.com/about" />
+
+        <%- include("../../components/metaCommanCSS") %>
+
+            <%- include("../../components/metaGA") %>
+
+</head>
+
+
+<body>
+
+    <%- include("../../components/header") %>
+
+        <div class="bg-gray-50 text-gray-800">
+
+            <section class="max-w-7xl lgd:max-w-[1440px] mx-auto px-4 py-10">
+
+                <div class="mb-12 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+                        Blog
+                    </h1>
+
+                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                        Explore tutorials, guides, tips, and updates related to PDF tools and document management.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <% blogs.forEach(blog=> { %>
+
+                        <div
+                            class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+
+                            <img src="<%= blog.image %>" alt="<%= blog.title %>" loading="lazy"
+                                class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
+
+                            <div class="p-6 py-8 flex flex-col">
+
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-3">
+                                    <%= blog.title %>
+                                </h2>
+
+                                <p class="text-gray-600 leading-relaxed mb-6 flex-grow">
+                                    <%= blog.description %>
+                                </p>
+
+                                <a href="/blog/<%= blog.slug %>" style="color:white !important;"
+                                    class="w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-black text-white hover:bg-secondary hover:shadow-lg transition-all duration-200 rounded-full font-medium text-center">
+                                    Read Article
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+
+                </div>
+
+                <!-- Pagination -->
+
+                <% if(totalPages> 1){ %>
+
+                    <div class="flex justify-center mt-12">
+
+                        <div class="flex flex-wrap gap-3">
+
+                            <% if(currentPage> 1){ %>
+
+                                <a href="/blog?page=<%= currentPage-1 %>"
+                                    class="hidden sm:inline-flex w-full sm:w-auto px-4 py-2 text-black transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
+                                    <
+                                </a>
+
+                                <% } %>
+
+                                    <% for(let i=1;i<=totalPages;i++){ %>
+
+                                        <a href="/blog?page=<%= i %>" class="
+                        px-4 py-2 rounded-full border transition
+                        <%= currentPage===i
+                            ? 'bg-primary text-white border-primary'
+                            : 'bg-white hover:bg-gray-100'
+                        %>
+                    ">
+                                            <%= i %>
+                                        </a>
+
+                                        <% } %>
+
+                                            <% if(currentPage < totalPages){ %>
+
+                                                <a href="/blog?page=<%= currentPage+1 %>"
+                                                    class="hidden sm:inline-flex w-full sm:w-auto px-4 py-2 text-black transition-all duration-200 rounded-full  min-h-[44px] font-medium text-center items-center justify-center">
+                                                    >
+                                                </a>
+
+                                                <% } %>
+
+                        </div>
+
+                    </div>
+
+                    <% } %>
+
+            </section>
+
+        </div>
+
+        <%- include("../../components/footer") %>
+</body>
+
+</html>

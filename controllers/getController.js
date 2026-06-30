@@ -499,6 +499,93 @@ async function editPDFPagesDownloadFile(request, reply) {
 
 }
 
+async function linearizePDF(request, reply) {
+  return reply.view("pages/linearize-pdf.ejs");
+}
+
+async function linearizePDFDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+    const endPoint = "pdf-linearization";
+
+    // Validate token exists
+    if (!token || !pdfStorage.has(token)) {
+      // Redirect back to the tool page if token is invalid/expired
+      return reply.redirect('/pdf-linearization');
+    }
+
+    // console.log(request.query.filename)
+
+    // Optional: you can check query param to know if it's a zip
+    const isZip = request.query.type === 'zip';
+
+    // console.log("Iszip "+isZip);
+
+    // Render the same download view you use for remove-pages
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint,
+      title: "Linearized PDF",
+      isZip
+    });
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+}
+
+async function linearizePDFDownloadFile(request, reply) {
+
+
+  try {
+    const { token } = request.params;
+
+    // Validate token
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({
+        error: 'Invalid or expired token'
+      });
+    }
+
+    // Get the stored buffer (can be PDF or ZIP)
+    const fileBuffer = pdfStorage.get(token);
+
+    // Clean up storage immediately (good practice)
+    pdfStorage.delete(token);
+
+    // Determine file type from previous processing
+    // (we used ?type=zip in redirect when keepDifferentPDF=true)
+    const isZip = request.query.type === 'zip';
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', 'attachment; filename="linearized-pdf.zip"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', 'attachment; filename="linearized-pdf.pdf"')
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+
+}
+
 async function wordToPDF(request, reply) {
   return reply.view("pages/wordToPDF.ejs");
 }
@@ -1376,4 +1463,7 @@ module.exports = {
   unlockPDF,
   unlockPDFDownload,
   unlockPDFDownloadFile,
+  linearizePDF,
+  linearizePDFDownload,
+  linearizePDFDownloadFile
 };

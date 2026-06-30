@@ -5,8 +5,8 @@
 <head>
 
     <%- include("../components/meta",{ title : "PDF Word Counter" , description
-        : "pdf word counter tool which counter the number of words, characters, sentences in pdf file." , keywords : "pdf word counter, pdf character counter" ,
-        og_url : "/pdf-word-counter" , robots : "index,follow" }) %>
+        : "pdf word counter tool which counter the number of words, characters, sentences in pdf file." , keywords
+        : "pdf word counter, pdf character counter" , og_url : "/pdf-word-counter" , robots : "index,follow" }) %>
 
 
         <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
@@ -37,7 +37,7 @@
                     </h2>
 
                     <div id="dropZone"
-                        class="border-2 border-dashed border-primary p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+                        class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
                         <input type="file" id="pdfInput" accept="application/pdf" class="hidden"
                             onchange="handleFileSelect(event)">
                         <button id="select-pdf-btn"
@@ -58,7 +58,7 @@
             </div>
 
 
-            
+
 
 
             <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-5 md:mt-10">
@@ -66,11 +66,11 @@
             </p>
 
 
-            <%- include("../components/toolsListIcons", removeCards=["/merge-pdf", "/imagetopdf" , "/edit-pdf-pages", "/word-to-pdf", "/excel-to-pdf", "/powerpoint-to-pdf", "/odt-to-pdf", "/html-to-pdf" ])
-                %>
+            <%- include("../components/toolsListIcons", removeCards=["/merge-pdf", "/imagetopdf" , "/edit-pdf-pages"
+                , "/word-to-pdf" , "/excel-to-pdf" , "/powerpoint-to-pdf" , "/odt-to-pdf" , "/html-to-pdf" ]) %>
 
 
-        
+
 
 
         </div>
@@ -82,23 +82,31 @@
 
                 dropZone.addEventListener('dragover', (event) => {
                     event.preventDefault();
-                    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+                    console.log("dragover")
+                    dropZone.classList.add('bg-gray-100');
                 });
 
                 dropZone.addEventListener('dragenter', (event) => {
                     event.preventDefault();
-                    dropZone.classList.add('bg-purple-100', 'border-solid', 'border-black-500');
+                    console.log("dragenter")
+                    dropZone.classList.remove('border-gray-400')
+                    dropZone.classList.add('bg-gray-100', 'border-primary');
                 });
 
                 dropZone.addEventListener('dragleave', (event) => {
                     event.preventDefault();
-                    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+                    console.log("dragleave")
+                    dropZone.classList.remove('bg-gray-100', 'border-primary');
+                    dropZone.classList.add('border-gray-400')
                 });
 
                 dropZone.addEventListener('drop', (event) => {
                     event.preventDefault();
-                    dropZone.classList.remove('bg-purple-100', 'border-solid', 'border-black-500');
+                    console.log("drop")
+                    dropZone.classList.remove('bg-gray-100', 'border-primary');
+                    dropZone.classList.add('border-gray-400')
                     handleDrop(event);
+
                 });
 
                 dropZone.addEventListener('click', () => {
@@ -107,6 +115,7 @@
 
                 function handleDrop(event) {
                     const files = event.dataTransfer.files;
+
                     if (files.length) {
                         document.getElementById('pdfInput').files = files;
                         handleFileSelect({ target: { files } });
@@ -115,6 +124,7 @@
 
                 function handleFileSelect(event) {
                     const files = event.target.files;
+
                     // Add your file handling logic here
                     console.log('Selected files:', files);
                 }
