@@ -1398,6 +1398,104 @@ async function unlockPDFDownloadFile(request, reply) {
 }
 
 
+async function PDFImageExtractor(request, reply) {
+  return reply.view("pages/pdf-image-extractor.ejs");
+}
+
+async function PDFImageExtractorDownload(request, reply) {
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      // You can redirect to a common page or home
+      return reply.redirect('/pdf-image-extractor');
+    }
+
+    const stored = pdfStorage.get(token);   // Buffer or {path, filename, type}
+
+    const isZip = request.query.type === 'zip' ||
+      (typeof stored === 'object' && stored.type === 'zip');
+
+    const filename = request.query.filename || 'download.zip';
+
+    return reply.view('pages/downloadPDF.ejs', {
+      token,
+      endPoint: "pdf-image-extractor",           // or dynamically pass tool name if needed
+      title: "Extracted Images",
+      isZip,
+      filename                     // pass original filename
+    });
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
+
+}
+
+
+async function PDFImageExtractorDownloadFile(request, reply) {
+
+
+  try {
+    const { token } = request.params;
+
+    if (!token || !pdfStorage.has(token)) {
+      return reply.status(400).send({ error: 'Invalid or expired token' });
+    }
+
+    const storedData = pdfStorage.get(token);
+    pdfStorage.delete(token);        // Clean up immediately
+
+    let fileBuffer;
+    let isZip = false;
+    let downloadFilename = 'download.pdf';
+
+    // Handle both simple Buffer and Object cases
+    if (Buffer.isBuffer(storedData)) {
+      fileBuffer = storedData;
+      // Try to detect from query
+      isZip = request.query.type === 'zip';
+    }
+    else if (typeof storedData === 'object' && storedData !== null) {
+      // New improved structure (recommended)
+      fileBuffer = storedData.buffer || storedData.path ? await fs.readFile(storedData.path) : null;
+      isZip = storedData.type === 'zip' || request.query.type === 'zip';
+      downloadFilename = storedData.filename || (isZip ? 'export.zip' : 'export.pdf');
+    }
+
+    if (!fileBuffer) {
+      return reply.status(500).send({ error: 'File data corrupted' });
+    }
+
+    if (isZip) {
+      reply
+        .header('Content-Type', 'application/zip')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    } else {
+      reply
+        .header('Content-Type', 'application/pdf')
+        .header('Content-Disposition', `attachment; filename="${downloadFilename}"`)
+        .header('Content-Length', fileBuffer.length)
+        .send(fileBuffer);
+    }
+
+  } catch (error) {
+    fastify.log.error(error);
+    return reply.status(500).send({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+
+
+
+}
+
+
 async function pageNotFound(request, reply) {
   return reply.status(404).view("pages/404.ejs");
 }
@@ -1465,5 +1563,8 @@ module.exports = {
   unlockPDFDownloadFile,
   linearizePDF,
   linearizePDFDownload,
-  linearizePDFDownloadFile
+  linearizePDFDownloadFile,
+  PDFImageExtractor,
+  PDFImageExtractorDownload,
+  PDFImageExtractorDownloadFile
 };

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <%- include("../components/meta",{ title : "Extract Embedded Images from PDF" , description
+        : "extract embedded images in pdf file for free."
+        , keywords
+        : "image extractor, extract images from pdf"
+        , og_url : "/pdf-image-extractor" , robots : "index,follow" }) %>
+
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+        
+
+
+        <link rel="stylesheet" href="/css/splitpdf.css">
+        <link rel="canonical" href="https://pdfversatile.com/pdf-image-extractor" />
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+</head>
+
+<%- include("../components/header") %>
+
+    <body>
+
+        <div class="mx-auto">
+            <div id="pickPDFContainer">
+                <%- include('../components/ImageExtractor/pickPDF.ejs') %>
+            </div>
+            <div id="splitPDFEnableContainer" class="hidden">
+                <%- include('../components/ImageExtractor/imageExtractorEnable.ejs') %>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
+
+        <script src="/js/pdf-image-extractor.js"></script>
+
+        <script src="/js/carousel.js"></script>
+
+        <script src="/js/rollsc-othms.js"></script>
+
+
+    </body>
+
+
+
+</html>

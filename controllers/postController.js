@@ -17,6 +17,8 @@ const gsPath = `"C:\\Program Files\\gs\\gs10.07.0\\bin\\gswin64c.exe"`;
 
 const qpdfPath = `C:\\Program Files\\qpdf 12.3.2\\bin\\qpdf.exe`;
 
+const popplerPath = `C:\\Users\\ALPA RATHOD\\Downloads\\Release-26.02.0-0\\poppler-26.02.0\\Library\\bin\\pdfimages.exe`;
+
 const COMPRESSION_SETTINGS = {
     low: '/printer',      // Good quality, moderate compression
     medium: '/ebook',  // Default - smaller size, acceptable quality
@@ -3468,6 +3470,139 @@ async function getCompatibilityDataPost(request, reply) {
     }
 }
 
+async function imageExtractorPost(request, reply) {
+    try {
+        const parts = await request.parts();
+
+        let pdfBuffer = null;
+
+        // ---------------- Parse multipart form ----------------
+        for await (const part of parts) {
+            if (part.file && part.fieldname === "pdf") {
+                if (!part.filename?.toLowerCase().endsWith(".pdf")) {
+                    return reply.status(400).send({
+                        error: "Uploaded file must be a PDF."
+                    });
+                }
+
+                pdfBuffer = await part.toBuffer();
+            }
+        }
+
+        if (!pdfBuffer) {
+            return reply.status(400).send({
+                error: "No PDF uploaded."
+            });
+        }
+
+        const uniqueId =
+            Date.now() + "-" + Math.random().toString(36).slice(2);
+
+        const tmpDir = path.join(PROJECT_TEMP_ROOT, `pdf-${uniqueId}`);
+
+        const inputPath = path.join(tmpDir, "input.pdf");
+        const outputPrefix = path.join(tmpDir, "image");
+
+        const outputImages = [];
+
+        try {
+            await fs.mkdir(tmpDir, { recursive: true });
+
+            await fs.writeFile(inputPath, pdfBuffer);
+
+            const command = `"${popplerPath}" -all "${inputPath}" "${outputPrefix}"`;
+
+            await new Promise((resolve, reject) => {
+                exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(stderr);
+                        return reject(error);
+                    }
+
+                    resolve();
+                });
+            });
+
+            console.log("files are here!!!!");
+
+            const files = await fs.readdir(tmpDir);
+
+            const imageFiles = files.filter(file => {
+                return (
+                    /\.(png|jpg|jpeg|jp2|jpx|ppm|pbm|pgm|tif|tiff)$/i.test(file) &&
+                    !file.includes("-mask") &&
+                    !file.includes("-alpha")
+                );
+            });
+
+            console.log("image files are here with length " + imageFiles.length)
+
+            if (imageFiles.length === 0) {
+                return reply.status(404).send({
+                    error: "No embedded images found in this PDF."
+                });
+            }
+
+
+
+            for (const file of imageFiles) {
+                outputImages.push({
+                    name: file,
+                    buffer: await fs.readFile(path.join(tmpDir, file))
+                });
+            }
+
+
+        } finally {
+            fs.rm(tmpDir, { recursive: true, force: true })
+                .catch(err => console.warn(`Cleanup failed ${tmpDir}:`, err.message));
+        }
+
+
+
+        const zipBuffer = await new Promise((resolve, reject) => {
+            const archive = archiver("zip", {
+                zlib: { level: 9 }
+            });
+
+            const chunks = [];
+
+            archive.on("data", chunk => chunks.push(chunk));
+
+            archive.on("end", () => {
+                resolve(Buffer.concat(chunks));
+            });
+
+            archive.on("error", reject);
+
+            for (const image of outputImages) {
+                archive.append(image.buffer, {
+                    name: image.name
+                });
+            }
+
+            archive.finalize();
+        });
+
+        console.log("zip is ready");
+
+        const token = crypto.randomBytes(32).toString("hex");
+
+        pdfStorage.set(token, zipBuffer);
+
+        return reply.redirect(
+            `/pdf-image-extractor/download/${token}?type=zip&filename=images.zip`
+        );
+    } catch (err) {
+        request.log.error(err);
+
+        return reply.status(500).send({
+            error: "Failed to extract images.",
+            message: err.message
+        });
+    }
+}
+
 
 module.exports = {
     imageToPDFPOST,
@@ -3494,5 +3629,6 @@ module.exports = {
     getPDFFontPost,
     getCorruptionDataPost,
     getCompatibilityDataPost,
-    linearizePDFPost
+    linearizePDFPost,
+    imageExtractorPost
 };
