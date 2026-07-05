@@ -35,8 +35,8 @@
 
 
 
-            <h1 class="text-2xl sm:text-3xl font-semibold text-[var(--primary-color)] mb-4">Download Your PDF</h1>
-            <p class="text-gray-600 mb-6 sm:text-lg tracking-wide">Your PDF is ready! Hit the button below to download.
+            <h1 id="download-heading" class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Download Your PDF</h1>
+            <p id="download-subheading" class="text-gray-600 mb-6 sm:text-lg tracking-wide">Your PDF is ready! Hit the button below to download.
             </p>
 
             <div class="flex flex-col justify-center sm:flex-row gap-4 w-full">
@@ -82,6 +82,13 @@
     const token = '<%= token %>';
     const endPoint = '<%= endPoint %>';
 
+    if(endPoint == "pdf-image-extractor"){
+
+        document.getElementById("download-heading").textContent = "Download Your Images";
+        document.getElementById("download-subheading").textContent = "Your Images are ready! Hit the button below to download.";
+
+    }
+
     const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
 
     // console.log(isZip);
@@ -126,7 +133,7 @@
 
     getPDFLink()
         .then(() => {
-            downloadButton.textContent = "Download PDF";
+            downloadButton.textContent = "Download File";
             downloadButton.addEventListener('click', async function downloadPDF() {
                 link.click();
             })

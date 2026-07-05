@@ -340,7 +340,7 @@
                       <a href="/pdf-page-size-detector"
                         class="block px-2 py-1.5 text-gray-900 hover:text-primary hover:bg-nav-hover-bg rounded-md transition-all duration-150"
                         role="menuitem">
-                        PDF Page Size Detector
+                        PDF Dimension Checker
                       </a>
                     </li>
 
@@ -541,7 +541,7 @@
 
               <!-- Mobile menu button -->
               <button id="mobile-menu-button"
-                class="md:hidden p-2 text-slate-950 hover:text-primary hover:bg-nav-hover-bg transition-all duration-200 rounded-md "
+                class="md:hidden p-2 text-slate-950 hover:text-primary transition-all duration-200 rounded-md "
                 aria-label="Open menu" aria-expanded="false">
                 <div id="hamburger-icon" class="w-6 h-6 flex flex-col justify-center items-center">
                   <span class="hamburger-line block h-0.5 w-6 bg-current mb-1"></span>
@@ -569,7 +569,7 @@
     <div class="flex items-center justify-between py-3 px-4 sm:p-4 border-b border-gray-200">
       <span class="font-semibold text-primary">Explore More</span>
       <button id="drawer-close-button"
-        class="p-2 text-slate-950 hover:text-primary hover:bg-nav-hover-bg transition-colors rounded-md"
+        class="p-2 text-slate-950 hover:text-primary transition-colors rounded-md"
         aria-label="Close menu">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -847,17 +847,19 @@
     <!-- Mobile Auth Buttons (fixed at bottom) -->
 
     <div class="sm:hidden px-4 py-3 sm:p-4 border-t border-gray-200">
-      <div class="flex gap-4">
+      
 
         <% if (user) { %>
 
+          <div class="flex flex-col gap-4">
+
           <!-- 👤 Profile (Mobile) -->
           <a href="/user/dashboard" class="block">
-            <div class="flex items-center gap-3 p-3 bg-primary text-white rounded-md">
-              <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-primary font-semibold">
+            <div class="flex items-center gap-3 p-3 py-2 bg-primary text-white rounded-md">
+              <div class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-primary font-semibold">
                 <%= user ? user.charAt(0).toUpperCase() : 'U' %>
               </div>
-              <span class="font-medium">
+              <span class="font-medium text-sm">
                 <%= user %>
               </span>
             </div>
@@ -866,12 +868,16 @@
           <!-- Logout -->
           <a class="block">
             <button
-              class="logout-btn w-full px-4 py-1 text-sm border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[44px] font-medium">
+              class="logout-btn w-full px-4 py-1 text-sm border border-red-600 text-red-600 hover:bg-red-700 hover:text-white transition-all duration-200 rounded-full focus:outline-none min-h-[44px] font-medium">
               Logout
             </button>
           </a>
 
+          </div>
+
           <% } else { %>
+
+            <div class="flex gap-4">
 
             <!-- Login -->
             <a href="/login" class="block">
@@ -889,9 +895,13 @@
               </button>
             </a>
 
+            </div>
+
             <% } %>
 
-      </div>
+            
+
+      
     </div>
 
   </div>

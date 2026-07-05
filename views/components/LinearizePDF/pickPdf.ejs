@@ -1,6 +1,6 @@
 <div class="flex justify-center">
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Linearize PDF Free</h1>
+    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Linearize PDFs for Free</h1>
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
       Linearize PDF files for fast web view. Without Compression & Sign Up.
@@ -20,20 +20,20 @@
 
 <% const tool = {
   "tool-description": {
-    name: "Compress PDF file free",
-    desc: "Compress PDF file without losing it's quality."
+    name: "Linearize PDF Files",
+    desc: "PDF linearization for fast web view."
   },
   "tool-process": {
     name: "Select multiple files",
-    desc: "Compress multiple PDF files at once."
+    desc: "Linearize multiple PDF files at once."
   },
   "tool-setting": {
     name: "Advance Settings",
-    desc: "In advance setting select compression level (low, medium, high)."
+    desc: "In advance setting you can merge them into single PDF."
   },
   "download-info": {
     name: "Single Click Conversion",
-    desc: "Compress PDF files in few clicks & download the zip file."
+    desc: "Linearize PDF files in few clicks & download the zip file."
   }
 }; %>
 
@@ -43,19 +43,19 @@
   <div class="max-w-7xl mx-auto px-4 md:px-6">
     <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
           How to use
-          <span class="underline underline-offset-4">Compress PDF</span>
+          <span class="underline underline-offset-4">Linearize PDF</span>
           Tool
         </p>
 
     <!-- Step 1 -->
     <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
       <div class="lg:order-1">
-        <%- include("../carousel", { images: ["/images/compresspdf-laptop-1.webp", "/images/compresspdf-tablet-1.webp", "/images/compresspdf-mobile-1.webp"] }) %>
+        <%- include("../carousel", { images: ["/images/pdf-linearization-laptop-1.webp", "/images/pdf-linearization-tablet-1.webp", "/images/pdf-linearization-mobile-1.webp"] }) %>
       </div>
       <div class="space-y-6 lg:order-2">
         <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select File</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          Select PDF file by clicking the button or drag & drop in order to compress PDF files.
+          Select PDF file by clicking the button or drag & drop in order to linearize PDF files.
         </p>
       </div>
     </div>
@@ -63,13 +63,13 @@
     <!-- Step 2 -->
     <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
       <div class="space-y-6 order-2 lg:order-1">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Select compression level</h3>
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Linearize PDF files</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          After selecting the PDF files select the compression level from setting (low, medium, high). After selecting the compression level hit the Convert to PDF button.
+          After selecting PDF files you can merge them into single PDF after linearization. After setting up everything hit the Convert to PDF button.
         </p>
       </div>
       <div class="order-1 lg:order-2">
-        <%- include("../carousel", { images: ["/images/compresspdf-laptop-2.webp", "/images/compresspdf-tablet-2.webp", "/images/compresspdf-mobile-2.webp"] }) %>
+        <%- include("../carousel", { images: ["/images/pdf-linearization-laptop-2.webp", "/images/pdf-linearization-tablet-2.webp", "/images/pdf-linearization-mobile-2.webp"] }) %>
       </div>
     </div>
 
@@ -80,9 +80,9 @@
               , "/images/download-mobile.webp" ] }) %>
       </div>
       <div class="space-y-6 lg:order-2">
-        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download Compressed PDFs</h3>
+        <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download Linearized PDFs</h3>
         <p class="text-gray-600 sm:text-lg tracking-wide">
-          Wait a moment and you will be redirected to download page where you can download compressed PDF files in zip format.
+          Wait a moment and you will be redirected to download page where you can download linearized PDF files in zip format.
         </p>
       </div>
     </div>
@@ -98,10 +98,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How to compress PDF files without losing quality?
+            How to linearized PDF files for fast web view?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to compress PDF files without losing quality just
+            This tool is very easy with attractive interface. In order to linearize PDF files just
             follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
           </p>
         </div>
@@ -128,10 +128,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            Maximum number of PDF files I can upload to compress at once?
+            Maximum number of PDF files I can upload to linearize at once?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            we support 3 PDF files to compress at once.
+            we support 3 PDF files to linearize at once.
           </p>
         </div>
 
@@ -148,7 +148,7 @@
   Explore More Tools
 </p>
 
-<%- include("../toolsListIcons", { removeCards: ["/compress-pdf"] }) %>
+<%- include("../toolsListIcons", { removeCards: ["/pdf-linearization"] }) %>
 
 <%- include("../footer") %>
 
