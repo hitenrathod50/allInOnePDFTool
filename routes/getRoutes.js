@@ -135,8 +135,20 @@ async function getRoutes(fastify, options) {
   });
 
 
-  // fastify.get("/blog", blogList);
-  // fastify.get("/blog/:slug", singleBlog);
+  fastify.get("/blog", blogList);
+  fastify.get("/blog/:slug", singleBlog);
+
+  fastify.get("/tools", async (request, reply) => {
+
+    return reply.view("pages/tools.ejs");
+
+  });
+
+  fastify.get("/faq", async (request, reply) => {
+
+    return reply.view("pages/faq.ejs");
+
+  });
 
 
 
@@ -209,7 +221,7 @@ async function getRoutes(fastify, options) {
   fastify.get("/html-to-pdf", htmlToPDF)
   fastify.get("/html-to-pdf/download/:token", htmlToPDFDownload);
   fastify.get("/html-to-pdf/download/file/:token", htmlToPDFDownloadFile);
-  
+
   fastify.get("/extract-pdf-pages", extractPDFPages)
   fastify.get("/extract-pdf-pages/download/:token", extractPDFPagesDownload);
   fastify.get("/extract-pdf-pages/download/file/:token", extractPDFPagesDownloadFile);
@@ -225,7 +237,7 @@ async function getRoutes(fastify, options) {
   fastify.get("/protect-pdf", protectPDF)
   fastify.get("/protect-pdf/download/:token", protectPDFDownload);
   fastify.get("/protect-pdf/download/file/:token", protectPDFDownloadFile);
-  
+
   fastify.get("/unlock-pdf", unlockPDF)
   fastify.get("/unlock-pdf/download/:token", unlockPDFDownload);
   fastify.get("/unlock-pdf/download/file/:token", unlockPDFDownloadFile);

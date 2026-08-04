@@ -4,25 +4,65 @@
 
 <head>
 
-  <%- include("../components/meta",{
+    <%- include("../components/meta",{ title : "Convert Multiple Files to PDF - 100% Online & Free" , description
+        : "Convert multiple files into one PDF in few moments without any signup & compression or losing quality." ,
+        keywords
+        : "merge pdf, merge pdf into single pdf, convert multiple files to pdf, combine multiple files into one pdf" ,
+        og_url : "/merge-pdf" , robots : "index,follow" }) %>
 
-      title : "Convert Multiple Files to PDF - 100% Online & Free",
-      description : "Convert multiple files into one PDF in few moments without any signup & compression or losing quality.",
-      keywords : "merge pdf, merge pdf into single pdf, convert multiple files to pdf, combine multiple files into one pdf",
-      og_url : "/merge-pdf",
-      robots : "index,follow"
-
-  }) %>
-
-  <meta property="og:image" content="https://pdfversatile.com/images/mergepdf-og.webp" />
+        <meta property="og:image" content="https://pdfversatile.com/images/mergepdf-og.webp" />
 
 
-  <link rel="stylesheet" href="/css/mergePDF.css">
+        <link rel="stylesheet" href="/css/mergePDF.css">
         <link rel="canonical" href="https://pdfversatile.com/merge-pdf" />
 
-  <%- include("../components/metaCommanCSS") %>
+        <%- include("../components/metaCommanCSS") %>
 
-  <%- include("../components/metaGA") %>
+            <%- include("../components/metaGA") %>
+
+
+                <script type="application/ld+json">
+
+            {
+ "@context":"https://schema.org",
+ "@graph":[
+
+ {
+   "@type":"Organization",
+   "@id":"https://pdfversatile.com/#organization"
+ },
+
+ {
+   "@type":"WebPage",
+   "@id":"https://pdfversatile.com/merge-pdf#page",
+   "url":"https://pdfversatile.com/merge-pdf",
+   "name":"Merge PDF Online",
+   "description":"Merge multiple PDF files into one PDF online for free."
+ },
+
+ {
+   "@type":"WebApplication",
+   "@id":"https://pdfversatile.com/merge-pdf#application",
+   "name":"Merge PDF",
+   "url":"https://pdfversatile.com/merge-pdf",
+   "applicationCategory":"UtilitiesApplication",
+   "operatingSystem":"Web",
+   "browserRequirements":"Requires JavaScript. Works in modern browsers.",
+   "description":"Combine multiple PDF files into one document securely in your browser.",
+   "publisher":{
+      "@id":"https://pdfversatile.com/#organization"
+   },
+   "offers":{
+      "@type":"Offer",
+      "price":"0",
+      "priceCurrency":"USD"
+   }
+ }
+
+ ]
+}
+
+</script>
 
 </head>
 
@@ -41,15 +81,15 @@
         </div>
 
 
-        
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.js"></script>
 
-<script src="/js/mergepdf.js"></script>
-<script src="/js/carousel.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.2.1/dist/compressor.min.js"></script> -->
 
-<script src="/js/rollsc-othms.js"></script>
+        <script src="/js/mergepdf.js"></script>
+        <script src="/js/carousel.js"></script>
+
+        <script src="/js/rollsc-othms.js"></script>
 
 
 </body>

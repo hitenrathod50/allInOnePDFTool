@@ -1,17 +1,19 @@
 {
-  "name": "image-to-pdf",
+  "name": "PDF Versatile",
   "version": "1.0.0",
-  "description": "",
+  "description": "All in One PDF tool which facilitates all PDF tools we need in our daily life.",
   "main": "index.js",
   "scripts": {
     "dev": "node build-js.js && tailwindcss -i ./src/css/input.css -o ./public/css/output.css --minify",
-    "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch"
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/output.css --watch",
+    "pv" : "nodemon index.js"
   },
   "keywords": [
     "Image to PDF",
-    "HR Tools"
+    "Merge PDF",
+    "Split PDF"
   ],
-  "author": "",
+  "author": "Hiten Rathod",
   "license": "ISC",
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

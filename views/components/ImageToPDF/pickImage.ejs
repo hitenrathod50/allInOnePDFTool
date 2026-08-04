@@ -1,10 +1,18 @@
 <div class="flex justify-center">
 
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Merges Images into PDF</h1>
+    
+
+    <div class="flex items-center justify-center gap-3 mb-4" bis_skin_checked="1">
+        <img src="/images/imagetopdf-icon.webp" alt="Notes to PDF" class="w-12 h-12 object-contain">
+
+        <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
+          Notes to PDF
+        </h1>
+      </div>
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Convert multiple images to PDF. Without Quality loss or Compression & Sign Up.
+      Convert Notes to PDF for Free. Adjust page size, orientation and margin for notes.
     </h2>
 
     <div id="dropZone"
@@ -12,20 +20,23 @@
       <input type="file" id="imageInputFirst" accept="image/*" multiple class="hidden"
         onchange="handleFileSelect(event)">
       <button class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-secondary transition  mb-4">
-        Select Images
+        Select Notes
       </button>
-      <p class="text-gray-600 text-sm">select/drop images here (.jpg, .jpeg, .png, .gif, .webp, .bmp)</p>
+      <p class="text-gray-600 text-sm">select/drop notes here (.jpg, .jpeg, .png, .gif, .webp, .bmp)</p>
     </div>
+
+    <%- include('../secure.ejs') %>
+
   </div>
 
 </div>
 
 
-<% const tool={ "tool-description" : { name: "Transform Images to PDF Free" ,
-  desc: "Select/drop images of any type and combine them into single PDF." }, "tool-process" : {
-  name: "Drag/Move Image cards" , desc: "Move images cards in order to change images's position." }, "tool-setting" : {
-  name: "Advance settings Option" , desc: "Set page size, page orientation and page margin." }, "download-info" : {
-  name: "Convert in few moment" , desc: "Convert images to PDF in few moment and download or preview PDF." } }; %>
+<% const tool={ "tool-description" : { name: "Notes to PDF" ,
+  desc: "Convert Notes to PDF for free. Custom page size, orientation and margin for notes." }, "tool-process" : {
+  name: "Arrange Notes" , desc: "Arrange your notes in the order you want them in the PDF." }, "tool-setting" : {
+  name: "Advance settings" , desc: "Customize the page size, orientation, and margins for your notes in Advanced Settings." }, "download-info" : {
+  name: "Single Click Conversion" , desc: "Convert Notes to PDF in few moment and download or preview the PDF." } }; %>
 
 
   <%- include("../toolOperations", {tool_info : tool}) %>
@@ -39,8 +50,7 @@
       <div class="max-w-7xl mx-auto px-4 md:px-6">
         <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
           How to use
-          <span class="underline underline-offset-4">Image to PDF</span>
-          Tool
+          <span class="underline underline-offset-4">Notes to PDF</span>
         </p>
 
         <!-- Split PDF -->
@@ -54,9 +64,9 @@
           </div>
 
           <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Images</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Drag & Drop or Select Notes</h3>
             <p class=" text-gray-600 sm:text-lg tracking-wide">
-              Select images of any type by clicking the button or drag & drop in order to merge them into single PDF.
+              Select notes of by clicking the button or drag & drop in order to convert Notes to PDF.
             </p>
 
           </div>
@@ -66,11 +76,9 @@
         <!-- Image to PDF -->
         <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
           <div class="space-y-6 order-2 lg:order-1">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Move Image Cards</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Arrange Notes</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
-              After picking the image files you will image cards interface where you can change the position of images
-              card by moving them. Also set the page size, page orientation and page margin and after setting up
-              everything click on Convert to PDF.
+              After selecting the notes, notes in the order you want them in the PDF and set the page size, orientation and margin for notes, after setting up everything hit Notes to PDF button.
             </p>
 
           </div>
@@ -89,10 +97,9 @@
               , "/images/download-mobile.webp" ] }) %>
           </div>
           <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Download or Preview PDF</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
-              Wait a moment and you will have Download or Preview option where you can download or preview PDF. Once you
-              refresh the page you won't able to download or preview PDF anymore.
+              Wait a moment and you will be redirected on download page where you can preview or download the PDF.
             </p>
 
           </div>
@@ -116,10 +123,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How to convert multiple images to one PDF?
+            How to convert multiple Notes to PDF?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to merge multiple images into single PDF just
+            This tool is very easy with attractive interface. In order to convert Notes to PDF just
             follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
           </p>
         </div>
@@ -130,10 +137,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What will be the quality of images after PDF creation?
+            What will be the quality of notes after PDF creation?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            When converting images to PDF, we apply slight compression before uploading them to the server. This helps
+            When converting Notes to PDF, we apply slight compression before uploading them to the server. This helps
             optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not
             noticeable.
           </p>
@@ -144,10 +151,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            Which image types can I upload in this tool?
+            Which note types can I upload in this tool?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can upload images in all common formats, including JPG, PNG, WEBP, and GIF.
+            You can upload notes in all common formats, including JPG, JPEG, PNG.
           </p>
         </div>
 
@@ -158,10 +165,10 @@
 
         <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
           <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How many images can I merge into single PDF at once?
+            How many notes can I merge into single PDF at once?
           </h3>
           <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can convert upto 100 images into single PDF at once in free plan.
+            You can convert upto 100 notes into single PDF at once in free plan.
           </p>
         </div>
 

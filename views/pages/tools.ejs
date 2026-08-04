@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("../components/meta",{ title : "Tools" , description
+        : "All PdfVersatile tools for PDF operations like Image to PDF, Merge PDF, Split PDF and many more." , keywords
+        : "image to pdf, merge pdf, split pdf, edit pdf, add page to pdf, add page number to pdf, compress pdf, office to pdf"
+        , og_url : "/tools" , robots : "index,follow" }) %>
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+
+        <link rel="canonical" href="https://pdfversatile.com/tools" />
+
+
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+</head>
+
+
+<body>
+
+    <%- include("../components/header") %>
+
+        <div class="bg-transparent px-4">
+
+            <div class="max-w-7xl mx-auto my-5">
+
+                <div id="explore-more" class="mt-10 mb-5">
+
+                    <p class="text-lg font-medium">PDF Tools</p>
+
+                </div>
+
+                <!-- Tools Grid -->
+                <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
+                    <a href="/merge-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/merge-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Merge PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/split-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/split-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Split PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/imagetopdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/imagetopdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Image to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/edit-pdf-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/edit-pdf-pages-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Edit PDF Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/rotate-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/rotate-pages-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Rotate All Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-page-numbers" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-page-numbers-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Page Number
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/remove-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/remove-pages-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Remove Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-pages-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-pages-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Pages to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/word-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/word-to-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Word to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/excel-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/excel-to-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Excel to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/powerpoint-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/powerpoint-to-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Powerpoint to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/extract-pdf-pages" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/extract-pdf-pages-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Extract Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/compress-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/compress-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Compress PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-watermark" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-watermark-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Watermark
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/protect-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/protect-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Protect PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/unlock-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/unlock-pdf-icon.webp" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Unlock PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+
+                <div id="explore-more" class="mt-10 mb-5">
+
+                    <p class="text-lg font-medium">Inspection Tools</p>
+
+                </div>
+
+                <!-- Tools Grid -->
+                <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
+
+                    <a href="/pdf-size-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Size Checker">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Size Checker
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-page-counter" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Page Counter">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Page Counter
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-word-counter" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Word Counter">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Word Counter
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-page-size-detector" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Page Size Detector">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Page Size Detector
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-linearization-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Linearization Checker">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Linearization Checker
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-object-counter" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Object Counter">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Object Counter
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-security-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Security Checker">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Security Checker
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-tamper-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Tamper Checker">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Tamper Checker
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-signature-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Signature Checker">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    PDF Signature Checker
+                                </h3>
+                            </div>
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-standards-validator" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Standards Validator"></div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF Standards
+                                    Validator</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-language-detector" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Language Detector">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF Language
+                                    Detector</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/blank-page-detector" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="Blank Page Detector">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">Blank Page
+                                    Detector</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-font-detector" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Font Detector">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF Font
+                                    Detector</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-links-extractor" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="PDF Links Extractor">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF Links
+                                    Extractor</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/corrupted-pdf-detector" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="Corrupted PDF Detector"></div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">Corrupted PDF
+                                    Detector</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-compatibility-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Compatibility Checker"></div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF
+                                    Compatibility Checker</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/pdf-compliance-checker" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8"
+                                        alt="PDF Compliance Checker"></div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">PDF Compliance
+                                    Checker</h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                    <a href="/ai-pdf-summary" class="tool-card group">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center"><img
+                                        src="/images/pdfversatile-logo.png" class="w-8 h-8" alt="AI PDF Summary"></div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">AI PDF Summary
+                                </h3>
+                            </div>
+                            <div class="mr-3"><svg
+                                    class="w-3 h-3 text-gray-400 group-hover:text-gray-500 group-hover:translate-x-1 transition-all duration-300"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg></div>
+                        </div>
+                    </a>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <%- include("../components/footer") %>
+
+</body>
+
+
+
+</html>

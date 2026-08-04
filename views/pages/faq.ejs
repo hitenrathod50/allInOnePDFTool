@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("../components/meta",{ title : "FAQ" , description : "Most frequently asked question for PdfVersatile."
+        , keywords : "faq, pdfversatile faq" , og_url : "/faq" , robots : "index,follow" }) %>
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+
+        <link rel="canonical" href="https://pdfversatile.com/faq" />
+
+
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+
+                <script type="application/ld+json">
+
+        {
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+
+ {
+   "@type":"Question",
+   "name":"How are my uploaded images, PDFs, and other files used?",
+   "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"We do not permanently store your files. Once the requested operation is completed, your uploaded files and any generated output are automatically deleted from our server. We do not use your files for any other purpose."
+   }
+ },
+
+ {
+   "@type":"Question",
+   "name":"How can I upload my files?",
+   "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"You can upload your files by either dragging and dropping them into the upload area or by clicking the Choose Files or Upload button to browse and select files from your device. At this time, our tools support uploads only from your device. Direct imports from cloud storage services such as Google Drive, Dropbox, OneDrive, or other third-party platforms are not currently available."
+   }
+ },
+
+ {
+   "@type":"Question",
+   "name":"Why is my conversion taking longer than expected?",
+   "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Conversion time depends on several factors. It may take longer if your internet connection is slow, the file you're uploading is large, the file is damaged or corrupted, or our servers are experiencing high traffic."
+   }
+ },
+
+ {
+   "@type":"Question",
+   "name":"Which platforms is the tool available on?",
+   "acceptedAnswer":{
+      "@type":"Answer",
+      "text":"Our tools are currently available as a web application and can be accessed from any modern browser on desktops, laptops, tablets, and smartphones—no installation is required. We are also working on dedicated applications for Android, iOS, Windows, and macOS, which will be released in the future."
+   }
+ }
+
+ ]
+}
+
+    </script>
+
+
+</head>
+
+
+<body>
+
+    <%- include("../components/header") %>
+
+        <div class="bg-transparent px-4">
+
+
+
+            <div id="faq-section" class="bg-white sm:mt-0 py-10" bis_skin_checked="1">
+                <div class="max-w-5xl mx-auto md:px-6" bis_skin_checked="1">
+                    <h1 class="sm:text-center text-4xl text-gray-700 md:text-5xl font-bold mb-10">Frequently Asked
+                        Questions</h1>
+
+
+                    <div class="bg-white rounded-xl px-2 py-5 sm:p-5" bis_skin_checked="1">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+                            How are my uploaded images, PDFs, and other files used?
+                        </h3>
+                        <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+                            We do not permanently store your files. Once the requested operation is completed, your
+                            uploaded files and any generated output are automatically deleted from our server. We do not
+                            use your files for any other purpose.
+                        </p>
+                    </div>
+
+
+                    <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3" bis_skin_checked="1"></div>
+
+
+                    <div class="bg-white rounded-xl px-2 py-5 sm:p-5" bis_skin_checked="1">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+                            How can I upload my files?
+                        </h3>
+                        <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+                            You can upload your files by either dragging and dropping them into the upload area or by
+                            clicking the Choose Files or Upload button to browse and select files from your device. At
+                            this time, our tools support uploads only from your device. Direct imports from cloud
+                            storage services such as Google Drive, Dropbox, OneDrive, or other third-party platforms are
+                            not currently available.
+                        </p>
+                    </div>
+
+                    <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3" bis_skin_checked="1"></div>
+
+
+                    <div class="bg-white rounded-xl px-2 py-5 sm:p-5" bis_skin_checked="1">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+                            Why is my conversion taking longer than expected?
+                        </h3>
+                        <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+                            Conversion time depends on several factors. It may take longer if your internet connection
+                            is slow, the file you're uploading is large, the file is damaged or corrupted, or our
+                            servers are experiencing high traffic.
+                        </p>
+                    </div>
+
+                    <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3" bis_skin_checked="1"></div>
+
+
+
+
+                    <div class="bg-white rounded-xl px-2 py-5 sm:p-5" bis_skin_checked="1">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
+                            Which platforms is the tool available on?
+                        </h3>
+                        <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
+                            Our tools are currently available as a web application and can be accessed from any modern
+                            browser on desktops, laptops, tablets, and smartphones—no installation is required. We are
+                            also working on dedicated applications for Android, iOS, Windows, and macOS, which will be
+                            released in the future.
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <%- include("../components/footer") %>
+
+</body>
+
+
+
+</html>

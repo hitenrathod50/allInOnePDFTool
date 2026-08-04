@@ -16,6 +16,9 @@
       </button>
       <p class="text-gray-600 text-sm">Drag and drop PDFs here or click to select</p>
     </div>
+
+    <%- include('../secure.ejs') %>
+
   </div>
 </div>
 
@@ -30,9 +33,7 @@
     <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
       <div class="max-w-7xl mx-auto px-4 md:px-6">
         <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
-          How to use
-          <span class="underline underline-offset-4">Protect PDF</span>
-          Tool
+          How to make PDF password protected?
         </p>
 
         <!-- Step 1 -->
@@ -42,7 +43,7 @@
               , "/images/protectpdf-mobile-1.webp" ] }) %>
           </div>
           <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select File</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Drag & Drop or Select File</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
               Select PDF file by clicking the button or drag & drop in order to set password to PDF files.
             </p>
@@ -52,7 +53,7 @@
         <!-- Step 2 -->
         <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
           <div class="space-y-6 order-2 lg:order-1">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Set strong password</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Set strong password</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
               After selecting PDF files set strong password and finalize it using confirm password and hit Convert to
               PDF button.
@@ -71,7 +72,7 @@
               , "/images/download-mobile.webp" ] }) %>
           </div>
           <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download Protected PDFs</h3>
+            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Download Protected PDFs</h3>
             <p class="text-gray-600 sm:text-lg tracking-wide">
               Wait a moment and you will have download page where you can download pretected PDF files.
             </p>

@@ -19,36 +19,43 @@
       <%- include("../components/metaGA") %>
 
         <script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"BreadcrumbList",
- "itemListElement":[
-   {
-     "@type":"ListItem",
-     "position":1,
-     "name":"Merge Images into PDF",
-     "item":"https://pdfversatile.com/imagetopdf"
-   },
-   {
-     "@type":"ListItem",
-     "position":2,
-     "name":"Merge Multiple PDF Files",
-     "item":"https://pdfversatile.com/merge-pdf"
-   },
-   {
-     "@type":"ListItem",
-     "position":3,
-     "name":"Split PDF into multiple files",
-     "item":"https://pdfversatile.com/split-pdf"
-   },
-   {
-     "@type":"ListItem",
-     "position":4,
-     "name":"Edit PDF Pages Online",
-     "item":"https://pdfversatile.com/edit-pdf-pages"
-   }
- ]
+
+            {
+  "@context":"https://schema.org",
+  "@graph":[
+
+    {
+      "@type":"Organization",
+      "@id":"https://pdfversatile.com/#organization"
+    },
+
+    {
+      "@type":"WebSite",
+      "@id":"https://pdfversatile.com/#website",
+      "url":"https://pdfversatile.com/",
+      "name":"PDF Versatile",
+      "publisher":{
+          "@id":"https://pdfversatile.com/#organization"
+      },
+      "inLanguage":"en"
+    },
+
+    {
+      "@type":"WebPage",
+      "@id":"https://pdfversatile.com/#webpage",
+      "url":"https://pdfversatile.com/",
+      "name":"PDF Versatile - Free Online PDF Tools",
+      "isPartOf":{
+          "@id":"https://pdfversatile.com/#website"
+      },
+      "about":{
+          "@id":"https://pdfversatile.com/#organization"
+      }
+    }
+
+  ]
 }
+
 </script>
 
 </head>
@@ -64,224 +71,217 @@
 
       <div class="pt-5 md:pt-10">
 
-        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">All important PDF tools in one place</h1>
-            
-          <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
-            Every tool you need for PDF operations in one place. All tools are completely free with interactive UI. Explore Merge, Split, Rotate, Convert, Edit PDFs and many more.
-          </p>
+        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">PdfVersatile - All important PDF tools
+          in one place
+        </h1>
 
-          </div>
+        <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
+          Every tool you need for PDF operations in one place. All tools are completely free with interactive UI.
+          Explore Merge, Split, Rotate, Convert, Edit PDFs and many more.
+        </p>
 
-          
+      </div>
 
-        <%- include("../components/toolsListIcons", removeCards=[]) %>
+
+
+      <%- include("../components/toolsListIcons", removeCards=[]) %>
 
     </section>
 
-  <section class="bg-white max-w-7xl lgd:max-w-[1440px] mx-auto px-4 my-4 py-5">
+    <section class="bg-white max-w-7xl lgd:max-w-[1440px] mx-auto px-4 my-4 py-5">
 
-    <h2 class="text-3xl md:text-4xl font-semibold text-center text-gray-900 my-5 md:my-10 md:pb-5">
-            Start Here - Popular Tools
-          </h2>
+      <h2 class="text-3xl md:text-4xl font-semibold text-center text-gray-900 my-5 md:my-10 md:pb-5">
+        Start Here - Popular Tools
+      </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      
-      <!-- Card 1 -->
-      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
-        <img src="/images/imagetopdf-image.webp" 
-             alt="Image to PDF"
-             loading="lazy" 
-             class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
-        <div class="p-6 py-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-gray-800 mb-3">Image to PDF</h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Convert multiple Images into single PDF in few clicks. Without any quality loss or compression.
-          </p>
-          <a href="/imagetopdf" style="color: white !important;"
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card 1 -->
+        <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
+          <img src="/images/imagetopdf-image.webp" alt="Image to PDF" loading="lazy"
+            class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
+          <div class="p-6 py-8 flex flex-col">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Image to PDF</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Convert multiple Images into single PDF in few clicks. Without any quality loss or compression.
+            </p>
+            <a href="/imagetopdf" style="color: white !important;"
               class="w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-black text-white hover:bg-secondary hover:shadow-lg transition-all duration-200 rounded-full  font-medium text-center items-center justify-center">
               Convert Now
             </a>
+          </div>
         </div>
-      </div>
 
-      <!-- Card 2 -->
-      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
-        <img src="/images/split-pdf-image.webp" 
-             alt="Split PDF"
-             loading="lazy" 
-             class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
-        <div class="p-6 py-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-gray-800 mb-3">Split PDF</h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Split PDF into multiple files or merge them into single PDF file.
-          </p>
-          <a href="/split-pdf" style="color: white !important;"
+        <!-- Card 2 -->
+        <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
+          <img src="/images/split-pdf-image.webp" alt="Split PDF" loading="lazy"
+            class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
+          <div class="p-6 py-8 flex flex-col">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Split PDF</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Split PDF into multiple files or merge them into single PDF file.
+            </p>
+            <a href="/split-pdf" style="color: white !important;"
               class="w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-black text-white hover:bg-secondary hover:shadow-lg transition-all duration-200 rounded-full  font-medium text-center items-center justify-center">
               Split Now
             </a>
+          </div>
         </div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
-        <img src="/images/edit-pdf-image.webp" 
-             alt="Edit PDF"
-             loading="lazy" 
-             class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
-        <div class="p-6 py-8 flex flex-col">
-          <h3 class="text-2xl font-semibold text-gray-800 mb-3">Edit PDF Page</h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Drop shapes, text, image or draw, highlight on PDF pages.
-          </p>
-          <a href="/edit-pdf-pages" style="color: white !important;"
+        <!-- Card 3 -->
+        <div class="card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl">
+          <img src="/images/edit-pdf-image.webp" alt="Edit PDF" loading="lazy"
+            class="w-full h-auto bg-nav-hover-bg hover:bg-[#dbdbe999]">
+          <div class="p-6 py-8 flex flex-col">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-3">Edit PDF Page</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Drop shapes, text, image or draw, highlight on PDF pages.
+            </p>
+            <a href="/edit-pdf-pages" style="color: white !important;"
               class="w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-black text-white hover:bg-secondary hover:shadow-lg transition-all duration-200 rounded-full  font-medium text-center items-center justify-center">
               Edit Now
             </a>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="py-5 px-4">
-    <div class="max-w-6xl lgd:max-w-[1340px] mx-auto my-4 p-0 md:p-8 lg:bg-yellow-50 rounded-2xl">
-      <div class="flex flex-col m-0 lg:m-8 md:flex-row-reverse gap-10 lg:gap-20">
-        
-        <!-- Image Side -->
-        <div class="w-full bg-yellow-50 md:bg-transparent rounded-xl lg:w-5/12 flex justify-center">
-          <div class="p-5 lg:p-0">
-            <img 
-              src="/images/get-pro.svg" 
-              alt="Get Pro Now"
-              class="w-full object-cover"
-            >
-            
           </div>
         </div>
 
-        <!-- Content Side -->
-        <div class="w-full lg:w-7/12">
-          <div class="max-w-lg">
-            <!-- Title -->
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
-              Get More With Pro
-            </h2>
-            
-            
-            <!-- Benefits List -->
-            <ul class="mt-5 lg:mt-10 space-y-4">
-              <li class="flex items-center gap-4">
-                <div class="w-8 h-8 flex-shrink-0  text-green-600 rounded-2xl flex items-center justify-center">
-                  <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-800">Unlimited document processing</p>
-                  
-                </div>
-              </li>
+      </div>
 
-              <li class="flex items-center gap-4">
-                <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
-                  <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-800">Save files on cloud</p>
-                  
-                </div>
-              </li>
+    </section>
 
-              <li class="flex items-center gap-4">
-                <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
-                  <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-800">Priority customer support</p>
-                  
-                </div>
-              </li>
 
-              <li class="flex items-center gap-4">
-                <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
-                  <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
-                </div>
-                <div>
-                  <p class="font-semibold text-gray-800">Ads free experience</p>
-                  
-                </div>
-              </li>
-              
-            </ul>
+    <section class="py-5 px-4">
+      <div class="max-w-6xl lgd:max-w-[1340px] mx-auto my-4 p-0 md:p-8 lg:bg-yellow-50 rounded-2xl">
+        <div class="flex flex-col m-0 lg:m-8 md:flex-row-reverse gap-10 lg:gap-20">
 
-            <!-- Button -->
-            <div class="mt-5 lg:mt-10">
-            <a href="/pricing" style="color: black !important;" class="sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-yellow-400 text-black hover:bg-yellow-500 hover:shadow-lg transition-all duration-200 rounded-md  font-medium text-center items-center justify-center">
-              Get Pro Now
-            </a>
+          <!-- Image Side -->
+          <div class="w-full bg-yellow-50 md:bg-transparent rounded-xl lg:w-5/12 flex justify-center">
+            <div class="p-5 lg:p-0">
+              <img src="/images/get-pro.svg" alt="Get Pro Now" class="w-full object-cover">
+
             </div>
+          </div>
 
-            
+          <!-- Content Side -->
+          <div class="w-full lg:w-7/12">
+            <div class="max-w-lg">
+              <!-- Title -->
+              <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
+                Get More With Pro
+              </h2>
+
+
+              <!-- Benefits List -->
+              <ul class="mt-5 lg:mt-10 space-y-4">
+                <li class="flex items-center gap-4">
+                  <div class="w-8 h-8 flex-shrink-0  text-green-600 rounded-2xl flex items-center justify-center">
+                    <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-800">Unlimited document processing</p>
+
+                  </div>
+                </li>
+
+                <li class="flex items-center gap-4">
+                  <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
+                    <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-800">Save files on cloud</p>
+
+                  </div>
+                </li>
+
+                <li class="flex items-center gap-4">
+                  <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
+                    <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-800">Priority customer support</p>
+
+                  </div>
+                </li>
+
+                <li class="flex items-center gap-4">
+                  <div class="w-8 h-8 flex-shrink-0 text-green-600 rounded-2xl flex items-center justify-center">
+                    <img src="/images/check-mark.svg" alt="Check" class="w-5 h-5">
+                  </div>
+                  <div>
+                    <p class="font-semibold text-gray-800">Ads free experience</p>
+
+                  </div>
+                </li>
+
+              </ul>
+
+              <!-- Button -->
+              <div class="mt-5 lg:mt-10">
+                <a href="/pricing" style="color: black !important;"
+                  class="sm:inline-flex w-full sm:w-auto text-fluid-sm px-4 py-3 sm:py-2 bg-yellow-400 text-black hover:bg-yellow-500 hover:shadow-lg transition-all duration-200 rounded-md  font-medium text-center items-center justify-center">
+                  Get Pro Now
+                </a>
+              </div>
+
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <section class="py-10 md:py-20 bg-gray-50">
-        <div class="max-w-7xl lgd:max-w-[1440px] mx-auto px-4 md:px-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">
-            Your Trusted PDF Solution
-          </h2>
-          <p class="text-center text-lg text-gray-600 mb-16 max-w-2xl mx-auto">
-            Built for speed, simplicity, and reliability
-          </p>
+      <div class="max-w-7xl lgd:max-w-[1440px] mx-auto px-4 md:px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">
+          Your Trusted PDF Solution
+        </h2>
+        <p class="text-center text-lg text-gray-600 mb-16 max-w-2xl mx-auto">
+          Built for speed, simplicity, and reliability
+        </p>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
-            <!-- Card 1 -->
-            <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
-              <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/fast-processing.png" loading="lazy" alt="Fast Processing"
-                  class="w-8 h-8 object-contain" />
-              </div>
-              <h4 class="text-2xl font-semibold mb-3 text-gray-800">Fast Processing</h4>
-              <p class="text-gray-600 text-base">Seamless compression of data during sending it to the server.</p>
+          <!-- Card 1 -->
+          <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
+            <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
+              <img src="/images/fast-processing.png" loading="lazy" alt="Fast Processing"
+                class="w-8 h-8 object-contain" />
             </div>
+            <h4 class="text-2xl font-semibold mb-3 text-gray-800">Fast Processing</h4>
+            <p class="text-gray-600 text-base">Seamless compression of data during sending it to the server.</p>
+          </div>
 
-            <!-- Card 2 -->
-            <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
-              <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/interactive-ui.png" loading="lazy" alt="Fast Processing"
-                  class="w-8 h-8 object-contain" />
+          <!-- Card 2 -->
+          <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
+            <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
+              <img src="/images/interactive-ui.png" loading="lazy" alt="Fast Processing"
+                class="w-8 h-8 object-contain" />
 
-              </div>
-              <h4 class="text-2xl font-semibold mb-3 text-gray-800">Interactive UI</h4>
-              <p class="text-gray-600 text-base">Simple user interface so that anyone can use it very easily.</p>
             </div>
+            <h4 class="text-2xl font-semibold mb-3 text-gray-800">Interactive UI</h4>
+            <p class="text-gray-600 text-base">Simple user interface so that anyone can use it very easily.</p>
+          </div>
 
-            <!-- Card 3 -->
-            <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
-              <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/free-to-use.png" loading="lazy" alt="Fast Processing"
-                  class="w-8 h-8 object-contain" />
-              </div>
-              <h4 class="text-2xl font-semibold mb-3 text-gray-800">Free to Use</h4>
-              <p class="text-gray-600 text-base">All tools are completely free with limited files.</p>
+          <!-- Card 3 -->
+          <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
+            <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
+              <img src="/images/free-to-use.png" loading="lazy" alt="Fast Processing" class="w-8 h-8 object-contain" />
             </div>
+            <h4 class="text-2xl font-semibold mb-3 text-gray-800">Free to Use</h4>
+            <p class="text-gray-600 text-base">All tools are completely free with limited files.</p>
+          </div>
 
-            <!-- Card 4 -->
-            <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
-              <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
-                <img src="/images/affordable-premium.png" loading="lazy" alt="Fast Processing"
-                  class="w-8 h-8 object-contain" />
-              </div>
-              <h4 class="text-2xl font-semibold mb-3 text-gray-800">Get Pro</h4>
-              <p class="text-gray-600 text-base">Unlock advanced features at a very reasonable price.</p>
+          <!-- Card 4 -->
+          <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg   transition">
+            <div class="w-14 h-14 bg-nav-hover-bg rounded-2xl flex items-center justify-center mb-6">
+              <img src="/images/affordable-premium.png" loading="lazy" alt="Fast Processing"
+                class="w-8 h-8 object-contain" />
             </div>
+            <h4 class="text-2xl font-semibold mb-3 text-gray-800">Get Pro</h4>
+            <p class="text-gray-600 text-base">Unlock advanced features at a very reasonable price.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
 
     <%- include("../components/footer") %>
