@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <path d="M 399.554 170.587 L 399.554 356.214 L 312.495 356.214 L 312.495 443.344 L 192.815 443.344 L 192.815 356.085 L 105.554 356.085 L 105.554 154.447 L 192.815 154.447 L 192.815 67.679 L 296.646 67.679 L 399.554 170.587 Z M 170.888 296.344 L 301.555 296.344 L 301.555 280.013 L 170.888 280.013 L 170.888 296.344 Z M 334.22 329.013 L 170.888 329.013 L 170.888 345.343 L 334.22 345.343 L 334.22 329.013 Z M 334.22 231.015 L 170.888 231.015 L 170.888 247.345 L 334.22 247.345 L 334.22 231.015 Z M 379.97 173.845 L 293.388 87.263 L 293.388 173.845 L 379.97 173.845 Z" style="stroke-width: 1; fill: rgb(0, 0, 104);"/>
+  <text style="font-family: Arial, sans-serif; font-size: 70.2px; font-weight: 700; stroke: rgb(0, 0, 0); stroke-width: 3px; white-space: pre;" x="126.553" y="131.813"><title>1</title>1</text>
+  <text style="font-family: Arial, sans-serif; font-size: 70.2px; font-weight: 700; stroke: rgb(0, 0, 0); stroke-width: 3px; white-space: pre;" x="340.713" y="427.645">3</text>
+  <text style="font-family: Arial, sans-serif; font-size: 70.2px; font-weight: 700; stroke: rgb(0, 0, 0); stroke-width: 3px; white-space: pre;" x="126.553" y="426.427">2</text>
+</svg>

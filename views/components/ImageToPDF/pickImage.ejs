@@ -1,15 +1,15 @@
 <div class="flex justify-center">
 
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    
+
 
     <div class="flex items-center justify-center gap-3 mb-4" bis_skin_checked="1">
-        <img src="/images/imagetopdf-icon.webp" alt="Notes to PDF" class="w-12 h-12 object-contain">
+      <img src="/images/imagetopdf-icon.svg" alt="Notes to PDF" class="w-12 h-12 object-contain">
 
-        <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
-          Notes to PDF
-        </h1>
-      </div>
+      <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
+        Notes to PDF
+      </h1>
+    </div>
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
       Convert Notes to PDF for Free. Adjust page size, orientation and margin for notes.
@@ -35,7 +35,8 @@
 <% const tool={ "tool-description" : { name: "Notes to PDF" ,
   desc: "Convert Notes to PDF for free. Custom page size, orientation and margin for notes." }, "tool-process" : {
   name: "Arrange Notes" , desc: "Arrange your notes in the order you want them in the PDF." }, "tool-setting" : {
-  name: "Advance settings" , desc: "Customize the page size, orientation, and margins for your notes in Advanced Settings." }, "download-info" : {
+  name: "Advance settings" ,
+  desc: "Customize the page size, orientation, and margins for your notes in Advanced Settings." }, "download-info" : {
   name: "Single Click Conversion" , desc: "Convert Notes to PDF in few moment and download or preview the PDF." } }; %>
 
 
@@ -46,66 +47,48 @@
 
 
 
-    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-      <div class="max-w-7xl mx-auto px-4 md:px-6">
-        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+    <div id="tool-usage" class="py-5 md:py-14 my-10 bg-light">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
           How to use
           <span class="underline underline-offset-4">Notes to PDF</span>
-        </p>
-
-        <!-- Split PDF -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="lg:order-1">
+        </h2>
 
 
-            <%- include("../carousel", { images: ["/images/imagetopdf-laptop-1.webp", "/images/imagetopdf-tablet-1.webp"
-              , "/images/imagetopdf-mobile-1.webp" ] }) %>
+        <div class="flex flex-col sm:flex-row gap-8">
+
+          <!-- YouTube -->
+          <div class="w-full md:w-1/2">
+            <iframe class="w-full aspect-[16/9] rounded-lg" src="https://www.youtube.com/embed/u-EGJ-SHHAI"
+              title="Notes to PDF" frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Content -->
+          <div class="w-full md:w-1/2">
+            <div class="process-1 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">1. Drag & Drop or Select Notes</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Select notes of by clicking the button or drag & drop in order to convert Notes to PDF.
+              </p>
+            </div>
+            <div class="process-2 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">2. Arrange Notes</h5>
+              <p class="text-gray-600 sm:text-lg">
+                After selecting the notes, notes in the order you want them in the PDF and set the page size,
+                orientation and margin for notes, after setting up everything hit Notes to PDF button.
+              </p>
+            </div>
+            <div class="process-3 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">3. Download or Preview PDF</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Wait a moment and you will be redirected on download page where you can preview or download the PDF.
+              </p>
+            </div>
 
           </div>
 
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Drag & Drop or Select Notes</h3>
-            <p class=" text-gray-600 sm:text-lg tracking-wide">
-              Select notes of by clicking the button or drag & drop in order to convert Notes to PDF.
-            </p>
-
-          </div>
         </div>
-
-
-        <!-- Image to PDF -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="space-y-6 order-2 lg:order-1">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Arrange Notes</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              After selecting the notes, notes in the order you want them in the PDF and set the page size, orientation and margin for notes, after setting up everything hit Notes to PDF button.
-            </p>
-
-          </div>
-          <div class="order-1 lg:order-2">
-            <%- include("../carousel", { images: ["/images/imagetopdf-laptop-2.webp", "/images/imagetopdf-tablet-2.webp"
-              , "/images/imagetopdf-mobile-2.webp" ] }) %>
-          </div>
-        </div>
-
-
-
-        <!-- Split PDF -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-          <div class="lg:order-1">
-            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
-              , "/images/download-mobile.webp" ] }) %>
-          </div>
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-900">Download or Preview PDF</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Wait a moment and you will be redirected on download page where you can preview or download the PDF.
-            </p>
-
-          </div>
-        </div>
-
-
 
       </div>
     </div>
@@ -121,55 +104,107 @@
         </p>
 
 
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How to convert multiple Notes to PDF?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to convert Notes to PDF just
-            follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
-          </p>
-        </div>
+        <div class="space-y-4" id="faq-accordion">
 
+          <!-- Item 1 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-slate-900 pr-4">
+                How to convert multiple Notes to PDF?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                This tool is very easy with attractive interface. In order to convert Notes to PDF just
+                follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+                </p>
+              </div>
+            </div>
+          </div>
 
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
+          <!-- Item 2 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-slate-900 pr-4">
+                What will be the quality of notes after PDF creation?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                When converting Notes to PDF, we apply slight compression before uploading them to the server. This helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not noticeable.
+                </p>
+              </div>
+            </div>
+          </div>
 
+          <!-- Item 3 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-slate-900 pr-4">
+                Which note types can I upload in this tool?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                You can upload notes in all common formats, including JPG, JPEG, PNG.
+                </p>
+              </div>
+            </div>
+          </div>
 
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What will be the quality of notes after PDF creation?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            When converting Notes to PDF, we apply slight compression before uploading them to the server. This helps
-            optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not
-            noticeable.
-          </p>
-        </div>
+          <!-- Item 4 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-slate-900 pr-4">
+                How many notes can I merge into single PDF at once?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                You can convert upto 100 notes into single PDF at once in free plan.
+                </p>
+              </div>
+            </div>
+          </div>
 
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
+          
 
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            Which note types can I upload in this tool?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can upload notes in all common formats, including JPG, JPEG, PNG.
-          </p>
-        </div>
-
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
-
-
-
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How many notes can I merge into single PDF at once?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can convert upto 100 notes into single PDF at once in free plan.
-          </p>
         </div>
 
 
@@ -177,10 +212,10 @@
     </div>
 
 
-    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
+    
 
 
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-14">
       Explore More Tools
     </p>
 
@@ -241,4 +276,5 @@
             // Add your file handling logic here
             console.log('Selected files:', files);
           }
+
         </script>

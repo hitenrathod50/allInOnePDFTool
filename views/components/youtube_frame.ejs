@@ -1,0 +1,30 @@
+<div class="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
+
+    <!-- Cover Image -->
+    <img src="<%= cover_image %>" alt="<%= title %>" class="absolute inset-0 w-full h-full object-cover">
+
+    <!-- Play Button -->
+    <button class="absolute inset-0 flex items-center justify-center" onclick="this.parentElement.innerHTML = `
+      <iframe
+        class='w-full h-full'
+        src='https://www.youtube.com/embed/<%= video_id %>?autoplay=1'
+        title='<%= title %>'
+        frameborder='0'
+        allow='autoplay; encrypted-media'
+        allowfullscreen>
+      </iframe>
+    `" aria-label="Play <%= title %>">
+
+        <span class="flex items-center justify-center w-16 h-16 bg-primary rounded-full">
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                class="w-6 h-6 text-white ml-1">
+                <path d="M8 5v14l11-7z" />
+            </svg>
+
+        </span>
+
+    </button>
+
+</div>
+

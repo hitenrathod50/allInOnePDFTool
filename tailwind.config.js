@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         primary: '#00006a',
         secondary : '#00004b',
+        'light':'#dbdbe954',
         'primary-foreground': '#ffffff',
         'nav-hover': '#7100ad',
         'nav-hover-bg': 'rgba(244, 244, 255, 0.61)',
@@ -30,6 +31,7 @@ module.exports = {
         'fluid-base': 'clamp(1rem, 2vw, 1.125rem)',
         'fluid-lg': 'clamp(1.125rem, 2.5vw, 1.25rem)',
         'fluid-xl': 'clamp(1.25rem, 3vw, 1.5rem)',
+        'lg':'1.050rem',
       },
 
     },
