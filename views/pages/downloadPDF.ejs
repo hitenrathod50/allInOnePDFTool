@@ -5,21 +5,17 @@
 
 <head>
 
-  <%- include("../components/meta",{
+    <%- include("../components/meta",{ title : typeof title !=="undefined" ? `Download - ${title}`
+        : "Download Processed PDF" , description
+        : "Download you processed file with PdfVersatile, download or preview it." , keywords
+        : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF"
+        , og_url : typeof endPoint !=="undefined" ? `/${endPoint}` : "/" , robots : "noindex,follow" }) %>
 
-    title : typeof title !== "undefined" ? `Download - ${title}` : "Download Processed PDF",
-    description : "Download you processed file with PdfVersatile, download or preview it.",
-    keywords : "Image to PDF, Merge PDF, split PDF, Edit PDF pages, extract Pages, compress PDF, convert PDF, Word to PDF, JPG to PDF, Protect PDF",
-    og_url : typeof endPoint !== "undefined" ? `/${endPoint}` : "/",
-    robots : "noindex,follow"
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
 
-}) %>
+        <%- include("../components/metaCommanCSS") %>
 
-<meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
-
-  <%- include("../components/metaCommanCSS") %>
-
-  <%- include("../components/metaGA") %>
+            <%- include("../components/metaGA") %>
 
 </head>
 
@@ -35,113 +31,536 @@
 
 
 
-            <h1 id="download-heading" class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Download Your PDF</h1>
-            <p id="download-subheading" class="text-gray-600 mb-6 sm:text-lg tracking-wide">Your PDF is ready! Hit the button below to download.
-            </p>
+                <h1 id="download-heading" class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Download Your PDF
+                </h1>
+                <p id="download-subheading" class="text-gray-600 mb-6 sm:text-lg tracking-wide">Your PDF is ready! Hit
+                    the button below to download.
+                </p>
 
-            <div class="flex flex-col justify-center sm:flex-row gap-4 w-full">
+                <div class="flex flex-col justify-center sm:flex-row gap-4 w-full">
 
-                <a id="downloadButton" class="cursor-pointer w-full sm:w-1/2 text-white bg-primary px-4 py-2 border border-primary 
+                    <a id="downloadButton" class="cursor-pointer w-full sm:w-1/2 text-white bg-primary px-4 py-2 border border-primary 
         hover:bg-secondary transition-all duration-200 rounded-md 
         flex items-center justify-center min-h-[44px]">
-                    Download
-                </a>
+                        Download
+                    </a>
 
-                <a id="previewPDF" class="cursor-pointer w-full sm:w-1/2 px-4 py-2 border border-primary 
+                    <a id="previewPDF" class="cursor-pointer w-full sm:w-1/2 px-4 py-2 border border-primary 
         bg-white text-primary hover:bg-primary hover:text-white 
         transition-all duration-200 rounded-md 
         flex items-center justify-center min-h-[44px]">
-                    Preview
-                </a>
+                        Preview
+                    </a>
+
+                </div>
+
+
+
+
 
             </div>
 
-
-
-
-
         </div>
 
+        <div class="bg-transparent px-4">
+
+            <div class="max-w-7xl mx-auto my-5">
+
+                <div id="explore-more" class="mt-10 mb-5">
+
+                    <p class="text-lg font-medium">Explore More...</p>
+
+                </div>
+
+                <!-- Tools Grid -->
+                <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
+                    <a href="/merge-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/merge-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Merge PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/split-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/split-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Split PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/imagetopdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/imagetopdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Image to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/edit-pdf-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/edit-pdf-pages-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Edit PDF Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/rotate-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/rotate-pages-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Rotate All Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-page-numbers" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-page-numbers-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Page Number
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/remove-pages" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/remove-pages-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Remove Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-pages-pdf" class="tool-card group ">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-pages-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Pages to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/word-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/word-to-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Word to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/excel-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/excel-to-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Excel to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/powerpoint-to-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/powerpoint-to-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Powerpoint to PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/extract-pdf-pages" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/extract-pdf-pages-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Extract Pages
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/compress-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/compress-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Compress PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/add-watermark" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/add-watermark-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Add Watermark
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/protect-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/protect-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Protect PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+
+                    <a href="/unlock-pdf" class="tool-card group"
+                        style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl p-2 hover:shadow-md flex items-center justify-between h-full">
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-xl flex items-center justify-center">
+                                    <img src="/images/unlock-pdf-icon.svg" class="w-8 h-8">
+                                </div>
+                                <h3 class="text-base font-medium text-gray-900 group-hover:text-primary">
+                                    Unlock PDF
+                                </h3>
+                            </div>
+
+                            <div class="mr-3">
+                                <svg class="w-3 h-3 text-gray-400 group-hover:text-gray-500 
+       group-hover:translate-x-1 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"></path>
+                                </svg>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <%- include("../components/toolsList") %>
-
-            <%- include("../components/footer") %>
+        <%- include("../components/footer") %>
 
 
 
-        <script>
+            <script>
 
-    // document.getElementById("explore-more").classList.add("hidden");
+                // document.getElementById("explore-more").classList.add("hidden");
 
-    const downloadButton = document.getElementById("downloadButton");
+                const downloadButton = document.getElementById("downloadButton");
 
-    const previewPDF = document.getElementById("previewPDF");
+                const previewPDF = document.getElementById("previewPDF");
 
-    downloadButton.textContent = "Processing...";
-    const token = '<%= token %>';
-    const endPoint = '<%= endPoint %>';
+                downloadButton.textContent = "Processing...";
+                const token = '<%= token %>';
+                const endPoint = '<%= endPoint %>';
 
-    if(endPoint == "pdf-image-extractor"){
+                if (endPoint == "pdf-image-extractor") {
 
-        document.getElementById("download-heading").textContent = "Download Your Images";
-        document.getElementById("download-subheading").textContent = "Your Images are ready! Hit the button below to download.";
+                    document.getElementById("download-heading").textContent = "Download Your Images";
+                    document.getElementById("download-subheading").textContent = "Your Images are ready! Hit the button below to download.";
 
-    }
+                }
 
-    const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
+                const isZip = `<%= typeof isZip !== 'undefined' && isZip ? 'true' : 'false' %>`;
 
-    // console.log(isZip);
+                // console.log(isZip);
 
-    if (isZip === 'true') {
-        previewPDF.classList.add('hidden');
-    }
+                if (isZip === 'true') {
+                    previewPDF.classList.add('hidden');
+                }
 
-    const link = document.createElement('a');
+                const link = document.createElement('a');
 
-    async function getPDFLink() {
-        try {
+                async function getPDFLink() {
+                    try {
 
-            // Fetch the PDF using the token
-            const response = await fetch(`/${endPoint}/download/file/${token}`);
+                        // Fetch the PDF using the token
+                        const response = await fetch(`/${endPoint}/download/file/${token}`);
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to download PDF');
-            }
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.error || 'Failed to download PDF');
+                        }
 
-            // Get the PDF as a blob
-            const pdfBlob = await response.blob();
+                        // Get the PDF as a blob
+                        const pdfBlob = await response.blob();
 
-            // Create a temporary URL for the blob
-            const pdfUrl = window.URL.createObjectURL(pdfBlob);
+                        // Create a temporary URL for the blob
+                        const pdfUrl = window.URL.createObjectURL(pdfBlob);
 
-            previewPDF.addEventListener('click', (event) => {
-                window.open(pdfUrl, '_blank');
-            })
+                        previewPDF.addEventListener('click', (event) => {
+                            window.open(pdfUrl, '_blank');
+                        })
 
-            // Create a temporary link element to trigger the download
+                        // Create a temporary link element to trigger the download
 
-            link.href = pdfUrl;
-            link.download = isZip === 'true' ? 'output.zip' : 'output.pdf';
-            document.body.appendChild(link);
+                        link.href = pdfUrl;
+                        link.download = isZip === 'true' ? 'output.zip' : 'output.pdf';
+                        document.body.appendChild(link);
 
-        } catch (error) {
-            console.error('Error downloading PDF:', error);
-        }
-    }
+                    } catch (error) {
+                        console.error('Error downloading PDF:', error);
+                    }
+                }
 
-    getPDFLink()
-        .then(() => {
-            downloadButton.textContent = "Download File";
-            downloadButton.addEventListener('click', async function downloadPDF() {
-                link.click();
-            })
-        })
+                getPDFLink()
+                    .then(() => {
+                        downloadButton.textContent = "Download File";
+                        downloadButton.addEventListener('click', async function downloadPDF() {
+                            link.click();
+                        })
+                    })
 
 
 
-</script>
+            </script>
 
 </body>
 

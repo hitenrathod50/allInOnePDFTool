@@ -66,13 +66,18 @@
   <%- include("../components/header") %>
 
 
-    <section class="bg-gray-50 pb-5">
+    <section class="relative bg-gradient-to-b from-gray-100 to-white pb-5">
 
+      <!-- Top decorative shape — desktop only -->
+      <img src="/images/hero-shape.svg" alt="" aria-hidden="true"
+        class="hidden md:block absolute top-0 left-0 w-full h-auto">
 
-      <div class="pt-5 md:pt-10">
+      
 
-        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">PDF Versatile - All important PDF tools
-          in one place
+      <div class="relative pt-5 md:pt-10">
+
+        <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">
+          PDF Versatile - All important PDF tools in one place
         </h1>
 
         <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
@@ -82,9 +87,9 @@
 
       </div>
 
-
-
-      <%- include("../components/toolsListIcons", removeCards=[]) %>
+      <div class="relative">
+        <%- include("../components/toolsListIcons", removeCards=[]) %>
+      </div>
 
     </section>
 
@@ -231,7 +236,7 @@
 
     <section class="py-10 md:py-20 bg-gray-50">
       <div class="max-w-7xl lgd:max-w-[1440px] mx-auto px-4 md:px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center text-gray-800 mb-4">
           Your Trusted PDF Solution
         </h2>
         <p class="text-center text-lg text-gray-600 mb-16 max-w-2xl mx-auto">

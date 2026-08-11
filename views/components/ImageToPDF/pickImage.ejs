@@ -59,9 +59,11 @@
 
           <!-- YouTube -->
           <div class="w-full md:w-1/2">
-            <iframe class="w-full aspect-[16/9] rounded-lg" src="https://www.youtube.com/embed/u-EGJ-SHHAI"
-              title="Notes to PDF" frameborder="0" allowfullscreen>
-            </iframe>
+            
+
+            <%- include('../youtube_frame', { cover_image: '/images/imagetopdf-icon.svg' ,
+              title: 'Notes to PDF' , video_id: 'u-EGJ-SHHAI' }) %>
+
           </div>
 
           <!-- Content -->
@@ -124,8 +126,8 @@
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
               <div class="px-6 pb-5 text-slate-600 leading-relaxed">
                 <p>
-                This tool is very easy with attractive interface. In order to convert Notes to PDF just
-                follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+                  This tool is very easy with attractive interface. In order to convert Notes to PDF just
+                  follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
                 </p>
               </div>
             </div>
@@ -149,7 +151,9 @@
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
               <div class="px-6 pb-5 text-slate-600 leading-relaxed">
                 <p>
-                When converting Notes to PDF, we apply slight compression before uploading them to the server. This helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not noticeable.
+                  When converting Notes to PDF, we apply slight compression before uploading them to the server. This
+                  helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and
+                  typically not noticeable.
                 </p>
               </div>
             </div>
@@ -173,7 +177,7 @@
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
               <div class="px-6 pb-5 text-slate-600 leading-relaxed">
                 <p>
-                You can upload notes in all common formats, including JPG, JPEG, PNG.
+                  You can upload notes in all common formats, including JPG, JPEG, PNG.
                 </p>
               </div>
             </div>
@@ -197,13 +201,13 @@
             <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
               <div class="px-6 pb-5 text-slate-600 leading-relaxed">
                 <p>
-                You can convert upto 100 notes into single PDF at once in free plan.
+                  You can convert upto 100 notes into single PDF at once in free plan.
                 </p>
               </div>
             </div>
           </div>
 
-          
+
 
         </div>
 
@@ -212,7 +216,7 @@
     </div>
 
 
-    
+
 
 
     <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-14">

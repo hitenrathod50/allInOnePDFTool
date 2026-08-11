@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <filter id="drop-shadow-filter-0" bx:preset="drop-shadow 1 -10 14 0 0.5 #000" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+      <title>Drop shadow</title>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0"/>
+      <feOffset dx="-10" dy="14"/>
+      <feComponentTransfer result="offsetblur">
+        <feFuncA id="spread-ctrl" type="linear" slope="1"/>
+      </feComponentTransfer>
+      <feFlood flood-color="#000"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <bx:export>
+      <bx:file format="svg" href="#object-0" path="ring1-b.svg"/>
+      <bx:file format="svg" href="#group-1" path="original.svg"/>
+      <bx:file format="svg" href="#object-1" path="ring2-f.svg"/>
+    </bx:export>
+  </defs>
+  <g style="" transform="matrix(1.075223, 0, 0, 1, -13.817229, 11.322404)" id="object-0">
+    <title>ring1-b</title>
+    <path d="M 459.517 174.631 C 472.913 223.727 388.661 292.186 271.334 327.541 C 154.007 362.895 48.035 351.756 34.639 302.661 C 21.243 253.567 105.495 185.106 222.822 149.752 C 340.149 114.397 446.121 125.536 459.517 174.631 Z M 229.122 154.18 C 126.559 185.085 52.167 242.213 62.963 281.778 C 73.759 321.344 165.654 328.364 268.218 297.457 C 370.781 266.552 445.173 209.425 434.377 169.859 C 423.581 130.294 331.685 123.274 229.122 154.18 Z" style="fill: rgb(5, 28, 57);">
+      <title>lower</title>
+    </path>
+    <path d="M 459.444 169.015 C 472.84 215.734 388.588 280.879 271.261 314.522 C 153.934 348.165 47.962 337.565 34.566 290.847 C 21.17 244.129 105.422 178.983 222.749 145.34 C 340.076 111.697 446.048 122.297 459.444 169.015 Z M 229.049 149.554 C 126.486 178.963 52.094 233.325 62.89 270.975 C 73.686 308.625 165.581 315.305 268.145 285.895 C 370.708 256.486 445.1 202.124 434.304 164.474 C 423.508 126.824 331.612 120.144 229.049 149.554 Z" style="fill: rgb(7, 47, 95);">
+      <title>upper</title>
+    </path>
+  </g>
+  <g id="group-1" transform="matrix(0.351471, 0, 0, 0.351471, 80.917848, 67.58014)" style="filter: url(&quot;#drop-shadow-filter-0&quot;);">
+    <title>original</title>
+    <path d="M719.8 651.8m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M512.1 64H172v896h680V385.6L512.1 64z m278.8 324.3h-280v-265l280 265zM808 916H216V108h278.6l0.2 0.2v296.2h312.9l0.2 0.2V916z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M280.5 530h325.9v16H280.5z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M639.5 530h90.2v16h-90.2z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M403.5 641.8h277v16h-277z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M280.6 641.8h91.2v16h-91.2z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M279.9 753.7h326.5v16H279.9z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+    <path d="M655.8 753.7h73.9v16h-73.9z" style="fill: rgb(2, 43, 84); stroke: rgb(2, 43, 84); stroke-width: 31.297px; fill-rule: nonzero;"/>
+  </g>
+  <g style="" transform="matrix(1.075223, 0, 0, 1, -13.817229, 11.322404)" id="object-1">
+    <title>ring2-f</title>
+    <path d="M 271.334 327.541 C 216.063 344.196 163.313 350.533 121.573 347.444 C 123.992 342.171 125.547 335.9 126.088 328.598 C 126.353 325.023 126.296 320.334 126.028 315.588 C 163.767 319.422 214.531 313.636 268.218 297.457 C 323.005 280.948 369.753 256.957 399.772 232.158 C 398.901 237.639 398.266 243.166 397.977 247.333 C 397.504 254.163 397.708 260.79 398.732 264.704 C 399.025 265.823 399.308 266.676 399.676 267.41 C 366.541 290.812 322.024 312.266 271.334 327.541 Z" style="fill: rgb(5, 28, 57);">
+      <title>lower</title>
+    </path>
+    <path d="M 271.261 314.522 C 217.75 329.866 166.601 336.007 125.52 333.716 C 125.767 332.07 125.957 330.364 126.088 328.598 C 126.6 321.696 125.911 310.64 124.817 303.034 C 162.67 306.905 213.916 301.445 268.145 285.895 C 324.149 269.836 371.754 246.338 401.675 222.182 C 399.841 230.116 398.447 240.534 397.977 247.333 C 397.704 251.271 397.657 255.142 397.861 258.464 C 364.915 280.281 321.068 300.24 271.261 314.522 Z" style="fill: rgb(7, 47, 95);">
+      <title>upper</title>
+    </path>
+  </g>
+</svg>

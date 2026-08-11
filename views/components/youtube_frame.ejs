@@ -1,7 +1,17 @@
 <div class="relative w-full aspect-[16/9] overflow-hidden rounded-lg">
 
     <!-- Cover Image -->
-    <img src="<%= cover_image %>" alt="<%= title %>" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute bg-black inset-0 w-full h-full object-cover">
+
+        <div class="flex items-center justify-center gap-3 m-6 sm:m-10 p-2 sm:p-4 rounded-lg bg-white">
+            <img src="<%= cover_image %>" loading="lazy" alt="<%= title %>" class="w-12 h-12 object-contain">
+
+            <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
+                <%= title %>
+            </h1>
+        </div>
+
+    </div>
 
     <!-- Play Button -->
     <button class="absolute inset-0 flex items-center justify-center" onclick="this.parentElement.innerHTML = `
