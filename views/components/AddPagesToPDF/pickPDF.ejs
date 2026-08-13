@@ -1,20 +1,17 @@
 <div class="flex justify-center">
   <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
 
-    <div>
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <img src="/images/add-pages-pdf-icon.webp" alt="Add JPG to PDF"
-          class="w-12 h-12 object-contain" />
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <img src="/images/add-pages-pdf-icon.svg" alt="Notes to PDF" class="w-12 h-12 object-contain">
 
-        <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
-          Add JPG to PDF
-        </h1>
-      </div>
+      <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
+        Add JPG to PDF
+      </h1>
     </div>
 
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Add JPG to PDF for free. Easily adjust size, margin and orientation for JPG.
+      Add JPG to PDF for free. Easily adjust page size, margin and orientation for JPG.
     </h2>
 
     <div id="dropZone"
@@ -23,7 +20,7 @@
       <button class="bg-primary text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-secondary transition mb-4">
         Select PDF
       </button>
-      <p class="text-gray-600 text-sm">Drag and drop PDF or images here or click to select</p>
+      <p class="text-gray-600 text-sm">Drag and drop PDF here or click to select</p>
     </div>
 
     <%- include('../secure.ejs') %>
@@ -41,57 +38,53 @@
 
   <%- include("../toolOperations", {tool_info : tool}) %>
 
-    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-      <div class="max-w-7xl mx-auto px-4 md:px-6">
-        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+    <div id="tool-usage" class="py-5 md:py-14 my-10 bg-light">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
           How to use
           <span class="underline underline-offset-4">Add JPG to PDF</span>
-        </p>
+        </h2>
 
-        <!-- Step 1 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="lg:order-1">
-            <%- include("../carousel", { images: ["/images/addpages-laptop-1.webp", "/images/addpages-tablet-1.webp"
-              , "/images/addpages-mobile-1.webp" ] }) %>
+
+        <div class="flex flex-col sm:flex-row gap-8">
+
+          <!-- YouTube -->
+          <div class="w-full md:w-1/2">
+
+
+            <%- include('../youtube_frame', { cover_image: '/images/add-pages-pdf-icon.svg' , title: 'Add JPG to PDF' ,
+              video_id: 'u-EGJ-SHHAI' }) %>
+
           </div>
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select File</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Select PDF file by clicking the button or drag & drop in order to Add JPG to PDF.
-            </p>
+
+          <!-- Content -->
+          <div class="w-full md:w-1/2">
+            <div class="process-1 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">1. Drag & Drop or Select File</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Select PDF file by clicking the button or drag & drop in order to Add JPG to PDF.
+              </p>
+            </div>
+            <div class="process-2 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">2. Upload and Arrange JPG</h5>
+              <p class="text-gray-600 sm:text-lg">
+                After selecting the PDF file you'll have to upload images you want to add to you PDF. Arrange images and
+                set the page size, orientation and margin for images, after setting up everything hit Add JPG to PDF
+                button.
+              </p>
+            </div>
+            <div class="process-3 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">3. Download or Preview PDF</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Wait a moment and you will be redirected on download page where you can preview or download the updated
+                PDF.
+              </p>
+            </div>
+
           </div>
+
         </div>
 
-        <!-- Step 2 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="space-y-6 order-2 lg:order-1">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Upload and Arrange JPG</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              After selecting the PDF file you'll have to upload images you want to add to you PDF. Arrange images and
-              set the page size, orientation and margin for images, after setting up everything hit Add JPG to PDF
-              button.
-            </p>
-          </div>
-          <div class="order-1 lg:order-2">
-            <%- include("../carousel", { images: ["/images/addpages-laptop-2.webp", "/images/addpages-tablet-2.webp"
-              , "/images/addpages-mobile-2.webp" ] }) %>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-          <div class="lg:order-1">
-            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
-              , "/images/download-mobile.webp" ] }) %>
-          </div>
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Wait a moment and you will be redirected on download page where you can preview or download the updated
-              PDF.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -102,76 +95,135 @@
         </p>
 
 
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How to add JPG to PDF online?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to add JPG to PDF online just follow <a
-              href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
-          </p>
-        </div>
+        <div class="space-y-4" id="faq-accordion">
+
+          <!-- Item 1 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                How to add JPG to PDF online?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  This tool is very easy with attractive interface. In order to add JPG to PDF online just follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                What will be the quality of images in final PDF?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  During adding images to PDF, we apply slight compression before uploading them to the server. This helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not noticeable.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                Which image types can I upload in this tool?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  You can upload JPG/JPEG images.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                What is the maximum number of PDF files I can upload to add images?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  We support only one PDF file to add images.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                What is the maximum PDF file size allowed?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  We support maximum PDF file size up to 20 MB.
+                </p>
+              </div>
+            </div>
+          </div>
 
 
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
 
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What will be the quality of images in final PDF?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            During adding images to PDF, we apply slight compression before uploading them to the server. This helps
-            optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not
-            noticeable.
-          </p>
-        </div>
-
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
-
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            Which image types can I upload in this tool?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can upload JPG/JPEG images.
-          </p>
-        </div>
-
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
-
-
-
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What is the maximum number of PDF files I can upload to add images?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            we support only one PDF file to add images.
-          </p>
-        </div>
-
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
-
-
-
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What is the maximum PDF file size allowed?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            We support maximum PDF file size up to 20 MB.
-          </p>
         </div>
 
 
       </div>
     </div>
-
-    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
     <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
       Explore More Tools

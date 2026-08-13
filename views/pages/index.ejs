@@ -66,14 +66,14 @@
   <%- include("../components/header") %>
 
 
-    <section class="relative bg-gradient-to-b from-gray-100 to-white pb-5">
+    <section class="relative bg-gradient-to-b from-gray-100 to-white pb-5 overflow-hidden">
 
-      <!-- Top decorative shape — desktop only -->
-      <img src="/images/hero-shape.svg" alt="" aria-hidden="true"
-        class="hidden md:block absolute top-0 left-0 w-full h-auto">
+      <!-- Fixed background image -->
+      <div
+        class="absolute inset-0 bg-[url('/images/hero-shape.svg')] bg-fixed bg-cover bg-no-repeat pointer-events-none"
+        aria-hidden="true"></div>
 
-      
-
+      <!-- Content -->
       <div class="relative pt-5 md:pt-10">
 
         <h1 class="text-3xl md:text-5xl font-semibold text-center text-gray-800">
@@ -81,8 +81,9 @@
         </h1>
 
         <p class="text-center font-semibold text-lg md:text-xl text-gray-600 p-4 max-w-6xl mx-auto">
-          Every tool you need for PDF operations in one place. All tools are completely free with interactive UI.
-          Explore Merge, Split, Rotate, Convert, Edit PDFs and many more.
+          Every tool you need for PDF operations in one place. All tools are completely
+          free with interactive UI. Explore Merge, Split, Rotate, Convert, Edit PDFs
+          and many more.
         </p>
 
       </div>
