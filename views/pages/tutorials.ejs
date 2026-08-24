@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <%- include("../components/meta",{ title : "Tutorials" , description : "PDF Versatile - Tutorials for all tools." ,
+        keywords : "tutorials" , og_url : "/tutorials" , robots : "index,follow" }) %>
+
+        <meta property="og:image" content="https://pdfversatile.com/images/image-og.webp" />
+
+        <%- include("../components/metaCommanCSS") %>
+
+            <%- include("../components/metaGA") %>
+
+</head>
+
+
+<% const videosId=[ "Cn2q-4BHziY" , "u-EGJ-SHHAI" ]; %>
+
+
+    <body>
+
+        <%- include("../components/header") %>
+
+            <div class="bg-gray-50 text-gray-800">
+
+                <section class="max-w-7xl mx-auto px-4 py-10">
+
+                    <div class="text-justify md:text-center mb-12">
+                    <h1 class="text-4xl text-gray-700 md:text-5xl font-bold mb-4">Tutorials</h1>
+                    
+                </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lgd:grid-cols-4 gap-6">
+
+                        <% videosId.forEach(videoId=> { %>
+
+                            <div class="w-full aspect-video overflow-hidden rounded-lg">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/<%= videoId %>"
+                                    title="YouTube video" loading="lazy" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+
+                            <% }); %>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <%- include("../components/footer") %>
+
+    </body>
+
+
+</html>

@@ -1,23 +1,39 @@
+<div class="flex items-center gap-2 text-sm text-gray-600 m-4">
+  <a href="/" class="hover:text-blue-600 transition-colors">
+    Home
+  </a>
+
+  <span class="text-gray-400">&gt;</span>
+
+  <span class="text-gray-700 font-medium">
+    Add JPG to PDF
+  </span>
+</div>
+
 <div class="flex justify-center">
-  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
+
+  <div class="bg-white rounded-lg w-full shadow-lg p-6 sm:p-10 mx-4 cst:mx-60 my-4 sm:mb-0 text-center">
+
+
 
     <div class="flex items-center justify-center gap-3 mb-4">
-      <img src="/images/add-pages-pdf-icon.svg" alt="Notes to PDF" class="w-12 h-12 object-contain">
+      <img src="/images/add-pages-pdf-icon.svg" alt="Add JPG to PDF" class="w-16 h-16 object-contain">
 
-      <h1 class="text-2xl sm:text-3xl font-semibold text-primary">
+      <h1 class="text-3xl sm:text-4xl font-bold text-black">
         Add JPG to PDF
       </h1>
     </div>
 
 
     <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Add JPG to PDF for free. Easily adjust page size, margin and orientation for JPG.
+      Add Forgotten Notes, Scanned Documents, ID Proofs, Receipts, Signatures, Photographs, and other JPG files to PDF
+      For free. Easily adjust page size, margin and orientation for JPG.
     </h2>
 
     <div id="dropZone"
-      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-20 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
       <input type="file" id="pdfInputFirst" accept="application/pdf" class="hidden" onchange="handleFileSelect(event)">
-      <button class="bg-primary text-white sm:text-xl px-6 py-2 sm:py-3 rounded-lg hover:bg-secondary transition mb-4">
+      <button class="bg-light hover:bg-gray-200 text-primary sm:text-xl px-6 py-3 rounded-lg transition  mb-4">
         Select PDF
       </button>
       <p class="text-gray-600 text-sm">Drag and drop PDF here or click to select</p>
@@ -36,252 +52,551 @@
   name: "Single Click Conversion" , desc: "Add JPG to PDF in few moment and download or preview the updated PDF." } };
   %>
 
-  <%- include("../toolOperations", {tool_info : tool}) %>
+  <div class="mb-5 sm:mb-10 mt-8 sm:mt-20">
 
-    <div id="tool-usage" class="py-5 md:py-14 my-10 bg-light">
-      <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
-        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
-          How to use
-          <span class="underline underline-offset-4">Add JPG to PDF</span>
-        </h2>
+    <h2 class="text-2xl sm:text-3xl text-center font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+      Add JPG to PDF Online
+    </h2>
+
+    <%- include("../toolOperations", {tool_info : tool}) %>
+  </div>
+
+  <div id="tool-usage" class="py-5 md:py-14 my-10 bg-light">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
+        How to use
+        <span class="underline underline-offset-4">Add JPG to PDF</span>
+      </h2>
 
 
-        <div class="flex flex-col sm:flex-row gap-8">
+      <div class="flex flex-col sm:flex-row gap-8">
 
-          <!-- YouTube -->
-          <div class="w-full md:w-1/2">
+        <!-- YouTube -->
+        <div class="w-full md:w-1/2">
 
 
-            <%- include('../youtube_frame', { cover_image: '/images/add-pages-pdf-icon.svg' , title: 'Add JPG to PDF' ,
-              video_id: 'u-EGJ-SHHAI' }) %>
+          <%- include('../youtube_frame', { cover_image: '/images/add-pages-pdf-icon.svg' , title: 'Add JPG to PDF' ,
+            video_id: 'Cn2q-4BHziY' }) %>
 
+        </div>
+
+        <!-- Content -->
+        <div class="w-full md:w-1/2">
+          <div class="process-1 mb-5">
+            <h5 class="text-xl font-semibold text-gray-900 mb-2">1. Drag & Drop or Select File</h5>
+            <p class="text-gray-600 sm:text-lg">
+              Select PDF file by clicking the button or drag & drop in order to Add JPG to PDF.
+            </p>
           </div>
-
-          <!-- Content -->
-          <div class="w-full md:w-1/2">
-            <div class="process-1 mb-5">
-              <h5 class="text-xl font-semibold text-gray-900 mb-2">1. Drag & Drop or Select File</h5>
-              <p class="text-gray-600 sm:text-lg">
-                Select PDF file by clicking the button or drag & drop in order to Add JPG to PDF.
-              </p>
-            </div>
-            <div class="process-2 mb-5">
-              <h5 class="text-xl font-semibold text-gray-900 mb-2">2. Upload and Arrange JPG</h5>
-              <p class="text-gray-600 sm:text-lg">
-                After selecting the PDF file you'll have to upload images you want to add to you PDF. Arrange images and
-                set the page size, orientation and margin for images, after setting up everything hit Add JPG to PDF
-                button.
-              </p>
-            </div>
-            <div class="process-3 mb-5">
-              <h5 class="text-xl font-semibold text-gray-900 mb-2">3. Download or Preview PDF</h5>
-              <p class="text-gray-600 sm:text-lg">
-                Wait a moment and you will be redirected on download page where you can preview or download the updated
-                PDF.
-              </p>
-            </div>
-
+          <div class="process-2 mb-5">
+            <h5 class="text-xl font-semibold text-gray-900 mb-2">2. Upload and Arrange JPG</h5>
+            <p class="text-gray-600 sm:text-lg">
+              After selecting the PDF file you'll have to upload images you want to add to you PDF. Arrange images and
+              set the page size, orientation and margin for images, after setting up everything hit Add JPG to PDF
+              button.
+            </p>
+          </div>
+          <div class="process-3 mb-5">
+            <h5 class="text-xl font-semibold text-gray-900 mb-2">3. Download or Preview PDF</h5>
+            <p class="text-gray-600 sm:text-lg">
+              Wait a moment and you will be redirected on download page where you can preview or download the updated
+              PDF.
+            </p>
           </div>
 
         </div>
 
       </div>
-    </div>
 
-    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
-      <div class="max-w-5xl mx-auto px-4 md:px-6">
-        <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
-          What People Frequently Ask
+    </div>
+  </div>
+
+  <div class="mb-5 sm:mb-10 mt-8 sm:mt-20">
+
+    <h2 class="text-2xl sm:text-3xl text-center font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+      Why Use Our Add JPG to PDF Tool?
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 p-4 lg:mx-20 cst:mx-32 md:p-5">
+
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/free.svg" alt="Free to Use" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Free to Use
+        </h3>
+        <p class="text-gray-600">
+          Convert multiple PDFs for free without the need for an account, email or software installation.
         </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/no-software-install.svg" alt="No Software Installation" loading="lazy" class="w-10 h-10 mb-3">
 
 
-        <div class="space-y-4" id="faq-accordion">
 
-          <!-- Item 1 -->
-          <div
-            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
-              <span class="text-lg font-semibold text-gray-900 pr-4">
-                How to add JPG to PDF online?
-              </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
-                <p>
-                  This tool is very easy with attractive interface. In order to add JPG to PDF online just follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
-                </p>
-              </div>
-            </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          No Software Installation
+        </h3>
+        <p class="text-gray-600">
+          Add JPG images into existing PDF without software installation. Anyone can easily access the tool using any
+          browser.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/multiple-image-selection.svg" alt="Multiple Image Selection" loading="lazy"
+          class="w-10 h-10 mb-3">
+
+
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Multiple Image Support
+        </h3>
+        <p class="text-gray-600">
+          Upload your forgotten images, notes, photographs in JPG and JPEG formats and add them into existing PDF file.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/easy-to-use.svg" alt="Easy to Use" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Easy to Use
+        </h3>
+        <p class="text-gray-600">
+          Tool is very easy to use, anyone can easily add their forgotten image files into PDF in few steps.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="md:col-start-2 bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/no-quality-loss.svg" alt="No Quality Loss" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          No Quality Loss
+        </h3>
+        <p class="text-gray-600">
+          Compress images efficiently while preserving the visual quality of your images for a clear, readable PDF.
+        </p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+        <img src="/images/privacy-focused.svg" alt="Privacy Focused" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          Privacy Focused
+        </h3>
+        <p class="text-gray-600">
+          Your files are processed securely on our servers and automatically deleted after processing is complete.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="use-cases" class="py-5 md:py-14 my-10 bg-light">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
+        Common Uses of Add JPG to PDF Tool
+
+      </h2>
+
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Add Forgotten Pages
+            </h3>
+
           </div>
 
-          <!-- Item 2 -->
-          <div
-            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
-              <span class="text-lg font-semibold text-gray-900 pr-4">
-                What will be the quality of images in final PDF?
-              </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
-                <p>
-                  During adding images to PDF, we apply slight compression before uploading them to the server. This helps optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically not noticeable.
-                </p>
-              </div>
-            </div>
+          <p class="text-gray-600">
+            Forgot to include pages in your PDF? Add their JPGs as new pages without recreating the entire PDF.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Add Handwritten Notes
+            </h3>
+
           </div>
 
-          <!-- Item 3 -->
-          <div
-            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
-              <span class="text-lg font-semibold text-gray-900 pr-4">
-                Which image types can I upload in this tool?
-              </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
-                <p>
-                  You can upload JPG/JPEG images.
-                </p>
-              </div>
-            </div>
+          <p class="text-gray-600">
+            After creating multiple notes to PDF sometimes we need to append more notes to that PDF.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Important Documents
+            </h3>
+
           </div>
 
-          <!-- Item 4 -->
-          <div
-            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
-              <span class="text-lg font-semibold text-gray-900 pr-4">
-                What is the maximum number of PDF files I can upload to add images?
-              </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
-                <p>
-                  We support only one PDF file to add images.
-                </p>
-              </div>
-            </div>
+          <p class="text-gray-600">
+            Add JPG images of Aadhaar cards, PAN cards, driving licences, passport pages, or other ID documents to your
+            important documents.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Scanned Images
+            </h3>
+
           </div>
 
-          <!-- Item 5 -->
-          <div
-            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
-            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
-              <span class="text-lg font-semibold text-gray-900 pr-4">
-                What is the maximum PDF file size allowed?
-              </span>
-              <span
-                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                  </path>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
-                <p>
-                  We support maximum PDF file size up to 20 MB.
-                </p>
-              </div>
-            </div>
-          </div>
-
-
+          <p class="text-gray-600">
+            Add newly scanned document pages to an existing PDF without creating the PDF from scratch again.
+          </p>
 
         </div>
 
 
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Signatures
+            </h3>
+
+          </div>
+
+          <p class="text-gray-600">
+            Add a scanned signature or signed document page as a separate page to your existing PDF.
+          </p>
+
+        </div>
+
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Project Documentation
+            </h3>
+
+          </div>
+
+          <p class="text-gray-600">
+            Add project photos, diagrams, records, or other JPG pages to an existing project or documentation PDF.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Credits Page
+            </h3>
+
+          </div>
+
+          <p class="text-gray-600">
+            Add a credits page to presentations, project reports, portfolios, videos converted to PDF, or other creative documents.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Contact Information Page
+            </h3>
+
+          </div>
+
+          <p class="text-gray-600">
+            Add a final page containing an email address, phone number, website, or social media details.
+          </p>
+
+        </div>
+
+        <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+          <div class="flex items-center gap-4 mb-2">
+            <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+            <h3 class="text-lg font-semibold text-gray-900">
+              Call-to-Action Page
+            </h3>
+
+          </div>
+
+          <p class="text-gray-600">
+            Add a final page asking readers to take an action, such as visiting a website, registering, contacting a business, or following a social account.
+          </p>
+
+        </div>
+
       </div>
+
     </div>
+  </div>
 
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
-      Explore More Tools
-    </p>
+  <div id="faq-section" class="bg-white mt-20 mb-10">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
+        What People Frequently Ask
+      </h2>
 
-    <%- include("../toolsListIcons", { removeCards: ["/add-pages-pdf"] }) %>
 
-      <%- include("../footer") %>
+      <div class="space-y-4" id="faq-accordion">
 
-        <script>
-          const dropZone = document.getElementById('dropZone');
+        <!-- Item 1 -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+          <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+            <span class="text-lg font-semibold text-gray-900 pr-4">
+              How to add JPG to PDF online?
+            </span>
+            <span
+              class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+              <p>
+                This tool is very easy with attractive interface. In order to add JPG to PDF online just follow <a
+                  href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          dropZone.addEventListener('dragover', (event) => {
-            event.preventDefault();
-            console.log("dragover")
-            dropZone.classList.add('bg-gray-100');
-          });
+        <!-- Item 2 -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+          <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+            <span class="text-lg font-semibold text-gray-900 pr-4">
+              What will be the quality of images in final PDF?
+            </span>
+            <span
+              class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+              <p>
+                During adding images to PDF, we apply slight compression before uploading them to the server. This helps
+                optimize bandwidth usage while maintaining high visual quality. The compression is minimal and typically
+                not noticeable.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          dropZone.addEventListener('dragenter', (event) => {
-            event.preventDefault();
-            console.log("dragenter")
-            dropZone.classList.remove('border-gray-400')
-            dropZone.classList.add('bg-gray-100', 'border-primary');
-          });
+        <!-- Item 3 -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+          <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+            <span class="text-lg font-semibold text-gray-900 pr-4">
+              Which image types can I upload in this tool?
+            </span>
+            <span
+              class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+              <p>
+                You can upload JPG/JPEG images.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          dropZone.addEventListener('dragleave', (event) => {
-            event.preventDefault();
-            console.log("dragleave")
-            dropZone.classList.remove('bg-gray-100', 'border-primary');
-            dropZone.classList.add('border-gray-400')
-          });
+        <!-- Item 4 -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+          <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+            <span class="text-lg font-semibold text-gray-900 pr-4">
+              What is the maximum number of PDF files I can upload to add images?
+            </span>
+            <span
+              class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+              <p>
+                We support only one PDF file to add images.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          dropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            console.log("drop")
-            dropZone.classList.remove('bg-gray-100', 'border-primary');
-            dropZone.classList.add('border-gray-400')
-            handleDrop(event);
+        <!-- Item 5 -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+          <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+            <span class="text-lg font-semibold text-gray-900 pr-4">
+              What is the maximum PDF file size allowed?
+            </span>
+            <span
+              class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+              <p>
+                We support maximum PDF file size up to 20 MB.
+              </p>
+            </div>
+          </div>
+        </div>
 
-          });
 
-          dropZone.addEventListener('click', () => {
-            document.getElementById('pdfInputFirst').click();
-          });
 
-          function handleDrop(event) {
-            const files = event.dataTransfer.files;
+      </div>
 
-            if (files.length) {
-              document.getElementById('pdfInputFirst').files = files;
-              handleFileSelect({ target: { files } });
-            }
+
+    </div>
+  </div>
+
+  <h2 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-8 sm:mt-20">
+    Explore More Tools
+  </h2>
+
+  <%- include("../toolsListIcons", { removeCards: ["/add-pages-pdf"] }) %>
+
+    <%- include("../footer") %>
+
+      <script>
+        const dropZone = document.getElementById('dropZone');
+
+        dropZone.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          console.log("dragover")
+          dropZone.classList.add('bg-gray-100');
+        });
+
+        dropZone.addEventListener('dragenter', (event) => {
+          event.preventDefault();
+          console.log("dragenter")
+          dropZone.classList.remove('border-gray-400')
+          dropZone.classList.add('bg-gray-100', 'border-primary');
+        });
+
+        dropZone.addEventListener('dragleave', (event) => {
+          event.preventDefault();
+          console.log("dragleave")
+          dropZone.classList.remove('bg-gray-100', 'border-primary');
+          dropZone.classList.add('border-gray-400')
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+          event.preventDefault();
+          console.log("drop")
+          dropZone.classList.remove('bg-gray-100', 'border-primary');
+          dropZone.classList.add('border-gray-400')
+          handleDrop(event);
+
+        });
+
+        dropZone.addEventListener('click', () => {
+          document.getElementById('pdfInputFirst').click();
+        });
+
+        function handleDrop(event) {
+          const files = event.dataTransfer.files;
+
+          if (files.length) {
+            document.getElementById('pdfInputFirst').files = files;
+            handleFileSelect({ target: { files } });
           }
+        }
 
-          function handleFileSelect(event) {
-            const files = event.target.files;
+        function handleFileSelect(event) {
+          const files = event.target.files;
 
-            // Add your file handling logic here
-            console.log('Selected files:', files);
-          }
-        </script>
+          // Add your file handling logic here
+          console.log('Selected files:', files);
+        }
+      </script>

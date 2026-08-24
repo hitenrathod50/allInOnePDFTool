@@ -134,6 +134,12 @@ async function getRoutes(fastify, options) {
 
   });
 
+  fastify.get("/tutorials", async (request, reply) => {
+
+    return reply.view("pages/tutorials.ejs");
+
+  });
+
 
   fastify.get("/blog", blogList);
   fastify.get("/blog/:slug", singleBlog);

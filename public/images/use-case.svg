@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <g transform="matrix(1.401869, 0, 0, 1.401869, -90.337297, -112.879129)">
+    <circle style="fill: none; stroke-width: 30px; stroke: rgb(34, 197, 94);" cx="242.349" cy="259.768" r="160.5"/>
+    <g transform="matrix(0.867224, 0, 0, 0.867224, 37.179078, 37.183308)">
+      <rect x="118.716" y="226.948" width="124" height="30" style="fill: rgb(34, 197, 94); transform-box: fill-box; transform-origin: 50% 50%;" rx="20" ry="20" transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, -2.58065, 54.378899)"/>
+      <rect x="189.562" y="226.948" width="198" height="30" style="fill: rgb(34, 197, 94); stroke-width: 1; transform-origin: 288.563px 241.948px;" rx="20" ry="20" transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -16.815989, 27.937358)"/>
+    </g>
+  </g>
+</svg>
