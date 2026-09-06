@@ -1,145 +1,437 @@
-<div class="flex justify-center">
-  <div class="bg-white rounded-lg shadow-lg p-6 sm:p-10 m-4 sm:mb-0 max-w-2xl md:mx-auto text-center">
-    <h1 class="text-2xl sm:text-3xl font-semibold text-primary mb-4">Convert multiple files to PDF</h1>
+<div class="flex items-center gap-2 text-sm text-gray-600 m-4">
+  <a href="/" class="hover:text-blue-600 transition-colors">
+    Home
+  </a>
 
-    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Convert multiple files to single PDF. Without Compression & Sign Up.
-    </h2>
+  <span class="text-gray-400">&gt;</span>
 
-    <div id="dropZone"
-      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-10 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-      <input type="file" id="pdfInputFirst" accept="application/pdf" multiple class="hidden"
-        onchange="handleFileSelect(event)">
-      <button
-        class="bg-primary text-white sm:text-xl px-6 py-3 rounded-lg hover:bg-secondary transition mb-4">
-        Select Files
-      </button>
-      <p class="text-gray-600 text-sm">Drag and drop PDF files here or click to select</p>
-    </div>
-
-    <%- include('../secure.ejs') %>
-
-  </div>
+  <span class="text-gray-700 font-medium">
+    Join PDF to PDF
+  </span>
 </div>
 
-<% const tool={ "tool-description" : { name: "Convert multiple files to PDF" ,
-  desc: "Select/drop multiple files and combine them into single PDF." }, "tool-process" : { name: "Drag/Move PDF cards"
-  , desc: "Move PDF cards in order to change it's position." }, "tool-setting" : { name: "Advance settings Option" ,
-  desc: "In advance setting option you can set margin to PDF pages" }, "download-info" : { name: "Convert in few moment"
-  , desc: "Convert multiple files into PDF in few moment and download or preview PDF." } }; %>
+<%- include('../ToolUpload.ejs', { icon: '/images/merge-pdf-icon.svg' , alt: 'Join PDF to PDF' ,
+  title: 'Join PDF to PDF' ,
+  description: 'Join Assignments, Notes & Study Material, Application Documents, Legal Documents and other PDFs For free. Easily page margin for final PDF file.'
+  , inputId: 'pdfInputFirst' , accept: 'application/pdf' , multiple: true, buttonText: 'Select PDFs' ,
+  dropText: 'or drop here' }) %>
 
-  <%- include("../toolOperations", {tool_info : tool}) %>
 
-    <div id="tool-usage" class="py-10 md:py-10 bg-white mt-5 sm:mt-0">
-      <div class="max-w-7xl mx-auto px-4 md:px-6">
-        <p class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-5">
+  <% const tool={ "tool-description" : { name: "Join PDF to PDF" ,
+    desc: "Join Assignments, Notes & Study Material, Application Documents, Legal Documents and other PDFs For free." }, "tool-process" : {
+    name: "Arrange PDFs" , desc: "Arrange all the PDF files in the order you want them in the final PDF file." }, "tool-setting" : {
+    name: "Advance setting" , desc: "In advance setting you can set the page margin for final PDF file."
+    }, "download-info" : { name: "Single Click Conversion" ,
+    desc: "Join multiple PDF files into single one in a few moments and download or preview PDF." } }; %>
+
+    <div class="mb-5 sm:mb-10 mt-8 sm:mt-20">
+
+      <h2 class="text-2xl sm:text-3xl text-center font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+        Join PDF to PDF Online
+      </h2>
+
+      <%- include("../toolOperations", {tool_info : tool}) %>
+    </div>
+
+    <div id="tool-usage" class="py-5 md:py-14 my-10 bg-light">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
           How to use
-          <span class="underline underline-offset-4">Merge PDF</span>
-          Tool
-        </p>
+          <span class="underline underline-offset-4">Join PDF to PDF</span>
+        </h2>
 
-        <!-- Step 1 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="lg:order-1">
-            <%- include("../carousel", { images: ["/images/mergepdf-laptop-1.webp", "/images/mergepdf-tablet-1.webp"
-              , "/images/mergepdf-mobile-1.webp" ] }) %>
+
+        <div class="flex flex-col sm:flex-row gap-8">
+
+          <!-- YouTube -->
+          <div class="w-full md:w-1/2">
+
+
+            <%- include('../youtube_frame', { cover_image: '/images/merge-pdf-icon.svg' , title: 'Join PDF to PDF' ,
+              video_id: 'u-EGJ-SHHAI' }) %>
+
           </div>
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Drag & Drop or Select Files</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Select multiple files by clicking the button or drag & drop in order to merge multiple files into single
-              PDF.
-            </p>
+
+          <!-- Content -->
+          <div class="w-full md:w-1/2">
+            <div class="process-1 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">1. Drag & Drop or Select PDFs</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Select PDFs by clicking the button or drag & drop in order to join multiple PDFs.
+              </p>
+            </div>
+            <div class="process-2 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">2. Arrange PDFs</h5>
+              <p class="text-gray-600 sm:text-lg">
+                After selecting the PDFs, arrange all PDF files in the order you want them in final PDF, after setting up everything hit Join PDF to PDF button.
+              </p>
+            </div>
+            <div class="process-3 mb-5">
+              <h5 class="text-xl font-semibold text-gray-900 mb-2">3. Download or Preview PDF</h5>
+              <p class="text-gray-600 sm:text-lg">
+                Wait a moment and you will be redirected on download page where you can preview or download the PDF.
+              </p>
+            </div>
+
           </div>
+
         </div>
 
-        <!-- Step 2 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 md:mb-20">
-          <div class="space-y-6 order-2 lg:order-1">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Move PDF Cards</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Move PDF cards in order to change the specific PDF's position in merged PDF file. Also you can set the
-              margin to the each Pages in Merged PDF and after setting up all things click on Convert to PDF.
-            </p>
-          </div>
-          <div class="order-1 lg:order-2">
-            <%- include("../carousel", { images: ["/images/mergepdf-laptop-2.webp", "/images/mergepdf-tablet-2.webp"
-              , "/images/mergepdf-mobile-2.webp" ] }) %>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10">
-          <div class="lg:order-1">
-            <%- include("../carousel", { images: ["/images/download-laptop.webp", "/images/download-tablet.webp"
-              , "/images/download-mobile.webp" ] }) %>
-          </div>
-          <div class="space-y-6 lg:order-2">
-            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700">Download or Preview PDF</h3>
-            <p class="text-gray-600 sm:text-lg tracking-wide">
-              Wait a moment and you will have Download or Preview option where you can download or preview merged PDF.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
 
-    <div id="faq-section" class="bg-white sm:mt-0 mb-10">
+    <div class="mb-5 sm:mb-10 mt-8 sm:mt-20">
+
+      <h2 class="text-2xl sm:text-3xl text-center font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+        Why Use Our PDF Joiner Tool?
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 p-4 lg:mx-20 cst:mx-32 md:p-5">
+
+        <!-- Card 1 -->
+        <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/free.svg" alt="Free to Use" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Free to Use
+          </h3>
+          <p class="text-gray-600">
+            Merge multiple PDFs for free without the need for an account, email or software installation.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/no-software-install.svg" alt="No Software Installation" loading="lazy"
+            class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            No Software Installation
+          </h3>
+          <p class="text-gray-600">
+            Combine multiple PDFs into single PDF without software installation. Anyone can easily access the tool
+            using any browser.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/multiple-image-selection.svg" alt="Multiple Image Selection" loading="lazy"
+            class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Merge Multiple PDF
+          </h3>
+          <p class="text-gray-600">
+            Upload multiple PDF files and arrange them in the order you want and combine them into a single PDF.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/easy-to-use.svg" alt="Easy to Use" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Easy to Use
+          </h3>
+          <p class="text-gray-600">
+            Tool is very easy to use, anyone can easily merge multiple PDF files in few steps.
+          </p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="md:col-start-2 bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/no-quality-loss.svg" alt="No Quality Loss" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            No Quality Loss
+          </h3>
+          <p class="text-gray-600">
+            We don't compress PDF files during merging them into single PDF file. Page quality will remain same.
+          </p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-white rounded-xl p-5 sm:p-6 
+                aspect-auto sm:aspect-[5/3] md:aspect-[5/4] flex flex-col items-center justify-start text-center">
+
+          <img src="/images/privacy-focused.svg" alt="Privacy Focused" loading="lazy" class="w-10 h-10 mb-3">
+
+
+
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Privacy Focused
+          </h3>
+          <p class="text-gray-600">
+            Your files are processed securely on our servers and automatically deleted after processing is complete.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="use-cases" class="py-5 md:py-14 my-10 bg-light">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 mb-5">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
+          Common Uses of PDF Joiner
+
+        </h2>
+
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Join Assignment PDFs
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine multiple assignment files into one PDF for easy submission to your school, college, or university.
+            </p>
+
+          </div>
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Merge Notes & Study Materials
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine class notes, lecture notes, study guides, and other learning materials into one organized PDF.
+            </p>
+
+          </div>
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Join Job Application Documents
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine your resume, cover letter, certificates, and other supporting documents into a single PDF for job applications.
+            </p>
+
+          </div>
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+               Merge Business Documents
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine reports, proposals, presentations, and other business documents into one professional PDF.
+            </p>
+
+          </div>
+
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Combine Legal Documents
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine contracts, agreements, case documents, affidavits, and other legal paperwork into a single PDF.
+            </p>
+
+          </div>
+
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Merge Research Papers
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine research papers, journal articles, lab reports, and other academic documents for easier reading and reference.
+            </p>
+
+          </div>
+
+
+          <div class="hover:bg-white rounded-xl p-5 sm:p-6">
+
+            <div class="flex items-center gap-4 mb-2">
+              <img src="/images/use-case.svg" alt="Notes to PDF" loading="lazy" class="w-5 h-5 shrink-0">
+
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                Join Important Documents
+              </h3>
+
+            </div>
+
+            <p class="text-gray-600">
+              Combine important documents such as passport, visa, driver's license, identity documents, certificates, and permits into a single PDF for convenient storage, sharing, or submission.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div id="faq-section" class="bg-white mt-20 mb-10">
       <div class="max-w-5xl mx-auto px-4 md:px-6">
-        <p class="text-2xl sm:text-3xl font-semibold sm:text-center text-primary mb-5 sm:mb-10">
+        <h2 class="text-2xl sm:text-3xl font-semibold text-center text-primary mb-10 sm:mb-14">
           What People Frequently Ask
-        </p>
+        </h2>
 
 
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How to merge multiple files into single PDF?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            This tool is very easy with attractive interface. In order to merge multiple files into single PDF just
-            follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
-          </p>
-        </div>
+        <div class="space-y-4" id="faq-accordion">
+
+          <!-- Item 1 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                How to join multiple PDF files into single PDF?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  This tool is very easy with attractive interface. In order to join multiple files into single PDF just follow <a href="#tool-usage" class="text-blue-600 hover:text-blue-700 underline">few steps</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                What will be the quality of PDF pages after merging them into single PDF?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  Not at all. We don't compress the PDF files during merging them. So you will get original page quality in merged PDF.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md">
+            <button class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none">
+              <span class="text-lg font-semibold text-gray-900 pr-4">
+                How many files can I merge into single PDF at once?
+              </span>
+              <span
+                class="faq-icon flex-shrink-0 w-8 h-8 rounded-full bg-light text-primary flex items-center justify-center transition-transform duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                  </path>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="px-6 pb-5 text-slate-600 leading-relaxed">
+                <p>
+                  You can merge upto 5 PDF files into single PDF in free plan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          
 
 
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
 
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            What will be the quality of PDF pages after merging them into single PDF?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            Not at all. We don't compress the PDF files during merging them. So you will get original page quality in
-            merged PDF.
-          </p>
-        </div>
-
-
-
-        <div class="border-t border-gray-200 mx-0 sm:mx-10 my-3"></div>
-
-
-
-
-        <div class="bg-white rounded-xl px-2 py-5 sm:p-5">
-          <h3 class="text-xl sm:text-2xl font-semibold text-gray-700">
-            How many files can I merge into single PDF at once?
-          </h3>
-          <p class="text-gray-600  mt-3 sm:text-lg leading-relaxed">
-            You can merge upto 5 PDF files into single PDF in free plan.
-          </p>
         </div>
 
 
       </div>
     </div>
 
-    <div class="border-t border-gray-200 mx-4 sm:mx-5"></div>
 
-    <p class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-10">
+
+
+
+    <h2 class="text-2xl sm:text-3xl font-semibold text-center text-gray-800 mt-8 sm:mt-20">
       Explore More Tools
-    </p>
+    </h2>
 
     <%- include("../toolsListIcons", { removeCards: ["/merge-pdf"] }) %>
 

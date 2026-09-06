@@ -1,0 +1,49 @@
+<div class="flex justify-center">
+  <div class="bg-white rounded-lg w-full shadow-lg p-6 sm:p-10 mx-4 cst:mx-60 my-4 sm:mb-0 text-center">
+
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <img
+        src="<%= icon %>"
+        alt="<%= alt %>"
+        class="w-16 h-16 object-contain"
+      >
+
+      <h1 class="text-3xl sm:text-4xl font-bold text-black">
+        <%= title %>
+      </h1>
+    </div>
+
+    <p class="text-gray-600 sm:text-lg tracking-wide mb-4">
+      <%= description %>
+    </p>
+
+    <div
+      id="dropZone"
+      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-20 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200"
+    >
+
+      <input
+        type="file"
+        id="<%= inputId %>"
+        accept="<%= accept %>"
+        <%= multiple ? 'multiple' : '' %>
+        class="hidden"
+        onchange="handleFileSelect(event)"
+      >
+
+      <button
+        class="bg-light hover:bg-gray-200 text-primary sm:text-xl px-6 py-3 rounded-lg transition mb-4"
+      >
+        <%= buttonText %>
+      </button>
+
+      <p class="text-gray-600 text-sm">
+        <%= dropText %>
+      </p>
+
+    </div>
+
+    <%- include('./secure.ejs') %>
+
+  </div>
+</div>

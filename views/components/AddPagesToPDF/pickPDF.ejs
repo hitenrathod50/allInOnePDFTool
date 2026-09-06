@@ -10,39 +10,22 @@
   </span>
 </div>
 
-<div class="flex justify-center">
 
-  <div class="bg-white rounded-lg w-full shadow-lg p-6 sm:p-10 mx-4 cst:mx-60 my-4 sm:mb-0 text-center">
+<%- include('../ToolUpload.ejs', {
+  icon: '/images/add-pages-pdf-icon.svg',
+  alt: 'Add JPG to PDF',
+  title: 'Add JPG to PDF',
 
+  description: 'Add Forgotten Notes, Scanned Documents, ID Proofs, Receipts, Signatures, Photographs, and other JPG files to PDF For free. Easily adjust page size, margin and orientation for JPG.',
 
+  inputId: 'pdfInputFirst',
+  accept: 'application/pdf',
+  multiple: false,
 
-    <div class="flex items-center justify-center gap-3 mb-4">
-      <img src="/images/add-pages-pdf-icon.svg" alt="Add JPG to PDF" class="w-16 h-16 object-contain">
+  buttonText: 'Select PDF',
+  dropText: 'or drop here'
+}) %>
 
-      <h1 class="text-3xl sm:text-4xl font-bold text-black">
-        Add JPG to PDF
-      </h1>
-    </div>
-
-
-    <h2 class="text-gray-600 sm:text-lg tracking-wide mb-4">
-      Add Forgotten Notes, Scanned Documents, ID Proofs, Receipts, Signatures, Photographs, and other JPG files to PDF
-      For free. Easily adjust page size, margin and orientation for JPG.
-    </h2>
-
-    <div id="dropZone"
-      class="border-2 border-dashed border-gray-400 hover:border-gray-500 p-8 sm:p-20 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-200">
-      <input type="file" id="pdfInputFirst" accept="application/pdf" class="hidden" onchange="handleFileSelect(event)">
-      <button class="bg-light hover:bg-gray-200 text-primary sm:text-xl px-6 py-3 rounded-lg transition  mb-4">
-        Select PDF
-      </button>
-      <p class="text-gray-600 text-sm">Drag and drop PDF here or click to select</p>
-    </div>
-
-    <%- include('../secure.ejs') %>
-
-  </div>
-</div>
 
 <% const tool={ "tool-description" : { name: "Add JPG to PDF" ,
   desc: "Append JPG to PDF for free. Adjust page size, orientation and margin for JPG." }, "tool-process" : {
